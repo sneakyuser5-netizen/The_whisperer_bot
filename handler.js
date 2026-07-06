@@ -1,24 +1,44 @@
-const { loadPlugins } = require("../core/pluginManager");
+const fs = require("fs");
 
-const plugins = loadPlugins();
+const commands = new Map();
+
+function loadCommands() {
+    const files = fs.readdirSync("./commands");
+
+    for (const file of files) {
+        const command = require("./commands/" + file);
+
+        commands.set(command.name, command);
+    }
+
+    console.log("✅ Commands loaded:", [...commands.keys()]);
+}
+
 
 async function handleMessage(sock, msg) {
+
     const text =
         msg.message?.conversation ||
         msg.message?.extendedTextMessage?.text;
 
     if (!text) return;
 
-    const jid = msg.key.remoteJid;
-    const args = text.trim().split(" ");
-    const cmd = args[0].toLowerCase().replace(".", "");
-    const params = args.slice(1);
+    const sender = msg.key.remoteJid;
 
-    const plugin = plugins.get(cmd);
+    const cmd = text
+        .toLowerCase()
+        .trim()
+        .replace(".", "");
 
-    if (plugin) {
-        await plugin.execute(sock, msg, params, [...plugins.values()]);
-    }
+    const command = commands.get(cmd);
+
+    if (!command) return;
+
+    await command.execute(sock, msg);
 }
 
-module.exports = { handleMessage };
+
+module.exports = {
+    loadCommands,
+    handleMessage
+};
