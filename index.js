@@ -4,7 +4,7 @@ const pino = require("pino");
 const { loadCommands, handleMessage } = require("./handler");
 
 
-const PHONE_NUMBER = "237641037454";
+const PHONE_NUMBER = "237682349827";
 
 async function startBot() {
     try {
