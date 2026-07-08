@@ -37,12 +37,16 @@ Usage:
 
         try {
 
-            await sock.groupSettingUpdate(
-                jid,
-                option === "close"
-                    ? "announcement"
-                    : "not_announcement"
-            );
+            const groups = require("../../lib/groups");
+            if (option === "close") {
+
+    await groups.setClose(sock, jid);
+
+} else {
+
+    await groups.setOpen(sock, jid);
+
+            }
 
             await sock.sendMessage(jid, {
                 text:
