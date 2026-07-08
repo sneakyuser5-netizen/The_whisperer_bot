@@ -1,7 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
-const file = path.join(__dirname, "../../database/settings.json");
+const settings = require("../../lib/settings");
 
 module.exports = {
 
