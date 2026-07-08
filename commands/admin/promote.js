@@ -34,11 +34,11 @@ module.exports = {
 
         try {
 
-            await sock.groupParticipantsUpdate(
-                jid,
-                [target],
-                "promote"
-            );
+            await groups.promote(
+    sock,
+    jid,
+    target
+);
 
             await sock.sendMessage(jid, {
                 text: "✅ User promoted to admin."
