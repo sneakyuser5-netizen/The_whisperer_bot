@@ -1,3 +1,4 @@
+const groups = require("../../lib/groups");
 module.exports = {
 
     name: "kick",
@@ -42,11 +43,11 @@ if (!target) {
 
         try {
 
-            await sock.groupParticipantsUpdate(
-                jid,
-                [target],
-                "remove"
-            );
+            await groups.remove(
+    sock,
+    jid,
+    target
+);
 
 
             await sock.sendMessage(jid, {
