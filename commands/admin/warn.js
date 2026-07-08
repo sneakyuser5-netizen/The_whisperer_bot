@@ -1,7 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
-const file = path.join(__dirname, "../../database/warns.json");
+const warns = require("../../lib/warns");
 
 module.exports = {
 
@@ -45,16 +42,7 @@ module.exports = {
         }
 
 
-        let warns = JSON.parse(fs.readFileSync(file));
-
-        const key = `${jid}_${target}`;
-
-        warns[key] = (warns[key] || 0) + 1;
-
-        fs.writeFileSync(
-            file,
-            JSON.stringify(warns, null, 2)
-        );
+        const count = warns.add(jid, target);
 
 
         await sock.sendMessage(jid, {
@@ -62,12 +50,12 @@ module.exports = {
 `⚠️ Warning issued
 
 User: @${target.split("@")[0]}
-Warnings: ${warns[key]}/3`,
+Warnings: ${count}/3
             mentions: [target]
         });
 
 
-        if (warns[key] >= 3) {
+        if (count >= 3) {
 
             await sock.sendMessage(jid, {
                 text: "🚨 User reached 3 warnings. Removing member."
@@ -79,12 +67,7 @@ Warnings: ${warns[key]}/3`,
                 "remove"
             );
 
-            warns[key] = 0;
-
-            fs.writeFileSync(
-                file,
-                JSON.stringify(warns, null, 2)
-            );
+            warns.reset(jid, target);
         }
 
     }
