@@ -1,7 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
-const file = path.join(__dirname, "../../database/warns.json");
+const warns = require("../../lib/warns");
 
 module.exports = {
 
@@ -23,30 +20,19 @@ module.exports = {
             });
         }
 
-        let warns = {};
-
-        try {
-            warns = JSON.parse(fs.readFileSync(file));
-        } catch {
-            warns = {};
-        }
+        const list = warns.list(jid);
 
         let text = "📋 Warning List\n\n";
         let found = false;
 
-        for (const key in warns) {
+        for (const member of list) {
 
-            if (!key.startsWith(jid + "_")) continue;
+    if (member.warns <= 0) continue;
 
-            const count = warns[key];
+    found = true;
 
-            if (count <= 0) continue;
+    text += `• @${member.user.split("@")[0]} - ${member.warns}/3\n`;
 
-            found = true;
-
-            const user = key.split("_")[1];
-
-            text += `• @${user.split("@")[0]} - ${count}/3\n`;
         }
 
         if (!found) {
@@ -56,10 +42,8 @@ module.exports = {
         await sock.sendMessage(jid, {
             text,
             mentions: found
-                ? Object.keys(warns)
-                    .filter(k => k.startsWith(jid + "_"))
-                    .map(k => k.split("_")[1])
-                : []
+    ? list.map(member => member.user)
+    : []
         });
 
     }
