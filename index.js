@@ -99,7 +99,9 @@ async function startBot() {
         setTimeout(startBot, 5000);
     }
 }
+const START_TIME = Date.now();
 
+global.START_TIME = START_TIME;
 
 
 startBot();
