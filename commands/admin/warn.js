@@ -46,13 +46,13 @@ module.exports = {
 
 
         await sock.sendMessage(jid, {
-            text:
+    text:
 `⚠️ Warning issued
 
 User: @${target.split("@")[0]}
-Warnings: ${count}/3
-            mentions: [target]
-        });
+Warnings: ${count}/3`,
+    mentions: [target]
+});
 
 
         if (count >= 3) {
