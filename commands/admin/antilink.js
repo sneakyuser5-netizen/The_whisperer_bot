@@ -40,33 +40,11 @@ module.exports = {
         }
 
 
-        let settings = {};
-
-        try {
-
-            settings = JSON.parse(
-                fs.readFileSync(file)
-            );
-
-        } catch {
-
-            settings = {};
-
-        }
-
-
-        if (!settings[jid]) {
-            settings[jid] = {};
-        }
-
-
-        settings[jid].antilink = option === "on";
-
-
-        fs.writeFileSync(
-            file,
-            JSON.stringify(settings, null, 2)
-        );
+        settings.set(
+    jid,
+    "antilink",
+    option === "on"
+);
 
 
         await sock.sendMessage(jid, {
