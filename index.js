@@ -5,7 +5,7 @@ const { loadCommands, handleMessage } = require("./handler");
 const { loadEvents, runEvents } = require("./eventHandler");
 
 
-const PHONE_NUMBER = "237682349827";
+const PHONE_NUMBER = "237641037454";
 
 async function startBot() {
     try {
