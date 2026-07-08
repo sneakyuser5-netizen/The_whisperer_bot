@@ -1,3 +1,4 @@
+const groups = require("../../lib/groups");
 module.exports = {
 
     name: "group",
