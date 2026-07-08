@@ -4,6 +4,6 @@ module.exports = {
 
     PREFIX: ".",
 
-    OWNER: "237641037454"
+    OWNER: "237682349827"
 
 };
