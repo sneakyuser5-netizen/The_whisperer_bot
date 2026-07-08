@@ -1,7 +1,4 @@
-const fs = require("fs");
-const path = require("path");
-
-const file = path.join(__dirname, "../../database/warns.json");
+const warns = require("../../lib/warns");
 
 module.exports = {
 
@@ -39,16 +36,7 @@ module.exports = {
             });
         }
 
-        let warns = {};
-
-        try {
-            warns = JSON.parse(fs.readFileSync(file));
-        } catch {
-            warns = {};
-        }
-
-        const key = `${jid}_${target}`;
-        const count = warns[key] || 0;
+        const count = warns.get(jid, target);
 
         await sock.sendMessage(jid, {
             text:
