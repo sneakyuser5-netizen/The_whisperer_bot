@@ -88,10 +88,6 @@ async function handleMessage(sock, msg) {
     sender.includes(config.OWNER) ||
     msg.key.fromMe;
 
-//console.log("SENDER:", sender);
-//console.log("OWNER:", config.OWNER);
-//console.log("IS OWNER:", isOwner);
-
     const cmd = text
     .trim()
     .split(/\s+/)[0]
@@ -150,11 +146,7 @@ if (
 
 
 // then check admin status
-if (command.permission === "admin") {
-
-    // existing admin check here
-
-}
+const permissions = require("./lib/permissions");
 
 
 
