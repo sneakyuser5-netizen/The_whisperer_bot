@@ -20,21 +20,7 @@ module.exports = {
             });
         }
 
-        let settings = {};
-
-        try {
-
-            settings = JSON.parse(
-                fs.readFileSync(file)
-            );
-
-        } catch {
-
-            settings = {};
-
-        }
-
-        const group = settings[jid] || {};
+        const group = settings.get(jid);
 
         await sock.sendMessage(jid, {
 
