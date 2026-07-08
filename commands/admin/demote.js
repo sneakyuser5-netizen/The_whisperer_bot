@@ -34,11 +34,11 @@ module.exports = {
 
         try {
 
-            await sock.groupParticipantsUpdate(
-                jid,
-                [target],
-                "demote"
-            );
+            await groups.demote(
+    sock,
+    jid,
+    target
+);
 
             await sock.sendMessage(jid, {
                 text: "✅ User removed from admin list."
