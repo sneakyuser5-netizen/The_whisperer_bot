@@ -1,16 +1,22 @@
+const {
+    downloadMediaMessage
+} = require("@whiskeysockets/baileys");
+
+
 module.exports = {
 
     name: "gstatus",
 
-    description: "Change group description",
+    description: "Post replied media to WhatsApp status",
 
     category: "admin",
 
     permission: "admin",
 
-    execute: async (sock, msg, args) => {
+    execute: async (sock, msg) => {
 
         const jid = msg.key.remoteJid;
+
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
@@ -19,30 +25,80 @@ module.exports = {
         }
 
 
-        if (!args.length) {
+        const quoted =
+            msg.message?.extendedTextMessage
+            ?.contextInfo
+            ?.quotedMessage;
+
+
+        if (!quoted) {
+
             return sock.sendMessage(jid, {
-                text: "Usage:\n.gstatus Your group description"
+                text: "❌ Reply to a photo or video."
             });
+
         }
-
-
-        const description = args.join(" ");
 
 
         try {
 
-            await sock.groupUpdateDescription(
-                jid,
-                description
-            );
+            if (quoted.imageMessage) {
+
+                const buffer = await downloadMediaMessage(
+                    {
+                        message: quoted
+                    },
+                    "buffer",
+                    {}
+                );
+
+
+                await sock.sendMessage(
+                    "status@broadcast",
+                    {
+                        image: buffer,
+                        caption:
+                        quoted.imageMessage.caption || ""
+                    }
+                );
+
+            }
+
+
+            else if (quoted.videoMessage) {
+
+                const buffer = await downloadMediaMessage(
+                    {
+                        message: quoted
+                    },
+                    "buffer",
+                    {}
+                );
+
+
+                await sock.sendMessage(
+                    "status@broadcast",
+                    {
+                        video: buffer,
+                        caption:
+                        quoted.videoMessage.caption || ""
+                    }
+                );
+
+            }
+
+
+            else {
+
+                return sock.sendMessage(jid, {
+                    text: "❌ Only photos and videos are supported."
+                });
+
+            }
 
 
             await sock.sendMessage(jid, {
-                text:
-`✅ Group status updated.
-
-New status:
-${description}`
+                text: "✅ Posted to WhatsApp status."
             });
 
 
@@ -51,8 +107,7 @@ ${description}`
             console.log("GSTATUS ERROR:", err);
 
             await sock.sendMessage(jid, {
-                text:
-"❌ Failed to update group status. Make sure I am an admin."
+                text: "❌ Failed to post status."
             });
 
         }
