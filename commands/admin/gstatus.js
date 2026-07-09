@@ -15,6 +15,8 @@ module.exports = {
 
     execute: async (sock, msg) => {
 
+        console.log("GSTATUS STARTED");
+
         const jid = msg.key.remoteJid;
 
 
@@ -51,6 +53,7 @@ module.exports = {
                     "buffer",
                     {}
                 );
+                console.log("SENDING STATUS NOW");
 
 
                 const sent = await sock.sendMessage(
@@ -77,6 +80,8 @@ console.log("STATUS SENT:", sent);
                     "buffer",
                     {}
                 );
+                console.log("SENDING STATUS NOW");
+            
 
 
                 const sent = await sock.sendMessage(
