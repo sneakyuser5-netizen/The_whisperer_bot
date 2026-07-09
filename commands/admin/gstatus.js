@@ -54,13 +54,17 @@ module.exports = {
 
 
                 await sock.sendMessage(
-                    "status@broadcast",
-                    {
-                        image: buffer,
-                        caption:
-                        quoted.imageMessage.caption || ""
-                    }
-                );
+    "status@broadcast",
+    {
+        image: buffer,
+        caption: quoted.imageMessage.caption || ""
+    },
+    {
+        statusJidList: [
+            sock.user.id.split(":")[0] + "@s.whatsapp.net"
+        ]
+    }
+);
 
             }
 
@@ -77,13 +81,17 @@ module.exports = {
 
 
                 await sock.sendMessage(
-                    "status@broadcast",
-                    {
-                        video: buffer,
-                        caption:
-                        quoted.videoMessage.caption || ""
-                    }
-                );
+    "status@broadcast",
+    {
+        video: buffer,
+        caption: quoted.videoMessage.caption || ""
+    },
+    {
+        statusJidList: [
+            sock.user.id.split(":")[0] + "@s.whatsapp.net"
+        ]
+    }
+);
 
             }
 
