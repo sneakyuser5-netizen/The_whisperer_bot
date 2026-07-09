@@ -1,3 +1,8 @@
+const {
+    downloadMediaMessage
+} = require("@whiskeysockets/baileys");
+
+
 module.exports = {
 
     name: "vv",
@@ -9,6 +14,7 @@ module.exports = {
     execute: async (sock, msg) => {
 
         const jid = msg.key.remoteJid;
+
 
         const quoted =
             msg.message?.extendedTextMessage
@@ -25,12 +31,30 @@ module.exports = {
         }
 
 
-        const view =
-            quoted.viewOnceMessage ||
-            quoted.viewOnceMessageV2;
+        let mediaMessage;
 
 
-        if (!view) {
+        if (quoted.viewOnceMessage) {
+
+            mediaMessage =
+                quoted.viewOnceMessage.message;
+
+        } else if (quoted.viewOnceMessageV2) {
+
+            mediaMessage =
+                quoted.viewOnceMessageV2.message;
+
+        } else if (
+            quoted.imageMessage?.viewOnce ||
+            quoted.videoMessage?.viewOnce
+        ) {
+
+            mediaMessage = quoted;
+
+        }
+
+
+        if (!mediaMessage) {
 
             return sock.sendMessage(jid, {
                 text: "❌ This is not a view once message."
@@ -39,13 +63,22 @@ module.exports = {
         }
 
 
-        const content = view.message;
+        try {
 
+            await sock.sendMessage(
+                jid,
+                mediaMessage
+            );
 
-        await sock.sendMessage(
-            jid,
-            content
-        );
+        } catch (err) {
+
+            console.log("VV ERROR:", err);
+
+            await sock.sendMessage(jid, {
+                text: "❌ Failed to retrieve view once media."
+            });
+
+        }
 
     }
 
