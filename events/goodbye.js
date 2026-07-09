@@ -1,6 +1,7 @@
 const settings = require("../lib/settings");
 
 module.exports = async (sock, update) => {
+    console.log("GOODBYE EVENT:", update);
 
     const group = update.id;
 
