@@ -15,7 +15,6 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         const quoted =
             msg.message?.extendedTextMessage
             ?.contextInfo
@@ -23,52 +22,76 @@ module.exports = {
 
 
         if (!quoted) {
-
             return sock.sendMessage(jid, {
                 text: "❌ Reply to a view once message."
             });
-
         }
 
 
-        let mediaMessage;
+        let media;
 
 
-        if (quoted.viewOnceMessage) {
+        if (quoted.viewOnceMessageV2) {
 
-            mediaMessage =
-                quoted.viewOnceMessage.message;
+            media = quoted.viewOnceMessageV2.message;
 
-        } else if (quoted.viewOnceMessageV2) {
+        } else if (quoted.viewOnceMessage) {
 
-            mediaMessage =
-                quoted.viewOnceMessageV2.message;
+            media = quoted.viewOnceMessage.message;
 
-        } else if (
-            quoted.imageMessage?.viewOnce ||
-            quoted.videoMessage?.viewOnce
-        ) {
+        } else {
 
-            mediaMessage = quoted;
-
-        }
-
-
-        if (!mediaMessage) {
-
-            return sock.sendMessage(jid, {
-                text: "❌ This is not a view once message."
-            });
+            media = quoted;
 
         }
 
 
         try {
 
-            await sock.sendMessage(
-                jid,
-                mediaMessage
-            );
+            if (media.imageMessage) {
+
+                const buffer = await downloadMediaMessage(
+                    {
+                        message: media
+                    },
+                    "buffer",
+                    {}
+                );
+
+                await sock.sendMessage(jid, {
+                    image: buffer,
+                    caption: media.imageMessage.caption || ""
+                });
+
+            }
+
+
+            else if (media.videoMessage) {
+
+                const buffer = await downloadMediaMessage(
+                    {
+                        message: media
+                    },
+                    "buffer",
+                    {}
+                );
+
+                await sock.sendMessage(jid, {
+                    video: buffer,
+                    caption: media.videoMessage.caption || ""
+                });
+
+            }
+
+
+            else {
+
+                await sock.sendMessage(jid, {
+                    text: "❌ Unsupported view once type."
+                });
+
+            }
+
 
         } catch (err) {
 
