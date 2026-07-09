@@ -1,27 +1,32 @@
 const settings = require("../lib/settings");
 
-module.exports = async (sock, update) => {
-    console.log("GOODBYE EVENT:", update);
+module.exports = {
 
-    const group = update.id;
+    name: "goodbye",
 
-    if (!settings.get(group).goodbye) {
-        return;
-    }
+    trigger: "group-participants.update",
 
-    if (update.action !== "remove") {
-        return;
-    }
+    execute: async (sock, update) => {
 
-    for (const user of update.participants) {
+        console.log("GOODBYE EVENT:", update);
 
-        await sock.sendMessage(group, {
-            text:
+        const group = update.id;
+
+        if (!settings.get(group).goodbye) return;
+
+        if (update.action !== "remove") return;
+
+        for (const user of update.participants) {
+
+            await sock.sendMessage(group, {
+                text:
 `👋 Goodbye @${user.split("@")[0]}
 
 We hope to see you again!`,
-            mentions: [user]
-        });
+                mentions: [user]
+            });
+
+        }
 
     }
 
