@@ -65,6 +65,12 @@ async function startBot() {
         update
     );
 
+    await runEvents(
+        "goodbye",
+        sock,
+        update
+    );
+
 });
         
 
