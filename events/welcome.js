@@ -1,3 +1,4 @@
+const settings = require("../lib/settings");
 module.exports = {
 
     name: "welcome",
@@ -15,6 +16,11 @@ module.exports = {
 
         const user = participant.id || participant;
 
+        const group = update.id;
+
+if (!settings.get(group).welcome) {
+    return;
+}
         await sock.sendMessage(id, {
             text:
 `👋 Welcome @${user.split("@")[0]}
