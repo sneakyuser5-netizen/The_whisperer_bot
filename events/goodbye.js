@@ -17,6 +17,7 @@ module.exports = {
         if (update.action !== "remove") return;
 
         for (const user of update.participants) {
+    console.log("LEAVING USER:", user);
 
             await sock.sendMessage(group, {
                 text:
