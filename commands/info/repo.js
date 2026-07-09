@@ -24,7 +24,7 @@ Whisper Bot
 THE-WHISPERER-237
 
 🔗 GitHub:
-(Add your repository link here)
+(https://github.com/sneakyuser5-netizen/The_whisperer_bot)
 
 ⭐ Feel free to support the project.`
         });
