@@ -58,13 +58,10 @@ module.exports = {
     {
         image: buffer,
         caption: quoted.imageMessage.caption || ""
-    },
-    {
-        statusJidList: [
-            sock.user.id.split(":")[0] + "@s.whatsapp.net"
-        ]
     }
 );
+
+console.log("STATUS SENT:", sent.key);
 
 console.log("STATUS SENT:", sent);
 
@@ -87,13 +84,10 @@ console.log("STATUS SENT:", sent);
     {
         video: buffer,
         caption: quoted.videoMessage.caption || ""
-    },
-    {
-        statusJidList: [
-            sock.user.id.split(":")[0] + "@s.whatsapp.net"
-        ]
     }
 );
+
+console.log("STATUS SENT:", sent.key);
 
 console.log("STATUS SENT:", sent);
 
