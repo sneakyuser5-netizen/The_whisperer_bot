@@ -16,16 +16,26 @@ module.exports = {
 
         if (update.action !== "remove") return;
 
-        for (const user of update.participants) {
-    console.log("LEAVING USER:", user);
+        for (const participant of update.participants) {
 
-            await sock.sendMessage(group, {
-                text:
-`👋 Goodbye @${user.split("@")[0]}
+    console.log("LEAVING USER:", participant);
+
+    const jid =
+        typeof participant === "string"
+            ? participant
+            : participant.id ||
+              participant.jid ||
+              participant.phoneNumber ||
+              participant.lid;
+
+    if (!jid) continue;
+
+    await sock.sendMessage(group, {
+        text: `👋 Goodbye @${jid.split("@")[0]}
 
 We hope to see you again!`,
-                mentions: [user]
-            });
+        mentions: [jid]
+    });
 
         }
 
