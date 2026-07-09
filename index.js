@@ -6,6 +6,8 @@ const { loadEvents, runEvents } = require("./eventHandler");
 
 
 const PHONE_NUMBER = "237641037454";
+const BOT_OWNER = "THE-WHISPERER-237";
+const BOT_VERSION = "1.0.0";
 
 async function startBot() {
     try {
@@ -28,7 +30,51 @@ async function startBot() {
             const { connection, lastDisconnect } = update;
 
             if (connection === "open") {
-                console.log("✅ CONNECTED SUCCESSFULLY");
+
+    const number =
+        sock.user.id.split(":")[0];
+
+
+    const uptime = () => {
+
+        const seconds =
+            Math.floor((Date.now() - START_TIME) / 1000);
+
+        const hours =
+            Math.floor(seconds / 3600);
+
+        const minutes =
+            Math.floor((seconds % 3600) / 60);
+
+        const secs =
+            seconds % 60;
+
+        return `${hours}h ${minutes}m ${secs}s`;
+
+    };
+
+
+    console.log(`
+╔════════════════════════════════╗
+║        🤖 BOT ONLINE           ║
+╠════════════════════════════════╣
+║ 👑 Owner:
+║ ${BOT_OWNER}
+║
+║ 📱 Number:
+║ +${number}
+║
+║ 📦 Version:
+║ ${BOT_VERSION}
+║
+║ ⚡ Status:
+║ Connected ✅
+║
+║ ⏱️ Uptime:
+║ ${uptime()}
+╚════════════════════════════════╝
+    `);
+
             }
 
             if (connection === "close") {
