@@ -46,6 +46,19 @@ async function startBot() {
     const msg = messages[0];
 
     if (!msg.message) return;
+            const read = require("./lib/read");
+
+const user =
+msg.key.participant ||
+msg.key.remoteJid;
+
+if (read.get(user)) {
+
+    await sock.readMessages([
+        msg.key
+    ]);
+
+                   }
 
     await runEvents(
         "messages.upsert",
