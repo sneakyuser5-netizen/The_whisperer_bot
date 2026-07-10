@@ -3,6 +3,7 @@ const pino = require("pino");
 
 const { loadCommands, handleMessage } = require("./handler");
 const { loadEvents, runEvents } = require("./eventHandler");
+const settings = require("./lib/settings");
 
 
 const PHONE_NUMBER = "237641037454";
@@ -100,9 +101,33 @@ msg.key.remoteJid;
 
 if (read.get(user)) {
 
-    await sock.readMessages([
-        msg.key
-    ]);
+    await runEvents(
+    "messages.upsert",
+    sock,
+    msg
+);
+
+
+if (settings.get("global").autotyping) {
+
+    await sock.sendPresenceUpdate(
+        "composing",
+        msg.key.remoteJid
+    );
+
+    await new Promise(resolve =>
+        setTimeout(resolve, 5000)
+    );
+
+    await sock.sendPresenceUpdate(
+        "paused",
+        msg.key.remoteJid
+    );
+
+}
+
+
+await handleMessage(sock, msg);
 
                    }
 
