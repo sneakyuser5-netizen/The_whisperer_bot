@@ -93,43 +93,22 @@ async function startBot() {
     const msg = messages[0];
 
     if (!msg.message) return;
-            const read = require("./lib/read");
 
-const user =
-msg.key.participant ||
-msg.key.remoteJid;
+    const read = require("./lib/read");
 
-if (read.get(user)) {
-
-    await runEvents(
-    "messages.upsert",
-    sock,
-    msg
-);
+    const user =
+        msg.key.participant ||
+        msg.key.remoteJid;
 
 
-if (settings.get("global").autotyping) {
+    if (read.get(user)) {
 
-    await sock.sendPresenceUpdate(
-        "composing",
-        msg.key.remoteJid
-    );
+        await sock.readMessages([
+            msg.key
+        ]);
 
-    await new Promise(resolve =>
-        setTimeout(resolve, 5000)
-    );
+    }
 
-    await sock.sendPresenceUpdate(
-        "paused",
-        msg.key.remoteJid
-    );
-
-}
-
-
-await handleMessage(sock, msg);
-
-                   }
 
     await runEvents(
         "messages.upsert",
@@ -137,9 +116,25 @@ await handleMessage(sock, msg);
         msg
     );
 
-    await handleMessage(sock, msg);
+
+    if (settings.get("global").autotyping) {
+
+        console.log("AUTO TYPING ENABLED");
+
+        // We will add the real typing feature later.
+        // For now we're only checking that this setting is detected.
+
+    }
+
+
+    await handleMessage(
+        sock,
+        msg
+    );
 
 });
+
+    
     
         sock.ev.on("group-participants.update", async (update) => {
 
