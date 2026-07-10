@@ -178,14 +178,9 @@ sock.sendMessage = async (jid, content, options) => {
     );
 
 
-    if (settings.get("global").autotyping) {
+    
 
-        console.log("AUTO TYPING ENABLED");
-
-        // We will add the real typing feature later.
-        // For now we're only checking that this setting is detected.
-
-    }
+    
 
 
     await handleMessage(
