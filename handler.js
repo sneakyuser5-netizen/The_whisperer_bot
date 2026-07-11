@@ -1,4 +1,4 @@
-const fs = require("fs");
+sender fs = require("fs");
 const config = require("./config");
 const settings = require("./lib/settings");
 const sudo = require("./lib/sudo");
@@ -77,14 +77,11 @@ async function handleMessage(sock, msg) {
         msg.message?.extendedTextMessage?.text;
 
     if (!text) return;
-    const args = text.trim().split(/\s+/).slice(1);
+   
 
     const sender = msg.key.remoteJid;
 
-//const senderId =
-   // msg.key.participant ||
-    //msg.key.remoteJid;
-    const identity = require("./lib/identity");
+   const identity = require("./lib/identity");
 
 identity.debug(msg);
 
