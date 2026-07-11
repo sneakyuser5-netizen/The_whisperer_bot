@@ -85,24 +85,21 @@ async function handleMessage(sock, msg) {
     if (!text) return;
     const args = text.trim().split(/\s+/).slice(1);
 
-    const sender =
+    const sender = msg.key.remoteJid;
+
+const senderId =
+    msg.key.participant ||
     msg.key.remoteJid;
-
-const mode =
-    settings.get("global").mode || "private";
-
-const isSudo =
-    sudo.has(senderId);
 
 const isOwner =
     senderId.includes(config.OWNER) ||
     msg.key.fromMe;
 
-    const cmd = text
-    .trim()
-    .split(/\s+/)[0]
-    .toLowerCase()
-    .replace(".", "");
+const isSudo =
+    sudo.has(senderId);
+
+const mode =
+    settings.get("global").mode || "private";
  
 
 
@@ -144,15 +141,7 @@ if (command.cooldown) {
 }    
     const permission = command.permission || "public";
     const jid = msg.key.remoteJid;
-    const mode =
-    settings.get("global").mode || "private";
-
-const senderId =
-    msg.key.participant ||
-    msg.key.remoteJid;
-
-const isSudo =
-    sudo.get().includes(senderId);
+    
 
 if (
     mode === "private" &&
