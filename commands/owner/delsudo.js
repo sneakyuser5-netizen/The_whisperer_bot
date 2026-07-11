@@ -29,7 +29,10 @@ module.exports = {
 
         }
 
-        sudo.remove(target);
+        sudo.remove(
+    identity.getBotOwner(),
+    id
+);
 
         await sock.sendMessage(jid, {
             text:
