@@ -88,9 +88,11 @@ async function handleMessage(sock, msg) {
     const sender =
     msg.key.remoteJid;
 
-const senderId =
-    msg.key.participant ||
-    msg.key.remoteJid;
+const mode =
+    settings.get("global").mode || "private";
+
+const isSudo =
+    sudo.has(senderId);
 
 const isOwner =
     senderId.includes(config.OWNER) ||
