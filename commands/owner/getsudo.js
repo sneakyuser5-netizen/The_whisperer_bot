@@ -14,8 +14,6 @@ module.exports = {
 
     const jid = msg.key.remoteJid;
 
-    const identity = require("../../lib/identity");
-
     const owner =
         identity.getBotOwner();
 
