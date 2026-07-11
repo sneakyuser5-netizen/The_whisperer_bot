@@ -99,11 +99,7 @@ const ownerDB = require("./lib/owner");
 
 ownerDB.set(owner);
 
-console.log("BOT OWNER:", owner);
- console.log("senderId:", senderId);
-console.log("participant:", msg.key.participant);
-console.log("remoteJid:", msg.key.remoteJid);
-console.log("pushName:", msg.pushName);               
+console.log("BOT OWNER:", owner);              
 console.log("SOCK USER:", sock.user);
     const number =
         sock.user.id.split(":")[0];
