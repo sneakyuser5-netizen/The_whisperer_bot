@@ -1,51 +1,41 @@
-const settings = require("../../lib/settings");
+const afk = require("../../lib/afk");
+const identity = require("../../lib/identity");
 
 module.exports = {
 
     name: "afk",
 
-    description: "Enable or disable AFK mode",
+    description: "Set yourself AFK",
 
     category: "owner",
 
     permission: "owner",
 
-    usage: ".afk on/off",
-
     execute: async (sock, msg, args) => {
 
         const jid = msg.key.remoteJid;
 
-        const option = args[0]?.toLowerCase();
+        const sender = identity.getSender(msg);
 
+        const reason =
 
-        if (!["on", "off"].includes(option)) {
+            args.join(" ") ||
 
-            return sock.sendMessage(jid, {
-                text:
-`😂 Tell me what to do.
+            "No reason given.";
 
-.afk on
-.afk off`
-            });
-
-        }
-
-
-        settings.set(
-            "global",
-            "afk",
-            option === "on"
-        );
-
+        afk.set(sender, reason);
 
         await sock.sendMessage(jid, {
+
             text:
-option === "on"
-?
-"😴 AFK mode activated.\n\nThe owner has entered sleep mode 😂"
-:
-"👋 AFK mode disabled.\n\nThe owner has returned!"
+
+`😴 You're now AFK.
+
+📝 Reason:
+${reason}
+
+😂 I'll let everyone know you're pretending to be busy.`
+
         });
 
     }
