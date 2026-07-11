@@ -6,8 +6,8 @@ const { loadEvents, runEvents } = require("./eventHandler");
 const settings = require("./lib/settings");
 
 
-const PHONE_NUMBER = "237682349827";
-const BOT_OWNER = "THE-WHISPERER-237";
+const PHONE_NUMBER = "237641037454";
+const BOT_OWNER = "THE-WHISPERER";
 const BOT_VERSION = "1.0.0";
 
 async function startBot() {
