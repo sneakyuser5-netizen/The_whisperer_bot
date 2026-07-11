@@ -33,7 +33,10 @@ module.exports = {
 
     const id = identity.normalize(target);
 
-    sudo.add(id);
+    sudo.add(
+    identity.getBotOwner(),
+    id
+);
 
     await sock.sendMessage(jid, {
         text:
