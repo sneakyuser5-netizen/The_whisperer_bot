@@ -149,58 +149,95 @@ if (command.cooldown) {
     cooldowns.set(key, now);
 }    
     const permission = command.permission || "public";
-    const jid = msg.key.remoteJid;
-    
+const jid = msg.key.remoteJid;
 
+// Private mode
 if (
     mode === "private" &&
     !isOwner &&
     !isSudo
 ) {
+    return sock.sendMessage(sender, {
+        text:
+`🔒 WhisperBot is taking a nap. 😴
 
-    await sock.sendMessage(
-        sender,
-        {
-            text:
-`🔒 WhisperBot is in *PRIVATE MODE*.
+😂 Only the owner and trusted sudo members can wake me up.
 
-😂 The boss hid the keys.
-
-Ask the owner nicely... or bring pizza 🍕.`
-        }
-    );
-
-    return;
-            }
-
-if (
-    command.permission === "admin" &&
-    !jid.endsWith("@g.us")
-) {
-    return sock.sendMessage(jid, {
-        text: "❌ This command only works in groups."
+Tell the owner to use *.public* if they want everyone to play!`
     });
 }
 
-// then check admin status
-const permissions = require("./lib/permissions");
+// Creator only
+if (
+    permission === "creator" &&
+    !identity.isCreator(msg)
+) {
+    return sock.sendMessage(sender, {
+        text:
+`👑 Nice try. 😏
 
-if (permission === "admin") {
+Only *THE-WHISPERER-237* can use this command.`
+    });
+}
+
+// Owner only
+if (
+    permission === "owner" &&
+    !isOwner
+) {
+    return sock.sendMessage(sender, {
+        text:
+`😂 You're not the owner of this bot.
+
+Go borrow the owner's phone... if they're brave enough to hand it over.`
+    });
+}
+
+// Sudo
+if (
+    permission === "sudo" &&
+    !isOwner &&
+    !isSudo
+) {
+    return sock.sendMessage(sender, {
+        text:
+`🚫 Permission denied.
+
+Become a sudo member first... or start negotiating with the owner. 🤝😂`
+    });
+}
+
+// Admin commands
+if (
+    permission === "admin"
+) {
+
+    if (!jid.endsWith("@g.us")) {
+
+        return sock.sendMessage(jid, {
+            text:
+`😂 This command is lonely.
+
+Take it to a group chat first.`
+        });
+
+    }
 
     const admin = await isAdmin(sock, msg);
 
     if (!admin) {
 
-        await sock.sendMessage(
-            sender,
-            {
-                text: "❌ This command is only for group admins."
-            }
-        );
+        return sock.sendMessage(jid, {
+            text:
+`🚔 Stop right there!
 
-        return;
+Only group admins have the VIP pass for this command. 😎`
+        });
+
     }
+
 }
+    
 
 
 if (command.usage && command.minArgs) {
