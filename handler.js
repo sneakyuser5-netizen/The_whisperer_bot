@@ -85,6 +85,7 @@ const senderId =
     msg.key.participant ||
     msg.key.remoteJid;
     const identity = require("./lib/identity");
+    identity.debug(msg);
 
 const isOwner =
     identity.isOwner(msg);
