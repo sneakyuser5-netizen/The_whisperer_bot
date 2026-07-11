@@ -51,4 +51,4 @@ Use *.setsudo* by replying to someone's message.`
         )
     });
 
-        }
+        
