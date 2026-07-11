@@ -12,37 +12,36 @@ module.exports = {
 
     execute: async (sock, msg) => {
 
-        const jid = msg.key.remoteJid;
+    const jid = msg.key.remoteJid;
 
-        const context =
-            msg.message?.extendedTextMessage?.contextInfo;
+    const quoted =
+        msg.message?.extendedTextMessage?.contextInfo;
 
-        //let target =
-            //context?.mentionedJid?.[0] ||
-            //context?.participant;
-        const identity = require("../lib/identity");
+    const target =
+        quoted?.participant ||
+        quoted?.mentionedJid?.[0];
 
-const id = identity.getSender(msg);
+    if (!target) {
 
-sudo.add(id);
-
-        if (!target) {
-
-            return sock.sendMessage(jid, {
-                text: "❌ Reply to or mention a user."
-            });
-
-        }
-
-        sudo.add(target);
-
-        await sock.sendMessage(jid, {
-            text:
-`✅ Sudo added
-
-User: @${target.split("@")[0]}`,
-            mentions: [target]
+        return sock.sendMessage(jid, {
+            text: "😂 Reply to someone's message first.\n\nI can't promote invisible people. 👻"
         });
+
+    }
+
+    const identity = require("../../lib/identity");
+
+    const id = identity.normalize(target);
+
+    sudo.add(id);
+
+    await sock.sendMessage(jid, {
+        text:
+`✅ New Sudo unlocked! 🛡️
+
+@${id} can now boss the bot around (almost 😏).`,
+        mentions: [target]
+    });
 
     }
 
