@@ -1,5 +1,7 @@
 const fs = require("fs");
 const config = require("./config");
+const settings = require("./lib/settings");
+const sudo = require("./lib/sudo");
 
 const commands = new Map();
 const cooldowns = new Map();
@@ -134,6 +136,36 @@ if (command.cooldown) {
 }    
     const permission = command.permission || "public";
     const jid = msg.key.remoteJid;
+    const mode =
+    settings.get("global").mode || "private";
+
+const senderId =
+    msg.key.participant ||
+    msg.key.remoteJid;
+
+const isSudo =
+    sudo.get().includes(senderId);
+
+if (
+    mode === "private" &&
+    !isOwner &&
+    !isSudo
+) {
+
+    await sock.sendMessage(
+        sender,
+        {
+            text:
+`🔒 WhisperBot is in *PRIVATE MODE*.
+
+😂 The boss hid the keys.
+
+Ask the owner nicely... or bring pizza 🍕.`
+        }
+    );
+
+    return;
+            }
 
 if (
     command.permission === "admin" &&
