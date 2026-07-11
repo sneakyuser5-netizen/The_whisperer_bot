@@ -101,6 +101,13 @@ const isOwner =
     isCreator ||
     isBotOwner ||
     msg.key.fromMe;
+    console.log({
+    creator,
+    botOwner,
+    senderId,
+    isCreator,
+    isBotOwner
+});
 
 const isSudo =
     sudo.has(senderId);
