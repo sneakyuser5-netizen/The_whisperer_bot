@@ -85,18 +85,20 @@ const senderId =
     msg.key.participant ||
     msg.key.remoteJid;
     const identity = require("./lib/identity");
-    identity.debug(msg);
+
+identity.debug(msg);
+
+const senderId =
+    identity.getSender(msg);
 
 const isOwner =
     identity.isOwner(msg);
 
 const isSudo =
-    //identity.isSudo(msg);
+    identity.isSudo(msg);
 
-const senderId =
-    identity.getSender(msg);
-    console.log({
-    sender: identity.getSender(msg),
+console.log({
+    sender: senderId,
     creator: identity.getCreator(),
     botOwner: identity.getBotOwner(),
     isCreator: identity.isCreator(msg),
@@ -104,7 +106,6 @@ const senderId =
     isOwner,
     isSudo
 });
-
 const mode =
     settings.get("global").mode || "private";
 
