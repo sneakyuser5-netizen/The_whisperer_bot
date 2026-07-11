@@ -85,37 +85,6 @@ const senderId =
     msg.key.participant ||
     msg.key.remoteJid;
 
-const creator =
-    config.OWNER;
-
-const botOwner =
-    ownerDB.get();
-
-const isCreator =
-    senderId.includes(creator);
-
-const isBotOwner =
-    senderId.includes(botOwner);
-
-const isOwner =
-    isCreator ||
-    isBotOwner ||
-    msg.key.fromMe;
-    console.log({
-    creator,
-    botOwner,
-    senderId,
-    isCreator,
-    isBotOwner
-});
-    console.log("senderId:", senderId);
-console.log("participant:", msg.key.participant);
-console.log("remoteJid:", msg.key.remoteJid);
-console.log("pushName:", msg.pushName);
-
-const isSudo =
-    sudo.has(senderId);
-
 const mode =
     settings.get("global").mode || "private";
 
