@@ -108,6 +108,10 @@ const isOwner =
     isCreator,
     isBotOwner
 });
+    console.log("senderId:", senderId);
+console.log("participant:", msg.key.participant);
+console.log("remoteJid:", msg.key.remoteJid);
+console.log("pushName:", msg.pushName);
 
 const isSudo =
     sudo.has(senderId);
