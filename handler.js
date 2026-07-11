@@ -85,9 +85,15 @@ async function handleMessage(sock, msg) {
     if (!text) return;
     const args = text.trim().split(/\s+/).slice(1);
 
-    const sender = msg.key.remoteJid;
-    const isOwner =
-    sender.includes(config.OWNER) ||
+    const sender =
+    msg.key.remoteJid;
+
+const senderId =
+    msg.key.participant ||
+    msg.key.remoteJid;
+
+const isOwner =
+    senderId.includes(config.OWNER) ||
     msg.key.fromMe;
 
     const cmd = text
