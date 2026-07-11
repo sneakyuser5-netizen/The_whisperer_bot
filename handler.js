@@ -84,6 +84,25 @@ async function handleMessage(sock, msg) {
 const senderId =
     msg.key.participant ||
     msg.key.remoteJid;
+    const identity = require("./lib/identity");
+
+const isOwner =
+    identity.isOwner(msg);
+
+const isSudo =
+    identity.isSudo(msg);
+
+const senderId =
+    identity.getSender(msg);
+    console.log({
+    sender: identity.getSender(msg),
+    creator: identity.getCreator(),
+    botOwner: identity.getBotOwner(),
+    isCreator: identity.isCreator(msg),
+    isBotOwner: identity.isBotOwner(msg),
+    isOwner,
+    isSudo
+});
 
 const mode =
     settings.get("global").mode || "private";
