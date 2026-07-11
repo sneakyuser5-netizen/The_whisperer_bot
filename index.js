@@ -92,6 +92,13 @@ sock.sendMessage = async (jid, content, options) => {
             const { connection, lastDisconnect } = update;
 
             if (connection === "open") {
+                const owner = sock.user.id.split(":")[0];
+
+const ownerDB = require("./lib/owner");
+
+ownerDB.set(owner);
+
+console.log("BOT OWNER:", owner);
 
     const number =
         sock.user.id.split(":")[0];
