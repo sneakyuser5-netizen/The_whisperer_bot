@@ -2,20 +2,27 @@ module.exports = {
 
     name: "restart",
 
-    description: "Restart bot",
+    description: "Restart WhisperBot",
 
     category: "owner",
 
-    ownerOnly: true,
+    permission: "sudo",
 
     execute: async (sock, msg) => {
 
-        await sock.sendMessage(
-            msg.key.remoteJid,
-            {
-                text: "🔄 Restart command received."
-            }
-        );
+        const jid = msg.key.remoteJid;
+
+        await sock.sendMessage(jid, {
+            text:
+`🔄 Restart request accepted.
+
+😂 Hold my circuits together... I'll be right back!`
+        });
+
+        setTimeout(() => {
+            process.exit(0);
+        }, 1500);
 
     }
+
 };
