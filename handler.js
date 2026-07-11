@@ -2,7 +2,7 @@ const fs = require("fs");
 const config = require("./config");
 const settings = require("./lib/settings");
 const sudo = require("./lib/sudo");
-
+const ownerDB = require("./lib/owner");
 const commands = new Map();
 const cooldowns = new Map();
 async function isAdmin(sock, msg) {
@@ -85,8 +85,21 @@ const senderId =
     msg.key.participant ||
     msg.key.remoteJid;
 
+const creator =
+    config.OWNER;
+
+const botOwner =
+    ownerDB.get();
+
+const isCreator =
+    senderId.includes(creator);
+
+const isBotOwner =
+    senderId.includes(botOwner);
+
 const isOwner =
-    senderId.includes(config.OWNER) ||
+    isCreator ||
+    isBotOwner ||
     msg.key.fromMe;
 
 const isSudo =
