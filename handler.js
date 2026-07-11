@@ -27,11 +27,7 @@ async function isAdmin(sock, msg) {
         participant?.admin === "admin" ||
         participant?.admin === "superadmin"
     );
-}
-
-    
-
-    
+}   
 
 function loadCommands(dir = "./commands") {
 
@@ -74,8 +70,6 @@ function loadCommands(dir = "./commands") {
 
 }
     
-
-
 async function handleMessage(sock, msg) {
 
     const text =
@@ -100,12 +94,15 @@ const isSudo =
 
 const mode =
     settings.get("global").mode || "private";
+
+const cmd = text
+    .trim()
+    .split(/\s+/)[0]
+    .toLowerCase()
+    .replace(".", "");
+
+const command = commands.get(cmd);
  
-
-
-
-    const command = commands.get(cmd);
-
 if (!command) return;
 if (command.cooldown) {
 
@@ -119,8 +116,7 @@ if (command.cooldown) {
 
     const cooldownTime = command.cooldown * 1000;
 
-
-    if (lastUsed && now - lastUsed < cooldownTime) {
+ if (lastUsed && now - lastUsed < cooldownTime) {
 
         const remaining = Math.ceil(
             (cooldownTime - (now - lastUsed)) / 1000
@@ -135,7 +131,6 @@ if (command.cooldown) {
 
         return;
     }
-
 
     cooldowns.set(key, now);
 }    
@@ -173,11 +168,8 @@ if (
     });
 }
 
-
 // then check admin status
 const permissions = require("./lib/permissions");
-
-
 
 if (permission === "admin") {
 
@@ -221,21 +213,7 @@ console.log("ARGS:", args);
 
 await command.execute(sock, msg, args);
 
-
-
-
-   
-
-
-
-
-
-
-
-
 }
-
-
 function getCommands() {
     return [...new Set(commands.values())];
 }
@@ -245,6 +223,3 @@ module.exports = {
     handleMessage,
     commands,
 };
-    
-
-
