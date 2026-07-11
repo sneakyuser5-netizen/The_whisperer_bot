@@ -109,11 +109,21 @@ console.log({
 const mode =
     settings.get("global").mode || "private";
 
-const cmd = text
-    .trim()
-    .split(/\s+/)[0]
+let body = text.trim();
+
+if (body.startsWith(". ")) {
+
+    body = "." + body.slice(2);
+
+}
+
+const parts = body.split(/\s+/);
+
+const cmd = parts[0]
     .toLowerCase()
     .replace(".", "");
+
+const args = parts.slice(1);
 
 const command = commands.get(cmd);
  
