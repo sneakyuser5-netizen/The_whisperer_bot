@@ -91,7 +91,7 @@ const isOwner =
     identity.isOwner(msg);
 
 const isSudo =
-    identity.isSudo(msg);
+    //identity.isSudo(msg);
 
 const senderId =
     identity.getSender(msg);
