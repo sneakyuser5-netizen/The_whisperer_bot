@@ -6,7 +6,7 @@ module.exports = {
 
     category: "admin",
 
-    permission: "admin",
+    permission: "all",
 
     execute: async (sock, msg) => {
 
