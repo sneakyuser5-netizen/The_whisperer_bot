@@ -17,9 +17,14 @@ module.exports = {
         const context =
             msg.message?.extendedTextMessage?.contextInfo;
 
-        let target =
-            context?.mentionedJid?.[0] ||
-            context?.participant;
+        //let target =
+            //context?.mentionedJid?.[0] ||
+            //context?.participant;
+        const identity = require("../lib/identity");
+
+const id = identity.getSender(msg);
+
+sudo.add(id);
 
         if (!target) {
 
