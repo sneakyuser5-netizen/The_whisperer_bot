@@ -81,9 +81,9 @@ async function handleMessage(sock, msg) {
 
     const sender = msg.key.remoteJid;
 
-const senderId =
-    msg.key.participant ||
-    msg.key.remoteJid;
+//const senderId =
+   // msg.key.participant ||
+    //msg.key.remoteJid;
     const identity = require("./lib/identity");
 
 identity.debug(msg);
