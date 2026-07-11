@@ -1,5 +1,5 @@
-const fs = require("fs");
-
+const sudo = require("../../lib/sudo");
+const identity = require("../../lib/identity");
 module.exports = {
 
     name: "getsudo",
@@ -12,45 +12,43 @@ module.exports = {
 
     execute: async (sock, msg) => {
 
-        const jid = msg.key.remoteJid;
+    const jid = msg.key.remoteJid;
 
-        const file = "./database/sudo.json";
+    const identity = require("../../lib/identity");
 
-        if (!fs.existsSync(file)) {
+    const owner =
+        identity.getBotOwner();
 
-            return sock.sendMessage(jid, {
-                text: "❌ No sudo members found."
-            });
+    const users =
+        sudo.all(owner);
 
-        }
+    if (!users.length) {
 
-        const data = JSON.parse(
-            fs.readFileSync(file)
-        );
+        return sock.sendMessage(jid, {
+            text:
+`😂 You don't have any sudo members yet.
 
-        const users = Object.keys(data);
-
-        if (!users.length) {
-
-            return sock.sendMessage(jid, {
-                text: "❌ No sudo members found."
-            });
-
-        }
-
-        let text = "👑 Sudo Members\n\n";
-
-        for (const user of users) {
-
-            text += `• @${user.split("@")[0]}\n`;
-
-        }
-
-        await sock.sendMessage(jid, {
-            text,
-            mentions: users
+Use *.setsudo* by replying to someone's message.`
         });
 
     }
 
-};
+    let text =
+`👑 *Your Sudo Members*
+
+`;
+
+    for (const user of users) {
+
+        text += `• @${user}\n`;
+
+    }
+
+    await sock.sendMessage(jid, {
+        text,
+        mentions: users.map(
+            u => `${u}@lid`
+        )
+    });
+
+        }
