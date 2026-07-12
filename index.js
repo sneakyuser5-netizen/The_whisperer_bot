@@ -161,6 +161,13 @@ console.log("SOCK USER:", sock.user);
         sock.ev.on("messages.upsert", async ({ messages }) => {
 
     const msg = messages[0];
+            const botId = sock.user.id.split(":")[0];
+
+const senderId = identity.getSender(msg);
+
+if (senderId === botId) {
+    return;
+}
   
     if (!msg.message) return;
             const afk = require("./lib/afk");
