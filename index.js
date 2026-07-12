@@ -220,15 +220,12 @@ ${data.reason}
             const context =
     msg.message?.extendedTextMessage?.contextInfo;
 
-if (mentions.length > 0) {
+const mentions =
+    context?.mentionedJid || [];
+
+if (mentions.length) {
 
     for (const user of mentions) {
-
-        // existing code
-
-    }
-
-}
 
     if (!afk.has(user)) continue;
 
@@ -237,7 +234,7 @@ if (mentions.length > 0) {
     const duration = afk.format(
         Date.now() - data.time
     );
-    console.log("SENDING AFK REPLY");
+    
 
     await sock.sendMessage(
         msg.key.remoteJid,
@@ -259,10 +256,7 @@ ${duration}
     break;
 
 }
-            console.log("AFK REPLY SENT");
-            console.log(
-JSON.stringify(msg, null, 2)
-);
+            
 
 
     await runEvents(
