@@ -12,30 +12,8 @@ const BOT_VERSION = "1.0.0";
 
 async function startBot() {
     try {
-        if (!PHONE_NUMBER) {
-
-    console.log(`
-╔════════════════════════════════╗
-║      WHISPERBOT SETUP          ║
-╠════════════════════════════════╣
-║ No WhatsApp number found.
-║
-║ Open:
-║ pairing.js
-║
-║ Then add:
-║
-║ PHONE_NUMBER: "237XXXXXXXXX"
-║
-║ Save and restart.
-╚════════════════════════════════╝
-`);
-
-    return;
-
-        }
-
-        const { state, saveCreds } = await useMultiFileAuthState("./session");
+    
+    const { state, saveCreds } = await useMultiFileAuthState("./session");
 
         const sock = makeWASocket({
             auth: state,
