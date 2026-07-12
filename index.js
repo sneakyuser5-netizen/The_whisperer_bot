@@ -127,6 +127,7 @@ const data = ownerDB.get();
 if (!data || data.botOwner !== owner) {
 
     ownerDB.set(owner);
+    setup.clearPhone();
 
 }
                 const info = ownerDB.get();
