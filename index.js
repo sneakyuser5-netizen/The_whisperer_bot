@@ -161,6 +161,8 @@ console.log("SOCK USER:", sock.user);
         sock.ev.on("messages.upsert", async ({ messages }) => {
 
     const msg = messages[0];
+            const identity = require("./lib/identity");
+            const afk = require("./lib/afk");
             const botId = sock.user.id.split(":")[0];
 
 const senderId = identity.getSender(msg);
@@ -170,8 +172,8 @@ if (senderId === botId) {
 }
   
     if (!msg.message) return;
-            const afk = require("./lib/afk");
-const identity = require("./lib/identity");
+            
+
 
 const sender = identity.getSender(msg);
 
@@ -254,24 +256,14 @@ ${duration}
         }
     );
     break;
-
-}
-            
-
-
-    await runEvents(
+    }
+}      
+await runEvents(
         "messages.upsert",
         sock,
         msg
     );
-
-
-    
-
-    
-
-
-    await handleMessage(
+await handleMessage(
         sock,
         msg
     );
