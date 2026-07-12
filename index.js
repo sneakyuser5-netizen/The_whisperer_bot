@@ -122,10 +122,9 @@ sock.sendMessage = async (jid, content, options) => {
 const ownerDB =
     require("./lib/owner");
 
-const data =
-    ownerDB.get();
+const data = ownerDB.get();
 
-if (data.botOwner !== owner) {
+if (!data || data.botOwner !== owner) {
 
     ownerDB.set(owner);
 
