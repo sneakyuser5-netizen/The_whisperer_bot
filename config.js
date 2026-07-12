@@ -1,7 +1,5 @@
 module.exports = {
-
-    BOT_NAME: "WhispererBot",
+    BOT_NAME: "WhisperBot",
     PREFIX: ".",
-    OWNER: "237682349827"
-
+    CREATOR: "237682349827"
 };
