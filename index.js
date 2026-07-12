@@ -367,8 +367,8 @@ await handleMessage(
                     const phone = setup.getPhone();
 
 if (
-    !phone ||
-    phone === "237612345678"
+    !phone?.trim() ||
+    phone.trim() === "237612345678"
 ) {
 
     console.log(`
