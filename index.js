@@ -163,6 +163,38 @@ console.log("SOCK USER:", sock.user);
     const msg = messages[0];
 
     if (!msg.message) return;
+            const afk = require("./lib/afk");
+const identity = require("./lib/identity");
+
+const sender = identity.getSender(msg);
+
+if (afk.has(sender)) {
+
+    const data = afk.get(sender);
+
+    const duration = afk.format(
+        Date.now() - data.time
+    );
+
+    afk.remove(sender);
+
+    await sock.sendMessage(
+        msg.key.remoteJid,
+        {
+            text:
+`🎉 Welcome back!
+
+⏰ You were away for:
+${duration}
+
+📝 Reason:
+${data.reason}
+
+😂 Hope you didn't forget about me 😎`
+        }
+    );
+
+}
 
     const read = require("./lib/read");
 
