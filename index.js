@@ -161,7 +161,7 @@ console.log("SOCK USER:", sock.user);
         sock.ev.on("messages.upsert", async ({ messages }) => {
 
     const msg = messages[0];
-
+  if (msg.key.fromMe) return;
     if (!msg.message) return;
             const afk = require("./lib/afk");
 const identity = require("./lib/identity");
@@ -243,6 +243,7 @@ ${duration}
             mentions: [user]
         }
     );
+    break;
 
 }
             console.log(
