@@ -161,7 +161,7 @@ console.log("SOCK USER:", sock.user);
         sock.ev.on("messages.upsert", async ({ messages }) => {
 
     const msg = messages[0];
-  if (msg.key.fromMe) return;
+  
     if (!msg.message) return;
             const afk = require("./lib/afk");
 const identity = require("./lib/identity");
@@ -215,6 +215,7 @@ ${data.reason}
 
 const mentions =
     context?.mentionedJid || [];
+  console.log("MENTIONS:", mentions);
 
 for (const user of mentions) {
 
@@ -225,6 +226,7 @@ for (const user of mentions) {
     const duration = afk.format(
         Date.now() - data.time
     );
+    console.log("SENDING AFK REPLY");
 
     await sock.sendMessage(
         msg.key.remoteJid,
@@ -246,6 +248,7 @@ ${duration}
     break;
 
 }
+            console.log("AFK REPLY SENT");
             console.log(
 JSON.stringify(msg, null, 2)
 );
