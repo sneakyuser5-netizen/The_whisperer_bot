@@ -6,7 +6,7 @@ const { loadEvents, runEvents } = require("./eventHandler");
 const settings = require("./lib/settings");
 
 
-const { PHONE_NUMBER } = require("./pairing");
+const setup = require("./lib/setup");
 const BOT_OWNER = "THE-WHISPERER";
 const BOT_VERSION = "1.0.0";
 
@@ -385,7 +385,37 @@ await handleMessage(
             try {
 
                 if (!sock.authState.creds.registered) {
-                    const code = await sock.requestPairingCode(PHONE_NUMBER);
+                    const phone = setup.getPhone();
+
+if (!phone) {
+
+    console.log(`
+━━━━━━━━━━━━━━━
+🤖 WhisperBot Setup
+
+No phone number found.
+
+Open:
+
+database/setup.json
+
+and enter your WhatsApp number.
+
+Example:
+
+{
+    "phone": "237612345678"
+}
+
+Restart the bot afterwards.
+
+━━━━━━━━━━━━━━━
+`);
+
+    return;
+
+}
+                    const code = await sock.requestPairingCode(phone);
 
                     console.log("\n======================");
                     console.log("PAIR CODE 👉", code);
