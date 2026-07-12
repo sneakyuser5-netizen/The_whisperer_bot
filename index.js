@@ -103,7 +103,7 @@ const ownerDB =
 const data =
     ownerDB.get();
 
-if (!data.botOwner) {
+if (data.botOwner !== owner) {
 
     ownerDB.set(owner);
 
