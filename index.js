@@ -233,7 +233,7 @@ for (const user of mentions) {
         {
             text:
 
-`😴 @${user.split("@")[0]} is currently AFK.
+`😴 That user is currently AFK.
 
 📝 Reason:
 ${data.reason}
@@ -242,7 +242,7 @@ ${data.reason}
 ${duration}
 
 😂 They're probably hiding from responsibilities.`,
-            mentions: [user]
+            
         }
     );
     break;
