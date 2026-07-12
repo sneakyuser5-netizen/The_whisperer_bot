@@ -210,6 +210,41 @@ ${data.reason}
         ]);
 
     }
+            const context =
+    msg.message?.extendedTextMessage?.contextInfo;
+
+const mentions =
+    context?.mentionedJid || [];
+
+for (const user of mentions) {
+
+    if (!afk.has(user)) continue;
+
+    const data = afk.get(user);
+
+    const duration = afk.format(
+        Date.now() - data.time
+    );
+
+    await sock.sendMessage(
+        msg.key.remoteJid,
+        {
+            text:
+
+`😴 @${user.split("@")[0]} is currently AFK.
+
+📝 Reason:
+${data.reason}
+
+⏰ Away for:
+${duration}
+
+😂 They're probably hiding from responsibilities.`,
+            mentions: [user]
+        }
+    );
+
+}
 
 
     await runEvents(
