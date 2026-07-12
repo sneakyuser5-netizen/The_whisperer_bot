@@ -366,29 +366,45 @@ await handleMessage(
                 if (!sock.authState.creds.registered) {
                     const phone = setup.getPhone();
 
-if (!phone) {
+if (
+    !phone ||
+    phone === "237612345678"
+) {
 
     console.log(`
-━━━━━━━━━━━━━━━
-🤖 WhisperBot Setup
+╔══════════════════════════════════════╗
+║          🤖 WHISPERBOT SETUP         ║
+╚══════════════════════════════════════╝
 
-No phone number found.
+Welcome to WhisperBot!
 
-Open:
+Follow these steps:
 
-database/setup.json
+1️⃣ Open:
+   database/setup.json
 
-and enter your WhatsApp number.
+2️⃣ Replace:
 
-Example:
+   {
+     "phone": ""
+   }
 
-{
-    "phone": "237612345678"
-}
+3️⃣ With your WhatsApp number:
 
-Restart the bot afterwards.
+   {
+     "phone": "237612345678"
+   }
 
-━━━━━━━━━━━━━━━
+4️⃣ Save the file.
+
+5️⃣ Restart the bot.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+After restarting,
+your Pairing Code will appear here.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 `);
 
     return;
