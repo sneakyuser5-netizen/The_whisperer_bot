@@ -245,6 +245,9 @@ ${duration}
     );
 
 }
+            console.log(
+JSON.stringify(msg, null, 2)
+);
 
 
     await runEvents(
