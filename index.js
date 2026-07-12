@@ -220,11 +220,15 @@ ${data.reason}
             const context =
     msg.message?.extendedTextMessage?.contextInfo;
 
-const mentions =
-    context?.mentionedJid || [];
-  console.log("MENTIONS:", mentions);
+if (mentions.length > 0) {
 
-for (const user of mentions) {
+    for (const user of mentions) {
+
+        // existing code
+
+    }
+
+}
 
     if (!afk.has(user)) continue;
 
