@@ -1,6 +1,6 @@
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require("@whiskeysockets/baileys");
 const pino = require("pino");
-
+const fs = require("fs");
 const { loadCommands, handleMessage } = require("./handler");
 const { loadEvents, runEvents } = require("./eventHandler");
 const settings = require("./lib/settings");
@@ -94,11 +94,72 @@ sock.sendMessage = async (jid, content, options) => {
 
             if (connection === "open") {
                 
-                const owner = sock.user.id.split(":")[0];
+                const owner =
+    sock.user.id.split(":")[0];
 
-const ownerDB = require("./lib/owner");
+const ownerDB =
+    require("./lib/owner");
 
-ownerDB.set(owner);
+const data =
+    ownerDB.get();
+
+if (!data.botOwner) {
+
+    ownerDB.set(owner);
+
+}
+                const info = ownerDB.get();
+
+if (!info.welcomed) {
+
+    try {
+
+        await sock.sendMessage(
+            owner + "@s.whatsapp.net",
+            {
+                image: fs.readFileSync("./assets/welcome.png"),
+
+                caption:
+`━━━━━━━━━━━━━━━
+🤖 *WhisperBot*
+
+Welcome *${sock.user.name || "Owner"}*! 🎉
+
+Your WhatsApp has been linked successfully.
+
+👑 You are now the owner of this WhisperBot instance.
+
+🚀 Start by typing:
+
+*.menu*
+
+Useful commands:
+
+• .private
+• .public
+• .setsudo
+• .ping
+
+Enjoy your new assistant!
+
+━━━━━━━━━━━━━━━
+
+Made with ❤️ by
+*THE-WHISPERER-237*`
+            }
+        );
+
+        ownerDB.welcomed();
+
+        console.log("✅ Welcome image sent.");
+
+    } catch (err) {
+
+        console.log("Welcome message failed:", err);
+
+    }
+
+}
 
 console.log("BOT OWNER:", owner);              
 console.log("SOCK USER:", sock.user);
