@@ -3,6 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "type": "commonjs",
+
+  "scripts": {
+    "translate": "node tools/build-language.js",
+    "build": "node tools/build-language.js"
+  },
+
   "dependencies": {
     "@whiskeysockets/baileys": "latest",
     "pino": "latest"

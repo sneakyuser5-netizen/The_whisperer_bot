@@ -64,11 +64,12 @@ module.exports = {
     warnlist: "Afficher la liste des avertissements.",
     welcome: "Configurer le message de bienvenue.",
     whois: "Afficher les informations d'un utilisateur.",
+botinfo:
+    "Afficher les informations du bot.",
 
-    botinfo:
-        "",
+runtime:
+    "Afficher la durée de fonctionnement du bot.",
 
-    runtime:
-        "",
+
 
 };

@@ -71,7 +71,6 @@ for (const cmd of output) {
     const text =
         cmd.description
             .replace(/"/g, '\\"');
-console.log(`[${cmd.name}] -> [${cmd.description}]`);
     en.push(
 `    ${cmd.name}: "${text}",\n`
     );
@@ -154,22 +153,13 @@ if (missingEntries.length) {
 
 if (missingEntries.length) {
 
-    let updated = dictionaryContent;
-
-    updated = updated.replace(
-        /\n};\s*$/,
-        ",\n\n" +
-        missingEntries.join("\n\n") +
-        "\n\n};"
-    );
-
-    fs.writeFileSync(
-        dictionaryFile,
-        updated
-    );
+    console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    console.log("Missing dictionary entries:\n");
 
     console.log(
-        "\n✓ dictionary.js updated automatically."
+        missingEntries.join("\n\n")
     );
+
+    console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━");
 
 }
