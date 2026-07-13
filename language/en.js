@@ -1,6 +1,8 @@
 module.exports = {
 
-    menu: "Menu",
+    menu_title: "📌 WhisperBot Menu",
+
+    total_commands: "Total Commands",
 
     ping: "Check the bot latency.",
 
