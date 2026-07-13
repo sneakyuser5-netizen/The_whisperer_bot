@@ -1,15 +1,18 @@
 module.exports = {
-    8ball: "Poser une question à la boule magique.",
+
+    ping: "Pour vérifier la vitesse de réponse du bot.",
+    menu: "Afficher les commandes du bot.",
+    alive: "Vérifier si le bot est en ligne.",
+
+    "8ball": "Poser une question à la boule magique.",
     admincheck: "Vérifier si un utilisateur est administrateur.",
     admincount: "Afficher le nombre d'administrateurs.",
     admins: "Afficher la liste des administrateurs.",
     afk: "Définir votre statut d'absence.",
-    alive: "Vérifier si le bot est en ligne.",
     antilink: "Activer ou désactiver l'anti-lien.",
     autorecording: "Activer ou désactiver l'enregistrement automatique.",
     autotyping: "Activer ou désactiver l'indicateur de saisie.",
     bot: "Afficher les informations du bot.",
-    botinfo: "Show information about the bot",
     compliment: "Envoyer un compliment aléatoire.",
     dare: "Obtenir un défi aléatoire.",
     delsudo: "Retirer un utilisateur sudo.",
@@ -27,10 +30,8 @@ module.exports = {
     leave: "Quitter le groupe.",
     membercount: "Afficher le nombre de membres.",
     memory: "Afficher l'utilisation de la mémoire.",
-    menu: "Afficher les commandes du bot.",
     online: "Afficher les membres en ligne.",
     owner: "Afficher le propriétaire du bot.",
-    ping: "Pour vérifier la vitesse de réponse du bot.",
     ping2: "Tester la vitesse de réponse du bot.",
     private: "Passer le bot en mode privé.",
     promote: "Promouvoir un membre administrateur.",
@@ -42,7 +43,6 @@ module.exports = {
     restart: "Redémarrer le bot.",
     revoke: "Réinitialiser le lien d'invitation.",
     roast: "Envoyer une pique amusante.",
-    runtime: "Show Node.js runtime version",
     say: "Faire parler le bot.",
     secret: "Envoyer un message secret.",
     server: "Afficher les informations du serveur.",
@@ -64,4 +64,11 @@ module.exports = {
     warnlist: "Afficher la liste des avertissements.",
     welcome: "Configurer le message de bienvenue.",
     whois: "Afficher les informations d'un utilisateur.",
+
+    botinfo:
+        "",
+
+    runtime:
+        "",
+
 };

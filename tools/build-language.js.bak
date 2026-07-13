@@ -1,13 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const dictionary = require("../language/dictionary");
-const dictionaryFile = path.join(
-    __dirname,
-    "../language/dictionary.js"
-);
-const dictionaryContent =
-    fs.readFileSync(dictionaryFile, "utf8");
-const missingEntries = [];
 const commandsDir = path.join(__dirname, "../commands");
 const output = [];
 
@@ -65,7 +58,7 @@ const fr = [];
 
 en.push("module.exports = {\n");
 fr.push("module.exports = {\n");
-const missing = [];
+
 for (const cmd of output) {
 
     const text =
@@ -75,20 +68,9 @@ console.log(`[${cmd.name}] -> [${cmd.description}]`);
     en.push(
 `    ${cmd.name}: "${text}",\n`
     );
-let french = dictionary[cmd.name];
 
-if (!french) {
-
-    missing.push(cmd.name);
-
-    missingEntries.push(
-`    ${cmd.name}:
-        "",`
-    );
-
-    french = text;
-
-}
+      const french =
+    dictionary[cmd.name] || text;
 fr.push(
 `    ${cmd.name}: "${french.replace(/"/g, '\\"')}",\n`
 );
@@ -119,57 +101,3 @@ Created:
 language/generated-en.js
 language/generated-fr.js`
 );
-if (missing.length) {
-
-    console.log("\nMissing French translations:\n");
-
-    for (const name of missing) {
-        console.log("-", name);
-    }
-
-    console.log(
-        `\nTotal missing: ${missing.length}`
-    );
-
-}
-if (missingEntries.length) {
-
-    console.log(
-        "\n━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    );
-
-    console.log(
-        "Paste these into language/dictionary.js:\n"
-    );
-
-    console.log(
-        missingEntries.join("\n")
-    );
-
-    console.log(
-        "\n━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    );
-
-}
-
-if (missingEntries.length) {
-
-    let updated = dictionaryContent;
-
-    updated = updated.replace(
-        /\n};\s*$/,
-        ",\n\n" +
-        missingEntries.join("\n\n") +
-        "\n\n};"
-    );
-
-    fs.writeFileSync(
-        dictionaryFile,
-        updated
-    );
-
-    console.log(
-        "\n✓ dictionary.js updated automatically."
-    );
-
-}
