@@ -71,9 +71,9 @@ for (const cmd of output) {
     const text =
         cmd.description
             .replace(/"/g, '\\"');
-    en.push(
-`    ${cmd.name}: "${text}",\n`
-    );
+en.push(
+`    "${cmd.name}": "${text.replace(/"/g, '\\"')}",\n`
+);
 let french = dictionary[cmd.name];
 
 if (!french) {
@@ -89,7 +89,7 @@ if (!french) {
 
 }
 fr.push(
-`    ${cmd.name}: "${french.replace(/"/g, '\\"')}",\n`
+`    "${cmd.name}": "${french.replace(/"/g, '\\"')}",\n`
 );
 }
 
