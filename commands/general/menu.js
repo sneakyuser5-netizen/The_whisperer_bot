@@ -41,10 +41,7 @@ let menu = `${t(jid, "menu_title")}\n`;
 
                 menu += `• .${command.name}`;
 
-                if (command.description) {
-                    menu += `\n  ${command.description}`;
-                }
-
+menu += `\n  ${t(jid, command.name)}`;
                 menu += "\n";
             }
         }
