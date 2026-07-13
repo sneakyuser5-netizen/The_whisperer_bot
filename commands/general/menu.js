@@ -1,3 +1,4 @@
+console.log("🔥 MENU.JS LOADED");
 module.exports = {
 
     name: "menu",
