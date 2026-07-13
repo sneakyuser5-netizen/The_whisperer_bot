@@ -9,10 +9,11 @@ module.exports = {
     permission: "public",
 
     execute: async (sock, msg) => {
+        const { t } = require("../../lib/lang");
 
         const { commands } = require("../../handler.js");
 
-        let menu = "📌 WhispererBot Menu\n";
+        let menu = `${t("menu_title")}\n`;
 
         const categories = {};
 
@@ -47,7 +48,7 @@ module.exports = {
         }
 
 
-        menu += `\nTotal Commands: ${commands.size}`;
+        menu += `\n${t("total_commands")}: ${commands.size}`;
 
         await sock.sendMessage(
             msg.key.remoteJid,
