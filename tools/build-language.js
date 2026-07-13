@@ -95,19 +95,17 @@ fr.push(
 
 en.push("};\n");
 fr.push("};\n");
-
 fs.writeFileSync(
     path.join(__dirname,
-    "../language/generated-en.js"),
+    "../language/en.js"),
     en.join("")
 );
 
 fs.writeFileSync(
     path.join(__dirname,
-    "../language/generated-fr.js"),
+    "../language/fr.js"),
     fr.join("")
 );
-
 console.log(
 `Done!
 
