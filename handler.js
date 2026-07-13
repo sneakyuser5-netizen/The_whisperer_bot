@@ -109,16 +109,19 @@ const mode =
 let body = text.trim();
 
 if (body.startsWith(". ")) {
-
     body = "." + body.slice(2);
+}
 
+// Ignore messages without the prefix
+if (!body.startsWith(".")) {
+    return;
 }
 
 const parts = body.split(/\s+/);
 
 const cmd = parts[0]
-    .toLowerCase()
-    .replace(".", "");
+    .slice(1) // Remove only the first character (the prefix)
+    .toLowerCase();
 
 const args = parts.slice(1);
 
