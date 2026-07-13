@@ -21,11 +21,13 @@ async function startBot() {
             logger: pino({ level: "silent" })
         });
         global.sock = sock;
-        console.log("signalRepository exists:", !!sock.signalRepository);
+        console.log("LID MAPPING:");
+console.log(sock.signalRepository.lidMapping);
 
-if (sock.signalRepository) {
-    console.log("signalRepository keys:");
-    console.log(Object.keys(sock.signalRepository));
+console.log("LID MAPPING KEYS:");
+console.log(
+    Object.keys(sock.signalRepository.lidMapping)
+);
 }
         const originalSendMessage = sock.sendMessage.bind(sock);
 
