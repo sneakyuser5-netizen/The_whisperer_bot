@@ -60,9 +60,19 @@ output.sort((a, b) =>
     a.name.localeCompare(b.name)
 );
 
-const en = [];
-const fr = [];
+const en = [
+`module.exports = {
+    menu_title: "📌 WhisperBot Menu",
+    total_commands: "Total commands",
+`
+];
 
+const fr = [
+`module.exports = {
+    menu_title: "📌 Menu WhisperBot",
+    total_commands: "Nombre total de commandes",
+`
+];
 en.push("module.exports = {\n");
 fr.push("module.exports = {\n");
 const missing = [];
@@ -73,8 +83,7 @@ for (const cmd of output) {
             .replace(/"/g, '\\"');
 en.push(
 `    "${cmd.name}": "${text.replace(/"/g, '\\"')}",\n`
-);
-let french = dictionary[cmd.name];
+);let french = dictionary[cmd.name];
 
 if (!french) {
 
