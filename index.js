@@ -27,7 +27,7 @@ console.log(sock.signalRepository.lidMapping);
 console.log("LID MAPPING KEYS:");
 console.log(
     Object.keys(sock.signalRepository.lidMapping));
-}
+
 const originalSendMessage = sock.sendMessage.bind(sock);
 
 sock.sendMessage = async (jid, content, options) => {
