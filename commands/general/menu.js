@@ -13,7 +13,10 @@ module.exports = {
 
         const { commands } = require("../../handler.js");
 
-        let menu = `${t("menu_title")}\n`;
+        const jid = msg.key.remoteJid;
+
+let menu =
+`${t(jid, "menu_title")}\n`;
 
         const categories = {};
 
@@ -48,7 +51,8 @@ module.exports = {
         }
 
 
-        menu += `\n${t("total_commands")}: ${commands.size}`;
+        menu +=
+`\n${t(jid, "total_commands")}: ${commands.size}`;
 
         await sock.sendMessage(
             msg.key.remoteJid,
