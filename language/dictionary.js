@@ -3,7 +3,6 @@ module.exports = {
     ping: "Pour vérifier la vitesse de réponse du bot.",
     menu: "Afficher les commandes du bot.",
     alive: "Vérifier si le bot est en ligne.",
-
     "8ball": "Poser une question à la boule magique.",
     admincheck: "Vérifier si un utilisateur est administrateur.",
     admincount: "Afficher le nombre d'administrateurs.",
@@ -64,12 +63,7 @@ module.exports = {
     warnlist: "Afficher la liste des avertissements.",
     welcome: "Configurer le message de bienvenue.",
     whois: "Afficher les informations d'un utilisateur.",
-botinfo:
-    "Afficher les informations du bot.",
-
-runtime:
-    "Afficher la durée de fonctionnement du bot.",
-
-
+    botinfo: "Afficher les informations du bot.",
+  runtime: "Afficher la durée de fonctionnement du bot.",
 
 };
