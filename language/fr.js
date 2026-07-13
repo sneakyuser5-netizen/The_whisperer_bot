@@ -1,4 +1,7 @@
 module.exports = {
+    menu_title: "📌 Menu WhisperBot",
+    total_commands: "Nombre total de commandes",
+module.exports = {
     "8ball": "Poser une question à la boule magique.",
     "admincheck": "Vérifier si un utilisateur est administrateur.",
     "admincount": "Afficher le nombre d'administrateurs.",
