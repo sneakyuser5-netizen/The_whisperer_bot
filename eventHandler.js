@@ -7,8 +7,7 @@ const events = {
 
 
 function loadEvents() {
-    function loadEvents() {
-
+    
     events["messages.upsert"] = [];
     events["group-participants.update"] = [];
 
