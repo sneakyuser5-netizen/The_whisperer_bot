@@ -32,7 +32,6 @@ sock.sendMessage = async (jid, content, options) => {
 
         if (config.autotyping) {
 
-            console.log("⌨️ AUTO TYPING");
 
             await sock.sendPresenceUpdate(
                 "composing",
@@ -52,7 +51,7 @@ sock.sendMessage = async (jid, content, options) => {
 
         else if (config.autorecording) {
 
-            console.log("🎙️ AUTO RECORDING");
+        
 
             await sock.sendPresenceUpdate(
                 "recording",
@@ -152,18 +151,17 @@ Made with ❤️ by
 
         ownerDB.welcomed();
 
-        console.log("✅ Welcome image sent.");
+        
 
     } catch (err) {
 
-        console.log("Welcome message failed:", err);
+        
 
     }
 
 }
 
-console.log("BOT OWNER:", owner);              
-console.log("SOCK USER:", sock.user);
+
     const number =
         sock.user.id.split(":")[0];
 
