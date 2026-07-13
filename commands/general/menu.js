@@ -1,4 +1,3 @@
-console.log("🔥 MENU.JS LOADED");
 module.exports = {
 
     name: "menu",
@@ -15,9 +14,6 @@ module.exports = {
         const { commands } = require("../../handler.js");
 
         const jid = msg.key.remoteJid;
-console.log("JID:", jid);
-console.log("SETTINGS:", require("../../lib/settings").get(jid));
-console.log("TITLE:", t(jid, "menu_title"));
 
 let menu = `${t(jid, "menu_title")}\n`;
 
