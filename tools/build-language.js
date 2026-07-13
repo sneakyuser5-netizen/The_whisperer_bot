@@ -73,8 +73,6 @@ const fr = [
     total_commands: "Nombre total de commandes",
 `
 ];
-en.push("module.exports = {\n");
-fr.push("module.exports = {\n");
 const missing = [];
 for (const cmd of output) {
 
