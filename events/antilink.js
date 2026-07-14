@@ -55,11 +55,12 @@ console.log(
 
 const sender = msg.key.participant || msg.key.remoteJid;
 
-const member = metadata.participants.find(
-    p => p.id === sender || p.phoneNumber === sender
-);
+const member = metadata.participants.find(p => {
     const id = (p.id || p.jid || "").split(":")[0];
-    return id === sender.split(":")[0];
+    const phone = (p.phoneNumber || "").split(":")[0];
+    const user = sender.split(":")[0];
+
+    return id === user || phone === user;
 });
 
 console.log("Sender:", sender);
