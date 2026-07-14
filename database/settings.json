@@ -4,7 +4,8 @@
     "language": "fr",
     "lock_sticker": false,
     "lock_image": false,
-    "slowmode": 0
+    "slowmode": 0,
+    "antispam": false
   },
   "global": {
     "mode": "public"

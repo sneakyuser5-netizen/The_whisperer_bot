@@ -75,6 +75,30 @@ async function handleMessage(sock, msg) {
     const text =
         msg.message?.conversation ||
         msg.message?.extendedTextMessage?.text;
+// Save messages for purge command
+if (msg.key.remoteJid.endsWith("@g.us")) {
+
+    global.messageCache =
+        global.messageCache || {};
+
+    global.messageCache[msg.key.remoteJid] =
+        global.messageCache[msg.key.remoteJid] || [];
+
+
+    global.messageCache[msg.key.remoteJid].push(msg);
+
+
+    // Keep only latest 100 messages
+    if (
+        global.messageCache[msg.key.remoteJid].length > 100
+    ) {
+
+        global.messageCache[msg.key.remoteJid]
+        .shift();
+
+    }
+
+}
 
     if (!text) return;
    
