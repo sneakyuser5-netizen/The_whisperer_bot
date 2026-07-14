@@ -16,6 +16,12 @@ module.exports = {
         const jid =
             msg.key.remoteJid;
 
+const settings = require("../lib/settings");
+
+const groupSettings =
+    settings.get(jid);
+
+if (!groupSettings.antispam) return;
 
         if (!jid.endsWith("@g.us")) return;
 
