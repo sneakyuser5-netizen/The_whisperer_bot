@@ -5,6 +5,7 @@
   "type": "commonjs",
 
   "scripts": {
+    "start": "node index.js",
     "translate": "node tools/build-language.js",
     "build": "node tools/build-language.js"
   },
