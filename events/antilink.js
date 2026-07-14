@@ -45,25 +45,27 @@ if (!settings[jid]?.antilink) return;
         // Get group info
         const metadata = await sock.groupMetadata(jid);
 
-        const sender =
-    msg.key.participant || msg.key.remoteJid;
-
-const member = metadata.participants.find(
-    p => p.id === sender
+console.log(
+    JSON.stringify(
+        metadata.participants,
+        null,
+        2
+    )
 );
 
-// Ignore group admins
-if (member?.admin) return;
+const sender = msg.key.participant || msg.key.remoteJid;
 
-// Ignore the group owner
-if (metadata.owner === sender) return;
+const member = metadata.participants.find(p => {
+    const id = (p.id || p.jid || "").split(":")[0];
+    return id === sender.split(":")[0];
+});
 
-// Ignore the bot itself
-if (sender === sock.user.id) return;
 console.log("Sender:", sender);
 console.log("Member:", member);
-console.log("Owner:", metadata.owner);
 
+// Ignore admins
+if (member && member.admin) return;
+        
         await sock.sendMessage(jid, {
             delete: msg.key
         });
