@@ -328,28 +328,9 @@ await handleMessage(
         msg
     );
 
-});
-
+}); 
     
-    
-        sock.ev.on("group-participants.update", async (update) => {
-
-    await runEvents(
-        "welcome",
-        sock,
-        update
-    );
-
-    await runEvents(
-        "goodbye",
-        sock,
-        update
-    );
-
-});
-        
-
-        sock.ev.on("group-participants.update", async (update) => {
+     sock.ev.on("group-participants.update", async (update) => {
 
     await runEvents(
         "group-participants.update",
