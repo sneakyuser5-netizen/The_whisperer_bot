@@ -2,5 +2,8 @@
   "120363426993971039@g.us": {
     "antilink": true,
     "language": "fr"
+  },
+  "global": {
+    "mode": "public"
   }
 }

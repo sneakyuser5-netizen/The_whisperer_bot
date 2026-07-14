@@ -93,6 +93,18 @@ const isOwner =
 
 const isSudo =
     identity.isSudo(msg);
+const mute = require("./lib/mute");
+
+const groupId = msg.key.remoteJid;
+if (
+    groupId.endsWith("@g.us") &&
+    mute.isMuted(groupId, senderId) &&
+    !identity.isCreator(msg) &&
+    !identity.isBotOwner(msg) &&
+    !isSudo
+) {
+    return;
+}
 
 console.log({
     sender: senderId,
