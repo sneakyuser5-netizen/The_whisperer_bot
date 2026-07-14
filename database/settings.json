@@ -1,7 +1,9 @@
 {
   "120363426993971039@g.us": {
     "antilink": true,
-    "language": "fr"
+    "language": "fr",
+    "lock_sticker": false,
+    "lock_image": false
   },
   "global": {
     "mode": "public"
