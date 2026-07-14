@@ -3,7 +3,8 @@
     "antilink": true,
     "language": "fr",
     "lock_sticker": false,
-    "lock_image": false
+    "lock_image": false,
+    "slowmode": 10
   },
   "global": {
     "mode": "public"
