@@ -5,7 +5,8 @@
     "lock_sticker": false,
     "lock_image": false,
     "slowmode": 0,
-    "antispam": false
+    "antispam": false,
+    "rules": ""
   },
   "global": {
     "mode": "public"
