@@ -4,7 +4,7 @@
     "language": "fr",
     "lock_sticker": false,
     "lock_image": false,
-    "slowmode": 10
+    "slowmode": 0
   },
   "global": {
     "mode": "public"
