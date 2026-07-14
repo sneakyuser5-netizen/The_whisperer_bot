@@ -45,14 +45,6 @@ if (!settings[jid]?.antilink) return;
         // Get group info
         const metadata = await sock.groupMetadata(jid);
 
-console.log(
-    JSON.stringify(
-        metadata.participants,
-        null,
-        2
-    )
-);
-
 const sender = msg.key.participant || msg.key.remoteJid;
 
 const member = metadata.participants.find(p => {
@@ -62,9 +54,6 @@ const member = metadata.participants.find(p => {
 
     return id === user || phone === user;
 });
-
-console.log("Sender:", sender);
-console.log("Member:", member);
 
 // Ignore admins
 if (member && member.admin) return;
