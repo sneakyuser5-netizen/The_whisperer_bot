@@ -30,8 +30,7 @@ module.exports = {
     if (member.warns <= 0) continue;
 
     found = true;
-
-    text += `• @${member.user.split("@")[0]} - ${member.warns}/3\n`;
+text += `• @${member.jid.split("@")[0]} - ${member.warns}/5\n`;
 
         }
 
@@ -41,9 +40,10 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text,
-            mentions: found
-    ? list.map(member => member.user)
-    : []
+mentions: found
+? list.map(member => member.jid)
+: []
+
         });
 
     }

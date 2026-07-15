@@ -1,4 +1,6 @@
 const warns = require("../../lib/warns");
+const mute = require("../../lib/mute");
+const identity = require("../../lib/identity");
 
 module.exports = {
 
@@ -15,60 +17,137 @@ module.exports = {
         const jid = msg.key.remoteJid;
 
         if (!jid.endsWith("@g.us")) {
+
             return sock.sendMessage(jid, {
                 text: "❌ This command only works in groups."
             });
+
         }
 
-        // continue with the rest of your code...
 
+        const context =
+            msg.message?.extendedTextMessage?.contextInfo;
 
-
-
-
-
-        const context = msg.message?.extendedTextMessage?.contextInfo;
-
-        let target = context?.mentionedJid?.[0];
+        let target =
+            context?.mentionedJid?.[0];
 
         if (!target && context?.participant) {
             target = context.participant;
         }
 
         if (!target) {
+
             return sock.sendMessage(jid, {
-                text: "❌ Reply to a user or mention them.\n\nExample:\n.warn @user"
+                text:
+"❌ Reply to a user or mention them.\n\nExample:\n.warn @user"
             });
+
         }
 
 
-        const count = warns.add(jid, target);
+        target =
+            identity.normalize(target);
 
+const mention =
+    context?.mentionedJid?.[0] ||
+    context?.participant;
+
+const count =
+    warns.add(jid, target, mention);
 
         await sock.sendMessage(jid, {
-    text:
+
+            text:
 `⚠️ Warning issued
 
-User: @${target.split("@")[0]}
-Warnings: ${count}/3`,
-    mentions: [target]
-});
+User: @${target}
+
+Warnings: ${count}/5`,
+
+            mentions: [context?.mentionedJid?.[0] || context?.participant]
+
+        });
 
 
-        if (count >= 3) {
+        // 3 warns → mute
+        if (count === 3) {
+
+            mute.mute(
+                jid,
+                target,
+                30 * 60 * 1000
+            );
+
+            return sock.sendMessage(jid, {
+
+                text:
+`🔇 @${target} has been automatically muted for 30 minutes.
+
+😂 Time to cool off a little.`,
+
+                mentions: [
+                    context?.mentionedJid?.[0] ||
+                    context?.participant
+                ]
+
+            });
+
+        }
+
+
+        // 4 warns
+        if (count === 4) {
+
+            return sock.sendMessage(jid, {
+
+                text:
+`⚠️ Final warning for @${target}.
+
+🚨 One more warning and WhisperBot will remove you.`,
+
+                mentions: [
+                    context?.mentionedJid?.[0] ||
+                    context?.participant
+                ]
+
+            });
+
+        }
+
+
+        // 5 warns → kick
+        if (count >= 5) {
 
             await sock.sendMessage(jid, {
-                text: "🚨 User reached 3 warnings. Removing member."
+
+                text:
+`👢 @${target} reached the maximum warnings.
+
+😂 WhisperBot has escorted them to the exit.`,
+
+                mentions: [
+                    context?.mentionedJid?.[0] ||
+                    context?.participant
+                ]
+
             });
 
             await sock.groupParticipantsUpdate(
                 jid,
-                [target],
+                [
+                    context?.mentionedJid?.[0] ||
+                    context?.participant
+                ],
                 "remove"
             );
 
-            warns.reset(jid, target);
+            warns.reset(
+                jid,
+                target
+            );
+
         }
 
     }
+
 };

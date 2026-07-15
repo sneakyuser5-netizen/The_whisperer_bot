@@ -1,5 +1,5 @@
 const warns = require("../../lib/warns");
-
+const identity = require("../../lib/identity");
 module.exports = {
 
     name: "warnings",
@@ -36,14 +36,15 @@ module.exports = {
             });
         }
 
-        const count = warns.get(jid, target);
+const user = identity.normalize(target);
 
+const count = warns.get(jid, user);
         await sock.sendMessage(jid, {
             text:
 `📋 Warning Status
 
 User: @${target.split("@")[0]}
-Warnings: ${count}/3`,
+Warnings: ${count}/5`,
             mentions: [target]
         });
 
