@@ -1,4 +1,4 @@
-const { spawn } = require("child_process");
+const { exec } = require("child_process");
 
 module.exports = {
 
@@ -16,37 +16,14 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text:
-`🔄 Restart request accepted.
+`🔄 Restarting WhisperBot...
 
-😂 Hold my circuits together... I'll be right back!`
+😂 Hold my circuits together. I'll be back shortly!`
         });
 
         setTimeout(() => {
-
-            // Running inside Termux
-            if (
-                process.env.PREFIX &&
-                process.env.PREFIX.includes("com.termux")
-            ) {
-
-                spawn(
-                    "npm",
-                    ["start"],
-                    {
-                        cwd: process.cwd(),
-                        detached: true,
-                        stdio: "ignore"
-                    }
-                ).unref();
-
-            }
-
-            // Exit current process.
-            // On bot-hosting.net the panel restarts the bot.
-            // On Termux the new process is already running.
-            process.exit(0);
-
-        }, 1500);
+            exec("npx pm2 restart whisperbot");
+        }, 2000);
 
     }
 
