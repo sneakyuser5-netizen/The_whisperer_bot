@@ -1,14 +1,1 @@
-{
-  "120363426993971039@g.us": {
-    "antilink": true,
-    "language": "fr",
-    "lock_sticker": false,
-    "lock_image": false,
-    "slowmode": 0,
-    "antispam": false,
-    "rules": ""
-  },
-  "global": {
-    "mode": "public"
-  }
-}
+{}
