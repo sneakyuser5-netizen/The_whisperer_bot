@@ -1,5 +1,5 @@
 const warns = require("../../lib/warns");
-
+const identity = require("../../lib/identity");
 module.exports = {
 
     name: "resetwarn",
@@ -36,14 +36,15 @@ module.exports = {
             });
         }
 
-        warns.reset(jid, target);
+const user = identity.normalize(target);
 
+warns.reset(jid, user);
         await sock.sendMessage(jid, {
             text:
 `✅ Warnings reset.
 
 User: @${target.split("@")[0]}
-Warnings: 0/3`,
+Warnings: 0/5`,
             mentions: [target]
         });
 
