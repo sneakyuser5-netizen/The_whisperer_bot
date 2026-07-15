@@ -2,4 +2,6 @@
 
 echo "🚀 Starting WhisperBot..."
 
-pm2 start index.js --name whisperbot --attach
+npm install pm2 --save
+
+npx pm2 start index.js --name whisperbot --attach
