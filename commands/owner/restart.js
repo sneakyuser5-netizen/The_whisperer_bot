@@ -22,8 +22,8 @@ module.exports = {
         });
 
         setTimeout(() => {
-            exec("npx pm2 restart whisperbot");
-        }, 2000);
+    process.exit(1);
+}, 2000);
 
     }
 
