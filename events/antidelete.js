@@ -55,8 +55,10 @@ if (!owner) return;
 👤 User:
 @${sender.split("@")[0]}
 
+const metadata = await sock.groupMetadata(jid);
+const groupName = metadata.subject;
 👥 Group:
-${jid}
+${groupName}
 
 💬 Message:
 ${text}`,
