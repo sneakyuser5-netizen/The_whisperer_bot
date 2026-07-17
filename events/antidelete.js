@@ -53,7 +53,7 @@ if (!owner) return;
 `🗑️ Deleted Message Recovered
 
 👤 User:
-@${sender.split("@")[0]}
+@${sender}
 
 const metadata = await sock.groupMetadata(jid);
 const groupName = metadata.subject;
