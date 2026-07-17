@@ -45,9 +45,11 @@ module.exports = {
 
         const identity = require("../lib/identity");
 
-const owner = identity.getBotOwner();
+const ownerNumber = identity.getBotOwner();
 
-if (!owner) return;
+if (!ownerNumber) return;
+
+const owner = ownerNumber + "@s.whatsapp.net";
         const owner = identity.getBotOwner();
 
 if (!owner) return;
