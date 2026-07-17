@@ -50,7 +50,6 @@ const ownerNumber = identity.getBotOwner();
 if (!ownerNumber) return;
 
 const owner = ownerNumber + "@s.whatsapp.net";
-        const owner = identity.getBotOwner();
 
 if (!owner) return;
 
