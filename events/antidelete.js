@@ -42,9 +42,11 @@ module.exports = {
             original.message?.extendedTextMessage?.text ||
             "[Media message]";
 
-        const owner = settings.get("global").owner;
+        const identity = require("../lib/identity");
 
-        if (!owner) return;
+const owner = identity.getBotOwner();
+
+if (!owner) return;
 
         await sock.sendMessage(owner, {
             text:
