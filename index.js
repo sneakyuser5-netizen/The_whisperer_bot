@@ -221,6 +221,12 @@ Made with ❤️ by
         sock.ev.on("messages.upsert", async ({ messages }) => {
 
     const msg = messages[0];
+            const messageCache = require("./lib/messageCache");
+
+// Save every incoming message
+if (msg.message && !msg.key.fromMe) {
+    messageCache.save(msg);
+}
             const identity = require("./lib/identity");
             const afk = require("./lib/afk");
             const botId = sock.user.id.split(":")[0];
