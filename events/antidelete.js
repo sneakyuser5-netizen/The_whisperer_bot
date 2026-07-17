@@ -14,6 +14,7 @@ module.exports = {
         const protocol = msg.message.protocolMessage;
 
         if (!protocol) return;
+        
 
         // Only handle deleted messages
         if (protocol.type !== 0) return;
@@ -47,6 +48,16 @@ module.exports = {
 const owner = identity.getBotOwner();
 
 if (!owner) return;
+        const owner = identity.getBotOwner();
+
+if (!owner) return;
+
+let groupName = "Unknown Group";
+
+try {
+    const metadata = await sock.groupMetadata(jid);
+    groupName = metadata.subject;
+} catch {}
 
         await sock.sendMessage(owner, {
             text:
@@ -55,8 +66,6 @@ if (!owner) return;
 👤 User:
 @${sender}
 
-const metadata = await sock.groupMetadata(jid);
-const groupName = metadata.subject;
 👥 Group:
 ${groupName}
 
