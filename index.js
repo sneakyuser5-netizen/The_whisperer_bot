@@ -242,6 +242,12 @@ if (senderId === botId) {
 
 
 const sender = identity.getSender(msg);
+            const activity = require("./lib/activity");
+
+activity.update(
+    msg.key.remoteJid,
+    sender
+);
 
 if (afk.has(sender)) {
 
