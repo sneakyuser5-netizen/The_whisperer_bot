@@ -345,6 +345,26 @@ await handleMessage(
     );
 
 });
+        sock.ev.on("presence.update", ({ id, presences }) => {
+
+    const presence = require("./lib/presence");
+
+    for (const user in presences) {
+
+        const state = presences[user]?.lastKnownPresence;
+
+        if (
+            state === "available" ||
+            state === "composing" ||
+            state === "recording" ||
+            state === "paused"
+        ) {
+            presence.set(user);
+        }
+
+    }
+
+});
 
         setTimeout(async () => {
             try {
