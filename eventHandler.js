@@ -2,11 +2,15 @@ const fs = require("fs");
 
 const events = {
     "messages.upsert": [],
+    "messages.update": [],
     "group-participants.update": []
 };
 
 
 function loadEvents() {
+  //  events["messages.upsert"] = [];
+events["messages.update"] = [];
+//events["group-participants.update"] = [];
     
     events["messages.upsert"] = [];
     events["group-participants.update"] = [];
