@@ -22,43 +22,66 @@ module.exports = {
             });
         }
 
-        const minutes = parseInt(args[0]) || 30;
+        const minutes = Math.max(
+            parseInt(args[0]) || 30,
+            1
+        );
 
-        const cutoff = Date.now() - (minutes * 60 * 1000);
+        const cutoff =
+            Date.now() - (minutes * 60 * 1000);
 
-        const metadata = await sock.groupMetadata(jid);
+        const metadata =
+            await sock.groupMetadata(jid);
 
-        let text =
-`📢 Active members (last ${minutes} minute${minutes === 1 ? "" : "s"})
-
-`;
-
-        const mentions = [];
+        const active = [];
 
         for (const member of metadata.participants) {
 
             const id = member.id;
 
-            const last = activity.get(jid, id);
+            const last =
+                activity.get(jid, id);
 
             if (last < cutoff) continue;
 
-            mentions.push(id);
-
-            text += `• @${id.split("@")[0]}\n`;
-
-        }
-
-        if (!mentions.length) {
-
-            return sock.sendMessage(jid, {
-                text:
-`😴 No members have spoken in the last ${minutes} minute${minutes === 1 ? "" : "s"}.`
+            active.push({
+                id,
+                last
             });
 
         }
 
-        text += "\n😂 Wake up, everyone!";
+        if (!active.length) {
+
+            return sock.sendMessage(jid, {
+                text:
+`😴 Nobody has spoken in the last ${minutes} minute${minutes === 1 ? "" : "s"}.`
+            });
+
+        }
+
+        active.sort((a, b) => b.last - a.last);
+
+        let text =
+`📢 Active Members
+
+🕒 Last ${minutes} minute${minutes === 1 ? "" : "s"}
+
+👥 Total: ${active.length}
+
+`;
+
+        const mentions = [];
+
+        active.forEach((user, index) => {
+
+            mentions.push(user.id);
+
+            text += `${index + 1}. @${user.id.split("@")[0]}\n`;
+
+        });
+
+        text += "\n🔥 These members have been active recently.";
 
         await sock.sendMessage(jid, {
             text,
