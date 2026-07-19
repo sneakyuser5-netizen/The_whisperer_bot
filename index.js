@@ -242,12 +242,19 @@ if (senderId === botId) {
 
 
 const sender = identity.getSender(msg);
-            const activity = require("./lib/activity");
 
-activity.update(
-    msg.key.remoteJid,
-    sender
-);
+const activity = require("./lib/activity");
+
+// Only record activity from real users in groups
+if (
+    !msg.key.fromMe &&
+    msg.key.remoteJid.endsWith("@g.us")
+) {
+    activity.update(
+        msg.key.remoteJid,
+        sender
+    );
+}
 
 if (afk.has(sender)) {
 
