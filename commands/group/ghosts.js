@@ -35,9 +35,12 @@ module.exports = {
                 identity.normalize(member.id);
 
             // Skip the bot
-            if (member.id === sock.user.id) {
-                continue;
-            }
+if (
+    identity.normalize(member.id) ===
+    identity.normalize(sock.user.id)
+) {
+    continue;
+}
 
             if (!active[id]) {
                 ghosts.push(member.id);
