@@ -1,4 +1,5 @@
 const activity = require("../../lib/activity");
+const identity = require("../../lib/identity");
 
 module.exports = {
 
@@ -21,6 +22,7 @@ module.exports = {
         }
 
         const board = activity.leaderboard(jid);
+        const metadata = await sock.groupMetadata(jid);
 
         if (!board.length) {
             return sock.sendMessage(jid, {
@@ -41,7 +43,13 @@ module.exports = {
 
         top.forEach(([user, data], index) => {
 
-            mentions.push(user + "@s.whatsapp.net");
+            const member = metadata.participants.find(
+    p => identity.normalize(p.id) === user
+);
+
+if (member) {
+    mentions.push(member.id);
+}
 
             const medal =
                 index === 0 ? "🥇" :
