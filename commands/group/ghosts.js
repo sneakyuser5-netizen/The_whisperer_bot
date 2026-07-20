@@ -41,6 +41,9 @@ if (
 ) {
     continue;
 }
+            if (member.admin) {
+    continue;
+            }
 
             if (!active[id]) {
                 ghosts.push(member.id);
