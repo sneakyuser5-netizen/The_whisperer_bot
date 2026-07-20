@@ -72,7 +72,7 @@ module.exports = {
 
 👤 User: @${target.split("@")[0]}
 
-🕒 Last active:
+🕒 Last message:
 ${ago} ago
 
 📅 Date:
