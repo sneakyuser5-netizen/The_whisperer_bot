@@ -1,6 +1,6 @@
 const activity = require("../../lib/activity");
 const identity = require("../../lib/identity");
-
+const config = require("../../config");
 module.exports = {
 
     name: "seen",
@@ -64,7 +64,7 @@ module.exports = {
             activity.format(Date.now() - last);
 
         const date = new Date(last).toLocaleString("en-GB", {
-    timeZone: "Africa/Douala",
+    timeZone: config.TIMEZONE,
     day: "2-digit",
     month: "short",
     year: "numeric",
