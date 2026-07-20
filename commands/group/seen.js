@@ -63,8 +63,14 @@ module.exports = {
         const ago =
             activity.format(Date.now() - last);
 
-        const date =
-            new Date(last).toLocaleString();
+        const date = new Date(last).toLocaleString("en-GB", {
+    timeZone: "Africa/Douala",
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit"
+});
 
         await sock.sendMessage(jid, {
             text:
