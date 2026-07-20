@@ -31,6 +31,10 @@ module.exports = {
         }
 
         const top = board.slice(0, 10);
+        const totalMessages = board.reduce(
+    (sum, [, data]) => sum + data.messages,
+    0
+);
 
         let text =
 `🏆 Group Leaderboard
@@ -57,7 +61,12 @@ if (member) {
                 index === 2 ? "🥉" :
                 `${index + 1}.`;
 
-            text += `${medal} @${user} — ${data.messages} messages\n`;
+            const percent = totalMessages
+    ? ((data.messages / totalMessages) * 100).toFixed(1)
+    : "0.0";
+
+text +=
+`${medal} @${user} — ${data.messages} messages (${percent}%)\n`;
 
         });
 
