@@ -15,7 +15,7 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-let menu = `${t(jid, "menu_title")}\n`;
+let menu = `${t("menu_title")}\n`;
 
         const categories = {};
 
@@ -41,14 +41,14 @@ let menu = `${t(jid, "menu_title")}\n`;
 
                 menu += `• .${command.name}`;
 
-menu += `\n  ${t(jid, command.name)}`;
+menu += `\n  ${t(command.name)}`;
                 menu += "\n";
             }
         }
 
 
         menu +=
-`\n${t(jid, "total_commands")}: ${commands.size}`;
+`${t("total_commands")}: ${commands.size}`;
 
         await sock.sendMessage(
             msg.key.remoteJid,
