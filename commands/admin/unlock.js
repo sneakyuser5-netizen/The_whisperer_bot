@@ -1,5 +1,5 @@
 const settings = require("../../lib/settings");
-
+const { t } = require("../../lib/lang");
 module.exports = {
 
     name: "unlock",
@@ -21,7 +21,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "group_only")
             });
         }
 
