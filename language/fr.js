@@ -83,4 +83,5 @@ module.exports = {
     "warnlist": "Afficher la liste des avertissements.",
     "welcome": "Configurer le message de bienvenue.",
     "whois": "Afficher les informations d'un utilisateur.",
+    choose_one: "❌ Choisissez un élément :",
 };
