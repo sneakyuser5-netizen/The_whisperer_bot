@@ -88,4 +88,5 @@ module.exports = {
 group_opened: "🔓 Group opened.\nEveryone can send messages.",
 group_closed: "🔒 Group closed.\nOnly admins can send messages.",
 group_update_failed: "❌ Failed to update group settings.\nMake sure I am an admin.",
+    group_only: "😂 This command is lonely.\n\nTake it to a group chat first.",
 };
