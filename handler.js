@@ -1,4 +1,5 @@
 const fs = require("fs");
+const { t } = require("./lib/lang");
 const config = require("./config");
 const settings = require("./lib/settings");
 const sudo = require("./lib/sudo");
@@ -261,10 +262,7 @@ if (
     if (!jid.endsWith("@g.us")) {
 
         return sock.sendMessage(jid, {
-            text:
-`😂 This command is lonely.
-
-Take it to a group chat first.`
+            text: t("group_only")
         });
 
     }
