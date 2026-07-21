@@ -84,4 +84,8 @@ module.exports = {
     "welcome": "Enable or disable welcome messages",
  "whois": "Show chat information",
     choose_one: "❌ Choose one:",
+    invalid_option: "❌ Invalid option.",
+group_opened: "🔓 Group opened.\nEveryone can send messages.",
+group_closed: "🔒 Group closed.\nOnly admins can send messages.",
+group_update_failed: "❌ Failed to update group settings.\nMake sure I am an admin.",
 };
