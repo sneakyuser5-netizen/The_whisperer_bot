@@ -88,5 +88,8 @@ module.exports = {
 group_opened: "🔓 Group opened.\nEveryone can send messages.",
 group_closed: "🔒 Group closed.\nOnly admins can send messages.",
 group_update_failed: "❌ Failed to update group settings.\nMake sure I am an admin.",
-    group_only: "😂 This command is lonely.\n\nTake it to a group chat first.",
+    group_only: "😉 This command is lonely.\n\nTake it to a group chat first.",
+    owner_only: "😉 You're not the owner of this bot.\n\nGo borrow the owner's phone... if they're brave enough to hand it over.",
+    creator_only: "👑 Nice try. 😏\n\nOnly *THE-WHISPERER* can use this command.",
+    private_mode: "🔒 WhisperBot is taking a nap. 😴\n\n🤧 Only the owner and trusted sudo members can wake me up.\n\nTell the owner to use *.public* if they want everyone to play!",
 };
