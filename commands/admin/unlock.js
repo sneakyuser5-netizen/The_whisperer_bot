@@ -59,11 +59,9 @@ ${types.join(", ")}`
 
 
         await sock.sendMessage(jid, {
-            text:
-`🔓 ${type} unlocked.
-
-😂 The ${type} prisoners escaped from admin jail.`
-        });
+    text: t(jid, "unlocked_success")
+        .replaceAll("{type}", type)
+});
 
     }
 
