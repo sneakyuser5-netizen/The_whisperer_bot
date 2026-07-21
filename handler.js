@@ -205,12 +205,7 @@ if (
     !isSudo
 ) {
     return sock.sendMessage(sender, {
-        text:
-`🔒 WhisperBot is taking a nap. 😴
-
-😂 Only the owner and trusted sudo members can wake me up.
-
-Tell the owner to use *.public* if they want everyone to play!`
+        text: t("private_mode")
     });
 }
 
@@ -220,10 +215,7 @@ if (
     !identity.isCreator(msg)
 ) {
     return sock.sendMessage(sender, {
-        text:
-`👑 Nice try. 😏
-
-Only *THE-WHISPERER-237* can use this command.`
+    text: t("creator_only")
     });
 }
 
@@ -233,10 +225,7 @@ if (
     !isOwner
 ) {
     return sock.sendMessage(sender, {
-        text:
-`😂 You're not the owner of this bot.
-
-Go borrow the owner's phone... if they're brave enough to hand it over.`
+        text: t("owner_only")
     });
 }
 
