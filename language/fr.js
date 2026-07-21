@@ -1,6 +1,10 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
+    sudo_only: "🚫 Permission refusée.\n\nDevenez membre sudo d'abord... ou commencez à négocier avec le propriétaire. 🤝😪",
+    admin_only: "🚔 Arrêtez-vous là ‼️!\n\nSeuls les administrateurs du groupe peuvent utiliser cette commande. 😎",
+    missing_argument: "❌ Argument manquant.",
+usage: "Utilisation :",
     "8ball": "Poser une question à la boule magique.",
     "admincheck": "Vérifier si un utilisateur est administrateur.",
     "admincount": "Afficher le nombre d'administrateurs.",
