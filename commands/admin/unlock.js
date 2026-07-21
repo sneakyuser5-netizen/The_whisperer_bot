@@ -41,12 +41,12 @@ module.exports = {
 
         if (!types.includes(type)) {
 
-            return sock.sendMessage(jid, {
-                text:
-`❌ Choose one:
+    return sock.sendMessage(jid, {
+        text:
+`${t(jid, "choose_one")}
 
 ${types.join(", ")}`
-            });
+    });
 
         }
 
