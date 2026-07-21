@@ -82,5 +82,6 @@ module.exports = {
     "warnings": "Check a user's warnings",
     "warnlist": "Show all warned users",
     "welcome": "Enable or disable welcome messages",
-    "whois": "Show chat information",
+ "whois": "Show chat information",
+    choose_one: "❌ Choose one:",
 };
