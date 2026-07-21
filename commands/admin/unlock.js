@@ -21,7 +21,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: t(jid, "group_only")
+                text: t("group_only")
             });
         }
 
