@@ -84,4 +84,8 @@ module.exports = {
     "welcome": "Configurer le message de bienvenue.",
     "whois": "Afficher les informations d'un utilisateur.",
     choose_one: "❌ Choisissez un élément :",
+    invalid_option: "❌ Option invalide.",
+group_opened: "🔓 Groupe ouvert.\nTout le monde peut envoyer des messages.",
+group_closed: "🔒 Groupe fermé.\nSeuls les administrateurs peuvent envoyer des messages.",
+group_update_failed: "❌ Impossible de modifier les paramètres du groupe.\nAssurez-vous que je suis administrateur.",
 };
