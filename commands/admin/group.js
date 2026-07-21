@@ -1,4 +1,5 @@
 const groups = require("../../lib/groups");
+const { t } = require("../../lib/lang");
 module.exports = {
 
     name: "group",
@@ -19,7 +20,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("group_only")
             });
         }
 
@@ -27,10 +28,11 @@ module.exports = {
 
         if (!["open", "close"].includes(option)) {
             return sock.sendMessage(jid, {
+                
                 text:
-`❌ Invalid option.
+`${t("invalid_option")}
 
-Usage:
+${t("usage")}
 .group open
 .group close`
             });
@@ -51,9 +53,9 @@ Usage:
 
             await sock.sendMessage(jid, {
                 text:
-                    option === "close"
-                        ? "🔒 Group closed.\nOnly admins can send messages."
-                        : "🔓 Group opened.\nEveryone can send messages."
+option === "close"
+    ? t("group_closed")
+    : t("group_opened")
             });
 
         } catch (err) {
@@ -61,7 +63,7 @@ Usage:
             console.log(err);
 
             await sock.sendMessage(jid, {
-                text: "❌ Failed to update group settings.\nMake sure I am an admin."
+                text: t("group_update_failed")
             });
 
         }
