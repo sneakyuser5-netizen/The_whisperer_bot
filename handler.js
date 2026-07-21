@@ -236,10 +236,7 @@ if (
     !isSudo
 ) {
     return sock.sendMessage(sender, {
-        text:
-`🚫 Permission denied.
-
-Become a sudo member first... or start negotiating with the owner. 🤝😂`
+        text: t("sudo_only")
     });
 }
 
@@ -261,10 +258,7 @@ if (
     if (!admin) {
 
         return sock.sendMessage(jid, {
-            text:
-`🚔 Stop right there!
-
-Only group admins have the VIP pass for this command. 😎`
+            text: t("admin_only")
         });
 
     }
@@ -281,9 +275,9 @@ if (command.usage && command.minArgs) {
             sender,
             {
                 text:
-`❌ Missing argument.
+`${t("missing_argument")}
 
-Usage:
+${t("usage")}
 ${command.usage}`
             }
         );
