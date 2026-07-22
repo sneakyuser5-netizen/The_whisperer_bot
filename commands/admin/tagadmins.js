@@ -1,4 +1,5 @@
 const groups = require("../../lib/groups");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -16,14 +17,14 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
         const members = await groups.members(sock, jid);
         const admins = members.filter(m => m.admin);
 
-        let text = "👑 Group Admins\n\n";
+        let text = `${t(jid, "admin.tagadmins_title")}\n\n`;
         const mentions = [];
 
         for (const admin of admins) {
