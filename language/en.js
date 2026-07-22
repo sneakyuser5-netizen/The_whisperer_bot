@@ -109,4 +109,12 @@ module.exports = {
     demote_target_required: "❌ Reply to an admin or mention them.\n\nExample:\n.demote @user",
     demote_success: "✅ User removed from admin list.",
     demote_failed: "❌ Failed to demote user.",
+    group_update_failed: "❌ Unable to modify group settings.\nMake sure I am an administrator.",
+admin_check_confirmed: "👥 Admin access confirmed!",
+admin_count_message: "👑 There are {count} admin(s) in this group.",
+group_admins_title: "👑 *Group Administrators*",
+group_invite_link_header: "🔗 Group invite link:",
+group_invite_link_title: "🔗 Group invite link",
+invite_link_error: "❌ Unable to get the invite link. Make sure I am an administrator.",
+invite_link_error_alt: "❌ I couldn't get the invite link. Make sure I am an administrator.",
 };
