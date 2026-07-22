@@ -92,7 +92,7 @@ module.exports = {
     group_opened: "🔓 Groupe ouvert.\nTout le monde peut envoyer des messages.",
     group_closed: "🔒 Groupe fermé.\nSeuls les administrateurs peuvent envoyer des messages.",
     group_only: "😭 Cette commande est seule.\n\nEmmenez-la d'abord dans un groupe.",
-    private_mode: "🔒 WhisperBot fait une petite sieste. 😴\n\n😉 Seuls le propriétaire et les membres sudo de confiance peuvent me réveiller.\n\nDemandez au propriétaire d'utiliser *.public* si vous voulez que tout le monde joue!",
+    private_mode: "🔒 WhisperBot fait une petite sieste. 😴\n\n😉 Seuls le propriétaire et les membres sudo de confiance peuvent me réveiller.\n\nDemandez au propriétaire d'utiliser *.pub[...]",
     creator_only: "👑 Bien essayé. 😏\n\nSeul *THE-WHISPERER-237* peut utiliser cette commande.",
     owner_only: "😪 Vous n'êtes pas le propriétaire de ce bot.\n\nAllez emprunter le téléphone du propriétaire... s'il ose vous le donner.",
     group_update_failed: "❌ Impossible de modifier les paramètres du groupe.\nAssurez-vous que je suis administrateur.",
@@ -116,4 +116,47 @@ module.exports = {
     demote_target_required: "❌ Répondez à un admin ou mentionnez-le.\n\nExemple :\n.demote @user",
     demote_success: "✅ Utilisateur retiré de la liste des administrateurs.",
     demote_failed: "❌ Impossible de rétrograder l'utilisateur.",
+
+    // Admin command translations (French)
+    "admin.only_groups": "❌ Cette commande ne fonctionne qu'en groupes.",
+    "admin.goodbye_usage": "Utilisation:\n.goodbye on\n.goodbye off",
+    "admin.goodbye_enabled": "✅ Messages d'au revoir activés.",
+    "admin.goodbye_disabled": "✅ Messages d'au revoir désactivés.",
+
+    "admin.gstatus_reply_media": "❌ Répondez à une photo ou une vidéo.",
+    "admin.gstatus_only_supported": "❌ Seules les photos et les vidéos sont prises en charge.",
+    "admin.gstatus_posted": "✅ Publié dans le statut WhatsApp.",
+    "admin.gstatus_failed": "❌ Échec de la publication du statut.",
+
+    "admin.groupinfo_title": "📋 Informations sur le groupe",
+    "admin.groupinfo_name": "📛 Nom",
+    "admin.groupinfo_members": "👥 Membres",
+    "admin.groupinfo_admins": "👑 Admins",
+    "admin.groupinfo_description": "📝 Description",
+    "admin.groupinfo_no_description": "Pas de description.",
+
+    "admin.kick_usage": "❌ Répondez au message d'un utilisateur ou mentionnez-le.\n\nExemple:\n.kick @user",
+    "admin.kick_success": "✅ Utilisateur supprimé avec succès.",
+    "admin.kick_failed": "❌ Échec de la suppression de l'utilisateur. Assurez-vous que je suis admin.",
+
+    "admin.lock_valid_types": "❌ Types valides :",
+    "admin.lock_locked_emoji": "🔒",
+    "admin.lock_locked_text": "a été verrouillé.",
+
+    "admin.membercount_total": "👥 Membres au total :",
+
+    "admin.mute_mention": "❌ Mentionnez un utilisateur.\nExemple : .mute @user 10m",
+    "admin.mute_invalid_time": "❌ Temps invalide.\nUtilisez :\n10m = minutes\n1h = heures\n1d = jours",
+    "admin.mute_muted_emoji": "🔇",
+    "admin.mute_muted_for": "a été réduit au silence pendant",
+
+    "admin.mutelist_none": "🔊 Aucun membre n'est actuellement réduit au silence.",
+    "admin.mutelist_title": "🔇 *Membres réduits au silence*",
+
+    "admin.promote_usage": "❌ Répondez à un utilisateur ou mentionnez-le.\n\nExemple:\n.promote @user",
+    "admin.promote_success": "✅ Utilisateur promu administrateur.",
+    "admin.promote_failed": "❌ Échec de la promotion de l'utilisateur.",
+
+    "admin.resetwarn_usage": "❌ Répondez à un utilisateur ou mentionnez-le.",
+    "admin.resetwarn_success": "✅ Avertissements réinitialisés."
 };
