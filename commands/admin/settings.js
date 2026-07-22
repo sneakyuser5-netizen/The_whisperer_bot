@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -16,7 +17,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -25,15 +26,15 @@ module.exports = {
         await sock.sendMessage(jid, {
 
             text:
-`📋 WhispererBot Settings
+`${t(jid, "admin.settings_title")}
 
-🛡 Anti-Link : ${group.antilink ? "✅ ON" : "❌ OFF"}
+${t(jid, "admin.settings_antilink")} : ${group.antilink ? t(jid, "admin.on") : t(jid, "admin.off")}
 
-👋 Welcome : ${group.welcome ? "✅ ON" : "❌ OFF"}
+${t(jid, "admin.settings_welcome")} : ${group.welcome ? t(jid, "admin.on") : t(jid, "admin.off")}
 
-🚫 Anti-GM : ${group.antigm ? "✅ ON" : "❌ OFF"}
+${t(jid, "admin.settings_antigm")} : ${group.antigm ? t(jid, "admin.on") : t(jid, "admin.off")}
 
-👋 Goodbye : ${group.goodbye ? "✅ ON" : "❌ OFF"}`
+${t(jid, "admin.settings_goodbye")} : ${group.goodbye ? t(jid, "admin.on") : t(jid, "admin.off")}`
 
         });
 
