@@ -1,3 +1,4 @@
+const { t } = require("../../lib/lang");
 const settings = require("../../lib/settings");
 
 module.exports = {
@@ -23,8 +24,7 @@ module.exports = {
         if (!jid.endsWith("@g.us")) {
 
             return sock.sendMessage(jid, {
-                text:
-                "❌ This command only works in groups."
+                text: t("group_only")
             });
 
         }
@@ -37,11 +37,7 @@ module.exports = {
         if (!["on", "off"].includes(option)) {
 
             return sock.sendMessage(jid, {
-                text:
-`❌ Use:
-
-.antispam on
-.antispam off`
+                text: t("antispam_usage")
             });
 
         }
@@ -59,9 +55,9 @@ module.exports = {
             text:
             option === "on"
 
-            ? "🚨 Anti-spam enabled.\n😂 The spam police are awake."
+            ? t("antispam_enabled")
 
-            : "😌 Anti-spam disabled.\n😂 Spam party allowed."
+            : t("antispam_disabled")
 
         });
 
