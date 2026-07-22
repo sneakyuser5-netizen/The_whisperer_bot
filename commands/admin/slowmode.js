@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -22,7 +23,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -39,8 +40,7 @@ module.exports = {
             );
 
             return sock.sendMessage(jid, {
-                text:
-                "🚦 Slowmode disabled.\n😂 Everyone can talk freely again."
+                text: t(jid, "admin.slowmode_disabled")
             });
 
         }
@@ -55,8 +55,7 @@ module.exports = {
         ) {
 
             return sock.sendMessage(jid, {
-                text:
-                "❌ Use:\n.slowmode 10\n.slowmode off"
+                text: t(jid, "admin.slowmode_usage")
             });
 
         }
@@ -71,9 +70,9 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text:
-`🚦 Slowmode enabled: ${seconds}s
+`${t(jid, "admin.slowmode_enabled_prefix")} ${seconds}s
 
-😂 Messages must now wait their turn.`
+${t(jid, "admin.slowmode_wait")}`
         });
 
     }
