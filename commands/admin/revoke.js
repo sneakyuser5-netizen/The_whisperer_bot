@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "revoke",
@@ -14,7 +16,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -26,10 +28,9 @@ module.exports = {
 
             await sock.sendMessage(jid, {
                 text:
-`✅ Group invite link has been reset.
+`${t(jid, "admin.revoke_reset")}
 
-🔗 New Link:
-https://chat.whatsapp.com/${code}`
+🔗 ${t(jid, "admin.revoke_new_link_base")}https://chat.whatsapp.com/${code}`
             });
 
         } catch (err) {
@@ -37,7 +38,7 @@ https://chat.whatsapp.com/${code}`
             console.log("Revoke error:", err);
 
             await sock.sendMessage(jid, {
-                text: "❌ I couldn't reset the invite link. Make sure I'm an admin."
+                text: t(jid, "admin.revoke_failed")
             });
 
         }
