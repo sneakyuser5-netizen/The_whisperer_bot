@@ -16,7 +16,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.only_groups")
+                text: t("admin.only_groups")
             });
         }
 
@@ -28,9 +28,9 @@ module.exports = {
 
             await sock.sendMessage(jid, {
                 text:
-`${t(jid, "admin.revoke_reset")}
+`${t("admin.revoke_reset")}
 
-🔗 ${t(jid, "admin.revoke_new_link_base")}https://chat.whatsapp.com/${code}`
+${t("admin.revoke_new_link_base")}https://chat.whatsapp.com/${code}`
             });
 
         } catch (err) {
@@ -38,7 +38,7 @@ module.exports = {
             console.log("Revoke error:", err);
 
             await sock.sendMessage(jid, {
-                text: t(jid, "admin.revoke_failed")
+                text: t("admin.revoke_failed")
             });
 
         }

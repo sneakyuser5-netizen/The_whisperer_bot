@@ -11,37 +11,40 @@ module.exports = {
 
     permission: "admin",
 
-    usage: ".setrules text",
+    usage: ".setrules",
 
-    minArgs: 1,
-
-
-    execute: async (sock, msg, args) => {
+    execute: async (sock, msg) => {
 
         const jid = msg.key.remoteJid;
 
+        const body = msg.message?.conversation || msg.message?.extendedTextMessage?.text || "";
 
-        if (!jid.endsWith("@g.us")) {
-            return sock.sendMessage(jid, {
-                text: t(jid, "admin.only_groups")
-            });
-        }
-
+        const args = body.split(" ").slice(1);
 
         const rules = args.join(" ");
 
 
-        settings.set(
-            jid,
-            "rules",
-            rules
-        );
+        if (!jid.endsWith("@g.us")) {
+            return sock.sendMessage(jid, {
+                text: t("admin.only_groups")
+            });
+        }
+
+
+
+        const group = settings.get("groups")[jid] || {};
+
+        group.rules = rules;
+
+        settings.set("groups", {
+            ...settings.get("groups"),
+            [jid]: group
+        });
 
 
         await sock.sendMessage(jid, {
-            text: t(jid, "admin.setrules_updated")
+            text: t("admin.setrules_updated")
         });
 
     }
-
 };

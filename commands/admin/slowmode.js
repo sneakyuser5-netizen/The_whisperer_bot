@@ -5,49 +5,47 @@ module.exports = {
 
     name: "slowmode",
 
-    description: "Set group slowmode",
+    description: "Enable or disable slowmode",
 
     category: "admin",
 
     permission: "admin",
 
-    usage: ".slowmode 10/off",
+    usage: ".slowmode 10",
 
-    minArgs: 1,
-
-
-    execute: async (sock, msg, args) => {
+    execute: async (sock, msg) => {
 
         const jid = msg.key.remoteJid;
+
+        const body = msg.message?.conversation || msg.message?.extendedTextMessage?.text || "";
+
+        const args = body.split(" ").slice(1);
+
+        const option = args[0]?.toLowerCase();
 
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.only_groups")
+                text: t("admin.only_groups")
             });
         }
 
-
-        const option = args[0].toLowerCase();
-
+        const group = settings.get("groups")[jid] || {};
 
         if (option === "off") {
 
-            settings.set(
-                jid,
-                "slowmode",
-                0
-            );
+            settings.set("groups", {
+                ...settings.get("groups"),
+                [jid]: { ...group, slowmode: 0 }
+            });
 
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.slowmode_disabled")
+                text: t("admin.slowmode_disabled")
             });
 
         }
 
-
-        const seconds = Number(option);
-
+        const seconds = parseInt(option);
 
         if (
             isNaN(seconds) ||
@@ -55,26 +53,22 @@ module.exports = {
         ) {
 
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.slowmode_usage")
+                text: t("admin.slowmode_usage")
             });
 
         }
 
-
-        settings.set(
-            jid,
-            "slowmode",
-            seconds
-        );
-
+        settings.set("groups", {
+            ...settings.get("groups"),
+            [jid]: { ...group, slowmode: seconds }
+        });
 
         await sock.sendMessage(jid, {
             text:
-`${t(jid, "admin.slowmode_enabled_prefix")} ${seconds}s
+`${t("admin.slowmode_enabled_prefix")} ${seconds}s
 
-${t(jid, "admin.slowmode_wait")}`
+${t("admin.slowmode_wait")}`
         });
 
     }
-
 };

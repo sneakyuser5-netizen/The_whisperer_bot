@@ -5,39 +5,42 @@ module.exports = {
 
     name: "settings",
 
-    description: "Show current group settings",
+    description: "Show group settings",
 
     category: "admin",
 
     permission: "admin",
 
+    usage: ".settings",
+
     execute: async (sock, msg) => {
 
         const jid = msg.key.remoteJid;
 
+        const group = settings.get("groups")[jid] || {};
+
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.only_groups")
+                text: t("admin.only_groups")
             });
         }
 
-        const group = settings.get(jid);
+        const groupSettings = settings.get("groups")[jid];
 
         await sock.sendMessage(jid, {
 
             text:
-`${t(jid, "admin.settings_title")}
+`${t("admin.settings_title")}
 
-${t(jid, "admin.settings_antilink")} : ${group.antilink ? t(jid, "admin.on") : t(jid, "admin.off")}
+${t("admin.settings_antilink")} : ${groupSettings.antilink ? t("admin.on") : t("admin.off")}
 
-${t(jid, "admin.settings_welcome")} : ${group.welcome ? t(jid, "admin.on") : t(jid, "admin.off")}
+${t("admin.settings_welcome")} : ${groupSettings.welcome ? t("admin.on") : t("admin.off")}
 
-${t(jid, "admin.settings_antigm")} : ${group.antigm ? t(jid, "admin.on") : t(jid, "admin.off")}
+${t("admin.settings_antigm")} : ${groupSettings.antigm ? t("admin.on") : t("admin.off")}
 
-${t(jid, "admin.settings_goodbye")} : ${group.goodbye ? t(jid, "admin.on") : t(jid, "admin.off")}`
+${t("admin.settings_goodbye")} : ${groupSettings.goodbye ? t("admin.on") : t("admin.off")}`
 
         });
 
     }
-
 };
