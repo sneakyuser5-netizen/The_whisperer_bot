@@ -1,3 +1,4 @@
+const { t } = require("../../lib/lang");
 const settings = require("../../lib/settings");
 
 
@@ -23,7 +24,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("group_only")
             });
         }
 
@@ -34,7 +35,7 @@ module.exports = {
         if (!["on", "off"].includes(option)) {
 
             return sock.sendMessage(jid, {
-                text: "❌ Use:\n.antilink on\n.antilink off"
+                text: t("antilink_usage")
             });
 
         }
@@ -50,8 +51,8 @@ module.exports = {
         await sock.sendMessage(jid, {
             text:
             option === "on"
-            ? "✅ Anti-link enabled for this group."
-            : "✅ Anti-link disabled for this group."
+            ? t("antilink_enabled")
+            : t("antilink_disabled")
         });
 
     }
