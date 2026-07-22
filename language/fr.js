@@ -152,5 +152,6 @@ module.exports = {
     "admin.promote_usage": "❌ Répondez à un utilisateur ou mentionnez-le.\n\nExemple:\n.promote @user",
     "admin.promote_success": "✅ Utilisateur promu administrateur.",
     "admin.promote_failed": "❌ Échec de la promotion de l'utilisateur.",
+    "admin.tagadmins_title": "👑 Administrateurs du groupe",
+};
 
-{
