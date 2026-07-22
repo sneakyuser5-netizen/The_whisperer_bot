@@ -1,4 +1,5 @@
 const groups = require("../../lib/groups");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -14,7 +15,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("group_only")
             });
         }
 
@@ -23,7 +24,7 @@ module.exports = {
         const count = members.filter(m => m.admin).length;
 
         await sock.sendMessage(jid, {
-            text: `👑 There are ${count} admin(s) in this group.`
+            text: t("admin_count_message").replace("{count}", count)
         });
 
     }
