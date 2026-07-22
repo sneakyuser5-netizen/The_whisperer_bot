@@ -165,4 +165,5 @@ demote_failed: "❌ Failed to demote user.",
 
 "admin.resetwarn_usage": "❌ Reply to a user or mention them.",
 "admin.resetwarn_success": "✅ Warnings reset.",
+    "admin.tagadmins_title": "👑 Group Admins",
 };
