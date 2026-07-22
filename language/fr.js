@@ -1,10 +1,6 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
-    sudo_only: "🚫 Permission refusée.\n\nDevenez membre sudo d'abord... ou commencez à négocier avec le propriétaire. 🤝😪",
-    admin_only: "🚔 Arrêtez-vous là ‼️!\n\nSeuls les administrateurs du groupe peuvent utiliser cette commande. 😎",
-    missing_argument: "❌ Argument manquant.",
-    usage: "Utilisation :",
     "8ball": "Poser une question à la boule magique.",
     "admincheck": "Vérifier si un utilisateur est administrateur.",
     "admincount": "Afficher le nombre d'administrateurs.",
@@ -55,7 +51,7 @@ module.exports = {
     "repo": "Afficher le dépôt GitHub du bot.",
     "resetwarn": "Réinitialiser les avertissements d'un membre.",
     "restart": "Redémarrer le bot.",
-    "revoke": "Réinitialiser le lien d'invitation.",
+    "revoke": "Générer un nouveau lien d'invitation du groupe",
     "roast": "Envoyer une pique amusante.",
     "rules": "Afficher les règles du groupe",
     "runtime": "Afficher la durée de fonctionnement du bot.",
@@ -157,6 +153,4 @@ module.exports = {
     "admin.promote_success": "✅ Utilisateur promu administrateur.",
     "admin.promote_failed": "❌ Échec de la promotion de l'utilisateur.",
 
-    "admin.resetwarn_usage": "❌ Répondez à un utilisateur ou mentionnez-le.",
-    "admin.resetwarn_success": "✅ Avertissements réinitialisés."
-};
+{
