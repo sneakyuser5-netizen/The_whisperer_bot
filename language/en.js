@@ -2,6 +2,21 @@ module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
     "fun.truth_title": "😈 TRUTH TIME",
+    "general.userinfo_title": "👤 User Information",
+"general.userinfo_number": "Number",
+"general.userinfo_jid": "JID",
+
+"general.uptime_title": "⏱️ Uptime",
+
+"general.time_title": "🕒 Current Time",
+"general.time_timezone": "Time Zone",
+
+"general.stats_title": "📊 WhispererBot Statistics",
+"general.stats_commands": "Commands",
+"general.stats_events": "Events",
+"general.stats_database": "Database Files",
+"general.stats_uptime": "Uptime",
+"general.stats_version": "Version",
 "fun.truth_footer": "Answer honestly... or the bot will know 😂",
 "fun.truth_1": "😂 What is your most embarrassing moment?",
 "fun.truth_2": "😏 Who was your first crush?",
