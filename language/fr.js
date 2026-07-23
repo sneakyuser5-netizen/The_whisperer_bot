@@ -12,7 +12,26 @@ module.exports = {
 "fun.truth_5": "😂 Quelle est ta plus grande peur ?",
 "fun.truth_6": "😎 Quelle est la chose que tu regrettes le plus d'avoir faite ?",
 "fun.truth_7": "🔥 Qui dans ce groupe te fait le plus rire ?",
+"general.server_title": "🖥️ Informations du serveur",
+"general.server_platform": "Plateforme",
+"general.server_architecture": "Architecture",
+"general.server_cpu": "Cœurs CPU",
+"general.server_hostname": "Nom d'hôte",
 
+"general.runtime_title": "🖥️ Environnement d'exécution",
+
+"general.rules_none": "📜 Aucune règle n'a encore été définie.\n\n😂 Le groupe fonctionne actuellement uniquement sur la bonne humeur.",
+"general.rules_title": "📜 Règles du groupe :",
+"general.rules_footer": "😂 Respectez les règles et évitez les problèmes avec les modérateurs.",
+    "general.owner": "👑 Propriétaire : The-whisperer_237",
+
+"general.memory_title": "💾 Utilisation de la mémoire",
+
+"general.botinfo_title": "🤖 WhispererBot",
+"general.botinfo_version": "Version",
+"general.botinfo_library": "Bibliothèque",
+"general.botinfo_language": "Langage",
+"general.botinfo_developer": "Développeur",
 "fun.ship_usage": "❤️ Qui dois-je mettre ensemble ?\n\nMentionne quelqu'un.\n\nExemple :\n.ship @user",
 "fun.ship_title": "❤️ CALCULATEUR DE COMPATIBILITÉ",
 "fun.ship_compatibility": "Compatibilité :\n",
