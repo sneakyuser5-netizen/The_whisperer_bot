@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "compliment",
@@ -23,39 +25,24 @@ module.exports = {
 
         if (!target) {
             return sock.sendMessage(jid, {
-                text:
-`😂 Who deserves a compliment?
-
-Mention someone first.
-
-Example:
-.compliment @user`
+                text: t(jid, "fun.compliment_usage")
             });
         }
 
-
         const compliments = [
-
-            "✨ Your energy is brighter than a phone screen at midnight.",
-
-            "😎 You are the reason this chat has some class.",
-
-            "🔥 You are officially approved by the vibe department.",
-
-            "😂 Even the bot has to admit you're doing something right.",
-
-            "🌟 You make ordinary conversations better."
-
+            t(jid, "fun.compliment_1"),
+            t(jid, "fun.compliment_2"),
+            t(jid, "fun.compliment_3"),
+            t(jid, "fun.compliment_4"),
+            t(jid, "fun.compliment_5")
         ];
-
 
         const text =
             compliments[Math.floor(Math.random() * compliments.length)];
 
-
         await sock.sendMessage(jid, {
             text:
-`💎 COMPLIMENT TIME
+`${t(jid, "fun.compliment_title")}
 
 @${target.split("@")[0]}
 
