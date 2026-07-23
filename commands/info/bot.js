@@ -2,70 +2,64 @@ const os = require("os");
 const sudo = require("../../lib/sudo");
 const settings = require("../../lib/settings");
 const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
-name:"bot",
+    name: "bot",
 
-description:"Show bot information",
+    description: "Show bot information",
 
-category:"info",
+    category: "info",
 
-permission:"public",
+    permission: "public",
 
-execute: async(sock,msg)=>{
+    execute: async (sock, msg) => {
 
-const jid=msg.key.remoteJid;
+        const jid = msg.key.remoteJid;
 
-const uptime=Math.floor(
-(process.uptime())
-);
+        const uptime = Math.floor(process.uptime());
 
-const h=Math.floor(uptime/3600);
+        const h = Math.floor(uptime / 3600);
+        const m = Math.floor((uptime % 3600) / 60);
+        const s = uptime % 60;
 
-const m=Math.floor((uptime%3600)/60);
+        const owner = identity.getBotOwner();
+        const sudos = sudo.all(owner).length;
+        const mode = settings.get("global").mode || "private";
 
-const s=uptime%60;
-
-const owner=identity.getBotOwner();
-
-const sudos=sudo.all(owner).length;
-
-const mode=settings.get("global").mode||"private";
-
-const text=
-
-`🤖 *WhisperBot*
+        const text =
+`${t("info.bot_title")}
 
 ━━━━━━━━━━━━━━
 
-👑 Creator
+👑 ${t("info.bot_creator")}
 THE-WHISPERER-237
 
-🤖 Bot Owner
+🤖 ${t("info.bot_owner")}
 ${owner}
 
-🛡️ Sudo Members
+🛡️ ${t("info.bot_sudos")}
 ${sudos}
 
-🌍 Mode
+🌍 ${t("info.bot_mode")}
 ${mode}
 
-⚙️ Platform
+⚙️ ${t("info.bot_platform")}
 ${os.platform()}
 
-📦 Node
+📦 ${t("info.bot_node")}
 ${process.version}
 
-⏱️ Uptime
+⏱️ ${t("info.bot_uptime")}
 ${h}h ${m}m ${s}s
 
 ━━━━━━━━━━━━━━`;
 
-await sock.sendMessage(jid,{
-text
-});
+        await sock.sendMessage(jid, {
+            text
+        });
 
-}
+    }
 
 };
