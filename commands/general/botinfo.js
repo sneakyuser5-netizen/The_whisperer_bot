@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "botinfo",
@@ -8,16 +10,18 @@ module.exports = {
 
     execute: async (sock, msg) => {
 
+        const jid = msg.key.remoteJid;
+
         const text =
-`🤖 WhispererBot
+`${t(jid, "general.botinfo_title")}
 
-Version: 1.0.0
-Library: Baileys
-Language: JavaScript (Node.js)
+${t(jid, "general.botinfo_version")}: 1.0.0
+${t(jid, "general.botinfo_library")}: Baileys
+${t(jid, "general.botinfo_language")}: JavaScript (Node.js)
 
-Developer: You`;
+${t(jid, "general.botinfo_developer")}: You`;
 
-        await sock.sendMessage(msg.key.remoteJid, {
+        await sock.sendMessage(jid, {
             text
         });
 
