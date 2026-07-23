@@ -10,6 +10,26 @@ module.exports = {
 "fun.truth_5": "😂 What is your biggest fear?",
 "fun.truth_6": "😎 What is one thing you regret doing?",
 "fun.truth_7": "🔥 Who in this group makes you laugh the most?",
+    "general.server_title": "🖥️ Server Information",
+"general.server_platform": "Platform",
+"general.server_architecture": "Architecture",
+"general.server_cpu": "CPU Cores",
+"general.server_hostname": "Hostname",
+
+"general.runtime_title": "🖥️ Runtime",
+
+"general.rules_none": "📜 No rules have been set yet.\n\n😂 The group is currently running on vibes only.",
+"general.rules_title": "📜 Group Rules:",
+"general.rules_footer": "😂 Follow the rules and stay out of moderator trouble.",
+"general.owner": "👑 Owner: The-whisperer_237",
+
+"general.memory_title": "💾 Memory Usage",
+
+"general.botinfo_title": "🤖 WhispererBot",
+"general.botinfo_version": "Version",
+"general.botinfo_library": "Library",
+"general.botinfo_language": "Language",
+"general.botinfo_developer": "Developer",
 
 "fun.ship_usage": "❤️ Who should I ship?\n\nMention someone.\n\nExample:\n.ship @user",
 "fun.ship_title": "❤️ SHIP CALCULATOR",
