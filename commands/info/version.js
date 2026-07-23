@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "version",
@@ -16,7 +18,7 @@ module.exports = {
             require("@whiskeysockets/baileys/package.json").version;
 
         await sock.sendMessage(jid, {
-            text: `Baileys Version: ${version}`
+            text: `${t("info.version_title")} ${version}`
         });
 
     }
