@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "memory",
@@ -13,7 +15,10 @@ module.exports = {
         const ram = (used.heapUsed / 1024 / 1024).toFixed(2);
 
         await sock.sendMessage(msg.key.remoteJid, {
-            text: `💾 Memory Usage\n\n${ram} MB`
+            text:
+`${t(msg.key.remoteJid, "general.memory_title")}
+
+${ram} MB`
         });
 
     }
