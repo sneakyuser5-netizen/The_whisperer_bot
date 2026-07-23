@@ -1,6 +1,12 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
+    "admin.warnings_usage": "❌ Répondez à un utilisateur ou mentionnez-le.\n\nExemple :\n.warnings @user",
+"admin.warnings_title": "📋 État des avertissements",
+"admin.warnings_user": "Utilisateur :",
+"admin.warnings_count": "Avertissements :",
+"admin.warnlist_title": "📋 Liste des avertissements",
+"admin.warnlist_empty": "✅ Aucun utilisateur n'a actuellement d'avertissement.",
     "admin.welcome_usage": "Utilisation :\n.welcome on\n.welcome off",
     "admin.welcome_enabled": "✅ Messages de bienvenue activés.",
    "admin.welcome_disabled": "✅ Messages de bienvenue désactivés.",
