@@ -1,6 +1,21 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
+    "general.userinfo_title": "👤 Informations de l'utilisateur",
+"general.userinfo_number": "Numéro",
+"general.userinfo_jid": "JID",
+
+"general.uptime_title": "⏱️ Temps de fonctionnement",
+
+"general.time_title": "🕒 Heure actuelle",
+"general.time_timezone": "Fuseau horaire",
+
+"general.stats_title": "📊 Statistiques de WhispererBot",
+"general.stats_commands": "Commandes",
+"general.stats_events": "Événements",
+"general.stats_database": "Fichiers de base de données",
+"general.stats_uptime": "Temps de fonctionnement",
+"general.stats_version": "Version",
     "fun.8ball_usage": "🎱 Pose-moi une question.\n\nExemple :\n.8ball Vais-je devenir riche ?",
 "fun.8ball_title": "🎱 BOULE MAGIQUE",
     "fun.truth_title": "😈 L'HEURE DE LA VÉRITÉ",
