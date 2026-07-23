@@ -166,4 +166,5 @@ demote_failed: "❌ Failed to demote user.",
 "admin.resetwarn_usage": "❌ Reply to a user or mention them.",
 "admin.resetwarn_success": "✅ Warnings reset.",
     "admin.tagadmins_title": "👑 Group Admins",
+    admin_only: "🚔 Stop right there!‼️\n\nOnly group admins have the VIP pass for this command. 😎",
 };
