@@ -1,5 +1,6 @@
 const activity = require("../../lib/activity");
 const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -17,7 +18,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("admin.only_groups")
             });
         }
 
@@ -35,14 +36,16 @@ module.exports = {
                 identity.normalize(member.id);
 
             // Skip the bot
-if (
-    identity.normalize(member.id) ===
-    identity.normalize(sock.user.id)
-) {
-    continue;
-}
+            if (
+                identity.normalize(member.id) ===
+                identity.normalize(sock.user.id)
+            ) {
+                continue;
+            }
+
+            // Skip admins
             if (member.admin) {
-    continue;
+                continue;
             }
 
             if (!active[id]) {
@@ -54,16 +57,15 @@ if (
         if (!ghosts.length) {
 
             return sock.sendMessage(jid, {
-                text:
-"🎉 No ghost members found.\n\nEveryone has spoken at least once."
+                text: t("group.ghosts_none")
             });
 
         }
 
         let text =
-`👻 Ghost Members
+`${t("group.ghosts_title")}
 
-👥 Total: ${ghosts.length}
+${t("group.ghosts_total")}: ${ghosts.length}
 
 `;
 
@@ -73,8 +75,7 @@ if (
 
         });
 
-        text +=
-"\n😂 These members have never spoken since activity tracking began.";
+        text += `\n${t("group.ghosts_footer")}`;
 
         await sock.sendMessage(jid, {
             text,
