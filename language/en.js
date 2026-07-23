@@ -1,6 +1,9 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
+   "admin.welcome_usage": "Usage:\n.welcome on\n.welcome off",
+   "admin.welcome_enabled": "✅ Welcome messages enabled.",
+   "admin.welcome_disabled": "✅ Welcome messages disabled.",
     "8ball": "Ask the magic ball",
     "admincheck": "Test admin permission",
     "admincount": "Show the number of group admins",
