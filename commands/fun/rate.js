@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "rate",
@@ -12,63 +14,47 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         const context =
             msg.message?.extendedTextMessage?.contextInfo;
 
-
         let target = context?.mentionedJid?.[0];
-
 
         if (!target && context?.participant) {
             target = context.participant;
         }
 
-
         if (!target) {
-
             return sock.sendMessage(jid, {
-                text:
-`😂 Who should I rate?
-
-Mention someone first.
-
-Example:
-.rate @user`
+                text: t(jid, "fun.rate_usage")
             });
-
         }
-
 
         const score =
             Math.floor(Math.random() * 101);
 
-
         let comment;
 
-
         if (score >= 90) {
-            comment = "🔥 Legendary!";
+            comment = t(jid, "fun.rate_legendary");
         }
         else if (score >= 70) {
-            comment = "😎 Pretty good!";
+            comment = t(jid, "fun.rate_good");
         }
         else if (score >= 40) {
-            comment = "😂 Needs some updates.";
+            comment = t(jid, "fun.rate_average");
         }
         else {
-            comment = "💀 The rating system crashed.";
+            comment = t(jid, "fun.rate_bad");
         }
-
 
         await sock.sendMessage(jid, {
             text:
-`⭐ RATING SYSTEM
+`${t(jid, "fun.rate_title")}
 
-User:
+${t(jid, "fun.rate_user")}
 @${target.split("@")[0]}
 
-Score:
+${t(jid, "fun.rate_score")}
 ${score}/100
 
 ${comment}`,
