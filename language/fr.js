@@ -153,5 +153,6 @@ module.exports = {
     "admin.promote_success": "✅ Utilisateur promu administrateur.",
     "admin.promote_failed": "❌ Échec de la promotion de l'utilisateur.",
     "admin.tagadmins_title": "👑 Administrateurs du groupe",
+    admin_only: "🚔 Halte là !‼️\n\nSeuls les administrateurs du groupe ont le pass VIP pour cette commande. 😎",
 };
 
