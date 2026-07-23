@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "uptime",
@@ -21,7 +23,7 @@ module.exports = {
 
         await sock.sendMessage(msg.key.remoteJid, {
             text:
-`⏱️ Uptime
+`${t("general.uptime_title")}
 
 ${days}d ${hours}h ${minutes}m ${seconds}s`
         });
