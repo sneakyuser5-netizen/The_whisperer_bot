@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -20,7 +21,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -39,7 +40,7 @@ module.exports = {
 
             return sock.sendMessage(jid, {
                 text:
-`❌ Valid types:
+`${t(jid, "admin.lock_valid_types")}
 
 ${types.join(", ")}`
             });
@@ -53,7 +54,7 @@ ${types.join(", ")}`
         );
 
         await sock.sendMessage(jid, {
-            text: `🔒 ${type} has been locked.`
+            text: `${t(jid, "admin.lock_locked_emoji")} ${type} ${t(jid, "admin.lock_locked_text")}`
         });
 
     }
