@@ -1,5 +1,7 @@
 const warns = require("../../lib/warns");
 const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "warnings",
@@ -18,7 +20,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -32,19 +34,20 @@ module.exports = {
 
         if (!target) {
             return sock.sendMessage(jid, {
-                text: "❌ Reply to a user or mention them.\n\nExample:\n.warnings @user"
+                text: t(jid, "admin.warnings_usage")
             });
         }
 
-const user = identity.normalize(target);
+        const user = identity.normalize(target);
 
-const count = warns.get(jid, user);
+        const count = warns.get(jid, user);
+
         await sock.sendMessage(jid, {
             text:
-`📋 Warning Status
+`${t(jid, "admin.warnings_title")}
 
-User: @${target.split("@")[0]}
-Warnings: ${count}/5`,
+${t(jid, "admin.warnings_user")} @${target.split("@")[0]}
+${t(jid, "admin.warnings_count")} ${count}/5`,
             mentions: [target]
         });
 
