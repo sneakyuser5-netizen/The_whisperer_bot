@@ -1,6 +1,12 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
+    "admin.warnings_usage": "❌ Reply to a user or mention them.\n\nExample:\n.warnings @user",
+"admin.warnings_title": "📋 Warning Status",
+"admin.warnings_user": "User:",
+"admin.warnings_count": "Warnings:",
+"admin.warnlist_title": "📋 Warning List",
+"admin.warnlist_empty": "✅ No users currently have warnings.",
    "admin.welcome_usage": "Usage:\n.welcome on\n.welcome off",
    "admin.welcome_enabled": "✅ Welcome messages enabled.",
    "admin.welcome_disabled": "✅ Welcome messages disabled.",
