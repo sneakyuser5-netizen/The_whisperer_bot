@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -18,7 +19,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -27,7 +28,7 @@ module.exports = {
         if (!["on", "off"].includes(option)) {
 
             return sock.sendMessage(jid, {
-                text: "Usage:\n.welcome on\n.welcome off"
+                text: t(jid, "admin.welcome_usage")
             });
 
         }
@@ -41,8 +42,8 @@ module.exports = {
         await sock.sendMessage(jid, {
             text:
                 option === "on"
-                    ? "✅ Welcome messages enabled."
-                    : "✅ Welcome messages disabled."
+                    ? t(jid, "admin.welcome_enabled")
+                    : t(jid, "admin.welcome_disabled")
         });
 
     }
