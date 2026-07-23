@@ -4,6 +4,31 @@ module.exports = {
     "general.userinfo_title": "👤 Informations de l'utilisateur",
 "general.userinfo_number": "Numéro",
 "general.userinfo_jid": "JID",
+    "group.tagactive_none": "😴 Personne n'a parlé au cours de la dernière {minutes} minute{plural}.",
+"group.tagactive_title": "📢 Membres actifs",
+"group.tagactive_last": "🕒 Dernières",
+"group.tagactive_minutes": "minute",
+"group.tagactive_total": "👥 Total",
+"group.tagactive_footer": "🔥 Ces membres ont été actifs récemment.",
+
+"group.seen_usage": "❌ Répondez à un utilisateur ou mentionnez-le.\n\nExemple :\n.seen @user",
+"group.seen_title": "👀 Dernière activité",
+"group.seen_user": "👤 Utilisateur",
+"group.seen_no_activity": "❌ Aucune activité n'a été enregistrée depuis l'activation du suivi.",
+"group.seen_last_message": "🕒 Dernier message :",
+"group.seen_date": "📅 Date :",
+"group.seen_footer": "😂 Cette personne est silencieuse depuis ce moment.",
+
+"group.leaderboard_empty": "📭 Aucune activité n'a encore été enregistrée.",
+"group.leaderboard_title": "🏆 Classement du groupe",
+"group.leaderboard_subtitle": "👥 Top {count} des membres les plus actifs",
+"group.leaderboard_messages": "{count} messages ({percent} %)",
+"group.leaderboard_footer": "😂 Continuez à discuter pour grimper dans le classement !",
+
+"group.ghosts_none": "🎉 Aucun membre fantôme trouvé.\n\nTout le monde a parlé au moins une fois.",
+"group.ghosts_title": "👻 Membres fantômes",
+"group.ghosts_total": "👥 Total",
+"group.ghosts_footer": "😂 Ces membres n'ont jamais parlé depuis le début du suivi d'activité.",
 
 "general.uptime_title": "⏱️ Temps de fonctionnement",
 
