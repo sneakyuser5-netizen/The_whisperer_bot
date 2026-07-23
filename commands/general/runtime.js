@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "runtime",
@@ -10,7 +12,7 @@ module.exports = {
 
         await sock.sendMessage(msg.key.remoteJid, {
             text:
-`🖥️ Runtime
+`${t("general.runtime_title")}
 
 Node.js: ${process.version}`
         });
