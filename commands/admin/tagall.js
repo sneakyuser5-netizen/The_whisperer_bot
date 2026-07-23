@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "tagall",
@@ -14,13 +16,13 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
         const metadata = await sock.groupMetadata(jid);
 
-        let text = "📢 Tagging everyone\n\n";
+        let text = `${t(jid, "admin.tagall_title")}\n\n`;
 
         let mentions = [];
 
