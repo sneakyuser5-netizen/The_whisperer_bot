@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "userinfo",
@@ -20,10 +22,10 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text:
-`👤 User Information
+`${t("general.userinfo_title")}
 
-Number: ${user.split("@")[0]}
-JID: ${user}`
+${t("general.userinfo_number")}: ${user.split("@")[0]}
+${t("general.userinfo_jid")}: ${user}`
         });
 
     }
