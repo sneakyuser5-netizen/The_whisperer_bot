@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -41,7 +42,6 @@ module.exports = {
         }
 
         const commandCount = countCommands(commandsDir);
-
         const databaseCount = fs.readdirSync(databaseDir).length;
 
         const uptime = Date.now() - global.START_TIME;
@@ -52,15 +52,15 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text:
-`📊 WhispererBot Statistics
+`${t("general.stats_title")}
 
-📝 Commands: ${commandCount}
-⚡ Events: 2
-💾 Database Files: ${databaseCount}
+📝 ${t("general.stats_commands")}: ${commandCount}
+⚡ ${t("general.stats_events")}: 2
+💾 ${t("general.stats_database")}: ${databaseCount}
 
-⏱ Uptime: ${hours}h ${minutes}m ${seconds}s
+⏱ ${t("general.stats_uptime")}: ${hours}h ${minutes}m ${seconds}s
 
-📦 Version: 1.0.0`
+📦 ${t("general.stats_version")}: 1.0.0`
         });
 
     }
