@@ -5,6 +5,31 @@ module.exports = {
     "general.userinfo_title": "👤 User Information",
 "general.userinfo_number": "Number",
 "general.userinfo_jid": "JID",
+    "group.tagactive_none": "😴 Nobody has spoken in the last {minutes} minute{plural}.",
+"group.tagactive_title": "📢 Active Members",
+"group.tagactive_last": "🕒 Last",
+"group.tagactive_minutes": "minute",
+"group.tagactive_total": "👥 Total",
+"group.tagactive_footer": "🔥 These members have been active recently.",
+
+"group.seen_usage": "❌ Reply to a user or mention them.\n\nExample:\n.seen @user",
+"group.seen_title": "👀 Last Seen",
+"group.seen_user": "👤 User",
+"group.seen_no_activity": "❌ No activity has been recorded since tracking was enabled.",
+"group.seen_last_message": "🕒 Last message:",
+"group.seen_date": "📅 Date:",
+"group.seen_footer": "😂 They've been quiet since then.",
+
+"group.leaderboard_empty": "📭 No activity has been recorded yet.",
+"group.leaderboard_title": "🏆 Group Leaderboard",
+"group.leaderboard_subtitle": "👥 Top {count} Most Active Members",
+"group.leaderboard_messages": "{count} messages ({percent}%)",
+"group.leaderboard_footer": "😂 Keep chatting to climb the rankings!",
+
+"group.ghosts_none": "🎉 No ghost members found.\n\nEveryone has spoken at least once.",
+"group.ghosts_title": "👻 Ghost Members",
+"group.ghosts_total": "👥 Total",
+"group.ghosts_footer": "😂 These members have never spoken since activity tracking began.",
 
 "general.uptime_title": "⏱️ Uptime",
 
