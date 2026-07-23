@@ -1,37 +1,37 @@
 const os = require("os");
+const { t } = require("../../lib/lang");
 
-module.exports={
+module.exports = {
 
-name:"system",
+    name: "system",
 
-description:"Server information",
+    description: "Server information",
 
-category:"info",
+    category: "info",
 
-permission:"public",
+    permission: "public",
 
-execute:async(sock,msg)=>{
+    execute: async (sock, msg) => {
 
-const jid=msg.key.remoteJid;
+        const jid = msg.key.remoteJid;
 
-await sock.sendMessage(jid,{
+        await sock.sendMessage(jid, {
 
-text:
+            text:
+`${t("info.system_title")}
 
-`💻 *System Information*
+🖥️ ${t("info.system_platform")} ${os.platform()}
 
-🖥️ Platform : ${os.platform()}
+🏗️ ${t("info.system_architecture")} ${os.arch()}
 
-🏗️ Architecture : ${os.arch()}
+⚙️ ${t("info.system_cpu")} ${os.cpus().length} ${t("info.system_cores")}
 
-⚙️ CPU : ${os.cpus().length} Core(s)
+📦 ${t("info.system_node")} ${process.version}
 
-📦 Node : ${process.version}
+😂 ${t("info.system_footer")}`
 
-😂 My tiny server is lifting heavy WhatsApp weights! 💪`
+        });
 
-});
-
-}
+    }
 
 };
