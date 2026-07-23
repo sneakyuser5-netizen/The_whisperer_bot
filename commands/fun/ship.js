@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "ship",
@@ -17,48 +19,37 @@ module.exports = {
 
         let target = context?.mentionedJid?.[0];
 
-
         if (!target && context?.participant) {
             target = context.participant;
         }
 
-
         if (!target) {
             return sock.sendMessage(jid, {
-                text:
-`❤️ Who should I ship?
-
-Mention someone.
-
-Example:
-.ship @user`
+                text: t(jid, "fun.ship_usage")
             });
         }
 
-
         const percent = Math.floor(Math.random() * 101);
-
 
         let reaction;
 
         if (percent > 80) {
-            reaction = "🔥 Perfect match!";
+            reaction = t(jid, "fun.ship_reaction_1");
         } else if (percent > 50) {
-            reaction = "😏 Something is cooking...";
+            reaction = t(jid, "fun.ship_reaction_2");
         } else if (percent > 20) {
-            reaction = "😂 The connection needs WiFi.";
+            reaction = t(jid, "fun.ship_reaction_3");
         } else {
-            reaction = "💀 Even WhatsApp gave up.";
+            reaction = t(jid, "fun.ship_reaction_4");
         }
-
 
         await sock.sendMessage(jid, {
             text:
-`❤️ SHIP CALCULATOR
+`${t(jid, "fun.ship_title")}
 
 @${target.split("@")[0]}
 
-Compatibility:
+${t(jid, "fun.ship_compatibility")}
 ${percent}%
 
 ${reaction}`,
