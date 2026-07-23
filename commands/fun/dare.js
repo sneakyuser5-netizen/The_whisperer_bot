@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "dare",
@@ -12,37 +14,27 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         const dares = [
-
-            "😂 Change your profile picture for 10 minutes.",
-
-            "🤣 Send the last emoji you used.",
-
-            "🔥 Say something nice about the person above you.",
-
-            "😎 Send a voice note saying 'I am the boss'.",
-
-            "😂 Let someone choose your next status.",
-
-            "🤣 Type a message with your eyes closed."
-
+            t(jid, "fun.dare_1"),
+            t(jid, "fun.dare_2"),
+            t(jid, "fun.dare_3"),
+            t(jid, "fun.dare_4"),
+            t(jid, "fun.dare_5"),
+            t(jid, "fun.dare_6")
         ];
-
 
         const dare =
             dares[Math.floor(Math.random() * dares.length)];
 
-
         await sock.sendMessage(jid, {
             text:
-`🔥 DARE TIME
+`${t(jid, "fun.dare_title")}
 
-Your challenge:
+${t(jid, "fun.dare_challenge")}
 
 ${dare}
 
-Good luck 😂`
+${t(jid, "fun.dare_goodluck")}`
         });
 
     }
