@@ -1,6 +1,9 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
+    "admin.welcome_usage": "Utilisation :\n.welcome on\n.welcome off",
+    "admin.welcome_enabled": "✅ Messages de bienvenue activés.",
+   "admin.welcome_disabled": "✅ Messages de bienvenue désactivés.",
     "8ball": "Poser une question à la boule magique.",
     "admincheck": "Vérifier si un utilisateur est administrateur.",
     "admincount": "Afficher le nombre d'administrateurs.",
