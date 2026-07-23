@@ -1,4 +1,5 @@
 const mute = require("../../lib/mute");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -16,7 +17,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -26,11 +27,11 @@ module.exports = {
 
         if (!users.length) {
             return sock.sendMessage(jid, {
-                text: "🔊 No members are currently muted."
+                text: t(jid, "admin.mutelist_none")
             });
         }
 
-        let text = "🔇 *Muted Members*\n\n";
+        let text = `${t(jid, "admin.mutelist_title")}\n\n`;
         const mentions = [];
 
         for (const [user, data] of users) {
