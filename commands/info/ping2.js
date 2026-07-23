@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "ping2",
@@ -12,38 +14,33 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         const start = Date.now();
 
-
-        const sent = await sock.sendMessage(jid, {
-            text: "🏓 Testing connection..."
+        await sock.sendMessage(jid, {
+            text: t("info.ping_testing")
         });
 
-
         const speed = Date.now() - start;
-
 
         const memory =
             Math.round(
                 process.memoryUsage().rss / 1024 / 1024
             );
 
-
         await sock.sendMessage(jid, {
             text:
-`🏓 *PONG!*
+`${t("info.ping_title")}
 
-⚡ Speed:
+⚡ ${t("info.ping_speed")}
 ${speed}ms
 
-🧠 Memory:
+🧠 ${t("info.ping_memory")}
 ${memory}MB
 
-🟢 Status:
-Online ✅
+🟢 ${t("info.ping_status")}
+${t("info.ping_online")}
 
-😂 Still alive and causing problems.`
+😂 ${t("info.ping_footer")}`
         });
 
     }
