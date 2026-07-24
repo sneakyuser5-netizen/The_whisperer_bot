@@ -1,4 +1,5 @@
 const { downloadMediaMessage } = require("@whiskeysockets/baileys");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -14,21 +15,18 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         const quoted =
             msg.message?.extendedTextMessage
             ?.contextInfo
             ?.quotedMessage;
 
-
         if (!quoted?.imageMessage) {
 
             return sock.sendMessage(jid, {
-                text: "❌ Reply to an image."
+                text: t("owner.pp_usage")
             });
 
         }
-
 
         const image = await downloadMediaMessage(
             {
@@ -38,15 +36,13 @@ module.exports = {
             {}
         );
 
-
         await sock.updateProfilePicture(
             sock.user.id,
             image
         );
 
-
         await sock.sendMessage(jid, {
-            text: "✅ Profile picture updated."
+            text: t("owner.pp_updated")
         });
 
     }
