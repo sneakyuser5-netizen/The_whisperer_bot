@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -18,19 +19,13 @@ module.exports = {
 
         const option = args[0]?.toLowerCase();
 
-
         if (!["on", "off"].includes(option)) {
 
             return sock.sendMessage(jid, {
-                text:
-`😂 Try this:
-
-.autorecording on
-.autorecording off`
+                text: t("owner.autorecording_usage")
             });
 
         }
-
 
         settings.set(
             "global",
@@ -38,14 +33,11 @@ module.exports = {
             option === "on"
         );
 
-
         await sock.sendMessage(jid, {
             text:
-option === "on"
-?
-"🎙️ Auto recording enabled.\n\nI am preparing my imaginary voice note 😂"
-:
-"✅ Auto recording disabled."
+                option === "on"
+                    ? t("owner.autorecording_enabled")
+                    : t("owner.autorecording_disabled")
         });
 
     }
