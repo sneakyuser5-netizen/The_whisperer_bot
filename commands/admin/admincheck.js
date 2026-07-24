@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "admincheck",
@@ -13,7 +15,7 @@ module.exports = {
         await sock.sendMessage(
             msg.key.remoteJid,
             {
-                text: "👥 Admin access confirmed!"
+                text: t("admin_check_confirmed")
             }
         );
 

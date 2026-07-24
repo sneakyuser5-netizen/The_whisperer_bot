@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "invitelink",
@@ -14,7 +16,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("group_only")
             });
         }
 
@@ -24,7 +26,7 @@ module.exports = {
 
             await sock.sendMessage(jid, {
                 text:
-`🔗 Group Invite Link
+`${t("group_invite_link_title")}
 
 https://chat.whatsapp.com/${code}`
             });
@@ -32,7 +34,7 @@ https://chat.whatsapp.com/${code}`
         } catch {
 
             await sock.sendMessage(jid, {
-                text: "❌ I couldn't get the invite link. Make sure I'm an admin."
+                text: t("invite_link_error_alt")
             });
 
         }

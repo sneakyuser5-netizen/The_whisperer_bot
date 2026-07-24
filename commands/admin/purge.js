@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "purge",
@@ -12,26 +14,21 @@ module.exports = {
 
     minArgs: 1,
 
-
     execute: async (sock, msg, args) => {
 
         const jid =
             msg.key.remoteJid;
 
-
         if (!jid.endsWith("@g.us")) {
 
             return sock.sendMessage(jid, {
-                text:
-                "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
 
         }
 
-
         const amount =
             Number(args[0]);
-
 
         if (
             isNaN(amount) ||
@@ -40,64 +37,52 @@ module.exports = {
         ) {
 
             return sock.sendMessage(jid, {
-                text:
-                "❌ Use:\n.purge 10\n\nMaximum: 100 messages."
+                text: t(jid, "admin.purge_usage")
             });
 
         }
-
 
         const context =
             msg.message?.extendedTextMessage
             ?.contextInfo;
 
-
         if (!context?.stanzaId) {
 
             return sock.sendMessage(jid, {
-                text:
-                "❌ Reply to a message first.\n\nExample:\nReply → .purge 10"
+                text: t(jid, "admin.purge_reply")
             });
 
         }
-
 
         const messages =
             global.messageCache?.[jid];
 
-
         if (!messages) {
 
             return sock.sendMessage(jid, {
-                text:
-                "❌ I don't have enough message history yet."
+                text: t(jid, "admin.purge_no_history")
             });
 
         }
-
 
         const index =
             messages.findIndex(
                 m => m.key.id === context.stanzaId
             );
 
-
         if (index === -1) {
 
             return sock.sendMessage(jid, {
-                text:
-                "❌ Message not found in memory."
+                text: t(jid, "admin.purge_not_found")
             });
 
         }
-
 
         const selected =
             messages.slice(
                 Math.max(0, index - amount),
                 index + 1
             );
-
 
         for (const m of selected) {
 
@@ -107,14 +92,12 @@ module.exports = {
 
         }
 
-
         await sock.sendMessage(jid, {
             text:
-`🧹 Deleted ${selected.length} messages.
+`${t(jid, "admin.purge_deleted")} ${selected.length} ${t(jid, "admin.purge_messages")}
 
-😂 Cleanup crew has finished the job.`
+${t(jid, "admin.purge_finished")}`
         });
-
 
     }
 

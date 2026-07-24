@@ -1,4 +1,5 @@
 const config = require("../../config");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -33,13 +34,13 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text:
-`🕒 Current Time
+`${t("general.time_title")}
 
 📅 ${date}
 
 ⏰ ${time}
 
-🌍 Time Zone: ${config.TIMEZONE}`
+🌍 ${t("general.time_timezone")}: ${config.TIMEZONE}`
         });
 
     }

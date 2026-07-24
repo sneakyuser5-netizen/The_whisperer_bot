@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "repo",
@@ -12,21 +14,20 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         await sock.sendMessage(jid, {
             text:
-`📦 *BOT REPOSITORY*
+`${t("info.repo_title")}
 
-🤖 Project:
+🤖 ${t("info.repo_project")}
 Whisper Bot
 
-👑 Owner:
+👑 ${t("info.repo_owner")}
 THE-WHISPERER-237
 
 🔗 GitHub:
-(https://github.com/sneakyuser5-netizen/The_whisperer_bot)
+https://github.com/sneakyuser5-netizen/The_whisperer_bot
 
-⭐ Feel free to support the project.`
+⭐ ${t("info.repo_footer")}`
         });
 
     }

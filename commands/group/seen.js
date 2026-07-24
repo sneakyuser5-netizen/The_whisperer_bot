@@ -1,6 +1,8 @@
 const activity = require("../../lib/activity");
 const identity = require("../../lib/identity");
 const config = require("../../config");
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "seen",
@@ -19,7 +21,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("admin.only_groups")
             });
         }
 
@@ -35,26 +37,23 @@ module.exports = {
 
         if (!target) {
             return sock.sendMessage(jid, {
-                text:
-"❌ Reply to a user or mention them.\n\nExample:\n.seen @user"
+                text: t("group.seen_usage")
             });
         }
 
-        const user =
-            identity.normalize(target);
+        const user = identity.normalize(target);
 
-        const last =
-            activity.get(jid, user);
+        const last = activity.get(jid, user);
 
         if (!last) {
 
             return sock.sendMessage(jid, {
                 text:
-`👀 Last Seen
+`${t("group.seen_title")}
 
-👤 User: @${target.split("@")[0]}
+${t("group.seen_user")}: @${target.split("@")[0]}
 
-❌ No activity has been recorded since tracking was enabled.`,
+${t("group.seen_no_activity")}`,
                 mentions: [target]
             });
 
@@ -64,27 +63,27 @@ module.exports = {
             activity.format(Date.now() - last);
 
         const date = new Date(last).toLocaleString("en-GB", {
-    timeZone: config.TIMEZONE,
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit"
-});
+            timeZone: config.TIMEZONE,
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        });
 
         await sock.sendMessage(jid, {
             text:
-`👀 Last Seen
+`${t("group.seen_title")}
 
-👤 User: @${target.split("@")[0]}
+${t("group.seen_user")}: @${target.split("@")[0]}
 
-🕒 Last message:
+${t("group.seen_last_message")}
 ${ago} ago
 
-📅 Date:
+${t("group.seen_date")}
 ${date}
 
-😂 They've been quiet since then.`,
+${t("group.seen_footer")}`,
             mentions: [target]
         });
 

@@ -12,7 +12,7 @@ module.exports = {
         await sock.sendMessage(
             msg.key.remoteJid,
             {
-                text: "👑 Owner access confirmed!"
+                text: t("owner.secret_success")
             }
         );
 

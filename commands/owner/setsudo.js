@@ -24,7 +24,7 @@ module.exports = {
     if (!target) {
 
         return sock.sendMessage(jid, {
-            text: "😂 Reply to someone's message first.\n\nI can't promote invisible people. 👻"
+            text: t("owner.setsudo_reply")
         });
 
     }
@@ -40,9 +40,11 @@ module.exports = {
 
     await sock.sendMessage(jid, {
         text:
-`✅ New Sudo unlocked! 🛡️
+`${t("owner.setsudo_success")}
 
-@${id} can now boss the bot around (almost 😏).`,
+@${id}
+
+${t("owner.setsudo_note")}`,
         mentions: [target]
     });
 

@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "alive",
@@ -12,18 +14,17 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         await sock.sendMessage(jid, {
             text:
-`🤖 *WHISPER BOT IS ALIVE*
+`${t("info.alive_title")}
 
-👑 Owner:
+👑 ${t("info.alive_owner")}
 THE-WHISPERER-237
 
-⚡ Status:
-Running perfectly ✅
+⚡ ${t("info.alive_status")}
+${t("info.alive_running")}
 
-😂 I'm awake... unfortunately for my bugs.`
+😂 ${t("info.alive_footer")}`
         });
 
     }

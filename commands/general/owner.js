@@ -1,4 +1,7 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
+
     name: "owner",
 
     description: "Show bot owner",
@@ -10,9 +13,10 @@ module.exports = {
         await sock.sendMessage(
             msg.key.remoteJid,
             {
-                text: "👑 Owner: The-whisperer_237"
+                text: t(msg.key.remoteJid, "general.owner")
             }
         );
 
     }
+
 };

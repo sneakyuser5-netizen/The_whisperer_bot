@@ -1,4 +1,6 @@
 const groups = require("../../lib/groups");
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "promote",
@@ -15,7 +17,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -29,20 +31,20 @@ module.exports = {
 
         if (!target) {
             return sock.sendMessage(jid, {
-                text: "❌ Reply to a user or mention them.\n\nExample:\n.promote @user"
+                text: t(jid, "admin.promote_usage")
             });
         }
 
         try {
 
             await groups.promote(
-    sock,
-    jid,
-    target
-);
+                sock,
+                jid,
+                target
+            );
 
             await sock.sendMessage(jid, {
-                text: "✅ User promoted to admin."
+                text: t(jid, "admin.promote_success")
             });
 
         } catch (err) {
@@ -50,7 +52,7 @@ module.exports = {
             console.log("Promote error:", err);
 
             await sock.sendMessage(jid, {
-                text: "❌ Failed to promote user."
+                text: t(jid, "admin.promote_failed")
             });
         }
 

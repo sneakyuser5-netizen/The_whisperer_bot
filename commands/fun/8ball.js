@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "8ball",
@@ -12,44 +14,34 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         if (!args.length) {
             return sock.sendMessage(jid, {
-                text:
-`🎱 Ask me a question.
-
-Example:
-.8ball Will I become rich?`
+                text: t(jid, "fun.8ball_usage")
             });
         }
 
-
         const answers = [
-
-            "😂 Definitely yes!",
-            "🤔 Maybe... try again later.",
-            "🔥 Without a doubt!",
-            "💀 My magic ball is confused.",
-            "😎 The chances are looking good.",
-            "😂 Ask your WiFi first.",
-            "🚀 Yes, but work for it.",
-            "❌ Not today, my friend."
-
+            t(jid, "fun.8ball_answer_1"),
+            t(jid, "fun.8ball_answer_2"),
+            t(jid, "fun.8ball_answer_3"),
+            t(jid, "fun.8ball_answer_4"),
+            t(jid, "fun.8ball_answer_5"),
+            t(jid, "fun.8ball_answer_6"),
+            t(jid, "fun.8ball_answer_7"),
+            t(jid, "fun.8ball_answer_8")
         ];
-
 
         const answer =
             answers[Math.floor(Math.random() * answers.length)];
 
-
         await sock.sendMessage(jid, {
             text:
-`🎱 MAGIC 8-BALL
+`${t(jid, "fun.8ball_title")}
 
-Question:
+${t(jid, "fun.8ball_question")}
 ${args.join(" ")}
 
-Answer:
+${t(jid, "fun.8ball_answer")}
 ${answer}`
         });
 

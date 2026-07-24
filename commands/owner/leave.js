@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "leave",
@@ -15,13 +17,13 @@ module.exports = {
         if (!jid.endsWith("@g.us")) {
 
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("group_only")
             });
 
         }
 
         await sock.sendMessage(jid, {
-            text: "👋 Goodbye!"
+            text: t("owner.leave_goodbye")
         });
 
         await sock.groupLeave(jid);

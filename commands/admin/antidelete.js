@@ -1,3 +1,4 @@
+const { t } = require("../../lib/lang");
 const settings = require("../../lib/settings");
 
 module.exports = {
@@ -18,7 +19,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("group_only")
             });
         }
 
@@ -26,10 +27,7 @@ module.exports = {
 
         if (!["on", "off"].includes(option)) {
             return sock.sendMessage(jid, {
-                text:
-`Usage:
-.antidelete on
-.antidelete off`
+                text: t("antidelete_usage")
             });
         }
 
@@ -40,8 +38,7 @@ module.exports = {
         );
 
         await sock.sendMessage(jid, {
-            text:
-`🗑️ Anti-delete has been ${option === "on" ? "enabled ✅" : "disabled ❌"}`
+            text: option === "on" ? t("antidelete_enabled") : t("antidelete_disabled")
         });
 
     }

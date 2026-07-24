@@ -1,18 +1,25 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
+
     name: "goodbye",
+
     description: "Enable or disable goodbye messages",
+
     category: "admin",
+
     permission: "admin",
+
     usage: ".goodbye on/off",
 
     execute: async (sock, msg, args) => {
+
         const jid = msg.key.remoteJid;
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -20,7 +27,7 @@ module.exports = {
 
         if (!["on", "off"].includes(option)) {
             return sock.sendMessage(jid, {
-                text: "Usage:\n.goodbye on\n.goodbye off"
+                text: t(jid, "admin.goodbye_usage")
             });
         }
 
@@ -28,8 +35,10 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text: option === "on"
-                ? "✅ Goodbye messages enabled."
-                : "✅ Goodbye messages disabled."
+                ? t(jid, "admin.goodbye_enabled")
+                : t(jid, "admin.goodbye_disabled")
         });
+
     }
+
 };

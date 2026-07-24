@@ -1,4 +1,6 @@
 const mute = require("../../lib/mute");
+const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -14,55 +16,45 @@ module.exports = {
 
     minArgs: 2,
 
-
     execute: async (sock, msg, args) => {
 
         const jid = msg.key.remoteJid;
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
-
 
         const mentioned =
             msg.message.extendedTextMessage
             ?.contextInfo
             ?.mentionedJid;
 
-
         if (!mentioned || !mentioned[0]) {
             return sock.sendMessage(jid, {
-                text: "❌ Mention a user.\nExample: .mute @user 10m"
+                text: t(jid, "admin.mute_mention")
             });
         }
 
-
-const identity = require("../../lib/identity");
-
-const target =
-    identity.normalize(
-        mentioned[0]
-    );
+        const target =
+            identity.normalize(
+                mentioned[0]
+            );
 
         const duration = args[1];
 
         const match =
             duration.match(/^(\d+)(m|h|d)$/);
 
-
         if (!match) {
             return sock.sendMessage(jid, {
-                text:
-                "❌ Invalid time.\nUse:\n10m = minutes\n1h = hours\n1d = days"
+                text: t(jid, "admin.mute_invalid_time")
             });
         }
 
-
         const value = Number(match[1]);
         const unit = match[2];
-
 
         let ms = value * 60 * 1000;
 
@@ -74,17 +66,15 @@ const target =
             ms = value * 24 * 60 * 60 * 1000;
         }
 
-
         mute.mute(
             jid,
             target,
             ms
         );
 
-
         await sock.sendMessage(jid, {
             text:
-`🔇 @${target.split("@")[0]} has been muted for ${duration}.`,
+`${t(jid, "admin.mute_muted_emoji")} @${target.split("@")[0]} ${t(jid, "admin.mute_muted_for")} ${duration}.`,
             mentions: [target]
         });
 

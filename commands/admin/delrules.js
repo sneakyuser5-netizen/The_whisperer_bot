@@ -1,3 +1,4 @@
+const { t } = require("../../lib/lang");
 const settings = require("../../lib/settings");
 
 module.exports = {
@@ -22,8 +23,7 @@ module.exports = {
         if (!jid.endsWith("@g.us")) {
 
             return sock.sendMessage(jid, {
-                text:
-                "❌ This command only works in groups."
+                text: t("group_only")
             });
 
         }
@@ -38,10 +38,7 @@ module.exports = {
 
         await sock.sendMessage(jid, {
 
-            text:
-`🗑️ Group rules removed.
-
-😂 The law book has been burned... temporarily.`
+            text: t("delrules_success")
 
         });
 

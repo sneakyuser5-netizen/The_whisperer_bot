@@ -1,3 +1,4 @@
+const { t } = require("../../lib/lang");
 const groups = require("../../lib/groups");
 module.exports = {
 
@@ -15,7 +16,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("group_only")
             });
         }
 
@@ -29,7 +30,7 @@ module.exports = {
 
         if (!target) {
             return sock.sendMessage(jid, {
-                text: "❌ Reply to an admin or mention them.\n\nExample:\n.demote @user"
+                text: t("demote_target_required")
             });
         }
 
@@ -42,7 +43,7 @@ module.exports = {
 );
 
             await sock.sendMessage(jid, {
-                text: "✅ User removed from admin list."
+                text: t("demote_success")
             });
 
         } catch (err) {
@@ -50,7 +51,7 @@ module.exports = {
             console.log("Demote error:", err);
 
             await sock.sendMessage(jid, {
-                text: "❌ Failed to demote user."
+                text: t("demote_failed")
             });
         }
 
