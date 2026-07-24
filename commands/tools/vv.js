@@ -2,6 +2,7 @@ const {
     downloadMediaMessage
 } = require("@whiskeysockets/baileys");
 
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -20,16 +21,13 @@ module.exports = {
             ?.contextInfo
             ?.quotedMessage;
 
-
         if (!quoted) {
             return sock.sendMessage(jid, {
-                text: "❌ Reply to a view once message."
+                text: t("tools.vv_reply")
             });
         }
 
-
         let media;
-
 
         if (quoted.viewOnceMessageV2) {
 
@@ -44,7 +42,6 @@ module.exports = {
             media = quoted;
 
         }
-
 
         try {
 
@@ -63,10 +60,7 @@ module.exports = {
                     caption: media.imageMessage.caption || ""
                 });
 
-            }
-
-
-            else if (media.videoMessage) {
+            } else if (media.videoMessage) {
 
                 const buffer = await downloadMediaMessage(
                     {
@@ -81,24 +75,20 @@ module.exports = {
                     caption: media.videoMessage.caption || ""
                 });
 
-            }
-
-
-            else {
+            } else {
 
                 await sock.sendMessage(jid, {
-                    text: "❌ Unsupported view once type."
+                    text: t("tools.vv_unsupported")
                 });
 
             }
-
 
         } catch (err) {
 
             console.log("VV ERROR:", err);
 
             await sock.sendMessage(jid, {
-                text: "❌ Failed to retrieve view once media."
+                text: t("tools.vv_failed")
             });
 
         }
