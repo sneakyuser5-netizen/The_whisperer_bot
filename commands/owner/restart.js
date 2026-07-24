@@ -1,3 +1,4 @@
+const { t } = require("../../lib/lang");
 const { exec } = require("child_process");
 
 module.exports = {
