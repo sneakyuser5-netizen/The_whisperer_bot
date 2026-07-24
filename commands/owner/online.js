@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "online",
@@ -17,11 +19,10 @@ module.exports = {
         if (!["on", "off"].includes(option)) {
 
             return sock.sendMessage(jid, {
-                text: "Usage:\n.online on\n.online off"
+                text: t("owner.online_usage")
             });
 
         }
-
 
         if (option === "on") {
 
@@ -30,7 +31,7 @@ module.exports = {
             );
 
             await sock.sendMessage(jid, {
-                text: "✅ Always online enabled."
+                text: t("owner.online_enabled")
             });
 
         } else {
@@ -40,7 +41,7 @@ module.exports = {
             );
 
             await sock.sendMessage(jid, {
-                text: "✅ Always online disabled."
+                text: t("owner.online_disabled")
             });
 
         }
