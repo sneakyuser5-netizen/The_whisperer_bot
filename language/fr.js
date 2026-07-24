@@ -12,7 +12,30 @@ module.exports = {
 "owner.delsudo_usage": "❌ Répondez au message d'un utilisateur ou mentionnez-le.",
 "owner.delsudo_success": "✅ Membre sudo supprimé",
 "owner.user": "Utilisateur :",
+"tools.whois_title": "📌 Informations du chat",
+"tools.whois_jid": "JID :",
+"tools.whois_type": "Type :",
+"tools.whois_group": "Groupe",
+"tools.whois_private": "Privé",
+"tools.whois_fromme": "Envoyé par moi :",
+"tools.whois_group_name": "Nom du groupe :",
+"tools.whois_members": "Membres :",
 
+"tools.vv_reply": "❌ Répondez à un message « Voir une fois ».",
+"tools.vv_unsupported": "❌ Type de message « Voir une fois » non pris en charge.",
+"tools.vv_failed": "❌ Impossible de récupérer le média « Voir une fois ».",
+
+"yes": "Oui",
+"no": "Non",
+
+"tools.say_usage": "Utilisation :\n.say Bonjour",
+
+"tools.echo_usage": "Utilisation :\n.echo Bonjour",
+
+"tools.ping": "🏓 Pong !\nTemps de réponse :",
+
+"tools.test_success": "✅ Le nouveau plugin fonctionne !",
+"tools.test_sent": "Vous avez envoyé :",
 "owner.autotyping_usage": "😂 Utilisez correctement :\n\n.autotyping on\n.autotyping off",
 "owner.autotyping_enabled": "⌨️ Saisie automatique activée.\n\nJe vais maintenant faire semblant de réfléchir 😂",
 "owner.autotyping_disabled": "✅ Saisie automatique désactivée.",
