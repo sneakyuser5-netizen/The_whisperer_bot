@@ -1,5 +1,7 @@
 const sudo = require("../../lib/sudo");
+const identity = require("../../lib/identity");
 const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "setsudo",
@@ -12,41 +14,39 @@ module.exports = {
 
     execute: async (sock, msg) => {
 
-    const jid = msg.key.remoteJid;
+        const jid = msg.key.remoteJid;
 
-    const quoted =
-        msg.message?.extendedTextMessage?.contextInfo;
+        const quoted =
+            msg.message?.extendedTextMessage?.contextInfo;
 
-    const target =
-        quoted?.participant ||
-        quoted?.mentionedJid?.[0];
+        const target =
+            quoted?.participant ||
+            quoted?.mentionedJid?.[0];
 
-    if (!target) {
+        if (!target) {
 
-        return sock.sendMessage(jid, {
-            text: t("owner.setsudo_reply")
-        });
+            return sock.sendMessage(jid, {
+                text: t("owner.setsudo_reply")
+            });
 
-    }
+        }
 
-    const identity = require("../../lib/identity");
+        const id = identity.normalize(target);
 
-    const id = identity.normalize(target);
+        sudo.add(
+            identity.getBotOwner(),
+            id
+        );
 
-    sudo.add(
-    identity.getBotOwner(),
-    id
-);
-
-    await sock.sendMessage(jid, {
-        text:
+        await sock.sendMessage(jid, {
+            text:
 `${t("owner.setsudo_success")}
 
-@${id}
+@${target.split("@")[0]}
 
 ${t("owner.setsudo_note")}`,
-        mentions: [target]
-    });
+            mentions: [target]
+        });
 
     }
 
