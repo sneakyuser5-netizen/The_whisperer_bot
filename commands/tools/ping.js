@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "ping",
@@ -9,6 +11,7 @@ module.exports = {
     description: "Check bot response speed",
 
     permission: "public",
+
     cooldown: 5,
 
     execute: async (sock, msg) => {
@@ -18,10 +21,9 @@ module.exports = {
         await sock.sendMessage(
             msg.key.remoteJid,
             {
-                text: `🏓 Pong!\nResponse time: ${Date.now() - start}ms`
+                text: `${t("tools.ping")}\n${Date.now() - start}ms`
             }
         );
 
     }
 };
-
