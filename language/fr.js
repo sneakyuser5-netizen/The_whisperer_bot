@@ -9,9 +9,61 @@ module.exports = {
 "info.bot_platform": "Plateforme",
 "info.bot_node": "Node",
 "info.bot_uptime": "Temps d'activité",
+"owner.delsudo_usage": "❌ Répondez au message d'un utilisateur ou mentionnez-le.",
+"owner.delsudo_success": "✅ Membre sudo supprimé",
+"owner.user": "Utilisateur :",
 
+"owner.autotyping_usage": "😂 Utilisez correctement :\n\n.autotyping on\n.autotyping off",
+"owner.autotyping_enabled": "⌨️ Saisie automatique activée.\n\nJe vais maintenant faire semblant de réfléchir 😂",
+"owner.autotyping_disabled": "✅ Saisie automatique désactivée.",
+
+"owner.autorecording_usage": "😂 Essayez ceci :\n\n.autorecording on\n.autorecording off",
+"owner.autorecording_enabled": "🎙️ Enregistrement automatique activé.\n\nJe prépare ma note vocale imaginaire 😂",
+"owner.autorecording_disabled": "✅ Enregistrement automatique désactivé.",
+
+"owner.afk_no_reason": "Aucune raison donnée.",
+"owner.afk_set": "😴 Vous êtes maintenant AFK.",
+"owner.reason": "Raison :",
+"owner.afk_footer": "Je dirai à tout le monde que vous faites semblant d'être occupé.",
+  "owner.leave_goodbye": "👋 Au revoir !",
+
+"owner.online_usage": "Utilisation :\n.online on\n.online off",
+"owner.online_enabled": "✅ Toujours en ligne activé.",
+"owner.online_disabled": "✅ Toujours en ligne désactivé.",
+"owner.read_usage": "Utilisation :\n.read on\n.read off",
+"owner.read_enabled": "✅ Lecture automatique activée.",
+"owner.read_disabled": "✅ Lecture automatique désactivée.",
+
+"owner.public_enabled": `🌍 MODE PUBLIC ACTIVÉ
+
+😂 WhisperBot a ouvert ses portes.
+
+Tout le monde peut désormais utiliser les commandes publiques.
+
+(Les permissions du propriétaire et des membres sudo restent respectées.)`,
+
+"owner.private_enabled": `🔒 MODE PRIVÉ ACTIVÉ
+
+😂 Le patron a verrouillé les portes.
+
+Seuls le propriétaire et les membres sudo peuvent désormais m'utiliser.`,
+
+"owner.pp_usage": "❌ Répondez à une image.",
+"owner.pp_updated": "✅ Photo de profil mise à jour.",
+"owner.getsudo_empty": "😂 Vous n'avez encore aucun membre sudo.\n\nUtilisez *.setsudo* en répondant au message de quelqu'un.",
+"owner.getsudo_title": "👑 Vos membres sudo",  
 "info.version_title": "Version de Baileys :", 
+"owner.status_usage": "Utilisation :\n.status on\n.status off",
+"owner.status_enabled": "✅ Sauvegarde des statuts activée.",
+"owner.status_disabled": "✅ Sauvegarde des statuts désactivée.",
 
+"owner.setsudo_reply": "😂 Répondez d'abord au message de quelqu'un.\n\nJe ne peux pas promouvoir des personnes invisibles. 👻",
+"owner.setsudo_success": "✅ Nouveau membre Sudo ajouté ! 🛡️",
+"owner.setsudo_note": "peut maintenant contrôler le bot (ou presque 😏).",
+
+"owner.secret_success": "👑 Accès propriétaire confirmé !",
+
+"owner.restart": "🔄 Redémarrage de WhisperBot...\n\n😂 Gardez mes circuits ensemble. Je reviens dans un instant !",
 "info.system_title": "💻 Informations système",
 "info.system_platform": "Plateforme :",
 "info.system_architecture": "Architecture :",
