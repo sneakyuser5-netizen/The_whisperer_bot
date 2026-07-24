@@ -15,10 +15,7 @@ module.exports = {
         const jid = msg.key.remoteJid;
 
         await sock.sendMessage(jid, {
-            text:
-`🔄 Restarting WhisperBot...
-
-😂 Hold my circuits together. I'll be back shortly!`
+            text: t("owner.restart")
         });
 
         setTimeout(() => {
