@@ -1,4 +1,7 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
+
     name: "test",
 
     description: "Test new plugin",
@@ -16,12 +19,10 @@ module.exports = {
         await sock.sendMessage(
             msg.key.remoteJid,
             {
-                text: `✅ New plugin works!\nYou sent: ${args.join(" ")}`
+                text: `${t("tools.test_success")}\n${t("tools.test_sent")} ${args.join(" ")}`
             }
         );
 
     }
+
 };
-
-
-    
