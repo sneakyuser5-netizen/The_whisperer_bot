@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -21,14 +22,7 @@ module.exports = {
         );
 
         await sock.sendMessage(jid, {
-            text:
-`🌍 *PUBLIC MODE ENABLED*
-
-😂 WhisperBot has opened its doors.
-
-Everyone can now use public commands.
-
-(Owner and sudo permissions are still respected.)`
+            text: t("owner.public_enabled")
         });
 
     }
