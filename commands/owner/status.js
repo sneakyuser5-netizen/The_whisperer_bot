@@ -20,8 +20,7 @@ module.exports = {
         if (!["on", "off"].includes(option)) {
 
             return sock.sendMessage(jid, {
-                text:
-"Usage:\n.status on\n.status off"
+                text: t("owner.status_usage")
             });
 
         }
@@ -36,10 +35,8 @@ module.exports = {
         await sock.sendMessage(jid, {
             text:
 option === "on"
-?
-"✅ Status saving enabled."
-:
-"✅ Status saving disabled."
+    ? t("owner.status_enabled")
+    : t("owner.status_disabled")
         });
 
     }
