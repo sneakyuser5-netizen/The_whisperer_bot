@@ -5,7 +5,61 @@ module.exports = {
 "info.repo_project": "Project:",
 "info.repo_owner": "Owner:",
 "info.repo_footer": "Feel free to support the project.",
+"owner.delsudo_usage": "❌ Reply to or mention a user.",
+"owner.delsudo_success": "✅ Sudo removed",
+"owner.user": "User:",
 
+"owner.autotyping_usage": "😂 Use it properly:\n\n.autotyping on\n.autotyping off",
+"owner.autotyping_enabled": "⌨️ Auto typing enabled.\n\nNow I will pretend I'm thinking 😂",
+"owner.autotyping_disabled": "✅ Auto typing disabled.",
+
+"owner.autorecording_usage": "😂 Try this:\n\n.autorecording on\n.autorecording off",
+"owner.autorecording_enabled": "🎙️ Auto recording enabled.\n\nI am preparing my imaginary voice note 😂",
+"owner.autorecording_disabled": "✅ Auto recording disabled.",
+
+"owner.afk_no_reason": "No reason given.",
+"owner.afk_set": "😴 You're now AFK.",
+"owner.reason": "Reason:",
+"owner.afk_footer": "I'll let everyone know you're pretending to be busy.",
+  "owner.leave_goodbye": "👋 Goodbye!",
+
+"owner.online_usage": "Usage:\n.online on\n.online off",
+"owner.online_enabled": "✅ Always online enabled.",
+"owner.online_disabled": "✅ Always online disabled.",
+
+"owner.getsudo_empty": "😂 You don't have any sudo members yet.\n\nUse *.setsudo* by replying to someone's message.",
+"owner.getsudo_title": "👑 Your Sudo Members",
+   "owner.read_usage": "Usage:\n.read on\n.read off",
+"owner.read_enabled": "✅ Auto read enabled.",
+"owner.read_disabled": "✅ Auto read disabled.",
+
+"owner.public_enabled": `🌍 PUBLIC MODE ENABLED
+
+😂 WhisperBot has opened its doors.
+
+Everyone can now use public commands.
+
+(Owner and sudo permissions are still respected.)`,
+
+"owner.private_enabled": `🔒 PRIVATE MODE ENABLED
+
+😂 The boss locked the doors.
+
+Only the owner and sudo members can use me now.`,
+
+"owner.pp_usage": "❌ Reply to an image.",
+"owner.pp_updated": "✅ Profile picture updated.",
+    "owner.status_usage": "Usage:\n.status on\n.status off",
+"owner.status_enabled": "✅ Status saving enabled.",
+"owner.status_disabled": "✅ Status saving disabled.",
+
+"owner.setsudo_reply": "😂 Reply to someone's message first.\n\nI can't promote invisible people. 👻",
+"owner.setsudo_success": "✅ New Sudo unlocked! 🛡️",
+"owner.setsudo_note": "can now boss the bot around (almost 😏).",
+
+"owner.secret_success": "👑 Owner access confirmed!",
+
+"owner.restart": "🔄 Restarting WhisperBot...\n\n😂 Hold my circuits together. I'll be back shortly!",
 "info.ping_testing": "🏓 Testing connection...",
 "info.ping_title": "🏓 PONG!",
 "info.ping_speed": "Speed:",
