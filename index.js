@@ -20,7 +20,11 @@ async function startBot() {
             printQRInTerminal: false,
             logger: pino({ level: "silent" })
         });
-        throw new Error("STORE CHECK");
+        console.log(
+    "BAILEYS EXPORTS:",
+    Object.keys(require("@whiskeysockets/baileys"))
+        .filter(x => x.toLowerCase().includes("store"))
+);
         global.sock = sock;
 
 const originalSendMessage = sock.sendMessage.bind(sock);
