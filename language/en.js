@@ -8,7 +8,30 @@ module.exports = {
 "owner.delsudo_usage": "❌ Reply to or mention a user.",
 "owner.delsudo_success": "✅ Sudo removed",
 "owner.user": "User:",
+"tools.whois_title": "📌 Chat Information",
+"tools.whois_jid": "JID:",
+"tools.whois_type": "Type:",
+"tools.whois_group": "Group",
+"tools.whois_private": "Private",
+"tools.whois_fromme": "From Me:",
+"tools.whois_group_name": "Group Name:",
+"tools.whois_members": "Members:",
 
+"tools.vv_reply": "❌ Reply to a view once message.",
+"tools.vv_unsupported": "❌ Unsupported view once type.",
+"tools.vv_failed": "❌ Failed to retrieve view once media.",
+
+"yes": "Yes",
+"no": "No",
+
+"tools.say_usage": "Usage:\n.say Hello",
+
+"tools.echo_usage": "Usage:\n.echo Hello",
+
+"tools.ping": "🏓 Pong!\nResponse time:",
+
+"tools.test_success": "✅ New plugin works!",
+"tools.test_sent": "You sent:",
 "owner.autotyping_usage": "😂 Use it properly:\n\n.autotyping on\n.autotyping off",
 "owner.autotyping_enabled": "⌨️ Auto typing enabled.\n\nNow I will pretend I'm thinking 😂",
 "owner.autotyping_disabled": "✅ Auto typing disabled.",
