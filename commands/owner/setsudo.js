@@ -2,7 +2,7 @@ const sudo = require("../../lib/sudo");
 const { t } = require("../../lib/lang");
 module.exports = {
 
-    name: "*setsudo*",
+    name: "setsudo",
 
     description: "Add a sudo member",
 
