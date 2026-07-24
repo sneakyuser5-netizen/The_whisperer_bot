@@ -19,7 +19,7 @@ module.exports = {
         const context =
             msg.message?.extendedTextMessage?.contextInfo;
 
-        let target =
+        const target =
             context?.mentionedJid?.[0] ||
             context?.participant;
 
@@ -31,9 +31,11 @@ module.exports = {
 
         }
 
+        const id = identity.normalize(target);
+
         sudo.remove(
             identity.getBotOwner(),
-            target
+            id
         );
 
         await sock.sendMessage(jid, {
