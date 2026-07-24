@@ -26,9 +26,9 @@ module.exports = {
         }
 
         read.set(
-            msg.key.participant || jid,
-            option === "on"
-        );
+    "global",
+    option === "on"
+);
 
         await sock.sendMessage(jid, {
             text:
