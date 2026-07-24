@@ -1,6 +1,8 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
+    "owner.language_usage":
+"Utilisation :\n.language en\n.language fr",
     "info.bot_title": "🤖 WhisperBot",
 "info.bot_creator": "Créateur",
 "info.bot_owner": "Propriétaire du bot",
