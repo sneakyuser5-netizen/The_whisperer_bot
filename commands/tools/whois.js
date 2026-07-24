@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "whois",
@@ -11,32 +13,29 @@ module.exports = {
         const jid = msg.key.remoteJid;
 
         let text =
-`📌 Chat Information
+`${t("tools.whois_title")}
 
-JID:
+${t("tools.whois_jid")}
 ${jid}
 
-Type:
-${jid.endsWith("@g.us") ? "Group" : "Private"}
+${t("tools.whois_type")}
+${jid.endsWith("@g.us") ? t("tools.whois_group") : t("tools.whois_private")}
 
-From Me:
-${msg.key.fromMe ? "Yes" : "No"}`;
-
+${t("tools.whois_fromme")}
+${msg.key.fromMe ? t("yes") : t("no")}`;
 
         if (jid.endsWith("@g.us")) {
 
-            const meta =
-                await sock.groupMetadata(jid);
+            const meta = await sock.groupMetadata(jid);
 
             text +=
-`\n\nGroup Name:
+`\n\n${t("tools.whois_group_name")}
 ${meta.subject}
 
-Members:
+${t("tools.whois_members")}
 ${meta.participants.length}`;
 
         }
-
 
         await sock.sendMessage(jid, {
             text
