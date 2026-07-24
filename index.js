@@ -21,6 +21,9 @@ async function startBot() {
             logger: pino({ level: "silent" })
         });
         console.log("BAILEYS VERSION:", require("@whiskeysockets/baileys/package.json").version);
+        const baileys = require("@whiskeysockets/baileys");
+
+console.log(Object.keys(baileys));
         global.sock = sock;
 
 const originalSendMessage = sock.sendMessage.bind(sock);
