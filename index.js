@@ -20,11 +20,7 @@ async function startBot() {
             printQRInTerminal: false,
             logger: pino({ level: "silent" })
         });
-        console.log(
-    "BAILEYS EXPORTS:",
-    Object.keys(require("@whiskeysockets/baileys"))
-        .filter(x => x.toLowerCase().includes("store"))
-);
+        console.log("BAILEYS VERSION:", require("@whiskeysockets/baileys/package.json").version);
         global.sock = sock;
 
 const originalSendMessage = sock.sendMessage.bind(sock);
