@@ -1,6 +1,8 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
+    "owner.language_usage":
+"Usage:\n.language en\n.language fr",
     "info.repo_title": "📦 BOT REPOSITORY",
 "info.repo_project": "Project:",
 "info.repo_owner": "Owner:",
