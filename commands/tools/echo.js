@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "echo",
@@ -11,7 +13,7 @@ module.exports = {
         if (!args.length) {
 
             return sock.sendMessage(msg.key.remoteJid, {
-                text: "Usage:\n.echo Hello"
+                text: t("tools.echo_usage")
             });
 
         }
