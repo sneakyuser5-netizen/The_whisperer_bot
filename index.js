@@ -20,6 +20,7 @@ async function startBot() {
             printQRInTerminal: false,
             logger: pino({ level: "silent" })
         });
+        console.log("STORE:", sock.store);
         global.sock = sock;
 
 const originalSendMessage = sock.sendMessage.bind(sock);
