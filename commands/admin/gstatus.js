@@ -51,13 +51,23 @@ module.exports = {
                     {}
                 );
 
-                const sent = await sock.sendMessage(
-                    "status@broadcast",
-                    {
-                        image: buffer,
-                        caption: quoted.imageMessage.caption || ""
-                    }
-                );
+                const contacts = Object.keys(sock.store?.contacts || {})
+    .filter(jid => jid.endsWith("@s.whatsapp.net"));
+
+console.log("CONTACTS:", contacts.length);
+
+const sent = await sock.sendMessage(
+    "status@broadcast",
+    {
+        image: buffer,
+        caption: quoted.imageMessage.caption || ""
+    },
+    {
+        statusJidList: contacts
+    }
+);
+
+console.log(sent);
 
                 console.log("STATUS SENT:", sent.key);
 
