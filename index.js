@@ -1,10 +1,3 @@
-const baileys = require("@whiskeysockets/baileys");
-
-const {
-    default: makeWASocket,
-    useMultiFileAuthState,
-    DisconnectReason
-} = baileys;
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require("@whiskeysockets/baileys");
 const pino = require("pino");
 const fs = require("fs");
@@ -23,14 +16,10 @@ async function startBot() {
     const { state, saveCreds } = await useMultiFileAuthState("./session");
 
         const sock = makeWASocket({
-    auth: state,
-    printQRInTerminal: false,
-    logger: pino({ level: "silent" })
-});
-
-console.log("BAILEYS VERSION:", require("@whiskeysockets/baileys/package.json").version);
-console.log(Object.keys(baileys));
-console.log(Object.keys(baileys));
+            auth: state,
+            printQRInTerminal: false,
+            logger: pino({ level: "silent" })
+        });
         global.sock = sock;
 
 const originalSendMessage = sock.sendMessage.bind(sock);
@@ -297,11 +286,16 @@ ${data.reason}
 
     const read = require("./lib/read");
 
-    if (read.get("global")) {
+    const user =
+        msg.key.participant ||
+        msg.key.remoteJid;
 
-    await sock.readMessages([
-        msg.key
-    ]);
+
+    if (read.get(user)) {
+
+        await sock.readMessages([
+            msg.key
+        ]);
 
     }
             const context =
