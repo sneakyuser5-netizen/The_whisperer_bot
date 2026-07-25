@@ -21,13 +21,14 @@ module.exports = {
   "autorecording_disabled": "Enregistrement automatique désactivé",
   "autorecording_note": "Je vais maintenant afficher 🎙️ Enregistrement quand vous m'envoyez un message"
     }
-    "info.bot_title": "🤖 WhisperBot",
+    
 "info.bot_creator": "Créateur",
 "info.bot_owner": "Propriétaire du bot",
 "info.bot_sudos": "Membres Sudo",
 "info.bot_mode": "Mode",
 "info.bot_platform": "Plateforme",
 "info.bot_node": "Node",
+"info.bot_title": "🤖 WhisperBot",    
 "info.bot_uptime": "Temps d'activité",
 "owner.delsudo_usage": "❌ Répondez au message d'un utilisateur ou mentionnez-le.",
 "owner.delsudo_success": "✅ Membre sudo supprimé",
