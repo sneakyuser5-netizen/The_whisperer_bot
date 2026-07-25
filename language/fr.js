@@ -20,7 +20,7 @@ module.exports = {
   "autorecording_enabled": "Enregistrement automatique activé",
   "autorecording_disabled": "Enregistrement automatique désactivé",
   "autorecording_note": "Je vais maintenant afficher 🎙️ Enregistrement quand vous m'envoyez un message"
-    }
+    },
     
 "info.bot_creator": "Créateur",
 "info.bot_owner": "Propriétaire du bot",
