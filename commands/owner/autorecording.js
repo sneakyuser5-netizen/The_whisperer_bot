@@ -1,5 +1,5 @@
 const settings = require("../../lib/settings");
-const { t } = require("../../lib/lang"); // <-- added back
+const { t } = require("../../lib/lang");
 
 module.exports = {
     name: "autorecording",
@@ -10,20 +10,19 @@ module.exports = {
 
     execute: async (sock, msg, args = []) => {
         const jid = msg.key.remoteJid;
-
         const option = args[0]?.toLowerCase();
-        const current = settings.get("global").autorecording? t("owner.on") : t("owner.off");
+        const isOn = settings.get("global").autorecording;
 
-        // If no arg was given, just show status
+        // No arg = show status
         if (!option) {
             return sock.sendMessage(jid, {
-                text: `${t("owner.autorecording_status")} ${current}\n\n${t("usage")}:.autorecording on\n${t("usage")}:.autorecording off`
+                text: `${t("owner.autorecording_status")}: ${isOn? t("owner.on") : t("owner.off")}\n\n${t("owner.usage")}:.autorecording on\n${t("owner.usage")}:.autorecording off`
             });
         }
 
         if (!["on", "off"].includes(option)) {
             return sock.sendMessage(jid, {
-                text: `${t("owner.invalid_option")} "${option}"\n${t("owner.use_on_off")}\n${t("owner.current")}: ${current}`
+                text: `${t("owner.invalid_option")}: "${option}"\n${t("owner.use_on_off")}\n${t("owner.current")}: ${isOn? t("owner.on") : t("owner.off")}`
             });
         }
 
@@ -31,7 +30,7 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text: option === "on"
-              ? `✅ ${t("owner.autorecording_enabled")}`
+             ? `✅ ${t("owner.autorecording_enabled")}\n${t("owner.autorecording_note")}`
                 : `❌ ${t("owner.autorecording_disabled")}`
         });
     }
