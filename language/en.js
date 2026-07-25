@@ -7,6 +7,17 @@ module.exports = {
 "vv": "View 'View Once' media without opening it.",
     "owner.language_usage":
 "Usage:\n.language en\n.language fr",
+    "owner": {
+  "on": "ON",
+  "off": "OFF",
+  "current": "Current",
+  "usage": "Usage",
+  "use_on_off": "Use on/off",
+  "invalid_option": "Invalid option",
+  "autorecording_status": "*Auto Recording Status*",
+  "autorecording_enabled": "Auto Recording enabled",
+  "autorecording_disabled": "Auto Recording disabled",
+  "autorecording_note": "I will now show 🎙️ Recording when you message me",
     "info.repo_title": "📦 BOT REPOSITORY",
 "info.repo_project": "Project:",
 "info.repo_owner": "Owner:",
