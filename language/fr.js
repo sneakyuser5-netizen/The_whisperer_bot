@@ -9,6 +9,17 @@ module.exports = {
 "vv": "Voir les médias 'Voir une seule fois' sans les ouvrir.",
 "jid": "Afficher l'ID du chat ou de l'utilisateur.",
     // ... le reste
+    "owner": {
+  "on": "ACTIVÉ",
+  "off": "DÉSACTIVÉ",
+  "current": "Actuel",
+  "usage": "Utilisation",
+  "use_on_off": "Utiliser on/off",
+  "invalid_option": "Option invalide",
+  "autorecording_status": "*Statut de l'enregistrement auto*",
+  "autorecording_enabled": "Enregistrement automatique activé",
+  "autorecording_disabled": "Enregistrement automatique désactivé",
+  "autorecording_note": "Je vais maintenant afficher 🎙️ Enregistrement quand vous m'envoyez un message",
     "info.bot_title": "🤖 WhisperBot",
 "info.bot_creator": "Créateur",
 "info.bot_owner": "Propriétaire du bot",
