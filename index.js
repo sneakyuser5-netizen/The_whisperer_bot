@@ -24,6 +24,9 @@ async function startBot() {
         const baileys = require("@whiskeysockets/baileys");
 
 console.log(Object.keys(baileys));
+        const baileys = require("@whiskeysockets/baileys");
+
+console.log(Object.keys(baileys));
         global.sock = sock;
 
 const originalSendMessage = sock.sendMessage.bind(sock);
