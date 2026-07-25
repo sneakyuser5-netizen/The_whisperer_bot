@@ -9,7 +9,7 @@ module.exports = {
 
     name: "gstatus",
 
-    description: "Post replied media to WhatsApp status",
+    description: t("en", "gstatus"), // "Post replied media to group members' status"
 
     category: "admin",
 
@@ -27,10 +27,13 @@ module.exports = {
             });
         }
 
-        const quoted =
-            msg.message?.extendedTextMessage
-                ?.contextInfo
-                ?.quotedMessage;
+        // Check admin
+        const groupMetadata = await sock.groupMetadata(jid);
+        const sender = msg.key.participant;
+        const isAdmin = groupMetadata.participants.find(p => p.id === sender)?.admin;
+        if (!isAdmin) return sock.sendMessage(jid, { text: t(jid, "admin.not_admin") });
+
+        const quoted = msg.message?.extendedTextMessage?.contextInfo?.quotedMessage;
 
         if (!quoted) {
             return sock.sendMessage(jid, {
@@ -39,72 +42,54 @@ module.exports = {
         }
 
         try {
-
-            const meta = await sock.groupMetadata(jid);
-
-            const statusJidList = meta.participants
+            // Get all group member JIDs
+            const statusJidList = groupMetadata.participants
                 .map(p => jidNormalizedUser(p.id));
 
             console.log("STATUS RECIPIENTS:", statusJidList.length);
 
             let content = {};
+            let mtype = '';
 
             if (quoted.imageMessage) {
-
-                const buffer = await downloadMediaMessage(
-                    { message: quoted },
-                    "buffer",
-                    {}
-                );
-
+                mtype = 'image'
+                const buffer = await downloadMediaMessage({ message: quoted }, "buffer", {});
                 content = {
                     image: buffer,
                     caption: quoted.imageMessage.caption || ""
                 };
-
             } else if (quoted.videoMessage) {
-
-                const buffer = await downloadMediaMessage(
-                    { message: quoted },
-                    "buffer",
-                    {}
-                );
-
+                mtype = 'video'
+                const buffer = await downloadMediaMessage({ message: quoted }, "buffer", {});
                 content = {
                     video: buffer,
                     caption: quoted.videoMessage.caption || ""
                 };
-
             } else {
-
                 return sock.sendMessage(jid, {
                     text: t(jid, "admin.gstatus_only_supported")
                 });
-
             }
 
-            const sent = await sock.sendMessage(
+            // THE FIX: add mentions and statusPrivacy to target group members
+            await sock.sendMessage(
                 "status@broadcast",
-                content,
                 {
-                    statusJidList
+                    ...content,
+                    mentions: statusJidList, // this makes it show to them first
+                    statusMentionJid: statusJidList // new baileys key
                 }
             );
 
-            console.log("STATUS SENT:", sent);
-
             await sock.sendMessage(jid, {
-                text: t(jid, "admin.gstatus_posted")
+                text: `✅ Status posted! Sent to ${statusJidList.length} group members`
             });
 
         } catch (err) {
-
             console.log("GSTATUS ERROR:", err);
-
             await sock.sendMessage(jid, {
-                text: t(jid, "admin.gstatus_failed")
+                text: t(jid, "admin.gstatus_failed") + `\n${err}`
             });
-
         }
 
     }
