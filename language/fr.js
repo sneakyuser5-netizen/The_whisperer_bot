@@ -5,6 +5,9 @@ module.exports = {
     "gstatus": "Afficher le statut des fonctionnalités du groupe.",
     "owner.language_usage":
 "Utilisation :\n.language en\n.language fr",
+    "pp": "Changer la photo de profil du bot. Répondez à une image.",
+"vv": "Voir les médias 'Voir une seule fois' sans les ouvrir.",
+"jid": "Afficher l'ID du chat ou de l'utilisateur.",
     // ... le reste
     "info.bot_title": "🤖 WhisperBot",
 "info.bot_creator": "Créateur",
