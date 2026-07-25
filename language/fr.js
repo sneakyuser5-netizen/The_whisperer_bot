@@ -1,6 +1,7 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
+    language: "Changer la langue du bot. Ex: .language fr"
     gstatus: "Afficher le statut des fonctionnalités du groupe.",
 //language: "Changer la langue du bot. Ex: .language fr"
     "owner.language_usage":
