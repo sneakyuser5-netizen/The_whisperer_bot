@@ -1,11 +1,11 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
-    "language": "Changer la langue du bot. Ex: .language fr"
+    "language": "Changer la langue du bot. Ex: .language fr",  // <- ajoute la virgule
     "gstatus": "Afficher le statut des fonctionnalités du groupe.",
-//language: "Changer la langue du bot. Ex: .language fr"
     "owner.language_usage":
 "Utilisation :\n.language en\n.language fr",
+    // ... le reste
     "info.bot_title": "🤖 WhisperBot",
 "info.bot_creator": "Créateur",
 "info.bot_owner": "Propriétaire du bot",
