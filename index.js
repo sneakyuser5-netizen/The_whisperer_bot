@@ -23,6 +23,12 @@ async function startBot() {
         console.log("BAILEYS VERSION:", require("@whiskeysockets/baileys/package.json").version);
         const baileys = require("@whiskeysockets/baileys");
 
+const {
+    default: makeWASocket,
+    useMultiFileAuthState,
+    DisconnectReason
+} = baileys;
+
 console.log(Object.keys(baileys));
         console.log(
     Object.keys(
