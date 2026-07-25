@@ -18,7 +18,7 @@ module.exports = {
   "autorecording_enabled": "Auto Recording enabled",
   "autorecording_disabled": "Auto Recording disabled",
   "autorecording_note": "I will now show 🎙️ Recording when you message me"
-    }
+    },
     "info.repo_title": "📦 BOT REPOSITORY",
 "info.repo_project": "Project:",
 "info.repo_owner": "Owner:",
