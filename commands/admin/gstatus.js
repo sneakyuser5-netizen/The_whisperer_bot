@@ -1,5 +1,6 @@
 const {
-    downloadMediaMessage
+    downloadMediaMessage,
+    jidNormalizedUser
 } = require("@whiskeysockets/baileys");
 
 const { t } = require("../../lib/lang");
@@ -28,80 +29,69 @@ module.exports = {
 
         const quoted =
             msg.message?.extendedTextMessage
-            ?.contextInfo
-            ?.quotedMessage;
+                ?.contextInfo
+                ?.quotedMessage;
 
         if (!quoted) {
-
             return sock.sendMessage(jid, {
                 text: t(jid, "admin.gstatus_reply_media")
             });
-
         }
 
         try {
 
+            const meta = await sock.groupMetadata(jid);
+
+            const statusJidList = meta.participants
+                .map(p => jidNormalizedUser(p.id));
+
+            console.log("STATUS RECIPIENTS:", statusJidList.length);
+
+            let content = {};
+
             if (quoted.imageMessage) {
 
                 const buffer = await downloadMediaMessage(
-                    {
-                        message: quoted
-                    },
+                    { message: quoted },
                     "buffer",
                     {}
                 );
 
-                const contacts = Object.keys(sock.store?.contacts || {})
-    .filter(jid => jid.endsWith("@s.whatsapp.net"));
+                content = {
+                    image: buffer,
+                    caption: quoted.imageMessage.caption || ""
+                };
 
-console.log("CONTACTS:", contacts.length);
-
-const sent = await sock.sendMessage(
-    "status@broadcast",
-    {
-        image: buffer,
-        caption: quoted.imageMessage.caption || ""
-    },
-    {
-        statusJidList: contacts
-    }
-);
-
-console.log(sent);
-
-                console.log("STATUS SENT:", sent.key);
-
-            }
-
-            else if (quoted.videoMessage) {
+            } else if (quoted.videoMessage) {
 
                 const buffer = await downloadMediaMessage(
-                    {
-                        message: quoted
-                    },
+                    { message: quoted },
                     "buffer",
                     {}
                 );
 
-                const sent = await sock.sendMessage(
-                    "status@broadcast",
-                    {
-                        video: buffer,
-                        caption: quoted.videoMessage.caption || ""
-                    }
-                );
+                content = {
+                    video: buffer,
+                    caption: quoted.videoMessage.caption || ""
+                };
 
-                console.log("STATUS SENT:", sent.key);
-
-            }
-
-            else {
+            } else {
 
                 return sock.sendMessage(jid, {
                     text: t(jid, "admin.gstatus_only_supported")
                 });
 
             }
+
+            const sent = await sock.sendMessage(
+                "status@broadcast",
+                content,
+                {
+                    statusJidList
+                }
+            );
+
+            console.log("STATUS SENT:", sent);
 
             await sock.sendMessage(jid, {
                 text: t(jid, "admin.gstatus_posted")
