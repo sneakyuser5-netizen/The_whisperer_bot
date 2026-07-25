@@ -252,6 +252,15 @@ Made with ❤️ by
 // Save every incoming message
 //if (msg.message && !msg.key.fromMe) {
     //messageCache.save(msg);
+            // AUTO RECORDING ON RECEIVE
+try {
+    const config = settings.get("global");
+    if (config.autorecording &&!msg.key.fromMe) {
+        await sock.sendPresenceUpdate("recording", msg.key.remoteJid);
+    }
+} catch (err) {
+    console.log("AUTO RECORD ERROR:", err);
+}
 //}
             const identity = require("./lib/identity");
             const afk = require("./lib/afk");
