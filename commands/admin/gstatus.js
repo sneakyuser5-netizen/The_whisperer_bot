@@ -1,7 +1,9 @@
 const {
-    downloadMediaMessage
+    downloadMediaMessage,
+    jidNormalizedUser
 } = require("@whiskeysockets/baileys");
 
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -19,106 +21,88 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
-
 
         const quoted =
             msg.message?.extendedTextMessage
-            ?.contextInfo
-            ?.quotedMessage;
-
+                ?.contextInfo
+                ?.quotedMessage;
 
         if (!quoted) {
-
             return sock.sendMessage(jid, {
-                text: "❌ Reply to a photo or video."
+                text: t(jid, "admin.gstatus_reply_media")
             });
-
         }
 
-
         try {
+
+            const meta = await sock.groupMetadata(jid);
+
+            const statusJidList = meta.participants
+                .map(p => jidNormalizedUser(p.id));
+
+            console.log("STATUS RECIPIENTS:", statusJidList.length);
+
+            let content = {};
 
             if (quoted.imageMessage) {
 
                 const buffer = await downloadMediaMessage(
-                    {
-                        message: quoted
-                    },
+                    { message: quoted },
                     "buffer",
                     {}
                 );
-                console.log("SENDING STATUS NOW");
 
+                content = {
+                    image: buffer,
+                    caption: quoted.imageMessage.caption || ""
+                };
 
-                const sent = await sock.sendMessage(
-    "status@broadcast",
-    {
-        image: buffer,
-        caption: quoted.imageMessage.caption || ""
-    }
-);
-
-console.log("STATUS SENT:", sent.key);
-
-console.log("STATUS SENT:", sent);
-
-            }
-
-
-            else if (quoted.videoMessage) {
+            } else if (quoted.videoMessage) {
 
                 const buffer = await downloadMediaMessage(
-                    {
-                        message: quoted
-                    },
+                    { message: quoted },
                     "buffer",
                     {}
                 );
-                console.log("SENDING STATUS NOW");
-            
 
+                content = {
+                    video: buffer,
+                    caption: quoted.videoMessage.caption || ""
+                };
 
-                const sent = await sock.sendMessage(
-    "status@broadcast",
-    {
-        video: buffer,
-        caption: quoted.videoMessage.caption || ""
-    }
-);
-
-console.log("STATUS SENT:", sent.key);
-
-console.log("STATUS SENT:", sent);
-
-            }
-
-
-            else {
+            } else {
 
                 return sock.sendMessage(jid, {
-                    text: "❌ Only photos and videos are supported."
+                    text: t(jid, "admin.gstatus_only_supported")
                 });
 
             }
 
+            const sent = await sock.sendMessage(
+                "status@broadcast",
+                content,
+                {
+                    statusJidList
+                }
+            );
+
+            console.log("STATUS SENT:", sent);
 
             await sock.sendMessage(jid, {
-                text: "✅ Posted to WhatsApp status."
+                text: t(jid, "admin.gstatus_posted")
             });
-
 
         } catch (err) {
 
             console.log("GSTATUS ERROR:", err);
 
             await sock.sendMessage(jid, {
-                text: "❌ Failed to post status."
+                text: t(jid, "admin.gstatus_failed")
             });
 
         }

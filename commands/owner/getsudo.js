@@ -1,5 +1,7 @@
 const sudo = require("../../lib/sudo");
 const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "getsudo",
@@ -12,42 +14,40 @@ module.exports = {
 
     execute: async (sock, msg) => {
 
-    const jid = msg.key.remoteJid;
+        const jid = msg.key.remoteJid;
 
-    const owner =
-        identity.getBotOwner();
+        const owner =
+            identity.getBotOwner();
 
-    const users =
-        sudo.all(owner);
+        const users =
+            sudo.all(owner);
 
-    if (!users.length) {
+        if (!users.length) {
 
-        return sock.sendMessage(jid, {
-            text:
-`😂 You don't have any sudo members yet.
+            return sock.sendMessage(jid, {
+                text: t("owner.getsudo_empty")
+            });
 
-Use *.setsudo* by replying to someone's message.`
+        }
+
+        let text =
+`${t("owner.getsudo_title")}
+
+`;
+
+        for (const user of users) {
+
+            text += `• @${user}\n`;
+
+        }
+
+        await sock.sendMessage(jid, {
+            text,
+            mentions: users.map(
+                u => `${u}@lid`
+            )
         });
 
     }
 
-    let text =
-`👑 *Your Sudo Members*
-
-`;
-
-    for (const user of users) {
-
-        text += `• @${user}\n`;
-
-    }
-
-    await sock.sendMessage(jid, {
-        text,
-        mentions: users.map(
-            u => `${u}@lid`
-        )
-    });
- }
 };
-        

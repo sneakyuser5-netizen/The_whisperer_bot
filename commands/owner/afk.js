@@ -1,5 +1,6 @@
 const afk = require("../../lib/afk");
 const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -18,23 +19,20 @@ module.exports = {
         const sender = identity.getSender(msg);
 
         const reason =
-
             args.join(" ") ||
-
-            "No reason given.";
+            t("owner.afk_no_reason");
 
         afk.set(sender, reason);
 
         await sock.sendMessage(jid, {
 
             text:
+`${t("owner.afk_set")}
 
-`😴 You're now AFK.
-
-📝 Reason:
+📝 ${t("owner.reason")}
 ${reason}
 
-😂 I'll let everyone know you're pretending to be busy.`
+😂 ${t("owner.afk_footer")}`
 
         });
 

@@ -1,4 +1,5 @@
 const read = require("../../lib/read");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -19,21 +20,21 @@ module.exports = {
         if (!["on", "off"].includes(option)) {
 
             return sock.sendMessage(jid, {
-                text: "Usage:\n.read on\n.read off"
+                text: t("owner.read_usage")
             });
 
         }
 
         read.set(
-            msg.key.participant || jid,
-            option === "on"
-        );
+    "global",
+    option === "on"
+);
 
         await sock.sendMessage(jid, {
             text:
                 option === "on"
-                ? "✅ Auto read enabled."
-                : "✅ Auto read disabled."
+                    ? t("owner.read_enabled")
+                    : t("owner.read_disabled")
         });
 
     }

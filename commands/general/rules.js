@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -10,49 +11,38 @@ module.exports = {
 
     usage: ".rules",
 
-
     execute: async (sock, msg) => {
 
-        const jid =
-            msg.key.remoteJid;
-
+        const jid = msg.key.remoteJid;
 
         if (!jid.endsWith("@g.us")) {
 
             return sock.sendMessage(jid, {
-                text:
-                "❌ This command only works in groups."
+                text: t("admin.only_groups")
             });
 
         }
 
-
-        const data =
-            settings.get(jid);
-
+        const data = settings.get(jid);
 
         if (!data.rules) {
 
             return sock.sendMessage(jid, {
 
-                text:
-`📜 No rules have been set yet.
-
-😂 The group is currently running on vibes only.`
+                text: t("general.rules_none")
 
             });
 
         }
 
-
         await sock.sendMessage(jid, {
 
             text:
-`📜 Group Rules:
+`${t("general.rules_title")}
 
 ${data.rules}
 
-😂 Follow the rules and stay out of moderator trouble.`
+${t("general.rules_footer")}`
 
         });
 

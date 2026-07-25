@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -21,12 +22,7 @@ module.exports = {
         );
 
         await sock.sendMessage(jid, {
-            text:
-`🔒 *PRIVATE MODE ENABLED*
-
-😂 The boss locked the doors.
-
-Only the owner and sudo members can use me now.`
+            text: t("owner.private_enabled")
         });
 
     }
