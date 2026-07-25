@@ -1,5 +1,5 @@
-const { t } = require("../../lib/lang");
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang"); // <-- added back
 
 module.exports = {
     name: "autorecording",
@@ -8,25 +8,22 @@ module.exports = {
     permission: "owner",
     usage: ".autorecording on/off",
 
-    execute: async (sock, msg) => {
+    execute: async (sock, msg, args = []) => {
         const jid = msg.key.remoteJid;
 
-        // GET ARGS FROM MESSAGE DIRECTLY
-        const body = (msg.message?.conversation || msg.message?.extendedTextMessage?.text || "").trim();
-        const args = body.split(/ +/).slice(1); // removes.autorecording
         const option = args[0]?.toLowerCase();
+        const current = settings.get("global").autorecording? t("owner.on") : t("owner.off");
 
-        const current = settings.get("global").autorecording? "ON" : "OFF";
-
+        // If no arg was given, just show status
         if (!option) {
             return sock.sendMessage(jid, {
-                text: `*Usage:*.autorecording on\n*Usage:*.autorecording off\nCurrent: ${current}`
+                text: `${t("owner.autorecording_status")} ${current}\n\n${t("usage")}:.autorecording on\n${t("usage")}:.autorecording off`
             });
         }
 
         if (!["on", "off"].includes(option)) {
             return sock.sendMessage(jid, {
-                text: `Invalid option. Use on/off\nCurrent: ${current}`
+                text: `${t("owner.invalid_option")} "${option}"\n${t("owner.use_on_off")}\n${t("owner.current")}: ${current}`
             });
         }
 
@@ -34,8 +31,8 @@ module.exports = {
 
         await sock.sendMessage(jid, {
             text: option === "on"
-               ? `✅ Auto Recording: *ON*`
-                : `❌ Auto Recording: *OFF*`
+              ? `✅ ${t("owner.autorecording_enabled")}`
+                : `❌ ${t("owner.autorecording_disabled")}`
         });
     }
 };
