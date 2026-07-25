@@ -221,12 +221,38 @@ Made with ❤️ by
         sock.ev.on("messages.upsert", async ({ messages }) => {
 
     const msg = messages[0];
-            const messageCache = require("./lib/messageCache");
+    if (!msg.message) return; // add this first
+
+    // ===== GLOBAL AUTO READ START =====
+    try {
+        const fs = require("fs");
+        const readPath = "./database/read.json";
+
+        if (fs.existsSync(readPath)) {
+            const readDB = JSON.parse(fs.readFileSync(readPath));
+            if (readDB.global) {
+                await sock.readMessages([msg.key]); // marks blue ticks
+            }
+        }
+    } catch (err) {
+        console.log("AUTO READ ERROR:", err);
+    }
+    // ===== GLOBAL AUTO READ END =====
+
+    const messageCache = require("./lib/messageCache");
+    // Save every incoming message
+    if (msg.message &&!msg.key.fromMe) {
+        messageCache.save(msg);
+    }
+        //sock.ev.on("messages.upsert", async ({ messages }) => {
+
+    //const msg = messages[0];
+           // const messageCache = require("./lib/messageCache");
 
 // Save every incoming message
-if (msg.message && !msg.key.fromMe) {
-    messageCache.save(msg);
-}
+//if (msg.message && !msg.key.fromMe) {
+    //messageCache.save(msg);
+//}
             const identity = require("./lib/identity");
             const afk = require("./lib/afk");
             const botId = sock.user.id.split(":")[0];
