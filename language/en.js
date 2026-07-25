@@ -1,6 +1,10 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
+    "gstatus": "Show the status of all group features.",
+"language": "Change the bot language. Ex: .language en",
+"pp": "Change the bot profile picture. Reply to an image.",
+"vv": "View 'View Once' media without opening it.",
     "owner.language_usage":
 "Usage:\n.language en\n.language fr",
     "info.repo_title": "📦 BOT REPOSITORY",
