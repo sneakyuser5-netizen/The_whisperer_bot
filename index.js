@@ -1,3 +1,10 @@
+const baileys = require("@whiskeysockets/baileys");
+
+const {
+    default: makeWASocket,
+    useMultiFileAuthState,
+    DisconnectReason
+} = baileys;
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require("@whiskeysockets/baileys");
 const pino = require("pino");
 const fs = require("fs");
@@ -16,25 +23,14 @@ async function startBot() {
     const { state, saveCreds } = await useMultiFileAuthState("./session");
 
         const sock = makeWASocket({
-            auth: state,
-            printQRInTerminal: false,
-            logger: pino({ level: "silent" })
-        });
-        console.log("BAILEYS VERSION:", require("@whiskeysockets/baileys/package.json").version);
-        const baileys = require("@whiskeysockets/baileys");
+    auth: state,
+    printQRInTerminal: false,
+    logger: pino({ level: "silent" })
+});
 
-const {
-    default: makeWASocket,
-    useMultiFileAuthState,
-    DisconnectReason
-} = baileys;
-
+console.log("BAILEYS VERSION:", require("@whiskeysockets/baileys/package.json").version);
 console.log(Object.keys(baileys));
-        console.log(
-    Object.keys(
-        require("@whiskeysockets/baileys")
-    )
-);
+console.log(Object.keys(baileys));
         global.sock = sock;
 
 const originalSendMessage = sock.sendMessage.bind(sock);
