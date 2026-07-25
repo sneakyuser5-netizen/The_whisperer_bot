@@ -1,4 +1,5 @@
 const os = require("os");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -11,15 +12,15 @@ module.exports = {
     execute: async (sock, msg) => {
 
         const text =
-`🖥️ Server Information
+`${t("general.server_title")}
 
-Platform: ${os.platform()}
+${t("general.server_platform")}: ${os.platform()}
 
-Architecture: ${os.arch()}
+${t("general.server_architecture")}: ${os.arch()}
 
-CPU Cores: ${os.cpus().length}
+${t("general.server_cpu")}: ${os.cpus().length}
 
-Hostname: ${os.hostname()}`;
+${t("general.server_hostname")}: ${os.hostname()}`;
 
         await sock.sendMessage(msg.key.remoteJid, {
             text

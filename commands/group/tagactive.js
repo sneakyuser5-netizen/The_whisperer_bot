@@ -1,4 +1,5 @@
 const activity = require("../../lib/activity");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -18,20 +19,15 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("admin.only_groups")
             });
         }
 
-        const minutes = Math.max(
-            parseInt(args[0]) || 30,
-            1
-        );
+        const minutes = Math.max(parseInt(args[0]) || 30, 1);
 
-        const cutoff =
-            Date.now() - (minutes * 60 * 1000);
+        const cutoff = Date.now() - (minutes * 60 * 1000);
 
-        const metadata =
-            await sock.groupMetadata(jid);
+        const metadata = await sock.groupMetadata(jid);
 
         const active = [];
 
@@ -39,23 +35,20 @@ module.exports = {
 
             const id = member.id;
 
-            const last =
-                activity.get(jid, id);
+            const last = activity.get(jid, id);
 
             if (last < cutoff) continue;
 
-            active.push({
-                id,
-                last
-            });
+            active.push({ id, last });
 
         }
 
         if (!active.length) {
 
             return sock.sendMessage(jid, {
-                text:
-`😴 Nobody has spoken in the last ${minutes} minute${minutes === 1 ? "" : "s"}.`
+                text: t("group.tagactive_none")
+                    .replace("{minutes}", minutes)
+                    .replace("{plural}", minutes === 1 ? "" : "s")
             });
 
         }
@@ -63,11 +56,12 @@ module.exports = {
         active.sort((a, b) => b.last - a.last);
 
         let text =
-`📢 Active Members
+`${t("group.tagactive_title")}
 
-🕒 Last ${minutes} minute${minutes === 1 ? "" : "s"}
+${t("group.tagactive_last")}
+${minutes} ${t("group.tagactive_minutes")}${minutes === 1 ? "" : "s"}
 
-👥 Total: ${active.length}
+${t("group.tagactive_total")}: ${active.length}
 
 `;
 
@@ -81,7 +75,7 @@ module.exports = {
 
         });
 
-        text += "\n🔥 These members have been active recently.";
+        text += `\n${t("group.tagactive_footer")}`;
 
         await sock.sendMessage(jid, {
             text,

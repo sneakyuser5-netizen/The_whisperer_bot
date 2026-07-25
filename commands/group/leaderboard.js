@@ -1,5 +1,6 @@
 const activity = require("../../lib/activity");
 const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -17,7 +18,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t("admin.only_groups")
             });
         }
 
@@ -26,20 +27,21 @@ module.exports = {
 
         if (!board.length) {
             return sock.sendMessage(jid, {
-                text: "📭 No activity has been recorded yet."
+                text: t("group.leaderboard_empty")
             });
         }
 
         const top = board.slice(0, 10);
+
         const totalMessages = board.reduce(
-    (sum, [, data]) => sum + data.messages,
-    0
-);
+            (sum, [, data]) => sum + data.messages,
+            0
+        );
 
         let text =
-`🏆 Group Leaderboard
+`${t("group.leaderboard_title")}
 
-👥 Top ${top.length} Most Active Members
+${t("group.leaderboard_subtitle").replace("{count}", top.length)}
 
 `;
 
@@ -48,12 +50,12 @@ module.exports = {
         top.forEach(([user, data], index) => {
 
             const member = metadata.participants.find(
-    p => identity.normalize(p.id) === user
-);
+                p => identity.normalize(p.id) === user
+            );
 
-if (member) {
-    mentions.push(member.id);
-}
+            if (member) {
+                mentions.push(member.id);
+            }
 
             const medal =
                 index === 0 ? "🥇" :
@@ -62,15 +64,16 @@ if (member) {
                 `${index + 1}.`;
 
             const percent = totalMessages
-    ? ((data.messages / totalMessages) * 100).toFixed(1)
-    : "0.0";
+                ? ((data.messages / totalMessages) * 100).toFixed(1)
+                : "0.0";
 
-text +=
-`${medal} @${user} — ${data.messages} messages (${percent}%)\n`;
+            text += `${medal} @${user} — ${t("group.leaderboard_messages")
+                .replace("{count}", data.messages)
+                .replace("{percent}", percent)}\n`;
 
         });
 
-        text += "\n😂 Keep chatting to climb the rankings!";
+        text += `\n${t("group.leaderboard_footer")}`;
 
         await sock.sendMessage(jid, {
             text,

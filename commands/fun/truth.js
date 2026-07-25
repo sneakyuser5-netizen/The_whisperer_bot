@@ -1,3 +1,5 @@
+const { t } = require("../../lib/lang");
+
 module.exports = {
 
     name: "truth",
@@ -12,37 +14,26 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-
         const truths = [
-
-            "😂 What is your most embarrassing moment?",
-
-            "😏 Who was your first crush?",
-
-            "🤣 What is the weirdest thing you have searched online?",
-
-            "👀 What secret have you never told anyone?",
-
-            "😂 What is your biggest fear?",
-
-            "😎 What is one thing you regret doing?",
-
-            "🔥 Who in this group makes you laugh the most?"
-
+            t(jid, "fun.truth_1"),
+            t(jid, "fun.truth_2"),
+            t(jid, "fun.truth_3"),
+            t(jid, "fun.truth_4"),
+            t(jid, "fun.truth_5"),
+            t(jid, "fun.truth_6"),
+            t(jid, "fun.truth_7")
         ];
-
 
         const truth =
             truths[Math.floor(Math.random() * truths.length)];
 
-
         await sock.sendMessage(jid, {
             text:
-`😈 TRUTH TIME
+`${t(jid, "fun.truth_title")}
 
 ${truth}
 
-Answer honestly... or the bot will know 😂`
+${t(jid, "fun.truth_footer")}`
         });
 
     }

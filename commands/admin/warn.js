@@ -1,6 +1,7 @@
 const warns = require("../../lib/warns");
 const mute = require("../../lib/mute");
 const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -19,11 +20,10 @@ module.exports = {
         if (!jid.endsWith("@g.us")) {
 
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
 
         }
-
 
         const context =
             msg.message?.extendedTextMessage?.contextInfo;
@@ -38,36 +38,33 @@ module.exports = {
         if (!target) {
 
             return sock.sendMessage(jid, {
-                text:
-"❌ Reply to a user or mention them.\n\nExample:\n.warn @user"
+                text: t(jid, "admin.warn_usage")
             });
 
         }
 
-
         target =
             identity.normalize(target);
 
-const mention =
-    context?.mentionedJid?.[0] ||
-    context?.participant;
+        const mention =
+            context?.mentionedJid?.[0] ||
+            context?.participant;
 
-const count =
-    warns.add(jid, target, mention);
+        const count =
+            warns.add(jid, target, mention);
 
         await sock.sendMessage(jid, {
 
             text:
-`⚠️ Warning issued
+`${t(jid, "admin.warn_issued")}
 
-User: @${target}
+${t(jid, "admin.warnings_user")} @${target}
 
-Warnings: ${count}/5`,
+${t(jid, "admin.warnings_count")} ${count}/5`,
 
-            mentions: [context?.mentionedJid?.[0] || context?.participant]
+            mentions: [mention]
 
         });
-
 
         // 3 warns → mute
         if (count === 3) {
@@ -81,19 +78,13 @@ Warnings: ${count}/5`,
             return sock.sendMessage(jid, {
 
                 text:
-`🔇 @${target} has been automatically muted for 30 minutes.
+`🔇 @${target} ${t(jid, "admin.warn_auto_muted")}`,
 
-😂 Time to cool off a little.`,
-
-                mentions: [
-                    context?.mentionedJid?.[0] ||
-                    context?.participant
-                ]
+                mentions: [mention]
 
             });
 
         }
-
 
         // 4 warns
         if (count === 4) {
@@ -101,19 +92,13 @@ Warnings: ${count}/5`,
             return sock.sendMessage(jid, {
 
                 text:
-`⚠️ Final warning for @${target}.
+`⚠️ ${t(jid, "admin.warn_final")} @${target}.\n\n${t(jid, "admin.warn_last_chance")}`,
 
-🚨 One more warning and WhisperBot will remove you.`,
-
-                mentions: [
-                    context?.mentionedJid?.[0] ||
-                    context?.participant
-                ]
+                mentions: [mention]
 
             });
 
         }
-
 
         // 5 warns → kick
         if (count >= 5) {
@@ -121,23 +106,15 @@ Warnings: ${count}/5`,
             await sock.sendMessage(jid, {
 
                 text:
-`👢 @${target} reached the maximum warnings.
+`👢 @${target} ${t(jid, "admin.warn_kick")}`,
 
-😂 WhisperBot has escorted them to the exit.`,
-
-                mentions: [
-                    context?.mentionedJid?.[0] ||
-                    context?.participant
-                ]
+                mentions: [mention]
 
             });
 
             await sock.groupParticipantsUpdate(
                 jid,
-                [
-                    context?.mentionedJid?.[0] ||
-                    context?.participant
-                ],
+                [mention],
                 "remove"
             );
 

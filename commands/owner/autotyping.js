@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -18,19 +19,13 @@ module.exports = {
 
         const option = args[0]?.toLowerCase();
 
-
         if (!["on", "off"].includes(option)) {
 
             return sock.sendMessage(jid, {
-                text:
-`😂 Use it properly:
-
-.autotyping on
-.autotyping off`
+                text: t("owner.autotyping_usage")
             });
 
         }
-
 
         settings.set(
             "global",
@@ -38,14 +33,11 @@ module.exports = {
             option === "on"
         );
 
-
         await sock.sendMessage(jid, {
             text:
-option === "on"
-?
-"⌨️ Auto typing enabled.\n\nNow I will pretend I'm thinking 😂"
-:
-"✅ Auto typing disabled."
+                option === "on"
+                    ? t("owner.autotyping_enabled")
+                    : t("owner.autotyping_disabled")
         });
 
     }

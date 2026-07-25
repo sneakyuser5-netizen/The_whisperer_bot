@@ -1,5 +1,6 @@
 const warns = require("../../lib/warns");
 const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
 module.exports = {
 
     name: "resetwarn",
@@ -18,7 +19,7 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: "❌ This command only works in groups."
+                text: t(jid, "admin.only_groups")
             });
         }
 
@@ -32,7 +33,7 @@ module.exports = {
 
         if (!target) {
             return sock.sendMessage(jid, {
-                text: "❌ Reply to a user or mention them."
+                text: t(jid, "admin.resetwarn_usage")
             });
         }
 
@@ -41,10 +42,7 @@ const user = identity.normalize(target);
 warns.reset(jid, user);
         await sock.sendMessage(jid, {
             text:
-`✅ Warnings reset.
-
-User: @${target.split("@")[0]}
-Warnings: 0/5`,
+`${t(jid, "admin.resetwarn_success")}\n\nUser: @${target.split("@")[0]}\nWarnings: 0/5`,
             mentions: [target]
         });
 

@@ -1,4 +1,6 @@
 const sudo = require("../../lib/sudo");
+const identity = require("../../lib/identity");
+const { t } = require("../../lib/lang");
 
 module.exports = {
 
@@ -17,28 +19,31 @@ module.exports = {
         const context =
             msg.message?.extendedTextMessage?.contextInfo;
 
-        let target =
+        const target =
             context?.mentionedJid?.[0] ||
             context?.participant;
 
         if (!target) {
 
             return sock.sendMessage(jid, {
-                text: "❌ Reply to or mention a user."
+                text: t("owner.delsudo_usage")
             });
 
         }
 
+        const id = identity.normalize(target);
+
         sudo.remove(
-    identity.getBotOwner(),
-    id
-);
+            identity.getBotOwner(),
+            id
+        );
 
         await sock.sendMessage(jid, {
             text:
-`✅ Sudo removed
+`${t("owner.delsudo_success")}
 
-User: @${target.split("@")[0]}`,
+${t("owner.user")}
+@${target.split("@")[0]}`,
             mentions: [target]
         });
 
