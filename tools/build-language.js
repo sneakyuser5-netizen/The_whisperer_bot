@@ -1,170 +1,61 @@
-const fs = require("fs");
-const path = require("path");
-const dictionary = require("../language/dictionary");
-const dictionaryFile = path.join(
-    __dirname,
-    "../language/dictionary.js"
-);
-const dictionaryContent =
-    fs.readFileSync(dictionaryFile, "utf8");
-const missingEntries = [];
-const commandsDir = path.join(__dirname, "../commands");
-const output = [];
+const fs = require('fs');
+const path = require('path');
 
-function scan(dir) {
-    const files = fs.readdirSync(dir);
+const commandsPath = path.join(__dirname, '../commands');
+const dictPath = path.join(__dirname, '../language/dictionary.js');
+const outputEn = path.join(__dirname, '../language/generated-en.js');
+const outputFr = path.join(__dirname, '../language/generated-fr.js');
 
-    for (const file of files) {
-
-        const full = path.join(dir, file);
-
-        if (fs.statSync(full).isDirectory()) {
-            scan(full);
-            continue;
-        }
-
-        if (!file.endsWith(".js")) continue;
-
-        try {
-
-            delete require.cache[
-                require.resolve(full)
-            ];
-
-            const cmd = require(full);
-
-            if (!cmd.name) continue;
-
-            output.push({
-                name: cmd.name,
-                description:
-                    cmd.description || ""
-            });
-
-        } catch (err) {
-
-            console.log(
-                "Skipped:",
-                file
-            );
-
-        }
-
-    }
-
-}
-
-scan(commandsDir);
-
-output.sort((a, b) =>
-    a.name.localeCompare(b.name)
-);
-
-const en = [
-`module.exports = {
-    menu_title: "📌 WhisperBot Menu",
-    total_commands: "Total commands",
-`
-];
-
-const fr = [
-`module.exports = {
-    menu_title: "📌 Menu WhisperBot",
-    total_commands: "Nombre total de commandes",
-`
-];
+const dict = require(dictPath);
+let created = 0;
+let skipped = 0;
 const missing = [];
-for (const cmd of output) {
 
-    const text =
-        cmd.description
-            .replace(/"/g, '\\"');
-en.push(
-`    "${cmd.name}": "${text.replace(/"/g, '\\"')}",\n`
-);let french = dictionary[cmd.name];
-
-if (!french) {
-
-    missing.push(cmd.name);
-
-    missingEntries.push(
-`    ${cmd.name}:
-        "",`
-    );
-
-    french = text;
-
-}
-fr.push(
-`    "${cmd.name}": "${french.replace(/"/g, '\\"')}",\n`
-);
-}
-
-en.push("};\n");
-fr.push("};\n");
-fs.writeFileSync(
-    path.join(__dirname,
-    "../language/en.js"),
-    en.join("")
-);
-
-fs.writeFileSync(
-    path.join(__dirname,
-    "../language/fr.js"),
-    fr.join("")
-);
-console.log(
-`Done!
-
-Commands found: ${output.length}
-
-Created:
-
-language/generated-en.js
-language/generated-fr.js`
-);
-if (missing.length) {
-
-    console.log("\nMissing French translations:\n");
-
-    for (const name of missing) {
-        console.log("-", name);
+function getAllFiles(dir) {
+  let files = [];
+  fs.readdirSync(dir).forEach(file => {
+    const fullPath = path.join(dir, file);
+    if (fs.statSync(fullPath).isDirectory()) {
+      files = files.concat(getAllFiles(fullPath));
+    } else if (file.endsWith('.js')) {
+      files.push(fullPath);
     }
-
-    console.log(
-        `\nTotal missing: ${missing.length}`
-    );
-
-}
-if (missingEntries.length) {
-
-    console.log(
-        "\n━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    );
-
-    console.log(
-        "Paste these into language/dictionary.js:\n"
-    );
-
-    console.log(
-        missingEntries.join("\n")
-    );
-
-    console.log(
-        "\n━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    );
-
+  });
+  return files;
 }
 
-if (missingEntries.length) {
+const files = getAllFiles(commandsPath);
+const en = {};
+const fr = {};
 
-    console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━");
-    console.log("Missing dictionary entries:\n");
+files.forEach(file => {
+  try {
+    const content = fs.readFileSync(file, 'utf8');
+    const nameMatch = content.match(/name:\s*["']([^"']+)["']/);
+    if (!nameMatch) {
+      console.log(`Skipped: ${path.basename(file)} - no name export`);
+      skipped++;
+      return;
+    }
+    const name = nameMatch[1];
+    
+    if (dict[name]) {
+      fr[name] = dict[name];
+      en[name] = dict[name];
+      console.log(`Created: ${name}`);
+      created++;
+    } else {
+      console.log(`Skipped: ${path.basename(file)}`);
+      missing.push(name);
+      skipped++;
+    }
+  } catch (e) {
+    console.log(`Error in ${file}: ${e.message}`);
+  }
+});
 
-    console.log(
-        missingEntries.join("\n\n")
-    );
+fs.writeFileSync(outputEn, `module.exports = ${JSON.stringify(en, null, 2)};`);
+fs.writeFileSync(outputFr, `module.exports = ${JSON.stringify(fr, null, 2)};`);
 
-    console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━");
-
-}
+console.log(`\nDone!\n\nCommands found: ${files.length}\n\nCreated:\n${Object.keys(fr).length} commands`);
+if(missing.length > 0) console.log(`Missing French translations:\n${missing.join('\n')}`);
