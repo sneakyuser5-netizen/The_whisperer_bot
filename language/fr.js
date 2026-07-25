@@ -8,19 +8,15 @@ module.exports = {
     "pp": "Changer la photo de profil du bot. Répondez à une image.",
 "vv": "Voir les médias 'Voir une seule fois' sans les ouvrir.",
 "jid": "Afficher l'ID du chat ou de l'utilisateur.",
-    // ... le reste
-    "owner": {
-  "on": "ACTIVÉ",
-  "off": "DÉSACTIVÉ",
-  "current": "Actuel",
-  "usage": "Utilisation",
-  "use_on_off": "Utiliser on/off",
-  "invalid_option": "Option invalide",
-  "autorecording_status": "*Statut de l'enregistrement auto*",
-  "autorecording_enabled": "Enregistrement automatique activé",
-  "autorecording_disabled": "Enregistrement automatique désactivé",
-  "autorecording_note": "Je vais maintenant afficher 🎙️ Enregistrement quand vous m'envoyez un message"
-    },
+"owner.on": "ACTIVÉ",
+"owner.off": "DÉSACTIVÉ",
+"owner.current": "Actuel",
+"owner.usage": "Utilisation",
+"owner.use_on_off": "Utiliser on/off",
+"owner.invalid_option": "Option invalide",
+"owner.autorecording_status": "*Statut de l'enregistrement auto*",
+"owner.autorecording_enabled": "🎙️ Enregistrement automatique activé.\n\nJe prépare ma note vocale imaginaire 😂",
+"owner.autorecording_disabled": "✅ Enregistrement automatique désactivé.",
     
 "info.bot_creator": "Créateur",
 "info.bot_owner": "Propriétaire du bot",
