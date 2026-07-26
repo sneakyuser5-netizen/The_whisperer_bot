@@ -76,6 +76,14 @@ async function handleMessage(sock, msg) {
     const text =
         msg.message?.conversation ||
         msg.message?.extendedTextMessage?.text;
+      // ===== ADD THIS: GLOBAL AUTOTYPING =====
+    const isTypingOn = settings.get("global").autotyping;
+    if (isTypingOn) {
+        const jid = msg.key.remoteJid;
+        await sock.sendPresenceUpdate('composing', jid); // shows typing...
+        await new Promise(resolve => setTimeout(resolve, 2000)); // type for 2 seconds
+    }
+    
 // Save messages for purge command
 if (msg.key.remoteJid.endsWith("@g.us")) {
 
