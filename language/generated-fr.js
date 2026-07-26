@@ -63,7 +63,7 @@ module.exports = {
   "system": "Afficher les informations système.",
   "version": "Afficher la version du bot.",
   "afk": "Définir votre statut d'absence.",
-  "anticall": "Enable or disable automatic call rejection",
+  "anticall": "Activer ou désactiver le rejet automatique des appels",
   "autorecording": "Activer ou désactiver l'enregistrement automatique.",
   "autotyping": "Activer ou désactiver l'indicateur de saisie.",
   "delsudo": "Retirer un utilisateur sudo.",
