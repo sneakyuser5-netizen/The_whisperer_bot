@@ -51,7 +51,9 @@ module.exports = {
 "tools.say_usage": "Utilisation :\n.say Bonjour",
 
 "tools.echo_usage": "Utilisation :\n.echo Bonjour",
-
+"owner.anticall_enabled": "📵 Rejet automatique des appels activé.",
+"owner.anticall_disabled": "📞 Rejet automatique des appels désactivé.",
+"owner.anticall_usage": "Utilisation :\n.anticall on\n.anticall off",
 "tools.ping": "🏓 Pong !\nTemps de réponse :",
 
 "tools.test_success": "✅ Le nouveau plugin fonctionne !",

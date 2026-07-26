@@ -414,6 +414,29 @@ await handleMessage(
 
 });
 
+      sock.ev.on("call", async calls => {
+
+    const config = settings.get("global");
+
+    if (!config.anticall) return;
+
+    for (const call of calls) {
+
+        try {
+
+            await sock.rejectCall(call.id, call.from);
+
+            await sock.sendMessage(call.from, {
+                text: "📵 Calls are not accepted by this bot."
+            });
+
+        } catch (err) {
+            console.log("ANTICALL ERROR:", err);
+        }
+
+    }
+
+});
         setTimeout(async () => {
             try {
 

@@ -43,7 +43,9 @@ module.exports = {
 missing_argument: "❌ Missing argument.",
 usage: "Usage:",
 "tools.say_usage": "Usage:\n.say Hello",
-
+"owner.anticall_enabled": "📵 Anti-call enabled.",
+"owner.anticall_disabled": "📞 Anti-call disabled.",
+"owner.anticall_usage": "Usage:\n.anticall on\n.anticall off",
 "tools.echo_usage": "Usage:\n.echo Hello",
 
 "tools.ping": "🏓 Pong!\nResponse time:",
