@@ -18,7 +18,10 @@ module.exports = {
 "tools.whois_fromme": "From Me:",
 "tools.whois_group_name": "Group Name:",
 "tools.whois_members": "Members:",
-
+"admin.slowmode_enabled_prefix": "🐢 Slow mode enabled:",
+"admin.slowmode_wait": "Members must wait before sending another message.",
+"admin.slowmode_disabled": "✅ Slow mode disabled.",
+"admin.slowmode_usage": "Usage:\n.slowmode 10/off",
 "tools.vv_reply": "❌ Reply to a view once message.",
 "tools.vv_unsupported": "❌ Unsupported view once type.",
 "tools.vv_failed": "❌ Failed to retrieve view once media.",

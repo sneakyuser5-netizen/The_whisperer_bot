@@ -22,7 +22,10 @@ module.exports = {
 "tools.whois_fromme": "Envoyé par moi :",
 "tools.whois_group_name": "Nom du groupe :",
 "tools.whois_members": "Membres :",
-
+"admin.slowmode_enabled_prefix": "🐢 Mode lent activé :",
+"admin.slowmode_wait": "Les membres doivent attendre avant d'envoyer un autre message.",
+"admin.slowmode_disabled": "✅ Mode lent désactivé.",
+"admin.slowmode_usage": "Utilisation :\n.slowmode 10/off",
 "tools.vv_reply": "❌ Répondez à un message « Voir une fois ».",
 "tools.vv_unsupported": "❌ Type de message « Voir une fois » non pris en charge.",
 "tools.vv_failed": "❌ Impossible de récupérer le média « Voir une fois ».",

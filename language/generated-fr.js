@@ -67,6 +67,7 @@ module.exports = {
   "autotyping": "Activer ou désactiver l'indicateur de saisie.",
   "delsudo": "Retirer un utilisateur sudo.",
   "getsudo": "Afficher les utilisateurs sudo.",
+  "language": "Changer la langue du bot",
   "leave": "Quitter le groupe.",
   "online": "Afficher les membres en ligne.",
   "pp": "Modifier la photo de profil",
