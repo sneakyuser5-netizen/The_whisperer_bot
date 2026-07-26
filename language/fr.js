@@ -103,7 +103,8 @@ Seuls le propriétaire et les membres sudo peuvent désormais m'utiliser.`,
 "owner.setsudo_reply": "😂 Répondez d'abord au message de quelqu'un.\n\nJe ne peux pas promouvoir des personnes invisibles. 👻",
 "owner.setsudo_success": "✅ Nouveau membre Sudo ajouté ! 🛡️",
 "owner.setsudo_note": "peut maintenant contrôler le bot (ou presque 😏).",
-
+missing_argument: "❌ Argument manquant.",
+usage: "Utilisation :",
 "owner.secret_success": "👑 Accès propriétaire confirmé !",
 
 "owner.restart": "🔄 Redémarrage de WhisperBot...\n\n😂 Gardez mes circuits ensemble. Je reviens dans un instant !",

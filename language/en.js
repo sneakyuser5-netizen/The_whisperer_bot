@@ -38,10 +38,10 @@ module.exports = {
 "tools.vv_reply": "❌ Reply to a view once message.",
 "tools.vv_unsupported": "❌ Unsupported view once type.",
 "tools.vv_failed": "❌ Failed to retrieve view once media.",
-
 "yes": "Yes",
 "no": "No",
-
+missing_argument: "❌ Missing argument.",
+usage: "Usage:",
 "tools.say_usage": "Usage:\n.say Hello",
 
 "tools.echo_usage": "Usage:\n.echo Hello",
