@@ -9,13 +9,17 @@ module.exports = {
     permission: "public",
 
     execute: async (sock, msg) => {
-        const { t } = require("../../lib/lang");
 
-        const { commands } = require("../../handler.js");
+        const { t } = require("../../lib/lang");
+        const { commands } = require("../../handler");
 
         const jid = msg.key.remoteJid;
 
-let menu = `${t("menu_title")}\n`;
+        let menu =
+`╭━━━━━━━━━━━━━━━━━━━━━━╮
+┃      🤖 *WhisperBot*
+╰━━━━━━━━━━━━━━━━━━━━━━╯
+`;
 
         const categories = {};
 
@@ -30,32 +34,36 @@ let menu = `${t("menu_title")}\n`;
             }
 
             categories[category].push(command);
-        }
 
+        }
 
         for (const category in categories) {
 
-            menu += `\n📂 ${category.toUpperCase()}\n`;
+            menu += `
+
+╭───『 *${category.toUpperCase()}* 』───╮
+`;
 
             for (const command of categories[category]) {
 
-                menu += `• .${command.name}`;
+                menu += `│ ➤ *.${command.name}*\n`;
+                menu += `│    ${t(command.name)}\n`;
+                menu += "│\n";
 
-menu += `\n  ${t(command.name)}`;
-                menu += "\n";
             }
+
+            menu += "╰────────────────────╯\n";
+
         }
 
+        menu += `
 
-        menu +=
-`${t("total_commands")}: ${commands.size}`;
+📚 *${t("total_commands")}:* ${commands.size}`;
 
-        await sock.sendMessage(
-            msg.key.remoteJid,
-            {
-                text: menu
-            }
-        );
+        await sock.sendMessage(jid, {
+            text: menu
+        });
 
     }
+
 };
