@@ -1,6 +1,11 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
+    "admin.spam_detected": `🚨 Spam détecté !
+
+😂 {user}, tes doigts sont plus rapides que le bot.
+
+Ralentis avant que le groupe ne doive te mettre en pause.`,
     "owner.prefix_current": `Préfixe actuel : {prefix}
 
 Utilisation :
