@@ -12,49 +12,39 @@ module.exports = {
         const jid = msg.key.remoteJid;
 
         if (!jid.endsWith("@g.us")) {
-            return sock.sendMessage(jid, {
-                text: t("admin.only_groups")
-            });
+            return sock.sendMessage(jid, { text: t("admin.only_groups") });
         }
 
-        // ===== FIXED ADMIN CHECK =====
+        // ===== PROPER ADMIN CHECK =====
         const metadata = await sock.groupMetadata(jid);
-        const botId = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-        const botData = metadata.participants.find(p => p.id === botId || p.id.split(":")[0] + "@s.whatsapp.net" === botId);
+        const botNumber = sock.user.id.split(":")[0] + "@s.whatsapp.net";
 
-        if (!botData ||!botData.admin) {
-            return sock.sendMessage(jid, {
-                text: t("owner.permission_denied")
-            });
+        const botParticipant = metadata.participants.find(p => p.id === botNumber);
+
+        if (!botParticipant ||!["admin", "superadmin"].includes(botParticipant.admin)) {
+            console.log("Bot ID:", botNumber, "Admin status:", botParticipant?.admin); // for debug
+            return sock.sendMessage(jid, { text: t("owner.permission_denied") });
         }
-        // ===== END FIX =====
+        // ===== END =====
 
         const amount = Number(args[0]);
         if (isNaN(amount) || amount < 1 || amount > 100) {
-            return sock.sendMessage(jid, {
-                text: t("admin.purge_usage")
-            });
+            return sock.sendMessage(jid, { text: t("admin.purge_usage") });
         }
 
         const context = msg.message?.extendedTextMessage?.contextInfo;
         if (!context?.stanzaId) {
-            return sock.sendMessage(jid, {
-                text: t("admin.purge_reply")
-            });
+            return sock.sendMessage(jid, { text: t("admin.purge_reply") });
         }
 
         const messages = global.messageCache?.[jid];
         if (!messages) {
-            return sock.sendMessage(jid, {
-                text: t("admin.purge_no_history")
-            });
+            return sock.sendMessage(jid, { text: t("admin.purge_no_history") });
         }
 
         const index = messages.findIndex(m => m.key.id === context.stanzaId);
         if (index === -1) {
-            return sock.sendMessage(jid, {
-                text: t("admin.purge_not_found")
-            });
+            return sock.sendMessage(jid, { text: t("admin.purge_not_found") });
         }
 
         const selected = messages.slice(Math.max(0, index - amount + 1), index + 1);
