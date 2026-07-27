@@ -15,7 +15,7 @@ module.exports = {
             const current = settings.get(jid).prefix || ".";
             return sock.sendMessage(jid, {
                 text: t("owner.prefix_current")
-                    .replace("{prefix}", current)
+    .replaceAll("{prefix}", current)
             });
         }
 
@@ -37,7 +37,7 @@ module.exports = {
 
         return sock.sendMessage(jid, {
             text: t("owner.prefix_changed")
-                .replace("{prefix}", newPrefix)
+    .replaceAll("{prefix}", newPrefix)
         });
     }
 };
