@@ -18,22 +18,6 @@ module.exports = {
             });
         }
 
-        // Check bot admin
-        const metadata = await sock.groupMetadata(jid);
-
-        const bot = metadata.participants.find(
-            p => p.id === sock.user.id
-        );
-
-        if (
-            !bot ||
-            !["admin", "superadmin"].includes(bot.admin)
-        ) {
-            return sock.sendMessage(jid, {
-                text: t("bot_admin_only")
-            });
-        }
-
         const amount = Number(args[0]);
 
         if (
@@ -91,8 +75,13 @@ module.exports = {
                 await new Promise(resolve =>
                     setTimeout(resolve, 300)
                 );
-
             } catch {}
+        }
+
+        if (deleted === 0) {
+            return sock.sendMessage(jid, {
+                text: t("owner.permission_denied")
+            });
         }
 
         await sock.sendMessage(jid, {
