@@ -10,6 +10,7 @@ module.exports = {
         const groupSettings = settingsLib.get(jid);
         const fs = require("fs");
         const path = require("path");
+        const identity = require("../lib/identity");
 
         const settingsFile = path.join(__dirname, "../database/settings.json");
 
@@ -32,7 +33,7 @@ module.exports = {
                 return id === sender.split(":")[0];
             });
 
-            if (!member?.admin &&!member?.superadmin) { // FIX 1: check superadmin too
+            if (!member?.admin) {
                 await sock.sendMessage(jid, { delete: msg.key });
                 return sock.sendMessage(jid, {
                     text: "🚫 Stickers are currently locked."
@@ -52,26 +53,22 @@ module.exports = {
 
         try {
             const metadata = await sock.groupMetadata(jid);
-            const sender = msg.key.participant || msg.key.remoteJid;
+            const sender = identity.getSender(msg) + "@s.whatsapp.net";
 
             const member = metadata.participants.find(p => {
                 const id = (p.id || p.jid || "").split(":")[0];
                 return id === sender.split(":")[0];
             });
 
-            // FIX 1: Ignore admins and superadmins
-            if (member?.admin || member?.superadmin) return;
+            // Ignore admins and group owner
+          if (member?.admin) return;
 
             await sock.sendMessage(jid, { delete: msg.key });
 
-            // FIX 2: Force correct JID for mention
-            const mentionJid = sender.includes("@s.whatsapp.net")? sender : sender.split("@")[0] + "@s.whatsapp.net";
-            const name = mentionJid.split("@")[0];
-
             await sock.sendMessage(jid, {
-                text: `🚫 Anti-link activated!\n\n@${name}, links are not allowed here.`,
-                mentions: [mentionJid] // THIS makes it show name and ping
-            });
+    text: `🚫 Anti-link activated!\n\n@${sender.split("@")[0]}, links are not allowed here.`,
+    mentions: [sender]
+});
 
         } catch (err) {
             console.log("Anti-link error:", err);
