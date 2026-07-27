@@ -1,5 +1,4 @@
 const { t } = require("../../lib/lang");
-const { jidDecode } = require("@whiskeysockets/baileys");
 
 module.exports = {
     name: "purge",
@@ -10,59 +9,98 @@ module.exports = {
     minArgs: 1,
 
     execute: async (sock, msg, args) => {
+
         const jid = msg.key.remoteJid;
 
         if (!jid.endsWith("@g.us")) {
-            return sock.sendMessage(jid, { text: t("admin.only_groups") });
+            return sock.sendMessage(jid, {
+                text: t("admin.only_groups")
+            });
         }
 
-        // ===== PROPER ADMIN CHECK WITH JIDDECODE =====
+        // Check bot admin
         const metadata = await sock.groupMetadata(jid);
 
-        const botJid = jidDecode(sock.user.id).user + "@s.whatsapp.net";
-
-        const botParticipant = metadata.participants.find(p =>
-            jidDecode(p.id).user === jidDecode(botJid).user
+        const bot = metadata.participants.find(
+            p => p.id === sock.user.id
         );
 
-        if (!botParticipant ||!["admin", "superadmin"].includes(botParticipant.admin)) {
-            return sock.sendMessage(jid, { text: t("owner.permission_denied") });
+        if (
+            !bot ||
+            !["admin", "superadmin"].includes(bot.admin)
+        ) {
+            return sock.sendMessage(jid, {
+                text: t("bot_admin_only")
+            });
         }
-        // ===== END =====
 
         const amount = Number(args[0]);
-        if (isNaN(amount) || amount < 1 || amount > 100) {
-            return sock.sendMessage(jid, { text: t("admin.purge_usage") });
+
+        if (
+            isNaN(amount) ||
+            amount < 1 ||
+            amount > 100
+        ) {
+            return sock.sendMessage(jid, {
+                text: t("admin.purge_usage")
+            });
         }
 
-        const context = msg.message?.extendedTextMessage?.contextInfo;
+        const context =
+            msg.message?.extendedTextMessage?.contextInfo;
+
         if (!context?.stanzaId) {
-            return sock.sendMessage(jid, { text: t("admin.purge_reply") });
+            return sock.sendMessage(jid, {
+                text: t("admin.purge_reply")
+            });
         }
 
         const messages = global.messageCache?.[jid];
+
         if (!messages) {
-            return sock.sendMessage(jid, { text: t("admin.purge_no_history") });
+            return sock.sendMessage(jid, {
+                text: t("admin.purge_no_history")
+            });
         }
 
-        const index = messages.findIndex(m => m.key.id === context.stanzaId);
+        const index = messages.findIndex(
+            m => m.key.id === context.stanzaId
+        );
+
         if (index === -1) {
-            return sock.sendMessage(jid, { text: t("admin.purge_not_found") });
+            return sock.sendMessage(jid, {
+                text: t("admin.purge_not_found")
+            });
         }
 
-        const selected = messages.slice(Math.max(0, index - amount + 1), index + 1);
+        const selected = messages.slice(
+            Math.max(0, index - amount + 1),
+            index + 1
+        );
+
         let deleted = 0;
 
         for (const m of selected) {
             try {
-                await sock.sendMessage(jid, { delete: m.key });
+                await sock.sendMessage(jid, {
+                    delete: m.key
+                });
+
                 deleted++;
-                await new Promise(r => setTimeout(r, 300));
-            } catch (e) {}
+
+                await new Promise(resolve =>
+                    setTimeout(resolve, 300)
+                );
+
+            } catch {}
         }
 
         await sock.sendMessage(jid, {
-            text: `${t("admin.purge_deleted")} ${deleted} ${t("admin.purge_messages")}\n\n${t("admin.purge_finished")}`
+            text:
+`${t("admin.purge_deleted")} ${deleted} ${t("admin.purge_messages")}
+
+${t("admin.purge_finished")}`
         });
+
     }
 };
