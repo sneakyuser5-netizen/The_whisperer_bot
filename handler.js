@@ -60,9 +60,9 @@ async function handleMessage(sock, msg) {
     if (!text) return;
 
     const sender = msg.key.remoteJid;
-    const jid = msg.key.remoteJid; // only declare jid once here
+    const jid = msg.key.remoteJid;
     const groupSettings = settings.get(jid);
-    const prefix = groupSettings.prefix || "."; // only declare prefix once here
+    let prefix = groupSettings.prefix || "."; // let not const
 
     const identity = require("./lib/identity");
     identity.debug(msg);
@@ -78,6 +78,21 @@ async function handleMessage(sock, msg) {
     const mode = settings.get("global").mode || "private";
 
     let body = text.trim();
+
+    // ===== SPECIAL CASE:.prefix= BEFORE CHECKING PREFIX =====
+    if (body.startsWith(".prefix=") && isOwner) {
+        const newPrefix = body.split(".prefix=")[1]?.trim();
+        if (!newPrefix) {
+            return sock.sendMessage(jid, { text: t("prefix_current").replace("{prefix}", prefix) });
+        }
+        if (newPrefix.length > 3) return sock.sendMessage(jid, { text: t("prefix_too_long") });
+        if (newPrefix.includes(" ")) return sock.sendMessage(jid, { text: t("prefix_no_space") });
+
+        settings.set(jid, "prefix", newPrefix);
+        return sock.sendMessage(jid, { text: t("prefix_changed").replace("{prefix}", newPrefix) });
+    }
+    // ===== END SPECIAL CASE =====
+
     if (body.startsWith(prefix + " ")) {
         body = prefix + body.slice(prefix.length + 1);
     }
@@ -87,7 +102,6 @@ async function handleMessage(sock, msg) {
     const parts = body.split(/\s+/);
     const cmd = parts[0].slice(prefix.length).toLowerCase();
     const args = parts.slice(1);
-
     const command = commands.get(cmd);
     if (!command) return;
 
