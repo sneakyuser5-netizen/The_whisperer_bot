@@ -14,7 +14,7 @@ module.exports = {
         if (!args.length) {
             const current = settings.get(jid).prefix || ".";
             return sock.sendMessage(jid, {
-                text: t("prefix_current")
+                text: t("owner.prefix_current")
                     .replace("{prefix}", current)
             });
         }
@@ -23,20 +23,20 @@ module.exports = {
 
         if (newPrefix.length > 3) {
             return sock.sendMessage(jid, {
-                text: t("prefix_too_long")
+                text: t("owner.prefix_too_long")
             });
         }
 
         if (newPrefix.includes(" ")) {
             return sock.sendMessage(jid, {
-                text: t("prefix_no_space")
+                text: t("owner.prefix_no_space")
             });
         }
 
         settings.set(jid, "prefix", newPrefix);
 
         return sock.sendMessage(jid, {
-            text: t("prefix_changed")
+            text: t("owner.prefix_changed")
                 .replace("{prefix}", newPrefix)
         });
     }
