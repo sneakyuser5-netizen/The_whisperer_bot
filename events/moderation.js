@@ -53,7 +53,7 @@ module.exports = {
             if (now - last < delay * 1000) {
                 const remaining = Math.ceil((delay * 1000 - (now - last)) / 1000);
 
-<<<<<<< HEAD
+
 return sock.sendMessage(jid, {
     text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${sender.split("@")[0]}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
     mentions: [sender]
@@ -64,7 +64,7 @@ return sock.sendMessage(jid, {
     global.slowmode[key] = now;
 
 }
-=======
+
                 await sock.sendMessage(jid, { delete: msg.key });
 
                 const mentionJid = msg.key.participant || msg.key.remoteJid;
@@ -76,7 +76,7 @@ const name =
     contact.notify ||
     contact.verifiedName ||
     mentionJid.split("@")[0];
->>>>>>> 4c1500180ca30d3dbe6c3d4f5777362b26183a49
+
 
 return sock.sendMessage(jid, {
     text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${name}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
