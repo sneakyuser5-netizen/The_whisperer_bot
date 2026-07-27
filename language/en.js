@@ -11,6 +11,7 @@ module.exports = {
 "owner.off": "OFF",
 "owner.current": "Current",
 "owner.usage": "Usage",
+    "prefix_invalid": "❌ You cannot use 'prefix' as the prefix",
   "prefix_current": "Current prefix: {prefix}\n\nUsage:.prefix=!\nExample: {prefix}menu",
 "prefix_too_long": "❌ Prefix too long. Max 3 characters.",
 "prefix_no_space": "❌ Prefix cannot contain spaces.",
