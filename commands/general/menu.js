@@ -36,12 +36,24 @@ module.exports = {
             categories[category].push(command);
 
         }
+        const icons = {
+    admin: "👮",
+    group: "👥",
+    fun: "🎮",
+    general: "📖",
+    info: "ℹ️",
+    owner: "👑",
+    tools: "🛠",
+    other: "📦"
+};
 
         for (const category in categories) {
 
-            menu += `
+            const icon = icons[category] || "📦";
 
-╭───『 *${category.toUpperCase()}* 』───╮
+menu += `
+
+╭──『 ${icon} *${category.toUpperCase()}* (${categories[category].length}) 』──╮
 `;
 
             for (const command of categories[category]) {
