@@ -127,19 +127,11 @@ if (member?.admin) return;
                 delete: msg.key
             });
 
+return sock.sendMessage(jid, {
+    text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${sender.split("@")[0]}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
+    mentions: [sender]
+});
 
-            return sock.sendMessage(jid, {
-                text:
-`🐢 Slow down @${sender.split("@")[0]}!
-
-😂 The chat speed limit is ${delay}s.
-Wait ${remaining}s.`,
-                mentions: [sender]
-            });
-
-        }
-
-    }
 
 
     global.slowmode[key] = now;
