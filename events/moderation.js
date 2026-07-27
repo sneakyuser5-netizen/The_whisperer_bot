@@ -55,13 +55,20 @@ module.exports = {
 
                 await sock.sendMessage(jid, { delete: msg.key });
 
-                const mentionJid = sender; // this should be 2376xxxx@s.whatsapp.net
-                const name = mentionJid.split("@")[0];
+                const mentionJid = msg.key.participant || msg.key.remoteJid;
 
-                return sock.sendMessage(jid, {
-                    text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${name}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
-                    mentions: [mentionJid] // THIS makes it blue + ping
-                });
+const contact = sock.contacts?.[mentionJid] || {};
+
+const name =
+    contact.name ||
+    contact.notify ||
+    contact.verifiedName ||
+    mentionJid.split("@")[0];
+
+return sock.sendMessage(jid, {
+    text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${name}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
+    mentions: [mentionJid]
+});
             }
             global.slowmode[key] = now;
         } // <- ADDED THIS CLOSING BRACE
