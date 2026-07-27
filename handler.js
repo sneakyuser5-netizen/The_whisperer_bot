@@ -151,25 +151,28 @@ console.log({
 const mode =
     settings.get("global").mode || "private";
 
+const jid = msg.key.remoteJid;
+const groupSettings = settings.get(jid);
+const prefix = groupSettings.prefix || "."; // get custom prefix or default.
+
 let body = text.trim();
 
-if (body.startsWith(". ")) {
-    body = "." + body.slice(2);
+if (body.startsWith(prefix + " ")) {
+    body = prefix + body.slice(prefix.length + 1);
 }
 
 // Ignore messages without the prefix
-if (!body.startsWith(".")) {
+if (!body.startsWith(prefix)) {
     return;
 }
 
 const parts = body.split(/\s+/);
 
 const cmd = parts[0]
-    .slice(1) // Remove only the first character (the prefix)
-    .toLowerCase();
+   .slice(prefix.length) // Remove prefix length instead of 1
+   .toLowerCase();
 
 const args = parts.slice(1);
-
 const command = commands.get(cmd);
  
 if (!command) return;
