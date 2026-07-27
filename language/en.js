@@ -11,6 +11,8 @@ module.exports = {
 "owner.off": "OFF",
 "owner.current": "Current",
 "owner.usage": "Usage",
+    
+"anticall": "Enable or disable automatic call rejection.",
 "owner.use_on_off": "Use on/off",
 "owner.invalid_option": "Invalid option",
 "owner.autorecording_status": "*Auto Recording Status*",
