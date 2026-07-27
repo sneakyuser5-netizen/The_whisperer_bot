@@ -79,21 +79,7 @@ async function handleMessage(sock, msg) {
 
     let body = text.trim();
 
-    // ===== SPECIAL CASE: prefix= WORKS WITH ANY PREFIX =====
-    if ((body.startsWith(prefix + "prefix=") || body.startsWith(".prefix=")) && isOwner) {
-        const newPrefix = body.startsWith(prefix + "prefix=")
-           ? body.split("prefix=")[1]?.trim()
-            : body.split(".prefix=")[1]?.trim();
-        if (!newPrefix) {
-            return sock.sendMessage(jid, { text: t("prefix_current").replace("{prefix}", prefix) });
-        }
-        if (newPrefix.length > 3) return sock.sendMessage(jid, { text: t("prefix_too_long") });
-        if (newPrefix.includes(" ")) return sock.sendMessage(jid, { text: t("prefix_no_space") });
-
-        settings.set(jid, "prefix", newPrefix);
-        return sock.sendMessage(jid, { text: t("prefix_changed").replace("{prefix}", newPrefix) });
-    }
-    // ===== END SPECIAL CASE =====
+    
 
     if (body.startsWith(prefix + " ")) {
         body = prefix + body.slice(prefix.length + 1);
@@ -101,11 +87,21 @@ async function handleMessage(sock, msg) {
     if (!body.startsWith(prefix)) {
         return;
     }
-    const parts = body.split(/\s+/);
-    const cmd = parts[0].slice(prefix.length).toLowerCase();
-    const args = parts.slice(1);
-    const command = commands.get(cmd);
-    if (!command) return;
+    // Parse commands (.cmd arg) and (.cmd=arg)
+const content = body.slice(prefix.length).trim();
+
+const [commandPart, ...rest] = content.split(/\s+/);
+
+const [cmdName, inlineArg] = commandPart.split("=");
+
+const cmd = cmdName.toLowerCase();
+
+const args = inlineArg
+    ? [inlineArg, ...rest]
+    : rest;
+
+const command = commands.get(cmd);
+if (!command) return;
 
     if (command.cooldown) {
         const now = Date.now();
