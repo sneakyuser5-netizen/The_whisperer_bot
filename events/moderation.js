@@ -51,17 +51,19 @@ module.exports = {
             const last = global.slowmode[key] || 0;
 
             if (now - last < delay * 1000) {
-                const remaining = Math.ceil((delay * 1000 - (now - last)) / 1000);
+    const remaining = Math.ceil((delay * 1000 - (now - last)) / 1000);
 
-                await sock.sendMessage(jid, { delete: msg.key });
+    await sock.sendMessage(jid, { delete: msg.key });
 
-                return sock.sendMessage(jid, {
-                    text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${sender.split("@")[0]}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
-                    mentions: [sender]
-                });
-            }
-            global.slowmode[key] = now; // FIXED: moved outside
-        }
+    const mentionJid = sender; // this should be 2376xxxx@s.whatsapp.net
+    const name = mentionJid.split("@")[0];
+
+    return sock.sendMessage(jid, {
+        text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${name}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
+        mentions: [mentionJid] // THIS makes it blue + ping
+    });
+}
+global.slowmode[key] = now;
 
         // ===== LOCKED TYPES =====
         if (!locked) return;
