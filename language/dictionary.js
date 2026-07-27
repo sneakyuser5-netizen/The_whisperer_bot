@@ -85,5 +85,9 @@ module.exports = {
   "warnings": "Afficher les avertissements.",
   "warnlist": "Afficher la liste des avertissements.",
   "welcome": "Configurer le message de bienvenue.",
-anticall: "Enable or disable automatic call rejection",  "whois": "Afficher les informations d'un utilisateur."
+  anticall: "Enable or disable automatic call rejection",
+  "whois": "Afficher les informations d'un utilisateur.",
+  
+"prefix": "modifier le préfixe du bot"
+  
 }
