@@ -8,7 +8,6 @@ module.exports = {
   "antidelete": "Récupérer les messages supprimés.",
   "antilink": "Activer ou désactiver l'anti-lien.",
   "antispam": "Activer ou désactiver l'anti-spam",
-  "prefix": "modifier le préfixe du bot",
   "autorecording": "Activer ou désactiver l'enregistrement automatique.",
   "autotyping": "Activer ou désactiver l'indicateur de saisie.",
   "bot": "Afficher les informations du bot.",
