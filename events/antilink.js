@@ -1,120 +1,79 @@
 module.exports = {
-    
     name: "antilink",
-
     trigger: "messages.upsert",
 
     execute: async (sock, msg) => {
+        if (!msg.message) return;
 
-    if (!msg.message) return;
+        const jid = msg.key.remoteJid;
+        const settingsLib = require("../lib/settings");
+        const groupSettings = settingsLib.get(jid);
+        const fs = require("fs");
+        const path = require("path");
 
-    const jid = msg.key.remoteJid;
-const settingsLib = require("../lib/settings");
-const groupSettings = settingsLib.get(jid);
-    const fs = require("fs");
-    const path = require("path");
+        const settingsFile = path.join(__dirname, "../database/settings.json");
 
-    const settingsFile = path.join(__dirname, "../database/settings.json");
+        let settings = {};
+        try {
+            settings = JSON.parse(fs.readFileSync(settingsFile));
+        } catch {
+            settings = {};
+        }
 
-let settings = {};
+        if (!settings[jid]?.antilink) return;
+        if (!jid.endsWith("@g.us")) return;
 
-try {
-    settings = JSON.parse(fs.readFileSync(settingsFile));
-} catch {
-    settings = {};
-}
+        // Sticker lock
+        if (groupSettings.lock_sticker && msg.message?.stickerMessage) {
+            const metadata = await sock.groupMetadata(jid);
 
+            const sender = msg.key.participant || msg.key.remoteJid;
 
-if (!settings[jid]?.antilink) return;    
+            const member = metadata.participants.find(p => {
+                return (p.id || p.jid) === sender;
+            });
 
-    // Only groups
-    if (!jid.endsWith("@g.us")) return;
-// Sticker lock
-if (
-    groupSettings.lock_sticker &&
-    msg.message?.stickerMessage
-) {
-    const metadata =
-        await sock.groupMetadata(jid);
+            if (!member?.admin) {
+                await sock.sendMessage(jid, { delete: msg.key });
 
-    const sender =
-        msg.key.participant;
+                return sock.sendMessage(jid, {
+                    text: "🚫 Stickers are currently locked."
+                });
+            }
+        }
 
-    const member =
-        metadata.participants.find(p => {
+        const text =
+            msg.message.conversation ||
+            msg.message.extendedTextMessage?.text ||
+            msg.message.imageMessage?.caption ||
+            msg.message.videoMessage?.caption ||
+            "";
 
-            const id =
-                (p.id || p.jid || "")
-                .split(":")[0];
+        const linkRegex = /(https?:\/\/|www\.|chat\.whatsapp\.com)/i;
 
-            return id ===
-                sender.split(":")[0];
+        if (!linkRegex.test(text)) return;
 
-        });
+        try {
+            const metadata = await sock.groupMetadata(jid);
 
-    if (!member?.admin) {
+            const sender = msg.key.participant || msg.key.remoteJid;
 
-        await sock.sendMessage(jid, {
-            delete: msg.key
-        });
+            const member = metadata.participants.find(p => {
+                return (p.id || p.jid) === sender;
+            });
 
-        return sock.sendMessage(jid, {
-            text:
-                "🚫 Stickers are currently locked."
-        });
+            // Ignore admins and group owner
+            if (member?.admin) return;
 
+            await sock.sendMessage(jid, { delete: msg.key });
+
+            await sock.sendMessage(jid, {
+                text: `🚫 Anti-link activated!\n\n@${sender.split("@")[0]}, links are not allowed here.`,
+                mentions: [sender]
+            });
+
+        } catch (err) {
+            console.log("Anti-link error:", err);
+        }
     }
-
-}
-
-    const text =
-        msg.message.conversation ||
-        msg.message.extendedTextMessage?.text ||
-        "";
-
-
-    const linkRegex = /(https?:\/\/|www\.|chat\.whatsapp\.com)/i;
-
-    if (!linkRegex.test(text)) return;
-
-
-    try {
-
-        // Get group info
-        const metadata = await sock.groupMetadata(jid);
-
-const sender = msg.key.participant || msg.key.remoteJid;
-
-const member = metadata.participants.find(p => {
-    const id = (p.id || p.jid || "").split(":")[0];
-    const phone = (p.phoneNumber || "").split(":")[0];
-    const user = sender.split(":")[0];
-
-    return id === user || phone === user;
-});
-
-// Ignore admins
-if (member && member.admin) return;
-        
-        await sock.sendMessage(jid, {
-            delete: msg.key
-        });
-
-
-        await sock.sendMessage(jid, {
-            text:
-`🚫 Anti-link activated!
-
-@${sender.split("@")[0]}, links are not allowed here.`,
-            mentions: [sender]
-        });
-
-
-    } catch (err) {
-
-        console.log("Anti-link error:", err);
-
-    }
-
-}
 };

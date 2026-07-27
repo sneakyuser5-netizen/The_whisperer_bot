@@ -1,6 +1,29 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
+    "admin.spam_detected": `🚨 Spam détecté !
+
+😂 {user}, tes doigts sont plus rapides que le bot.
+
+Ralentis avant que le groupe ne doive te mettre en pause.`,
+    "owner.prefix_current": `Préfixe actuel : {prefix}
+
+Utilisation :
+{prefix}prefix !
+ou
+{prefix}prefix=!
+
+Exemple :
+{prefix}menu`,
+
+"owner.prefix_changed": `✅ Préfixe modifié : {prefix}
+
+Utilisez maintenant :
+{prefix}menu`,
+
+"owner.prefix_too_long": "❌ Le préfixe est trop long. Maximum : 3 caractères.",
+
+"owner.prefix_no_space": "❌ Le préfixe ne peut pas contenir d'espaces.",
     "language": "Changer la langue du bot. Ex: .language fr",  // <- ajoute la virgule
     "gstatus": "Afficher le statut des fonctionnalités du groupe.",
     "owner.language_usage":
@@ -9,6 +32,7 @@ module.exports = {
 "vv": "Voir les médias 'Voir une seule fois' sans les ouvrir.",
 "jid": "Afficher l'ID du chat ou de l'utilisateur.",
 "owner.on": "ACTIVÉ",
+    "anticall": "Activer ou désactiver le rejet automatique des appels.",
 "owner.off": "DÉSACTIVÉ",
 "owner.current": "Actuel",
 "owner.usage": "Utilisation",
@@ -31,6 +55,11 @@ module.exports = {
 "owner.user": "Utilisateur :",
 "tools.whois_title": "📌 Informations du chat",
 "tools.whois_jid": "JID :",
+    "prefix_invalid": "❌ Vous ne pouvez pas utiliser 'prefix' comme préfixe",
+    "prefix_current": "Préfixe actuel: {prefix}\n\nUtilisation:.prefix=!\nExemple: {prefix}menu",
+"prefix_too_long": "❌ Préfixe trop long. Max 3 caractères.",
+"prefix_no_space": "❌ Le préfixe ne peut pas contenir d'espaces.",
+"prefix_changed": "✅ Préfixe changé en: {prefix}\n\nUtilisez maintenant: {prefix}menu",
 "tools.whois_type": "Type :",
 "tools.whois_group": "Groupe",
 "tools.whois_private": "Privé",
@@ -44,7 +73,9 @@ module.exports = {
 "tools.vv_reply": "❌ Répondez à un message « Voir une fois ».",
 "tools.vv_unsupported": "❌ Type de message « Voir une fois » non pris en charge.",
 "tools.vv_failed": "❌ Impossible de récupérer le média « Voir une fois ».",
-
+"admin.slowmode_trigger_prefix": "Ralentis",
+"admin.slowmode_trigger_msg1": "La limite de vitesse du chat est de",
+"admin.slowmode_trigger_msg2": "Attends",
 "yes": "Oui",
 "no": "Non",
 

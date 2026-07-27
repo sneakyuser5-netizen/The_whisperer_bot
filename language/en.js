@@ -1,6 +1,29 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
+    "admin.spam_detected": `🚨 Spam detected!
+
+😂 {user}, your fingers are faster than the bot.
+
+Slow down before the group needs a timeout.`,
+"owner.prefix_current": `Current prefix: {prefix}
+
+Usage:
+{prefix}prefix !
+or
+{prefix}prefix=!
+
+Example:
+{prefix}menu`,
+
+"owner.prefix_changed": `✅ Prefix changed to: {prefix}
+
+Now use:
+{prefix}menu`,
+
+"owner.prefix_too_long": "❌ Prefix too long. Maximum is 3 characters.",
+
+"owner.prefix_no_space": "❌ Prefix cannot contain spaces.",
     "gstatus": "Show the status of all group features.",
 "language": "Change the bot language. Ex: .language en",
 "pp": "Change the bot profile picture. Reply to an image.",
@@ -11,6 +34,12 @@ module.exports = {
 "owner.off": "OFF",
 "owner.current": "Current",
 "owner.usage": "Usage",
+    "prefix_invalid": "❌ You cannot use 'prefix' as the prefix",
+  "prefix_current": "Current prefix: {prefix}\n\nUsage:.prefix=!\nExample: {prefix}menu",
+"prefix_too_long": "❌ Prefix too long. Max 3 characters.",
+"prefix_no_space": "❌ Prefix cannot contain spaces.",
+"prefix_changed": "✅ Prefix changed to: {prefix}\n\nNow use: {prefix}menu",  
+"anticall": "Enable or disable automatic call rejection.",
 "owner.use_on_off": "Use on/off",
 "owner.invalid_option": "Invalid option",
 "owner.autorecording_status": "*Auto Recording Status*",
@@ -40,6 +69,9 @@ module.exports = {
 "tools.vv_failed": "❌ Failed to retrieve view once media.",
 "yes": "Yes",
 "no": "No",
+    "admin.slowmode_trigger_prefix": "Slow down",
+"admin.slowmode_trigger_msg1": "The chat speed limit is",
+"admin.slowmode_trigger_msg2": "Wait",
 missing_argument: "❌ Missing argument.",
 usage: "Usage:",
 "tools.say_usage": "Usage:\n.say Hello",

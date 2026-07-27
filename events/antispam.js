@@ -1,5 +1,6 @@
+//const identity = require("../lib/identity");
 const identity = require("../lib/identity");
-
+const { t } = require("../lib/lang");
 module.exports = {
 
     name: "antispam",
@@ -119,12 +120,8 @@ if (!groupSettings.antispam) return;
 
             await sock.sendMessage(jid, {
 
-                text:
-`🚨 Spam detected!
-
-😂 @${mentionId.split("@")[0]}, your fingers are faster than the bot.
-
-Slow down before the group needs a timeout.`,
+                text: t("admin.spam_detected")
+    .replaceAll("{user}", "@" + mentionId.split("@")[0]),
 
                 mentions: [mentionId]
 

@@ -38,6 +38,7 @@ module.exports = {
   "menu": "Afficher les commandes du bot.",
   "mute": "Réduire temporairement un membre au silence",
   "mutelist": "Afficher les membres réduits au silence",
+  "prefix": "modifier le préfixe du bot",
   "online": "Afficher les membres en ligne.",
   "owner": "Afficher le propriétaire du bot.",
   "ping": "Pour vérifier la vitesse de réponse du bot.",

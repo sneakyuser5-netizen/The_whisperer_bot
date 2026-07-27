@@ -72,6 +72,7 @@ module.exports = {
   "leave": "Quitter le groupe.",
   "online": "Afficher les membres en ligne.",
   "pp": "Modifier la photo de profil",
+  "prefix": "modifier le préfixe du bot",
   "private": "Passer le bot en mode privé.",
   "public": "Passer le bot en mode public.",
   "read": "Marquer les messages comme lus.",
