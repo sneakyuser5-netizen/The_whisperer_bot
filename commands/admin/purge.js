@@ -78,23 +78,32 @@ module.exports = {
 
         }
 
+        // Delete the replied message and the next messages
         const selected =
             messages.slice(
-                Math.max(0, index - amount),
-                index + 1
+                index,
+                Math.min(messages.length, index + amount)
             );
+
+        let deleted = 0;
 
         for (const m of selected) {
 
-            await sock.sendMessage(jid, {
-                delete: m.key
-            });
+            try {
+
+                await sock.sendMessage(jid, {
+                    delete: m.key
+                });
+
+                deleted++;
+
+            } catch {}
 
         }
 
         await sock.sendMessage(jid, {
             text:
-`${t(jid, "admin.purge_deleted")} ${selected.length} ${t(jid, "admin.purge_messages")}
+`${t(jid, "admin.purge_deleted")} ${deleted} ${t(jid, "admin.purge_messages")}
 
 ${t(jid, "admin.purge_finished")}`
         });
