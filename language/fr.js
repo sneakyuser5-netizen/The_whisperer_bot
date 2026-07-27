@@ -17,7 +17,7 @@ module.exports = {
 "owner.autorecording_status": "*Statut de l'enregistrement auto*",
 "owner.autorecording_enabled": "🎙️ Enregistrement automatique activé.\n\nJe prépare ma note vocale imaginaire 😂",
 "owner.autorecording_disabled": "✅ Enregistrement automatique désactivé.",
-    
+  "owner.permission_denied": "❌ Permission refusée. Je dois être administrateur pour faire ça",  
 "info.bot_creator": "Créateur",
 "info.bot_owner": "Propriétaire du bot",
 "info.bot_sudos": "Membres Sudo",
