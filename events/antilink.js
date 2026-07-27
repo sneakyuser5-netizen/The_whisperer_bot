@@ -10,7 +10,6 @@ module.exports = {
         const groupSettings = settingsLib.get(jid);
         const fs = require("fs");
         const path = require("path");
-        const identity = require("../lib/identity");
 
         const settingsFile = path.join(__dirname, "../database/settings.json");
 
@@ -28,22 +27,50 @@ module.exports = {
         if (groupSettings.lock_sticker && msg.message?.stickerMessage) {
             const metadata = await sock.groupMetadata(jid);
 
-// Use the original participant JID from WhatsApp
-const sender = msg.key.participant || msg.key.remoteJid;
+            const sender = msg.key.participant || msg.key.remoteJid;
 
-const member = metadata.participants.find(p => {
-    return (p.id || p.jid) === sender;
-});
+            const member = metadata.participants.find(p => {
+                return (p.id || p.jid) === sender;
+            });
 
-// Ignore admins and group owner
-if (member && member.admin) return;
+            if (!member?.admin) {
+                await sock.sendMessage(jid, { delete: msg.key });
 
-await sock.sendMessage(jid, { delete: msg.key });
+                return sock.sendMessage(jid, {
+                    text: "🚫 Stickers are currently locked."
+                });
+            }
+        }
 
-await sock.sendMessage(jid, {
-    text: `🚫 Anti-link activated!\n\n@${sender.split("@")[0]}, links are not allowed here.`,
-    mentions: [sender]
-});
+        const text =
+            msg.message.conversation ||
+            msg.message.extendedTextMessage?.text ||
+            msg.message.imageMessage?.caption ||
+            msg.message.videoMessage?.caption ||
+            "";
+
+        const linkRegex = /(https?:\/\/|www\.|chat\.whatsapp\.com)/i;
+
+        if (!linkRegex.test(text)) return;
+
+        try {
+            const metadata = await sock.groupMetadata(jid);
+
+            const sender = msg.key.participant || msg.key.remoteJid;
+
+            const member = metadata.participants.find(p => {
+                return (p.id || p.jid) === sender;
+            });
+
+            // Ignore admins and group owner
+            if (member?.admin) return;
+
+            await sock.sendMessage(jid, { delete: msg.key });
+
+            await sock.sendMessage(jid, {
+                text: `🚫 Anti-link activated!\n\n@${sender.split("@")[0]}, links are not allowed here.`,
+                mentions: [sender]
+            });
 
         } catch (err) {
             console.log("Anti-link error:", err);
