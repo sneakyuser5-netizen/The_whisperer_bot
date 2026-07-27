@@ -9,6 +9,7 @@ module.exports = {
 "vv": "Voir les médias 'Voir une seule fois' sans les ouvrir.",
 "jid": "Afficher l'ID du chat ou de l'utilisateur.",
 "owner.on": "ACTIVÉ",
+    "anticall": "Activer ou désactiver le rejet automatique des appels.",
 "owner.off": "DÉSACTIVÉ",
 "owner.current": "Actuel",
 "owner.usage": "Utilisation",
