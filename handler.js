@@ -155,6 +155,9 @@ const jid = msg.key.remoteJid;
 const groupSettings = settings.get(jid);
 const prefix = groupSettings.prefix || "."; // get custom prefix or default.
 
+const groupSettings = settings.get(msg.key.remoteJid);
+const prefix = groupSettings.prefix || "."; // get custom prefix or default.
+
 let body = text.trim();
 
 if (body.startsWith(prefix + " ")) {
@@ -169,8 +172,8 @@ if (!body.startsWith(prefix)) {
 const parts = body.split(/\s+/);
 
 const cmd = parts[0]
-   .slice(prefix.length) // Remove prefix length instead of 1
-   .toLowerCase();
+  .slice(prefix.length) // Remove prefix length instead of 1
+  .toLowerCase();
 
 const args = parts.slice(1);
 const command = commands.get(cmd);
