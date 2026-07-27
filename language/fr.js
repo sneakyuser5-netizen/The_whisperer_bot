@@ -32,6 +32,7 @@ module.exports = {
 "owner.user": "Utilisateur :",
 "tools.whois_title": "📌 Informations du chat",
 "tools.whois_jid": "JID :",
+    "prefix_invalid": "❌ Vous ne pouvez pas utiliser 'prefix' comme préfixe",
     "prefix_current": "Préfixe actuel: {prefix}\n\nUtilisation:.prefix=!\nExemple: {prefix}menu",
 "prefix_too_long": "❌ Préfixe trop long. Max 3 caractères.",
 "prefix_no_space": "❌ Le préfixe ne peut pas contenir d'espaces.",
