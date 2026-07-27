@@ -1,104 +1,75 @@
 const { t } = require("../../lib/lang");
 
 module.exports = {
-
     name: "purge",
-
     description: "Delete recent messages",
-
     category: "admin",
-
     permission: "admin",
-
     usage: ".purge 10",
-
     minArgs: 1,
 
     execute: async (sock, msg, args) => {
-
-        const jid =
-            msg.key.remoteJid;
+        const jid = msg.key.remoteJid;
 
         if (!jid.endsWith("@g.us")) {
-
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.only_groups")
+                text: t("admin.only_groups")
             });
-
         }
 
-        const amount =
-            Number(args[0]);
-
-        if (
-            isNaN(amount) ||
-            amount < 1 ||
-            amount > 100
-        ) {
-
-            return sock.sendMessage(jid, {
-                text: t(jid, "admin.purge_usage")
-            });
-
+        // Check if bot is admin
+        const metadata = await sock.groupMetadata(jid);
+        const botId = sock.user.id.split(":")[0] + "@s.whatsapp.net";
+        const botAdmin = metadata.participants.find(p => p.id === botId)?.admin;
+        if (!botAdmin) {
+            return sock.sendMessage(jid, { text: t("admin.bot_not_admin") });
         }
 
-        const context =
-            msg.message?.extendedTextMessage
-            ?.contextInfo;
+        const amount = Number(args[0]);
 
+        if (isNaN(amount) || amount < 1 || amount > 100) {
+            return sock.sendMessage(jid, {
+                text: t("admin.purge_usage")
+            });
+        }
+
+        const context = msg.message?.extendedTextMessage?.contextInfo;
         if (!context?.stanzaId) {
-
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.purge_reply")
+                text: t("admin.purge_reply")
             });
-
         }
 
-        const messages =
-            global.messageCache?.[jid];
-
+        const messages = global.messageCache?.[jid];
         if (!messages) {
-
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.purge_no_history")
+                text: t("admin.purge_no_history")
             });
-
         }
 
-        const index =
-            messages.findIndex(
-                m => m.key.id === context.stanzaId
-            );
-
+        const index = messages.findIndex(m => m.key.id === context.stanzaId);
         if (index === -1) {
-
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.purge_not_found")
+                text: t("admin.purge_not_found")
             });
-
         }
 
-        const selected =
-            messages.slice(
-                Math.max(0, index - amount),
-                index + 1
-            );
+        const selected = messages.slice(Math.max(0, index - amount + 1), index + 1);
+        let deleted = 0;
 
         for (const m of selected) {
-
-            await sock.sendMessage(jid, {
-                delete: m.key
-            });
-
+            try {
+                // Correct delete format for Baileys
+                await sock.sendMessage(jid, { delete: m.key });
+                deleted++;
+                await new Promise(r => setTimeout(r, 300)); // avoid rate limit
+            } catch (e) {
+                console.log("Delete error:", e);
+            }
         }
 
         await sock.sendMessage(jid, {
-            text:
-`${t(jid, "admin.purge_deleted")} ${selected.length} ${t(jid, "admin.purge_messages")}
-
-${t(jid, "admin.purge_finished")}`
+            text: `${t("admin.purge_deleted")} ${deleted} ${t("admin.purge_messages")}\n\n${t("admin.purge_finished")}`
         });
-
     }
-
 };
