@@ -1,4 +1,5 @@
 const { t } = require("../../lib/lang");
+const { jidDecode } = require("@whiskeysockets/baileys");
 
 module.exports = {
     name: "purge",
@@ -15,14 +16,16 @@ module.exports = {
             return sock.sendMessage(jid, { text: t("admin.only_groups") });
         }
 
-        // ===== PROPER ADMIN CHECK =====
+        // ===== PROPER ADMIN CHECK WITH JIDDECODE =====
         const metadata = await sock.groupMetadata(jid);
-        const botNumber = sock.user.id.split(":")[0] + "@s.whatsapp.net";
 
-        const botParticipant = metadata.participants.find(p => p.id === botNumber);
+        const botJid = jidDecode(sock.user.id).user + "@s.whatsapp.net";
+
+        const botParticipant = metadata.participants.find(p =>
+            jidDecode(p.id).user === jidDecode(botJid).user
+        );
 
         if (!botParticipant ||!["admin", "superadmin"].includes(botParticipant.admin)) {
-            console.log("Bot ID:", botNumber, "Admin status:", botParticipant?.admin); // for debug
             return sock.sendMessage(jid, { text: t("owner.permission_denied") });
         }
         // ===== END =====
