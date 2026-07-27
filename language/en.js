@@ -47,7 +47,7 @@ usage: "Usage:",
 "owner.anticall_disabled": "📞 Anti-call disabled.",
 "owner.anticall_usage": "Usage:\n.anticall on\n.anticall off",
 "tools.echo_usage": "Usage:\n.echo Hello",
-
+"owner.permission_denied": "❌ Permission denied. I need to be an admin to do that",
 "tools.ping": "🏓 Pong!\nResponse time:",
 
 "tools.test_success": "✅ New plugin works!",
