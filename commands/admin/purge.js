@@ -13,50 +13,47 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: t("admin.only_groups") // FIXED: removed jid
+                text: t("admin.only_groups")
             });
         }
 
-        // CHECK IF BOT IS ADMIN
+        // ===== FIXED ADMIN CHECK =====
         const metadata = await sock.groupMetadata(jid);
         const botId = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-        const botData = metadata.participants.find(p => p.id === botId);
+        const botData = metadata.participants.find(p => p.id === botId || p.id.split(":")[0] + "@s.whatsapp.net" === botId);
 
         if (!botData ||!botData.admin) {
             return sock.sendMessage(jid, {
-                text: t("owner.permission_denied") // USE EXISTING KEY
+                text: t("owner.permission_denied")
             });
         }
+        // ===== END FIX =====
 
         const amount = Number(args[0]);
-
         if (isNaN(amount) || amount < 1 || amount > 100) {
             return sock.sendMessage(jid, {
-                text: t("admin.purge_usage") // FIXED
+                text: t("admin.purge_usage")
             });
         }
 
         const context = msg.message?.extendedTextMessage?.contextInfo;
-
         if (!context?.stanzaId) {
             return sock.sendMessage(jid, {
-                text: t("admin.purge_reply") // FIXED
+                text: t("admin.purge_reply")
             });
         }
 
         const messages = global.messageCache?.[jid];
-
         if (!messages) {
             return sock.sendMessage(jid, {
-                text: t("admin.purge_no_history") // FIXED
+                text: t("admin.purge_no_history")
             });
         }
 
         const index = messages.findIndex(m => m.key.id === context.stanzaId);
-
         if (index === -1) {
             return sock.sendMessage(jid, {
-                text: t("admin.purge_not_found") // FIXED
+                text: t("admin.purge_not_found")
             });
         }
 
@@ -67,12 +64,12 @@ module.exports = {
             try {
                 await sock.sendMessage(jid, { delete: m.key });
                 deleted++;
-                await new Promise(r => setTimeout(r, 300)); // avoid spam
+                await new Promise(r => setTimeout(r, 300));
             } catch (e) {}
         }
 
         await sock.sendMessage(jid, {
-            text: `${t("admin.purge_deleted")} ${deleted} ${t("admin.purge_messages")}\n\n${t("admin.purge_finished")}` // FIXED
+            text: `${t("admin.purge_deleted")} ${deleted} ${t("admin.purge_messages")}\n\n${t("admin.purge_finished")}`
         });
     }
 };
