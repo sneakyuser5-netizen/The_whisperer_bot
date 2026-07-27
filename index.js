@@ -422,9 +422,7 @@ await handleMessage(
 
             await sock.rejectCall(call.id, call.from);
 
-            await sock.sendMessage(call.from, {
-                text: "📵 Calls are not accepted by this bot."
-            });
+        
 
         } catch (err) {
             console.log("ANTICALL ERROR:", err);
