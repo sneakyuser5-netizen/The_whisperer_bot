@@ -1,6 +1,11 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
+    "admin.spam_detected": `🚨 Spam detected!
+
+😂 {user}, your fingers are faster than the bot.
+
+Slow down before the group needs a timeout.`,
 "owner.prefix_current": `Current prefix: {prefix}
 
 Usage:
