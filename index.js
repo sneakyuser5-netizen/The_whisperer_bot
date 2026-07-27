@@ -32,62 +32,58 @@ sock.sendMessage = async (jid, content, options) => {
 
         if (config.autotyping) {
 
+            await sock.sendPresenceUpdate("composing", jid);
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            await sock.sendPresenceUpdate("available", jid);
 
-            await sock.sendPresenceUpdate(
-                "composing",
-                jid
-            );
+        } else if (config.autorecording) {
 
-            await new Promise(resolve =>
-                setTimeout(resolve, 5000)
-            );
-
-            await sock.sendPresenceUpdate(
-                "available",
-                jid
-            );
-
-        }
-
-        else if (config.autorecording) {
-
-        
-
-            await sock.sendPresenceUpdate(
-                "recording",
-                jid
-            );
-
-            await new Promise(resolve =>
-                setTimeout(resolve, 5000)
-            );
-
-            await sock.sendPresenceUpdate(
-                "available",
-                jid
-            );
+            await sock.sendPresenceUpdate("recording", jid);
+            await new Promise(resolve => setTimeout(resolve, 5000));
+            await sock.sendPresenceUpdate("available", jid);
 
         }
 
     } catch (err) {
-
         console.log("PRESENCE ERROR:", err);
-
     }
 
-    return originalSendMessage(
-        jid,
-        content,
-        options
-    );
+    return originalSendMessage(jid, content, options);
+}; // <- THIS } WAS MISSING
 
-};
+sock.ev.on("creds.update", saveCreds);
 
-        sock.ev.on("creds.update", saveCreds);
+// ===== STATUS SAVER LISTENER START =====
+const identity = require("./lib/identity"); // removed duplicate settings
+
+sock.ev.on("messages.upsert", async ({ messages, type }) => {
+    if (type!== "notify") return;
+    const msg = messages[0];
+    if (!msg ||!msg.key) return;
+
+    // WhatsApp statuses come from status@broadcast
+    if (msg.key.remoteJid === "status@broadcast") {
+        const isOn = settings.get("global").status_saver;
+        if (!isOn) return;
+
+        const owner = identity.getBotOwner() + "@s.whatsapp.net"; // add @s.whatsapp.net
+        const who = msg.key.participant; // who posted the status
+
+        try {
+            // Forward the status to you
+            await sock.sendMessage(owner, { forward: msg });
+            console.log(`[STATUS] Forwarded status from ${who}`);
+        } catch (e) {
+            console.log("Status forward error:", e);
+        }
+    }
+});
+// ===== STATUS SAVER LISTENER END =====
 
         // load commands ONCE
         loadCommands();
         loadEvents();
+
 
         sock.ev.on("connection.update", async (update) => {
             const { connection, lastDisconnect } = update;
@@ -426,9 +422,7 @@ await handleMessage(
 
             await sock.rejectCall(call.id, call.from);
 
-            await sock.sendMessage(call.from, {
-                text: "📵 Calls are not accepted by this bot."
-            });
+        
 
         } catch (err) {
             console.log("ANTICALL ERROR:", err);
