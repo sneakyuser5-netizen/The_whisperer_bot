@@ -1,29 +1,7 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
-    prefix_current:
-prefix_current:
-`Current prefix: {prefix}
 
-Usage:
-{prefix}prefix !
-or
-{prefix}prefix=!
-
-Example:
-{prefix}menu`,
-
-prefix_changed:
-`✅ Prefix changed to: {prefix}
-
-Now use:
-{prefix}menu`,
-
-prefix_too_long:
-"❌ Prefix too long. Maximum is 3 characters.",
-
-prefix_no_space:
-"❌ Prefix cannot contain spaces.",
     "gstatus": "Show the status of all group features.",
 "language": "Change the bot language. Ex: .language en",
 "pp": "Change the bot profile picture. Reply to an image.",
