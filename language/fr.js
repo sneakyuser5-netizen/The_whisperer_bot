@@ -44,7 +44,9 @@ module.exports = {
 "tools.vv_reply": "❌ Répondez à un message « Voir une fois ».",
 "tools.vv_unsupported": "❌ Type de message « Voir une fois » non pris en charge.",
 "tools.vv_failed": "❌ Impossible de récupérer le média « Voir une fois ».",
-
+"admin.slowmode_trigger_prefix": "Ralentis",
+"admin.slowmode_trigger_msg1": "La limite de vitesse du chat est de",
+"admin.slowmode_trigger_msg2": "Attends",
 "yes": "Oui",
 "no": "Non",
 
