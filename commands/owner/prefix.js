@@ -1,4 +1,5 @@
 const settings = require("../../lib/settings");
+const { t } = require("../../lib/lang");
 
 module.exports = {
     name: "prefix",
@@ -13,16 +14,8 @@ module.exports = {
         if (!args.length) {
             const current = settings.get(jid).prefix || ".";
             return sock.sendMessage(jid, {
-                text:
-`Current prefix: ${current}
-
-Usage:
-${current}prefix !
-or
-${current}prefix=!
-
-Example:
-${current}menu`
+                text: t("prefix_current")
+                    .replace("{prefix}", current)
             });
         }
 
@@ -30,24 +23,21 @@ ${current}menu`
 
         if (newPrefix.length > 3) {
             return sock.sendMessage(jid, {
-                text: "❌ Prefix too long. Maximum is 3 characters."
+                text: t("prefix_too_long")
             });
         }
 
         if (newPrefix.includes(" ")) {
             return sock.sendMessage(jid, {
-                text: "❌ Prefix cannot contain spaces."
+                text: t("prefix_no_space")
             });
         }
 
         settings.set(jid, "prefix", newPrefix);
 
         return sock.sendMessage(jid, {
-            text:
-`✅ Prefix changed to: ${newPrefix}
-
-Now use:
-${newPrefix}menu`
+            text: t("prefix_changed")
+                .replace("{prefix}", newPrefix)
         });
     }
 };
