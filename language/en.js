@@ -11,7 +11,10 @@ module.exports = {
 "owner.off": "OFF",
 "owner.current": "Current",
 "owner.usage": "Usage",
-    
+  "prefix_current": "Current prefix: {prefix}\n\nUsage:.prefix=!\nExample: {prefix}menu",
+"prefix_too_long": "❌ Prefix too long. Max 3 characters.",
+"prefix_no_space": "❌ Prefix cannot contain spaces.",
+"prefix_changed": "✅ Prefix changed to: {prefix}\n\nNow use: {prefix}menu",  
 "anticall": "Enable or disable automatic call rejection.",
 "owner.use_on_off": "Use on/off",
 "owner.invalid_option": "Invalid option",
