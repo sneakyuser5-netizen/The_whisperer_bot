@@ -15,11 +15,40 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-        let menu =
+        const settings = require("../../lib/settings");
+
+const global = settings.get("global");
+
+const lang =
+    global.language === "fr"
+        ? "Français 🇫🇷"
+        : "English 🇬🇧";
+
+const version = "1.0.0";
+
+const uptime = () => {
+
+    const seconds =
+        Math.floor((Date.now() - global.START_TIME) / 1000);
+
+    const h = Math.floor(seconds / 3600);
+    const m = Math.floor((seconds % 3600) / 60);
+    const s = seconds % 60;
+
+    return `${h}h ${m}m ${s}s`;
+
+};
+
+let menu =
 `╭━━━━━━━━━━━━━━━━━━━━━━╮
 ┃      🤖 *WhisperBot*
-╰━━━━━━━━━━━━━━━━━━━━━━╯
-`;
+┣━━━━━━━━━━━━━━━━━━━━━━┫
+┃ 🌍 Language : ${lang}
+┃ ⚡ Prefix   : .
+┃ 📦 Version  : ${version}
+┃ ⏱ Uptime   : ${uptime()}
+┃ 📚 Commands : ${commands.size}
+╰━━━━━━━━━━━━━━━━━━━━━━╯`;
 
         const categories = {};
 
