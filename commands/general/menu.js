@@ -17,39 +17,40 @@ module.exports = {
 
         const settings = require("../../lib/settings");
 
-const global = settings.get("global");
+const config = settings.get("global");
 
 const lang =
-    global.language === "fr"
+    config.language === "fr"
         ? "Français 🇫🇷"
         : "English 🇬🇧";
 
 const version = "1.0.0";
 
-const uptime = () => {
+const seconds = Math.floor(
+    (Date.now() - (global.START_TIME || Date.now())) / 1000
+);
 
-    const seconds =
-        Math.floor((Date.now() - global.START_TIME) / 1000);
+const hours = Math.floor(seconds / 3600);
+const minutes = Math.floor((seconds % 3600) / 60);
+const secs = seconds % 60;
 
-    const h = Math.floor(seconds / 3600);
-    const m = Math.floor((seconds % 3600) / 60);
-    const s = seconds % 60;
+const uptime = `${hours}h ${minutes}m ${secs}s`;
 
-    return `${h}h ${m}m ${s}s`;
-
-};
+const ram =
+    (process.memoryUsage().rss / 1024 / 1024).toFixed(1);
 
 let menu =
-`╭━━━━━━━━━━━━━━━━━━━━━━╮
+`╭━━━━━━━━━━━━━━━━━━━━━━━━━━╮
 ┃      🤖 *WhisperBot*
-┣━━━━━━━━━━━━━━━━━━━━━━┫
-┃ 🌍 Language : ${lang}
-┃ ⚡ Prefix   : .
-┃ 📦 Version  : ${version}
-┃ ⏱ Uptime   : ${uptime()}
-┃ 📚 Commands : ${commands.size}
-╰━━━━━━━━━━━━━━━━━━━━━━╯`;
-
+┣━━━━━━━━━━━━━━━━━━━━━━━━━━┫
+┃ 👤 User      : ${msg.pushName || "User"}
+┃ 🌍 Language  : ${lang}
+┃ ⚡ Prefix    : .
+┃ 📦 Version   : ${version}
+┃ ⏱ Uptime    : ${uptime}
+┃ 💾 RAM       : ${ram} MB
+┃ 📚 Commands  : ${commands.size}
+╰━━━━━━━━━━━━━━━━━━━━━━━━━━╯`;
         const categories = {};
 
         for (const [name, command] of commands.entries()) {
