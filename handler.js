@@ -81,8 +81,9 @@ async function handleMessage(sock, msg) {
 
     // ===== SPECIAL CASE: prefix= WORKS WITH ANY PREFIX =====
     if ((body.startsWith(prefix + "prefix=") || body.startsWith(".prefix=")) && isOwner) {
-        const newPrefix = body.split("prefix=")[1]?.trim();
-        const newPrefix = body.split(".prefix=")[1]?.trim();
+        const newPrefix = body.startsWith(prefix + "prefix=")
+           ? body.split("prefix=")[1]?.trim()
+            : body.split(".prefix=")[1]?.trim();
         if (!newPrefix) {
             return sock.sendMessage(jid, { text: t("prefix_current").replace("{prefix}", prefix) });
         }
