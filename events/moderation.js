@@ -1,5 +1,5 @@
 const settings = require("../lib/settings");
-const { t } = require("../lib/lang"); // ADDED
+const { t } = require("../lib/lang");
 const identity = require("../lib/identity");
 
 module.exports = {
@@ -15,7 +15,6 @@ module.exports = {
 
         const groupSettings = settings.get(jid);
         global.slowmode = global.slowmode || {}; // init
-        const lastMessage = global.slowmode;
 
         const lockedTypes = {
             sticker: msg.message.stickerMessage,
@@ -53,38 +52,25 @@ module.exports = {
             if (now - last < delay * 1000) {
                 const remaining = Math.ceil((delay * 1000 - (now - last)) / 1000);
 
-
-return sock.sendMessage(jid, {
-    text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${sender.split("@")[0]}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
-    mentions: [sender]
-});
-
-
-
-    global.slowmode[key] = now;
-
-}
-
+                // delete spam message
                 await sock.sendMessage(jid, { delete: msg.key });
 
+                // get better name for mention
                 const mentionJid = msg.key.participant || msg.key.remoteJid;
+                const contact = sock.contacts?.[mentionJid] || {};
+                const name =
+                    contact.name ||
+                    contact.notify ||
+                    contact.verifiedName ||
+                    mentionJid.split("@")[0];
 
-const contact = sock.contacts?.[mentionJid] || {};
-
-const name =
-    contact.name ||
-    contact.notify ||
-    contact.verifiedName ||
-    mentionJid.split("@")[0];
-
-
-return sock.sendMessage(jid, {
-    text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${name}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
-    mentions: [mentionJid]
-});
+                return sock.sendMessage(jid, {
+                    text: `🐢 ${t("admin.slowmode_trigger_prefix")} @${name}!\n\n😂 ${t("admin.slowmode_trigger_msg1")} ${delay}s.\n${t("admin.slowmode_trigger_msg2")} ${remaining}s.`,
+                    mentions: [mentionJid]
+                });
             }
             global.slowmode[key] = now;
-        } // <- ADDED THIS CLOSING BRACE
+        }
 
         // ===== LOCKED TYPES =====
         if (!locked) return;
