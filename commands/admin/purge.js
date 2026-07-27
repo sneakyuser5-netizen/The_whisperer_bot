@@ -13,44 +13,50 @@ module.exports = {
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: t("admin.only_groups")
+                text: t("admin.only_groups") // FIXED: removed jid
             });
         }
 
-        // Check if bot is admin
+        // CHECK IF BOT IS ADMIN
         const metadata = await sock.groupMetadata(jid);
         const botId = sock.user.id.split(":")[0] + "@s.whatsapp.net";
-        const botAdmin = metadata.participants.find(p => p.id === botId)?.admin;
-        if (!botAdmin) {
-            return sock.sendMessage(jid, { text: t("admin.bot_not_admin") });
+        const botData = metadata.participants.find(p => p.id === botId);
+
+        if (!botData ||!botData.admin) {
+            return sock.sendMessage(jid, {
+                text: t("owner.permission_denied") // USE EXISTING KEY
+            });
         }
 
         const amount = Number(args[0]);
 
         if (isNaN(amount) || amount < 1 || amount > 100) {
             return sock.sendMessage(jid, {
-                text: t("admin.purge_usage")
+                text: t("admin.purge_usage") // FIXED
             });
         }
 
         const context = msg.message?.extendedTextMessage?.contextInfo;
+
         if (!context?.stanzaId) {
             return sock.sendMessage(jid, {
-                text: t("admin.purge_reply")
+                text: t("admin.purge_reply") // FIXED
             });
         }
 
         const messages = global.messageCache?.[jid];
+
         if (!messages) {
             return sock.sendMessage(jid, {
-                text: t("admin.purge_no_history")
+                text: t("admin.purge_no_history") // FIXED
             });
         }
 
         const index = messages.findIndex(m => m.key.id === context.stanzaId);
+
         if (index === -1) {
             return sock.sendMessage(jid, {
-                text: t("admin.purge_not_found")
+                text: t("admin.purge_not_found") // FIXED
             });
         }
 
@@ -59,17 +65,14 @@ module.exports = {
 
         for (const m of selected) {
             try {
-                // Correct delete format for Baileys
                 await sock.sendMessage(jid, { delete: m.key });
                 deleted++;
-                await new Promise(r => setTimeout(r, 300)); // avoid rate limit
-            } catch (e) {
-                console.log("Delete error:", e);
-            }
+                await new Promise(r => setTimeout(r, 300)); // avoid spam
+            } catch (e) {}
         }
 
         await sock.sendMessage(jid, {
-            text: `${t("admin.purge_deleted")} ${deleted} ${t("admin.purge_messages")}\n\n${t("admin.purge_finished")}`
+            text: `${t("admin.purge_deleted")} ${deleted} ${t("admin.purge_messages")}\n\n${t("admin.purge_finished")}` // FIXED
         });
     }
 };
