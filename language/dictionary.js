@@ -67,7 +67,7 @@ module.exports = {
   "ship": "Calculer la compatibilité entre deux personnes.",
   "slowmode": "Définir le délai entre les messages",
   "stats": "Afficher les statistiques du bot.",
-  "status": "Afficher le statut du bot.",
+  "status": "Activer ou désactiver la sauvegarde automatique de status",
   "system": "Afficher les informations système.",
   "tagactive": "Mentionner les membres récemment actifs.",
   "tagadmins": "Mentionner tous les administrateurs.",
