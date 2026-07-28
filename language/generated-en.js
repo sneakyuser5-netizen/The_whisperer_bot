@@ -79,7 +79,7 @@ module.exports = {
   "restart": "Redémarrer le bot.",
   "secret": "Envoyer un message secret.",
   "setsudo": "Ajouter un utilisateur sudo.",
-  "status": "Afficher le statut du bot.",
+  "status": "Activer ou Désactiver la sauvegarde automatique de status.",
   "echo": "Répéter votre message.",
   "jid": "Afficher le JID.",
   "ping": "Pour vérifier la vitesse de réponse du bot.",
