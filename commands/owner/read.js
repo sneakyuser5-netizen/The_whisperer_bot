@@ -29,14 +29,16 @@ module.exports = {
 
         if (!["on", "off"].includes(option)) {
             return sock.sendMessage(jid, {
-                text: `*Usage:*.read on\n*Usage:*.read off`
-            });
+    text: t("owner.read_usage")
+});
         }
 
         setRead(option === "on");
 
         await sock.sendMessage(jid, {
-            text: option === "on"? `✅ Auto Read: *ON*` : `❌ Auto Read: *OFF*`
-        });
+    text: option === "on"
+        ? t("owner.read_enabled")
+        : t("owner.read_disabled")
+});
     }
 };
