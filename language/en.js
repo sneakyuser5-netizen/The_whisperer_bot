@@ -1,6 +1,13 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
+    "admin.resetwarn_result": `✅ Warnings reset.
+
+User: {user}
+Warnings: 0/5`,
+    "admin.resetwarn_usage": "❌ Reply to a user or mention them.",
+
+"admin.resetwarn_success": "✅ Warnings reset.",
     "owner.read_usage": `Usage:
 .read on
 .read off`,
