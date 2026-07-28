@@ -14,6 +14,7 @@ module.exports = {
         const { commands } = require("../../handler");
 
         const jid = msg.key.remoteJid;
+        const page = (args[0] || "").toLowerCase();
 
         const settings = require("../../lib/settings");
 
