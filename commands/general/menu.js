@@ -106,7 +106,7 @@ menu += `
 
     menu += `│ ${cmdIcon} *.${command.name}*\n`;
     menu += `│ ${t(command.name)}\n`;
-    menu += `│\n`;
+    //menu += `│\n`;
 
 });
 
