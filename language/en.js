@@ -1,6 +1,8 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
+     "admin.setrules_updated":"group rules updated.Respect the rules or leave",
+     "admin.only_groups":"You're not an admin. so it's Impossible",
     "admin.resetwarn_result": `✅ Warnings reset.
 
 User: {user}
