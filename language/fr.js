@@ -1,6 +1,8 @@
 module.exports = {
     menu_title: "📌 Menu WhisperBot",
     total_commands: "Nombre total de commandes",
+     "admin.setrules_updated":"Règles du groupe mises à jour. Respectez-les ou quittez le groupe.",
+     "admin.only_groups":" Vous n'êtes pas administrateur. donc c'est impossible.",
     "admin.resetwarn_result": `✅ Avertissements réinitialisés.
 
 Utilisateur : {user}
