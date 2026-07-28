@@ -41,8 +41,8 @@ const user = identity.normalize(target);
 
 warns.reset(jid, user);
         await sock.sendMessage(jid, {
-            text:
-`${t(jid, "admin.resetwarn_success")}\n\nUser: @${target.split("@")[0]}\nWarnings: 0/5`,
+            text: t(jid, "admin.resetwarn_result")
+    .replace("{user}", "@" + target.split("@")[0]),
             mentions: [target]
         });
 
