@@ -1,6 +1,13 @@
 module.exports = {
     menu_title: "📌 WhisperBot Menu",
     total_commands: "Total commands",
+    "owner.read_usage": `Usage:
+.read on
+.read off`,
+
+"owner.read_enabled": "✅ Auto Read enabled.",
+
+"owner.read_disabled": "❌ Auto Read disabled.",
     "admin.spam_detected": `🚨 Spam detected!
 
 😂 {user}, your fingers are faster than the bot.
