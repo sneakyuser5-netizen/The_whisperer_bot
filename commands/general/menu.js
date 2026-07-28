@@ -76,6 +76,18 @@ let menu =
     tools: "🛠",
     other: "📦"
 };
+        const commandIcons = {
+    admin: "🛡️",
+    group: "👥",
+    fun: "🎲",
+    general: "📖",
+    info: "ℹ️",
+    owner: "👑",
+    tools: "🛠️",
+    other: "📦"
+};
+
+const cmdIcon = commandIcons[category] || "⚙️";
 
         for (const category in categories) {
 
@@ -88,9 +100,10 @@ menu += `
 
             for (const command of categories[category]) {
 
-                menu += `│ ➤ *.${command.name}*\n`;
-                menu += `│    ${t(command.name)}\n`;
-               // menu += "│\n";
+                menu += `├────────────────────\n`;
+menu += `│ ${cmdIcon} *.${command.name}*\n`;
+menu += `│ ${t(command.name)}\n`;
+menu += `│\n`;
 
             }
 
