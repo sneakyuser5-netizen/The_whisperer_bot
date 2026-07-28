@@ -8,7 +8,7 @@ module.exports = {
 
     permission: "public",
 
-    execute: async (sock, msg) => {
+    execute: async (sock, msg, args = []) => {
 
         const { t } = require("../../lib/lang");
         const { commands } = require("../../handler");
@@ -87,8 +87,29 @@ let menu =
     other: "📦"
 };
 
+        if (page && !categories[page]) {
+    return sock.sendMessage(jid, {
+        text:
+`❌ Unknown menu.
 
-        for (const category in categories) {
+Available pages:
+
+👮 admin
+👥 group
+🎮 fun
+📖 general
+ℹ️ info
+👑 owner
+🛠 tools
+
+Example:
+.menu admin`
+    });
+        }
+
+        const pages = page ? [page] : Object.keys(categories);
+
+for (const category of pages) {
 
             const icon = icons[category] || "📦";
             const cmdIcon = commandIcons[category] || "⚙️";
