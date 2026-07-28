@@ -98,14 +98,17 @@ menu += `
 ╭──『 ${icon} *${category.toUpperCase()}* (${categories[category].length}) 』──╮
 `;
 
-            for (const command of categories[category]) {
+            categories[category].forEach((command, index) => {
 
-                menu += `├────────────────────\n`;
-menu += `│ ${cmdIcon} *.${command.name}*\n`;
-menu += `│ ${t(command.name)}\n`;
-menu += `│\n`;
+    if (index > 0) {
+        menu += `├────────────────────\n`;
+    }
 
-            }
+    menu += `│ ${cmdIcon} *.${command.name}*\n`;
+    menu += `│ ${t(command.name)}\n`;
+    menu += `│\n`;
+
+});
 
             menu += "╰────────────────────╯\n";
 
