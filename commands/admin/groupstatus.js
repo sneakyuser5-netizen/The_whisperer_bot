@@ -1,89 +1,159 @@
+const {
+    generateWAMessageContent,
+    generateWAMessageFromContent
+} = require("@whiskeysockets/baileys");
+
+const {
+    downloadMediaMessage
+} = require("@whiskeysockets/baileys");
+
 module.exports = {
     name: "groupstatus",
     category: "admin",
-    description: "Post a group status",
+    description: "Post a WhatsApp Group Status",
     permission: "admin",
 
     execute: async (sock, msg) => {
-        const { t } = require("../../lib/lang");
+
         const jid = msg.key.remoteJid;
 
-        if (!msg.message?.extendedTextMessage?.contextInfo?.quotedMessage) {
+        const context =
+            msg.message?.extendedTextMessage?.contextInfo;
+
+        if (!context?.quotedMessage) {
             return sock.sendMessage(jid, {
                 text: "❌ Reply to an image, video or text."
             });
         }
 
-        const quoted =
-            msg.message.extendedTextMessage.contextInfo.quotedMessage;
+        const quoted = context.quotedMessage;
 
         try {
 
-            // Image
-            if (quoted.imageMessage) {
-                const media = await sock.downloadMediaMessage({
-                    key: msg.message.extendedTextMessage.contextInfo.stanzaId
-                        ? {
-                              remoteJid: jid,
-                              id: msg.message.extendedTextMessage.contextInfo.stanzaId,
-                              participant:
-                                  msg.message.extendedTextMessage.contextInfo.participant
-                          }
-                        : null,
-                    message: quoted
-                });
+            let content;
 
-                await sock.sendMessage("status@broadcast", {
-                    image: media,
-                    caption: ""
-                });
+            // TEXT
+            if (quoted.conversation || quoted.extendedTextMessage) {
+
+                content = {
+                    text:
+                        quoted.conversation ||
+                        quoted.extendedTextMessage.text
+                };
+
             }
 
-            // Video
+// IMAGE
+else if (quoted.imageMessage) {
+
+    const media = await downloadMediaMessage(
+        {
+            key: {
+                remoteJid: jid,
+                id: context.stanzaId,
+                participant: context.participant
+            },
+            message: quoted
+        },
+        "buffer",
+        {},
+        {
+            logger: sock.logger,
+            reuploadRequest: sock.updateMediaMessage
+        }
+    );
+
+    content = await generateWAMessageContent(
+        {
+            image: media,
+            caption: quoted.imageMessage.caption || ""
+        },
+        {
+            upload: sock.waUploadToServer
+        }
+    );
+
+}
+
+            // VIDEO
             else if (quoted.videoMessage) {
-                const media = await sock.downloadMediaMessage({
-                    key: {
-                        remoteJid: jid,
-                        id: msg.message.extendedTextMessage.contextInfo.stanzaId,
-                        participant:
-                            msg.message.extendedTextMessage.contextInfo.participant
+
+const media = await downloadMediaMessage(
+    {                        key: {
+                            remoteJid: jid,
+                            id: context.stanzaId,
+                            participant: context.participant
+                        },
+        message: quoted
+    },
+    "buffer",
+    {},
+    {
+        logger: sock.logger,
+        reuploadRequest: sock.updateMediaMessage
+    }
+);
+
+                content = await generateWAMessageContent(
+                    {
+                        video: media,
+                        caption:
+                            quoted.videoMessage.caption || ""
                     },
-                    message: quoted
-                });
+                    {
+                        upload: sock.waUploadToServer
+                    }
+                );
 
-                await sock.sendMessage("status@broadcast", {
-                    video: media,
-                    caption: ""
-                });
-            }
-
-            // Text
-            else if (quoted.conversation || quoted.extendedTextMessage) {
-                const text =
-                    quoted.conversation ||
-                    quoted.extendedTextMessage.text;
-
-                await sock.sendMessage("status@broadcast", {
-                    text
-                });
             }
 
             else {
+
                 return sock.sendMessage(jid, {
                     text: "❌ Unsupported message."
                 });
+
             }
 
+            const status = generateWAMessageFromContent(
+                "status@broadcast",
+                content,
+                {
+                    userJid: sock.user.id
+                }
+            );
+
+            await sock.relayMessage(
+                "status@broadcast",
+                status.message,
+                {
+                    messageId: status.key.id,
+
+                    statusJidList: [jid],
+
+                    additionalNodes: [
+                        {
+                            tag: "gstatus",
+                            attrs: {},
+                            content: []
+                        }
+                    ]
+                }
+            );
+
             await sock.sendMessage(jid, {
-                text: "✅ Status posted successfully."
+                text: "✅ Group Status posted successfully."
             });
 
         } catch (err) {
+
             console.error(err);
 
             await sock.sendMessage(jid, {
-                text: `❌ ${err.message}`
+                text: "❌ " + err.message
             });
+
         }
+
     }
 };

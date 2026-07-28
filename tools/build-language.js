@@ -1,61 +1,384 @@
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
-const commandsPath = path.join(__dirname, '../commands');
-const dictPath = path.join(__dirname, '../language/dictionary.js');
-const outputEn = path.join(__dirname, '../language/generated-en.js');
-const outputFr = path.join(__dirname, '../language/generated-fr.js');
+// Directories to scan
+const SCAN_DIRS = [
+    path.join(__dirname, "../commands"),
+    path.join(__dirname, "../events"),
+    path.join(__dirname, "../lib")
+];
 
-const dict = require(dictPath);
+// Files
+const DICT_FILE = path.join(__dirname, "../language/source/dictionary.js");
+const EN_FILE = path.join(__dirname, "../language/generated-en.js");
+const FR_FILE = path.join(__dirname, "../language/generated-fr.js");
+
+// Load dictionary
+let dictionary = require(DICT_FILE);
+//const enLang = require("../language/en");
+//const frLang = require("../language/fr");
+const enLang = require("../language/en");
+const frLang = require("../language/fr");
+const EN_PATH = path.join(__dirname, "../language/en.js");
+const FR_PATH = path.join(__dirname, "../language/fr.js");
 let created = 0;
 let skipped = 0;
 const missing = [];
-
 function getAllFiles(dir) {
-  let files = [];
-  fs.readdirSync(dir).forEach(file => {
-    const fullPath = path.join(dir, file);
-    if (fs.statSync(fullPath).isDirectory()) {
-      files = files.concat(getAllFiles(fullPath));
-    } else if (file.endsWith('.js')) {
-      files.push(fullPath);
-    }
-  });
-  return files;
-}
+    let results = [];
 
-const files = getAllFiles(commandsPath);
+    if (!fs.existsSync(dir)) {
+        return results;
+    }
+
+    const files = fs.readdirSync(dir);
+
+    for (const file of files) {
+
+        const full = path.join(dir, file);
+
+        if (fs.statSync(full).isDirectory()) {
+
+            results.push(...getAllFiles(full));
+
+        } else if (file.endsWith(".js")) {
+
+            results.push(full);
+
+        }
+
+    }
+
+    return results;
+}
+let files = [];
+
+for (const dir of SCAN_DIRS) {
+    files.push(...getAllFiles(dir));
+}
+files = files.filter(file => !file.includes("generated-"));
+
+
+console.log(`Scanning ${files.length} JavaScript files...\n`);
 const en = {};
 const fr = {};
+const foundKeys = new Set();
+const missingKeys = new Set();
 
+const missingEnglish = [];
+const missingFrench = [];
 files.forEach(file => {
   try {
     const content = fs.readFileSync(file, 'utf8');
-    const nameMatch = content.match(/name:\s*["']([^"']+)["']/);
-    if (!nameMatch) {
-      console.log(`Skipped: ${path.basename(file)} - no name export`);
+const nameMatch = content.match(
+    /module\.exports\s*=\s*{[\s\S]*?name\s*:\s*["']([^"']+)["']/
+);
+// Detect translation keys
+const regex = /t\s*\(\s*(?:(?:jid|chatId|id)\s*,\s*)?["'`]([a-zA-Z0-9_.-]+)["'`]\s*\)/g;
+let match;
+while ((match = regex.exec(content)) !== null) {
+
+    const key = match[1];
+
+    // Ignore invalid matches
+    if (
+        key === "global" ||
+        key === "key" ||
+        key === "_" ||
+        key.length < 3
+    ) {
+        continue;
+    }
+
+    foundKeys.add(key);
+
+}
+if (!nameMatch) {
       skipped++;
       return;
     }
     const name = nameMatch[1];
     
-    if (dict[name]) {
-      fr[name] = dict[name];
-      en[name] = dict[name];
-      console.log(`Created: ${name}`);
-      created++;
-    } else {
-      console.log(`Skipped: ${path.basename(file)}`);
-      missing.push(name);
-      skipped++;
-    }
-  } catch (e) {
+
+if (dictionary[name]) {
+
+    fr[name] = dictionary[name];
+    en[name] = dictionary[name];
+    created++;
+
+} else {
+
+    console.log(`Missing command description: ${name}`);
+    missing.push(name);
+    skipped++;
+
+}
+
+} catch (e) {
+
     console.log(`Error in ${file}: ${e.message}`);
-  }
+
+}
+
 });
 
-fs.writeFileSync(outputEn, `module.exports = ${JSON.stringify(en, null, 2)};`);
-fs.writeFileSync(outputFr, `module.exports = ${JSON.stringify(fr, null, 2)};`);
+fs.writeFileSync(
+    EN_FILE,
+    `module.exports = ${JSON.stringify(en, null, 2)};`
+);
 
-console.log(`\nDone!\n\nCommands found: ${files.length}\n\nCreated:\n${Object.keys(fr).length} commands`);
-if(missing.length > 0) console.log(`Missing French translations:\n${missing.join('\n')}`);
+fs.writeFileSync(
+    FR_FILE,
+    `module.exports = ${JSON.stringify(fr, null, 2)};`
+);
+
+console.log("\n══════════════════════════════");
+console.log(" WhisperBot Language Builder ");
+console.log("══════════════════════════════");
+
+console.log(`\nJavaScript files scanned : ${files.length}`);
+console.log(`Commands found           : ${created}`);
+console.log(`Library files           : ${skipped}`);
+console.log(`Translation keys found   : ${foundKeys.size}`);
+
+for (const key of foundKeys) {
+
+if (!dictionary[key]) {
+    missingKeys.add(key);
+}
+
+if (!enLang[key]) {
+enLang[key] = "[TODO] " + key;
+}
+
+if (!frLang[key]) {
+frLang[key] = "[TODO] " + key;
+}
+}
+for (const key of foundKeys) {
+
+    if (!enLang[key]) {
+        missingEnglish.push(key);
+    }
+
+    if (!frLang[key]) {
+        missingFrench.push(key);
+    }
+
+}
+
+if (missingKeys.size) {
+
+    console.log("\nMissing translation keys:\n");
+
+    let updated = false;
+
+    let dictionaryContent =
+        fs.readFileSync(DICT_FILE, "utf8");
+
+    for (const key of missingKeys) {
+
+        console.log(" - " + key);
+
+        if (!dictionaryContent.includes(`"${key}"`)) {
+
+            dictionaryContent =
+                dictionaryContent.replace(
+                    /module\.exports\s*=\s*{/,
+                    `module.exports = {\n  "${key}": "${key}",`
+                );
+
+            updated = true;
+        }
+    }
+
+
+    if (updated) {
+
+        fs.writeFileSync(
+            DICT_FILE,
+            dictionaryContent
+        );
+
+        console.log(
+            "\n✅ Missing keys automatically added to dictionary.js"
+        );
+
+    }
+
+} else {
+
+    console.log("\n✅ No missing translation keys.");
+
+}
+
+console.log("\n══════════════════════════════");
+console.log(" Language Status");
+console.log("══════════════════════════════");
+
+console.log(
+    `English : ${foundKeys.size - missingEnglish.length}/${foundKeys.size}`
+);
+
+console.log(
+    `French  : ${foundKeys.size - missingFrench.length}/${foundKeys.size}`
+);
+
+if (missingEnglish.length) {
+
+    console.log("\nMissing English:\n");
+
+    missingEnglish.forEach(k =>
+        console.log(" - " + k)
+    );
+
+}
+// ===========================================
+// Auto append missing translations
+// ===========================================
+
+function appendMissing(filePath, missing) {
+
+    if (!missing.length) return;
+
+    let content = fs.readFileSync(filePath, "utf8");
+
+    // Remove the closing };
+    content = content.replace(/\n?\};?\s*$/, "");
+
+    for (const key of missing) {
+
+        if (content.includes(`"${key}"`)) {
+            continue;
+        }
+const value =
+    filePath.endsWith("fr.js")
+        ? `À TRADUIRE: ${key}`
+        : `TODO: ${key}`;
+
+content += `,\n    "${key}": "${value}"`;
+
+    }
+
+    content += "\n};\n";
+
+    fs.writeFileSync(filePath, content);
+
+}
+
+appendMissing(EN_PATH, missingEnglish);
+appendMissing(FR_PATH, missingFrench);
+
+console.log("\n══════════════════════════════");
+console.log(" Builder Summary");
+console.log("══════════════════════════════");
+
+console.log(`English added : ${missingEnglish.length}`);
+console.log(`French added  : ${missingFrench.length}`);
+
+if (
+    missingEnglish.length ||
+    missingFrench.length
+) {
+
+    console.log("\nRun 'npm run build' again to verify.");
+
+} else {
+
+    console.log("\n✅ Everything is translated.");
+const sortedEn = Object.fromEntries(
+    Object.entries(enLang).sort((a, b) =>
+        a[0].localeCompare(b[0])
+    )
+);
+
+const sortedFr = Object.fromEntries(
+    Object.entries(frLang).sort((a, b) =>
+        a[0].localeCompare(b[0])
+    )
+);
+// Auto-update dictionary.js
+let dictionaryChanged = false;
+
+for (const file of files) {
+
+    const content = fs.readFileSync(file, "utf8");
+
+    const nameMatch = content.match(/name:\s*["']([^"']+)["']/);
+
+    if (!nameMatch) continue;
+
+    const command = nameMatch[1];
+
+    if (!dictionary[command]) {
+
+        dictionary[command] = "[TODO] Add description";
+
+        console.log("Added command description:", command);
+
+        dictionaryChanged = true;
+
+    }
+
+}
+
+if (dictionaryChanged) {
+
+    const sortedDictionary = Object.fromEntries(
+        Object.entries(dictionary).sort((a, b) =>
+            a[0].localeCompare(b[0])
+        )
+    );
+
+    fs.writeFileSync(
+        DICT_FILE,
+        "module.exports = " +
+        JSON.stringify(sortedDictionary, null, 2)
+    );
+
+}
+
+fs.writeFileSync(
+    path.join(__dirname, "../language/en.js"),
+    "module.exports = " +
+    JSON.stringify(sortedEn, null, 2)
+);
+
+fs.writeFileSync(
+    path.join(__dirname, "../language/fr.js"),
+    "module.exports = " +
+    JSON.stringify(sortedFr, null, 2)
+);
+
+}
+
+if (missingFrench.length) {
+
+    console.log("\nMissing French:\n");
+
+    missingFrench.forEach(k =>
+        console.log(" - " + k)
+    );
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
