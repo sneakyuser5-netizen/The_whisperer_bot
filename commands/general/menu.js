@@ -87,11 +87,11 @@ let menu =
     other: "📦"
 };
 
-const cmdIcon = commandIcons[category] || "⚙️";
 
         for (const category in categories) {
 
             const icon = icons[category] || "📦";
+            const cmdIcon = commandIcons[category] || "⚙️";
 
 menu += `
 
