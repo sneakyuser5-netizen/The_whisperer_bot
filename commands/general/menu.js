@@ -41,17 +41,26 @@ const ram =
     (process.memoryUsage().rss / 1024 / 1024).toFixed(1);
 
 let menu =
-`╭━━━━━━━━━━━━━━━━━━━━━━━━━━╮
-┃      🤖 *WhisperBot*
-┣━━━━━━━━━━━━━━━━━━━━━━━━━━┫
-┃ 👤 User      : ${msg.pushName || "User"}
-┃ 🌍 Language  : ${lang}
-┃ ⚡ Prefix    : .
-┃ 📦 Version   : ${version}
-┃ ⏱ Uptime    : ${uptime}
-┃ 💾 RAM       : ${ram} MB
-┃ 📚 Commands  : ${commands.size}
-╰━━━━━━━━━━━━━━━━━━━━━━━━━━╯`;
+`╔════════════════════════════════════╗
+║          🤖 *WhisperBot*           ║
+╠════════════════════════════════════╣
+║ 👤 User      : ${msg.pushName || "User"}
+║ 🌍 Language  : ${lang}
+║ ⚡ Prefix    : .
+║ 📦 Version   : ${version}
+║ ⏱️ Uptime     : ${uptime}
+║ 💾 RAM        : ${ram} MB
+║ 📚 Commands   : ${commands.size}
+╚════════════════════════════════════╝`;
+        menu += `
+
+╭────── 📂 Categories ──────╮`;
+
+Object.keys(categories).forEach(cat => {
+    menu += `\n│ ${icons[cat] || "📦"} ${cat.toUpperCase()} (${categories[cat].length})`;
+});
+
+menu += `\n╰──────────────────────────╯`;
         const categories = {};
 
         for (const [name, command] of commands.entries()) {
@@ -117,28 +126,29 @@ for (const category of pages) {
 
 menu += `
 
-╭──『 ${icon} *${category.toUpperCase()}* (${categories[category].length}) 』──╮
-`;
+╔══════ ${icon} ${category.toUpperCase()} (${categories[category].length}) ══════╗
 
             categories[category].forEach((command, index) => {
 
-    if (index > 0) {
-        menu += `├────────────────────\n`;
-    }
-
     menu += `│ ${cmdIcon} *.${command.name}*\n`;
-    menu += `│ ${t(command.name)}\n`;
-    //menu += `│\n`;
+menu += `│   ${t(command.name)}\n`;
+
+if (index < categories[category].length - 1) {
+    menu += `│\n`;
+    }
 
 });
 
-            menu += "╰────────────────────╯\n";
+            menu += "╚════════════════════════════════════╝\n";
 
         }
 
         menu += `
 
-📚 *${t("total_commands")}:* ${commands.size}`;
+╔════════════════════════════════════╗
+║ 📚 ${t("total_commands")}: ${commands.size}
+║ 🤖 WhisperBot v${version}
+╚════════════════════════════════════╝`;
 
         await sock.sendMessage(jid, {
             text: menu
