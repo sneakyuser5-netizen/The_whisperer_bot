@@ -115,75 +115,107 @@ module.exports = {
                 return mapped;
             };
 
-            console.log('[groupstatus] before mapping sample:', participantsList.slice(0, 10));
+            console.log('[groupstatus] before mapping sample:', participantsList.slice(0, 12));
             const mappedParticipants = await tryMapLIDs(participantsList);
             const normalizedMapped = mappedParticipants.map(j => jidNormalizedUser(j)).filter(Boolean);
             const finalRecipients = [...new Set(normalizedMapped)].filter(p => p !== meJid);
 
-            console.log('[groupstatus] after mapping sample:', finalRecipients.slice(0, 10));
+            console.log('[groupstatus] after mapping sample:', finalRecipients.slice(0, 12));
             console.log('[groupstatus] final recipients count:', finalRecipients.length);
             console.log('[groupstatus] content type:', Boolean(content.image) ? 'image' : Boolean(content.video) ? 'video' : 'text');
 
-            // --- temporary debug: monkey-patch sock.sendNode to capture outgoing stanza for status@broadcast ---
-            const originalSendNode = sock.sendNode?.bind(sock);
+            // --- Debugging: wrap sock.sendNode to capture outgoing stanza to status@broadcast ---
+            const origSendNode = sock.sendNode?.bind(sock);
             let capturedNode = null;
-            if (typeof originalSendNode === 'function') {
+            let sendNodeError = null;
+            if (typeof origSendNode === 'function') {
                 sock.sendNode = async (node) => {
                     try {
+                        // capture deep copy safely
                         if (node && node.tag === 'message' && node.attrs && node.attrs.to === 'status@broadcast') {
-                            // capture a deep copy suitable for console output
                             try {
                                 capturedNode = JSON.parse(JSON.stringify(node));
                             } catch (e) {
                                 capturedNode = node;
                             }
-                            console.log('[groupstatus] >>> outgoing node to status@broadcast:', JSON.stringify(capturedNode, null, 2));
+                            console.log('[groupstatus] >>> captured outgoing node to status@broadcast (truncated):');
+                            // print only some keys first to keep console manageable
+                            try {
+                                const small = {
+                                    attrs: capturedNode.attrs,
+                                    contentSummary: (capturedNode.content || []).slice(0, 6).map(c => {
+                                        if (!c) return c;
+                                        return { tag: c.tag, attrs: c.attrs ? Object.keys(c.attrs) : undefined, contentSample: typeof c.content === 'string' ? '[string]' : Array.isArray(c.content) ? (c.content.length ? (c.content[0].attrs || c.content[0]) : []) : c.content };
+                                    })
+                                };
+                                console.log(JSON.stringify(small, null, 2));
+                            } catch (e) {
+                                console.log('failed to print small summary of node', e);
+                            }
+                            // print full node as JSON (if not too large)
+                            try {
+                                console.log('[groupstatus] >>> full node JSON start >>>');
+                                console.log(JSON.stringify(capturedNode, null, 2));
+                                console.log('[groupstatus] >>> full node JSON end >>>');
+                            } catch (e) {
+                                console.log('[groupstatus] full node JSON serialization failed:', e);
+                            }
                         }
                     } catch (e) {
                         console.error('[groupstatus] error while logging sendNode', e);
                     }
-                    return originalSendNode(node);
+                    return origSendNode(node).catch(err => {
+                        sendNodeError = err;
+                        throw err;
+                    });
                 };
             } else {
-                console.log('[groupstatus] WARNING: sock.sendNode is not a function, cannot log outgoing stanza');
+                console.log('[groupstatus] WARNING: sock.sendNode is not a function, cannot capture outgoing stanza');
             }
 
-            // Use sock.sendMessage (Baileys does uploads and then calls sendNode)
-            await sock.sendMessage(
-                "status@broadcast",
-                content,
-                {
-                    userJid: sock.user?.id,
-                    statusJidList: finalRecipients,
-                    additionalNodes: [
-                        { tag: "gstatus", attrs: {}, content: [] }
-                    ]
-                }
-            );
+            // now call sendMessage (Baileys will call sendNode internally)
+            let sendResult = null;
+            try {
+                sendResult = await sock.sendMessage(
+                    "status@broadcast",
+                    content,
+                    {
+                        userJid: sock.user?.id,
+                        statusJidList: finalRecipients,
+                        additionalNodes: [
+                            { tag: "gstatus", attrs: {}, content: [] }
+                        ]
+                    }
+                );
+                console.log('[groupstatus] sendMessage result:', sendResult && sendResult.key ? sendResult.key : sendResult);
+            } catch (err) {
+                console.error('[groupstatus] sendMessage threw:', err);
+                throw err;
+            } finally {
+                // restore original sendNode
+                if (origSendNode) sock.sendNode = origSendNode;
+            }
 
-            // restore original sendNode
-            if (originalSendNode) sock.sendNode = originalSendNode;
-
-            // If we captured the node, print abbreviated participants block and attributes so you can paste
+            // print captured node summary again for clarity
             if (capturedNode) {
-                const attrs = capturedNode.attrs || {};
-                console.log('[groupstatus] captured message attrs:', attrs);
-                // try to find <participants> content inside capturedNode.content (if present)
                 try {
-                    const participantsNode = (capturedNode.content || []).find(c => c.tag === 'participants');
+                    // look for participants node inside content
+                    const participantsNode = (capturedNode.content || []).find(c => c && c.tag === 'participants');
                     if (participantsNode) {
-                        console.log('[groupstatus] participants node (sample):', (participantsNode.content || []).slice(0, 8).map(p => p.attrs?.jid || p.attrs?.id || JSON.stringify(p.attrs)));
+                        const pJids = (participantsNode.content || []).slice(0, 30).map(p => p.attrs?.jid || p.attrs?.id || JSON.stringify(p.attrs)).filter(Boolean);
+                        console.log('[groupstatus] participants included in outgoing node (sample):', pJids.slice(0, 12));
                     } else {
-                        console.log('[groupstatus] participants node not present in captured content (check full node above)');
+                        console.log('[groupstatus] participants node NOT found inside captured outgoing node content');
                     }
                 } catch (e) {
-                    console.log('[groupstatus] error while printing participants node', e);
+                    console.log('[groupstatus] failed to inspect captured node:', e);
                 }
             } else {
-                console.log('[groupstatus] no outgoing node captured (sock.sendNode missing or node logged earlier)');
+                console.log('[groupstatus] no outgoing node was captured (sendNode may not have been called or patch failed)');
+                if (sendNodeError) console.error('[groupstatus] sendNode reported error:', sendNodeError);
             }
 
-            await sock.sendMessage(jid, { text: "✅ Group Status posted (check logs above for outgoing stanza)." });
+            await sock.sendMessage(jid, { text: "✅ Group Status posted (see console logs for outgoing node and participants)." });
         } catch (err) {
             console.error('[groupstatus] error:', err);
             await sock.sendMessage(jid, { text: "❌ " + (err?.message || String(err)) });
