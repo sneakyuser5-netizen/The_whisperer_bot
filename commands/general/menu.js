@@ -1,46 +1,101 @@
 module.exports = {
-
     name: "menu",
-
     category: "general",
-
     description: "Show bot commands",
-
     permission: "public",
 
     execute: async (sock, msg, args = []) => {
 
         const { t } = require("../../lib/lang");
         const { commands } = require("../../handler");
+        const settings = require("../../lib/settings");
 
         const jid = msg.key.remoteJid;
         const page = (args[0] || "").toLowerCase();
 
-        const settings = require("../../lib/settings");
+        const config = settings.get("global");
 
-const config = settings.get("global");
+        const lang =
+            config.language === "fr"
+                ? "Français 🇫🇷"
+                : "English 🇬🇧";
 
-const lang =
-    config.language === "fr"
-        ? "Français 🇫🇷"
-        : "English 🇬🇧";
+        const version = "1.0.0";
 
-const version = "1.0.0";
+        const seconds = Math.floor(
+            (Date.now() - (global.START_TIME || Date.now())) / 1000
+        );
 
-const seconds = Math.floor(
-    (Date.now() - (global.START_TIME || Date.now())) / 1000
-);
+        const hours = Math.floor(seconds / 3600);
+        const minutes = Math.floor((seconds % 3600) / 60);
+        const secs = seconds % 60;
 
-const hours = Math.floor(seconds / 3600);
-const minutes = Math.floor((seconds % 3600) / 60);
-const secs = seconds % 60;
+        const uptime = `${hours}h ${minutes}m ${secs}s`;
 
-const uptime = `${hours}h ${minutes}m ${secs}s`;
+        const ram = (
+            process.memoryUsage().rss /
+            1024 /
+            1024
+        ).toFixed(1);
 
-const ram =
-    (process.memoryUsage().rss / 1024 / 1024).toFixed(1);
+        const icons = {
+            admin: "👮",
+            group: "👥",
+            owner: "👑",
+            fun: "🎮",
+            general: "📖",
+            info: "ℹ️",
+            tools: "🛠",
+            other: "📦"
+        };
 
-let menu =
+        const commandIcons = {
+            admin: "🛡️",
+            group: "👥",
+            owner: "👑",
+            fun: "🎲",
+            general: "📖",
+            info: "ℹ️",
+            tools: "🛠️",
+            other: "📦"
+        };
+
+        const categories = {};
+
+        for (const [name, command] of commands.entries()) {
+
+            if (name !== command.name) continue;
+
+            const cat = command.category || "other";
+
+            if (!categories[cat]) {
+                categories[cat] = [];
+            }
+
+            categories[cat].push(command);
+        }
+
+        if (page && !categories[page]) {
+            return sock.sendMessage(jid, {
+                text:
+`❌ Unknown menu.
+
+Available pages:
+
+👮 admin
+👥 group
+👑 owner
+🎮 fun
+📖 general
+ℹ️ info
+🛠 tools
+
+Example:
+.menu admin`
+            });
+        }
+
+        let menu =
 `╔════════════════════════════════════╗
 ║          🤖 *WhisperBot*           ║
 ╠════════════════════════════════════╣
@@ -48,99 +103,57 @@ let menu =
 ║ 🌍 Language  : ${lang}
 ║ ⚡ Prefix    : .
 ║ 📦 Version   : ${version}
-║ ⏱️ Uptime     : ${uptime}
+║ ⏱ Uptime     : ${uptime}
 ║ 💾 RAM        : ${ram} MB
 ║ 📚 Commands   : ${commands.size}
 ╚════════════════════════════════════╝`;
-        menu += `
+
+        if (!page) {
+
+            menu += `
 
 ╭────── 📂 Categories ──────╮`;
 
-Object.keys(categories).forEach(cat => {
-    menu += `\n│ ${icons[cat] || "📦"} ${cat.toUpperCase()} (${categories[cat].length})`;
-});
+            Object.keys(categories).forEach(cat => {
+                menu += `\n│ ${icons[cat] || "📦"} ${cat.toUpperCase()} (${categories[cat].length})`;
+            });
 
-menu += `\n╰──────────────────────────╯`;
-        const categories = {};
+            menu += `\n╰──────────────────────────╯`;
 
-        for (const [name, command] of commands.entries()) {
+            menu += `
 
-            if (name !== command.name) continue;
-
-            const category = command.category || "other";
-
-            if (!categories[category]) {
-                categories[category] = [];
-            }
-
-            categories[category].push(command);
-
-        }
-        const icons = {
-    admin: "👮",
-    group: "👥",
-    fun: "🎮",
-    general: "📖",
-    info: "ℹ️",
-    owner: "👑",
-    tools: "🛠",
-    other: "📦"
-};
-        const commandIcons = {
-    admin: "🛡️",
-    group: "👥",
-    fun: "🎲",
-    general: "📖",
-    info: "ℹ️",
-    owner: "👑",
-    tools: "🛠️",
-    other: "📦"
-};
-
-        if (page && !categories[page]) {
-    return sock.sendMessage(jid, {
-        text:
-`❌ Unknown menu.
-
-Available pages:
-
-👮 admin
-👥 group
-🎮 fun
-📖 general
-ℹ️ info
-👑 owner
-🛠 tools
+💡 Type *.menu <category>*
 
 Example:
-.menu admin`
-    });
+.menu admin`;
         }
 
-        const pages = page ? [page] : Object.keys(categories);
+        const pages = page
+            ? [page]
+            : Object.keys(categories);
 
-for (const category of pages) {
+        for (const category of pages) {
 
             const icon = icons[category] || "📦";
             const cmdIcon = commandIcons[category] || "⚙️";
 
-menu += `
+            menu += `
 
 ╔══════ ${icon} ${category.toUpperCase()} (${categories[category].length}) ══════╗
+`;
 
             categories[category].forEach((command, index) => {
 
-    menu += `│ ${cmdIcon} *.${command.name}*\n`;
-menu += `│   ${t(command.name)}\n`;
+                menu += `│ ${cmdIcon} *.${command.name}*\n`;
+                menu += `│   ${t(command.name)}\n`;
 
-if (index < categories[category].length - 1) {
-    menu += `│\n`;
-    }
+                if (index < categories[category].length - 1) {
+                    menu += `│\n`;
+                }
 
-});
+            });
 
-            menu += "╚════════════════════════════════════╝\n";
-
+            menu += `╚════════════════════════════════════╝`;
         }
 
         menu += `
@@ -155,5 +168,4 @@ if (index < categories[category].length - 1) {
         });
 
     }
-
 };
