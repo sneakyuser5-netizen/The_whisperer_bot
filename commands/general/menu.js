@@ -96,17 +96,17 @@ Example:
         }
 
         let menu =
-`╔════════════════════════════════════╗
-║          🤖 *WhisperBot*           ║
-╠════════════════════════════════════╣
-║ 👤 User      : ${msg.pushName || "User"}
-║ 🌍 Language  : ${lang}
-║ ⚡ Prefix    : .
-║ 📦 Version   : ${version}
-║ ⏱ Uptime     : ${uptime}
-║ 💾 RAM        : ${ram} MB
-║ 📚 Commands   : ${commands.size}
-╚════════════════════════════════════╝`;
+`╔══════════════════════════════════════╗
+║              🤖 WHISPERBOT           ║
+╠══════════════════════════════════════╣
+║ 👤 User      │ ${msg.pushName || "User"}
+║ 🌍 Language  │ ${lang}
+║ ⚡ Prefix    │ .
+║ 📦 Version   │ ${version}
+║ ⏱️ Uptime     │ ${uptime}
+║ 💾 RAM        │ ${ram} MB
+║ 📚 Commands   │ ${commands.size}
+╚══════════════════════════════════════╝`;
 
         if (!page) {
 
