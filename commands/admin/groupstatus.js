@@ -22,58 +22,38 @@ module.exports = {
     }
 
     const quoted = context.quotedMessage;
-
     try {
+      // build content
       let content;
-
-      // TEXT
       if (quoted.conversation || quoted.extendedTextMessage) {
         content = { text: quoted.conversation || quoted.extendedTextMessage.text };
-      }
-      // IMAGE
-      else if (quoted.imageMessage) {
+      } else if (quoted.imageMessage) {
         const media = await downloadMediaMessage(
           {
-            key: {
-              remoteJid: jid,
-              id: context.stanzaId,
-              participant: context.participant
-            },
+            key: { remoteJid: jid, id: context.stanzaId, participant: context.participant },
             message: quoted
           },
           "buffer",
           {},
-          {
-            logger: sock.logger,
-            reuploadRequest: sock.updateMediaMessage
-          }
+          { logger: sock.logger, reuploadRequest: sock.updateMediaMessage }
         );
         content = { image: media, caption: quoted.imageMessage.caption || "" };
-      }
-      // VIDEO
-      else if (quoted.videoMessage) {
+      } else if (quoted.videoMessage) {
         const media = await downloadMediaMessage(
           {
-            key: {
-              remoteJid: jid,
-              id: context.stanzaId,
-              participant: context.participant
-            },
+            key: { remoteJid: jid, id: context.stanzaId, participant: context.participant },
             message: quoted
           },
           "buffer",
           {},
-          {
-            logger: sock.logger,
-            reuploadRequest: sock.updateMediaMessage
-          }
+          { logger: sock.logger, reuploadRequest: sock.updateMediaMessage }
         );
         content = { video: media, caption: quoted.videoMessage.caption || "" };
       } else {
-        return sock.sendMessage(jid, { text: "❌ Unsupported message." });
+        return sock.sendMessage(jid, { text: "❌ Unsupported message type (reply to text/image/video)." });
       }
 
-      // fetch group metadata to build participants list (members' user JIDs)
+      // fetch group metadata and build participants list
       const metadata = typeof sock.groupMetadata === "function"
         ? await sock.groupMetadata(jid).catch(() => null)
         : null;
@@ -82,39 +62,32 @@ module.exports = {
         ? metadata.participants.map(p => p?.id).filter(Boolean)
         : [];
 
-      // normalize, dedupe
       participants = participants.map(j => jidNormalizedUser(j));
       participants = [...new Set(participants)];
-
-      // exclude ourselves
       const meJid = jidNormalizedUser(sock.user?.id);
-      participants = participants.filter(p => p !== meJid);
+      participants = participants.filter(p => p && p !== meJid);
 
       if (participants.length === 0) {
-        return sock.sendMessage(jid, {
-          text: "❌ Could not resolve group participants to publish status."
-        });
+        return sock.sendMessage(jid, { text: "❌ No valid group participants found to publish status to." });
       }
 
-      // Try LID -> PN mapping if available (best-effort)
+      // best-effort LID -> PN mapping
       const tryMapLIDs = async (list) => {
         if (!sock.signalRepository || !sock.signalRepository.lidMapping || typeof sock.signalRepository.lidMapping.getPNForLID !== 'function') {
           return list;
         }
-        const mapped = [];
-        for (const item of list) {
+        const out = [];
+        for (const x of list) {
           try {
-            if (item && item.endsWith && item.endsWith('@lid')) {
-              const pn = await sock.signalRepository.lidMapping.getPNForLID(item).catch(() => null);
-              mapped.push(pn || item);
-            } else {
-              mapped.push(item);
-            }
+            if (typeof x === 'string' && x.endsWith('@lid')) {
+              const pn = await sock.signalRepository.lidMapping.getPNForLID(x).catch(() => null);
+              out.push(pn || x);
+            } else out.push(x);
           } catch {
-            mapped.push(item);
+            out.push(x);
           }
         }
-        return mapped;
+        return out;
       };
 
       const mapped = await tryMapLIDs(participants);
@@ -122,74 +95,63 @@ module.exports = {
       finalPNs = [...new Set(finalPNs)].filter(p => p !== meJid);
 
       if (finalPNs.length === 0) {
-        return sock.sendMessage(jid, {
-          text: "❌ After mapping there are no valid recipients to publish status to."
-        });
+        return sock.sendMessage(jid, { text: "❌ After mapping, no valid PN recipients available." });
       }
 
-      // Also build explicit device-addressed JIDs for participants (device 0)
-      const participantsDeviceJids = finalPNs.map(p => {
+      // explicit device-addressed jids (device 0)
+      const deviceJids = finalPNs.map(p => {
         try {
           const dec = jidDecode(p);
           if (!dec?.user) return null;
           const server = dec.server || 's.whatsapp.net';
-          return jidEncode(dec.user, server, 0); // explicit device 0
+          return jidEncode(dec.user, server, 0);
         } catch {
           return null;
         }
       }).filter(Boolean);
 
-      // Build the status message using generateWAMessageFromContent so keys/ids are created correctly
-      const status = generateWAMessageFromContent(
-        "status@broadcast",
-        content,
-        { userJid: sock.user?.id }
-      );
+      // create status message
+      const status = generateWAMessageFromContent("status@broadcast", content, { userJid: sock.user?.id });
+      const msgId = status.key?.id;
 
-      // Build participants node (items) — server expects a <participants> list node
-      const participantsNodeItems = participantsDeviceJids.map(j => ({
-        tag: 'item',
-        attrs: { jid: j }
-      }));
+      // participants node content (deduped)
+      const participantsNodeContent = [
+        ...finalPNs.map(p => ({ tag: 'item', attrs: { jid: p } })),
+        ...deviceJids.map(d => ({ tag: 'item', attrs: { jid: d } }))
+      ];
+      const seen = new Set();
+      const dedupedParticipants = [];
+      for (const it of participantsNodeContent) {
+        const j = it?.attrs?.jid;
+        if (!j) continue;
+        if (!seen.has(j)) {
+          seen.add(j);
+          dedupedParticipants.push(it);
+        }
+      }
 
-      // add a small console debug so you can paste it if it still fails
-      console.log('[groupstatus] finalPNs count:', finalPNs.length);
-      console.log('[groupstatus] sample finalPNs:', finalPNs.slice(0, 8));
-      console.log('[groupstatus] sample device-jids:', participantsDeviceJids.slice(0, 8));
-      console.log('[groupstatus] content type:', Boolean(content.image) ? 'image' : Boolean(content.video) ? 'video' : 'text');
-      console.log('[groupstatus] about to relay status@broadcast id=', status.key?.id);
+      // minimal logging: recipients count + small sample
+      console.log('[groupstatus] recipients:', finalPNs.length, 'sample:', finalPNs.slice(0, 6));
 
-      // Relay explicitly with participants node & addressing_mode set to 'pn'
+      // relay message with addressing_mode hint and explicit participants node
+      console.log('[groupstatus] relaying id=', msgId, 'participants=', dedupedParticipants.length);
       await sock.relayMessage(
         "status@broadcast",
         status.message,
         {
-          messageId: status.key.id,
-          // give the PN user list as statusJidList (server uses this for 1:1 routing)
+          messageId: msgId,
           statusJidList: finalPNs,
-          // ensure addressing mode leans toward PN addresses
-          additionalAttributes: {
-            addressing_mode: 'pn'
-          },
-          // include participants node explicitly and gstatus node
+          additionalAttributes: { addressing_mode: 'pn' },
           additionalNodes: [
-            {
-              tag: 'participants',
-              attrs: {},
-              content: participantsNodeItems
-            },
-            {
-              tag: "gstatus",
-              attrs: {},
-              content: []
-            }
+            { tag: 'participants', attrs: {}, content: dedupedParticipants },
+            { tag: 'gstatus', attrs: {}, content: [] }
           ]
         }
       );
 
-      await sock.sendMessage(jid, { text: "✅ Group Status posted (check members' Status tab)." });
+      await sock.sendMessage(jid, { text: "✅ Attempted group status broadcast." });
     } catch (err) {
-      console.error('[groupstatus] error:', err);
+      console.error('[groupstatus] error:', err?.message || String(err));
       await sock.sendMessage(jid, { text: "❌ " + (err?.message || String(err)) });
     }
   }
