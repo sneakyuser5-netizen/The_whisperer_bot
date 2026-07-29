@@ -7,23 +7,21 @@ const { t } = require("../../lib/lang");
 
 module.exports = {
 
-    name: "gstatus",
+    name: "userstatus",
 
-    description: "Post replied media to WhatsApp status",
+    description: "Post replied media to your WhatsApp status",
 
-    category: "admin",
+    category: "owner",
 
-    permission: "admin",
+    permission: "owner",
 
     execute: async (sock, msg) => {
-
-        console.log("GSTATUS STARTED");
 
         const jid = msg.key.remoteJid;
 
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.only_groups")
+                text: t(jid, "You're not the bot owner")
             });
         }
 
@@ -34,7 +32,7 @@ module.exports = {
 
         if (!quoted) {
             return sock.sendMessage(jid, {
-                text: t(jid, "admin.gstatus_reply_media")
+                text: t(jid, "Reply to message, image or video")
             });
         }
 
@@ -78,7 +76,7 @@ module.exports = {
             } else {
 
                 return sock.sendMessage(jid, {
-                    text: t(jid, "admin.gstatus_only_supported")
+                    text: t(jid, "You're not the bot owner")
                 });
 
             }
@@ -94,7 +92,7 @@ module.exports = {
             console.log("STATUS SENT:", sent);
 
             await sock.sendMessage(jid, {
-                text: t(jid, "admin.gstatus_posted")
+                text: t(jid, "_Your status have been posted successfully_")
             });
 
         } catch (err) {
@@ -102,7 +100,7 @@ module.exports = {
             console.log("GSTATUS ERROR:", err);
 
             await sock.sendMessage(jid, {
-                text: t(jid, "admin.gstatus_failed")
+                text: t(jid, "``Failled to update status``")
             });
 
         }
