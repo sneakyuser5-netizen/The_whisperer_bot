@@ -112,20 +112,31 @@ Example:
 
             menu += `
 
-╭────── 📂 Categories ──────╮`;
+╔════════════ 📂 CATEGORIES ════════════╗`;
 
-            Object.keys(categories).forEach(cat => {
-                menu += `\n│ ${icons[cat] || "📦"} ${cat.toUpperCase()} (${categories[cat].length})`;
-            });
+Object.keys(categories).forEach(cat => {
 
-            menu += `\n╰──────────────────────────╯`;
+    const title =
+        cat.charAt(0).toUpperCase() + cat.slice(1);
 
-            menu += `
+    menu += `\n║ ${icons[cat] || "📦"} ${title.padEnd(10)} (${categories[cat].length})`;
 
-💡 Type *.menu <category>*
+});
 
-Example:
-.menu admin`;
+menu += `\n╚══════════════════════════════════════╝`;
+
+menu += `
+
+💡 ${config.language === "fr"
+    ? "Utilisez"
+    : "Use"}
+
+   *.menu <category>*
+
+📌 Examples
+• .menu admin
+• .menu tools
+• .menu fun`;
         }
 
         const pages = page
