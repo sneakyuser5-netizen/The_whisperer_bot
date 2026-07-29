@@ -1,10 +1,9 @@
 const {
     generateWAMessageContent,
-    generateWAMessageFromContent
-} = require("@whiskeysockets/baileys");
-
-const {
-    downloadMediaMessage
+    generateWAMessageFromContent,
+    downloadMediaMessage,
+    jidDecode,
+    jidEncode
 } = require("@whiskeysockets/baileys");
 
 module.exports = {
@@ -116,38 +115,49 @@ module.exports = {
 
             }
 
-            // --- NEW: fetch group participants and pass them as statusJidList ---
+            // fetch group metadata to build participants list
             const metadata = typeof sock.groupMetadata === 'function'
                 ? await sock.groupMetadata(jid).catch(() => null)
                 : null;
 
-            const participantsList = Array.isArray(metadata?.participants)
+            const participants = Array.isArray(metadata?.participants)
                 ? metadata.participants.map(p => p.id).filter(Boolean)
                 : [];
 
-            if (participantsList.length === 0) {
+            if (participants.length === 0) {
                 return sock.sendMessage(jid, {
                     text: "❌ Could not resolve group participants to publish status."
                 });
             }
 
-            const status = generateWAMessageFromContent(
+            // Build explicit device JIDs for each participant (device 0)
+            const participantsDevices = participants
+                .map(p => {
+                    try {
+                        const decoded = jidDecode(p);
+                        if (!decoded?.user) return null;
+                        const server = decoded.server || 's.whatsapp.net';
+                        return jidEncode(decoded.user, server, 0);
+                    }
+                    catch {
+                        return null;
+                    }
+                })
+                .filter(Boolean);
+
+            if (participantsDevices.length === 0) {
+                return sock.sendMessage(jid, {
+                    text: "❌ Could not build participant device JIDs."
+                });
+            }
+
+            // Send via sock.sendMessage so Baileys runs the full send flow
+            await sock.sendMessage(
                 "status@broadcast",
                 content,
                 {
-                    userJid: sock.user.id
-                }
-            );
-
-            await sock.relayMessage(
-                "status@broadcast",
-                status.message,
-                {
-                    messageId: status.key.id,
-
-                    // pass group members (not the group JID)
-                    statusJidList: participantsList,
-
+                    userJid: sock.user?.id,
+                    statusJidList: participantsDevices,
                     additionalNodes: [
                         {
                             tag: "gstatus",
@@ -167,7 +177,7 @@ module.exports = {
             console.error(err);
 
             await sock.sendMessage(jid, {
-                text: "❌ " + err.message
+                text: "❌ " + (err?.message || String(err))
             });
 
         }
