@@ -723,9 +723,7 @@ demote_failed: "❌ Failed to demote user.",
 
 "admin.resetwarn_usage": "❌ Reply to a user or mention them.",
 "admin.resetwarn_success": "✅ Warnings reset.",
-    "admin.tagadmins_title": "👑 Group Admins"
-};
-//======
+    "admin.tagadmins_title": "👑 Group Admins",
   "owner.off": "OFF",
   "owner.on": "ON",
   "owner.online_disabled": "✅ Always online disabled.",
@@ -828,4 +826,3 @@ demote_failed: "❌ Failed to demote user.",
   "whois": "Show chat information",
   "yes": "Yes"
 }
-//>>>>> 13323dc (Improve language builder and translation system)
