@@ -43,56 +43,57 @@ module.exports = {
 
             }
 
-// IMAGE
-else if (quoted.imageMessage) {
+            // IMAGE
+            else if (quoted.imageMessage) {
 
-    const media = await downloadMediaMessage(
-        {
-            key: {
-                remoteJid: jid,
-                id: context.stanzaId,
-                participant: context.participant
-            },
-            message: quoted
-        },
-        "buffer",
-        {},
-        {
-            logger: sock.logger,
-            reuploadRequest: sock.updateMediaMessage
-        }
-    );
-
-    content = await generateWAMessageContent(
-        {
-            image: media,
-            caption: quoted.imageMessage.caption || ""
-        },
-        {
-            upload: sock.waUploadToServer
-        }
-    );
-
-}
-
-            // VIDEO
-            else if (quoted.videoMessage) {
-
-const media = await downloadMediaMessage(
-    {                        key: {
+                const media = await downloadMediaMessage(
+                    {
+                        key: {
                             remoteJid: jid,
                             id: context.stanzaId,
                             participant: context.participant
                         },
-        message: quoted
-    },
-    "buffer",
-    {},
-    {
-        logger: sock.logger,
-        reuploadRequest: sock.updateMediaMessage
-    }
-);
+                        message: quoted
+                    },
+                    "buffer",
+                    {},
+                    {
+                        logger: sock.logger,
+                        reuploadRequest: sock.updateMediaMessage
+                    }
+                );
+
+                content = await generateWAMessageContent(
+                    {
+                        image: media,
+                        caption: quoted.imageMessage.caption || ""
+                    },
+                    {
+                        upload: sock.waUploadToServer
+                    }
+                );
+
+            }
+
+            // VIDEO
+            else if (quoted.videoMessage) {
+
+                const media = await downloadMediaMessage(
+                    {
+                        key: {
+                            remoteJid: jid,
+                            id: context.stanzaId,
+                            participant: context.participant
+                        },
+                        message: quoted
+                    },
+                    "buffer",
+                    {},
+                    {
+                        logger: sock.logger,
+                        reuploadRequest: sock.updateMediaMessage
+                    }
+                );
 
                 content = await generateWAMessageContent(
                     {
@@ -115,6 +116,21 @@ const media = await downloadMediaMessage(
 
             }
 
+            // --- NEW: fetch group participants and pass them as statusJidList ---
+            const metadata = typeof sock.groupMetadata === 'function'
+                ? await sock.groupMetadata(jid).catch(() => null)
+                : null;
+
+            const participantsList = Array.isArray(metadata?.participants)
+                ? metadata.participants.map(p => p.id).filter(Boolean)
+                : [];
+
+            if (participantsList.length === 0) {
+                return sock.sendMessage(jid, {
+                    text: "❌ Could not resolve group participants to publish status."
+                });
+            }
+
             const status = generateWAMessageFromContent(
                 "status@broadcast",
                 content,
@@ -129,7 +145,8 @@ const media = await downloadMediaMessage(
                 {
                     messageId: status.key.id,
 
-                    statusJidList: [jid],
+                    // pass group members (not the group JID)
+                    statusJidList: participantsList,
 
                     additionalNodes: [
                         {
