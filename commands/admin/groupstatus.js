@@ -1,4 +1,7 @@
-const { downloadMediaMessage } = require("@whiskeysockets/baileys");
+const {
+    downloadMediaMessage,
+    jidNormalizedUser
+} = require("@whiskeysockets/baileys");
 
 module.exports = {
     name: "groupstatus",
@@ -44,7 +47,6 @@ module.exports = {
                     }
                 );
 
-                // Pass raw buffer to sendMessage (Baileys will upload it)
                 content = {
                     image: media,
                     caption: quoted.imageMessage.caption || ""
@@ -83,15 +85,29 @@ module.exports = {
                 ? await sock.groupMetadata(jid).catch(() => null)
                 : null;
 
-            const participantsList = Array.isArray(metadata?.participants)
-                ? metadata.participants.map(p => p.id).filter(Boolean)
+            let participantsList = Array.isArray(metadata?.participants)
+                ? metadata.participants.map(p => p?.id).filter(Boolean)
                 : [];
+
+            // Normalize participant user JIDs and remove duplicates
+            participantsList = participantsList.map(j => jidNormalizedUser(j));
+            participantsList = [...new Set(participantsList)];
+
+            // Exclude ourselves (the bot account) from the recipients list
+            const meJid = jidNormalizedUser(sock.user?.id);
+            participantsList = participantsList.filter(p => p !== meJid);
 
             if (participantsList.length === 0) {
                 return sock.sendMessage(jid, {
-                    text: "❌ Could not resolve group participants to publish status."
+                    text: "❌ Could not resolve group participants to publish status (no recipients after filtering)."
                 });
             }
+
+            // Debug logging — will print to your console
+            console.log('[groupstatus] sending status@broadcast');
+            console.log('[groupstatus] participants count:', participantsList.length);
+            console.log('[groupstatus] sample participants:', participantsList.slice(0, 6));
+            console.log('[groupstatus] content type:', Boolean(content.image) ? 'image' : Boolean(content.video) ? 'video' : 'text');
 
             // Send via sock.sendMessage so Baileys runs the full send flow (uploads, tokens, etc.)
             await sock.sendMessage(
@@ -99,7 +115,7 @@ module.exports = {
                 content,
                 {
                     userJid: sock.user?.id,
-                    // Important: pass members (user JIDs), not group JID or device JIDs
+                    // members' normalized user JIDs
                     statusJidList: participantsList,
                     additionalNodes: [
                         { tag: "gstatus", attrs: {}, content: [] }
@@ -109,8 +125,6 @@ module.exports = {
 
             await sock.sendMessage(jid, { text: "✅ Group Status posted successfully." });
         } catch (err) {
-            console.error(err);
-            await sock.sendMessage(jid, { text: "❌ " + (err?.message || String(err)) });
-        }
-    }
-};
+            console.error('[groupstatus] error:', err);
+            await sock.sendMessage(jid, { text: "❌ " + (
+
