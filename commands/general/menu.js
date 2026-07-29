@@ -139,9 +139,7 @@ menu += `
 • .menu fun`;
         }
 
-        const pages = page
-            ? [page]
-            : Object.keys(categories);
+        const pages = page ? [page] : [];
 
         for (const category of pages) {
 
@@ -173,10 +171,16 @@ menu += `
 ║ 📚 ${t("total_commands")}: ${commands.size}
 ║ 🤖 WhisperBot v${version}
 ╚════════════════════════════════════╝`;
+        if (!page) {
+    return await sock.sendMessage(jid, {
+        text: menu
+    });
+        }
 
         await sock.sendMessage(jid, {
             text: menu
         });
+        
 
     }
 };
