@@ -60,15 +60,15 @@ module.exports = {
             other: "📦"
         };
         const categoryBanners = {
-    admin: "🛡️ GROUP ADMINISTRATION 🛡️",
-    group: "👥 GROUP MANAGEMENT 👥",
-    owner: "👑 OWNER PANEL 👑",
-    fun: "🎮 FUN & GAMES 🎮",
-    general: "📖 GENERAL COMMANDS 📖",
-    info: "ℹ️ INFORMATION ℹ️",
-    tools: "🛠️ UTILITIES 🛠️",
-    other: "📦 OTHER COMMANDS 📦"
-};
+            admin: "🛡️ GROUP ADMINISTRATION 🛡️",
+            group: "👥 GROUP MANAGEMENT 👥",
+            owner: "👑 OWNER PANEL 👑",
+            fun: "🎮 FUN & GAMES 🎮",
+            general: "📖 GENERAL COMMANDS 📖",
+            info: "ℹ️ INFORMATION ℹ️",
+            tools: "🛠️ UTILITIES 🛠️",
+            other: "📦 OTHER COMMANDS 📦"
+        };
 
         const categories = {};
 
@@ -118,25 +118,20 @@ Example:
 ║ 📚 Commands   │ ${commands.size}
 ╚══════════════════════════════════════╝`;
 
+        // If no specific page requested, show a general overview and categories summary
         if (!page) {
-            const banner = categoryBanners[category] || category.toUpperCase();
-
-menu += `
+            menu += `
 
 ╔══════════════════════════════════════╗
-║ ${banner.padEnd(36, " ")}║
+║ ${"🤖 WHISPERBOT".padEnd(36, " ")}║
 ╠══════════════════════════════════════╣
-║ ${icon} ${category.toUpperCase()} (${categories[category].length} commands)
+║ ${"Welcome to the command menu".padEnd(36, " ")}║
 ╚══════════════════════════════════════╝
 `;
 
-            
+            menu += `\n╚══════════════════════════════════════╝`;
 
-};
-
-menu += `\n╚══════════════════════════════════════╝`;
-
-menu += `
+            menu += `
 
 💡 ${config.language === "fr"
     ? "Utilisez"
@@ -150,6 +145,7 @@ menu += `
 • .menu fun`;
         }
 
+        // If a specific page was requested, or to build pages later
         const pages = page ? [page] : [];
 
         for (const category of pages) {
@@ -184,18 +180,21 @@ menu += `
 ║ 📚 ${t("total_commands")}: ${commands.size}
 ║ 🤖 WhisperBot v${version}
 ╚════════════════════════════════════╝`;
+
         if (!page) {
             menu += `
 
 ╔════════════ 📂 CATEGORIES ════════════╗`;
 
-Object.keys(categories).forEach(cat => {
-    menu += `\n║ ${icons[cat] || "📦"} ${cat.charAt(0).toUpperCase() + cat.slice(1).padEnd(10)} (${categories[cat].length})`;
-});
+            Object.keys(categories).forEach(cat => {
+                const icon = icons[cat] || "📦";
+                const name = cat.charAt(0).toUpperCase() + cat.slice(1);
+                menu += `\n║ ${icon} ${name.padEnd(10)} (${categories[cat].length})`;
+            });
 
-menu += `\n╚══════════════════════════════════════╝`;
+            menu += `\n╚══════════════════════════════════════╝`;
 
-menu += `
+            menu += `
 
 💡 ${config.language === "fr" ? "Utilisez" : "Use"}
 
@@ -205,15 +204,11 @@ menu += `
 • .menu admin
 • .menu tools
 • .menu fun`;
-    return await sock.sendMessage(jid, {
-        text: menu
-    });
         }
 
-        await sock.sendMessage(jid, {
+        return await sock.sendMessage(jid, {
             text: menu
         });
-        
 
     }
 };
