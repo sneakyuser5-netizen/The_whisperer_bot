@@ -1,382 +1,594 @@
 const fs = require("fs");
 const path = require("path");
 
-// Directories to scan
-const SCAN_DIRS = [
-    path.join(__dirname, "../commands"),
-    path.join(__dirname, "../events"),
-    path.join(__dirname, "../lib")
-];
+const ROOT = path.join(__dirname, "..");
 
-// Files
-const DICT_FILE = path.join(__dirname, "../language/source/dictionary.js");
-const EN_FILE = path.join(__dirname, "../language/generated-en.js");
-const FR_FILE = path.join(__dirname, "../language/generated-fr.js");
+const COMMANDS = path.join(ROOT, "commands");
+const EVENTS = path.join(ROOT, "events");
+const LIB = path.join(ROOT, "lib");
 
-// Load dictionary
-let dictionary = require(DICT_FILE);
-//const enLang = require("../language/en");
-//const frLang = require("../language/fr");
-const enLang = require("../language/en");
-const frLang = require("../language/fr");
-const EN_PATH = path.join(__dirname, "../language/en.js");
-const FR_PATH = path.join(__dirname, "../language/fr.js");
-let created = 0;
-let skipped = 0;
-const missing = [];
-function getAllFiles(dir) {
-    let results = [];
+const EN = path.join(ROOT, "language/en.js");
+const FR = path.join(ROOT, "language/fr.js");
+const DICTIONARY = path.join(ROOT, "language/source/dictionary.js");
 
-    if (!fs.existsSync(dir)) {
-        return results;
-    }
+const en = require(EN);
+const fr = require(FR);
+const dictionary = require(DICTIONARY);
+const templates = require("../language/source/templates");
+function normalizeKey(key) {
 
-    const files = fs.readdirSync(dir);
+    // Split by both "." and "_"
+    const parts = key.split(/[._]/);
 
-    for (const file of files) {
+    return {
+        original: key,
+        parts,
+
+        category: parts[0] || "",
+
+        command: parts[1] || "",
+
+        action: parts.slice(2).join("_"),
+
+        last: parts[parts.length - 1]
+    };
+
+}
+const foundKeys = new Set();
+const foundCommands = new Set();
+
+let scanned = 0;
+
+function getFiles(dir) {
+
+    let files = [];
+
+    if (!fs.existsSync(dir)) return files;
+
+    for (const file of fs.readdirSync(dir)) {
 
         const full = path.join(dir, file);
 
         if (fs.statSync(full).isDirectory()) {
 
-            results.push(...getAllFiles(full));
+            files.push(...getFiles(full));
 
         } else if (file.endsWith(".js")) {
 
-            results.push(full);
+            files.push(full);
 
         }
 
     }
 
-    return results;
+    return files;
+
 }
-let files = [];
 
-for (const dir of SCAN_DIRS) {
-    files.push(...getAllFiles(dir));
-}
-files = files.filter(file => !file.includes("generated-"));
+const files = [
+    ...getFiles(COMMANDS),
+    ...getFiles(EVENTS),
+    ...getFiles(LIB)
+];
 
+for (const file of files) {
 
-console.log(`Scanning ${files.length} JavaScript files...\n`);
-const en = {};
-const fr = {};
-const foundKeys = new Set();
-const missingKeys = new Set();
+    scanned++;
 
-const missingEnglish = [];
-const missingFrench = [];
-files.forEach(file => {
-  try {
-    const content = fs.readFileSync(file, 'utf8');
-const nameMatch = content.match(
+    const content = fs.readFileSync(file, "utf8");
+
+    // ----------------------------
+    // Detect command names
+    // ----------------------------
+
+const commandMatch = content.match(
     /module\.exports\s*=\s*{[\s\S]*?name\s*:\s*["']([^"']+)["']/
 );
-// Detect translation keys
-const regex = /t\s*\(\s*(?:(?:jid|chatId|id)\s*,\s*)?["'`]([a-zA-Z0-9_.-]+)["'`]\s*\)/g;
-let match;
-while ((match = regex.exec(content)) !== null) {
 
-    const key = match[1];
+if (commandMatch) {
 
-    // Ignore invalid matches
+    foundCommands.add(commandMatch[1]);
+
+} else if (file.includes("/commands/")) {
+
+    console.log(
+        "Missing name:",
+        file.replace(ROOT + "/", "")
+    );
+
+}
+
+    // ----------------------------
+    // Detect translation keys
+    // ----------------------------
+
+    const regex =
+        /t\s*\(\s*(?:[^,]+,\s*)?["'`]([a-zA-Z0-9_.-]+)["'`]\s*\)/g;
+
+    let match;
+
+    while ((match = regex.exec(content)) !== null) {
+
+        foundKeys.add(match[1]);
+
+    }
+
+}
+
+
+let addedEn = 0;
+let addedFr = 0;
+let addedDesc = 0;
+
+// --------------------------------
+// Add missing command descriptions
+// --------------------------------
+
+for (const cmd of foundCommands) {
+
+if (!dictionary[cmd]) {
+
+    const file = files.find(f => {
+
+        const content = fs.readFileSync(f, "utf8");
+
+        return content.includes(`name: "${cmd}"`) ||
+               content.includes(`name: '${cmd}'`);
+
+    });
+
+    let description = "No description available.";
+
+    if (file) {
+
+        const content = fs.readFileSync(file, "utf8");
+
+        const match = content.match(
+            /description\s*:\s*["'`]([^"'`]+)["'`]/
+        );
+
+        if (match) {
+
+            description = match[1];
+
+        }
+
+    }
+
+    dictionary[cmd] = description;
+
+    console.log("Added command description:", cmd);
+
+    addedDesc++;
+
+}
+
+}
+
+// --------------------------------
+// Add missing translation keys
+// --------------------------------
+
+const commandMeaning = {
+
+    promote: {
+        en: "promote them to admin",
+        fr: "le promouvoir administrateur"
+    },
+
+    demote: {
+        en: "remove them from admin",
+        fr: "le rétrograder"
+    },
+
+    kick: {
+        en: "remove them from the group",
+        fr: "le retirer du groupe"
+    },
+
+    ban: {
+        en: "ban them",
+        fr: "le bannir"
+    },
+
+    mute: {
+        en: "mute them",
+        fr: "le rendre muet"
+    },
+
+    unmute: {
+        en: "unmute them",
+        fr: "le réactiver"
+    },
+
+    warn: {
+        en: "warn them",
+        fr: "l'avertir"
+    },
+
+    resetwarn: {
+        en: "reset their warnings",
+        fr: "réinitialiser ses avertissements"
+    },
+
+    revoke: {
+        en: "revoke the current group invite link",
+        fr: "révoquer le lien d'invitation du groupe"
+    },
+
+    welcome: {
+        en: "manage welcome messages",
+        fr: "gérer les messages de bienvenue"
+    },
+
+    goodbye: {
+        en: "manage goodbye messages",
+        fr: "gérer les messages d'au revoir"
+    },
+
+    antilink: {
+        en: "manage anti-link protection",
+        fr: "gérer la protection anti-liens"
+    },
+
+    antispam: {
+        en: "manage anti-spam protection",
+        fr: "gérer la protection anti-spam"
+    }
+
+};
+
+function autoEnglish(key) {
+const last = key;
+const info = normalizeKey(key);
+
+const meaning = commandMeaning[info.command];
+// Smart command sentences
+
+if (meaning) {
+
+    switch (info.action) {
+
+        case "usage":
+            return `Reply to a user or mention them to ${meaning.en}.`;
+
+        case "success":
+            return `${meaning.en.charAt(0).toUpperCase() + meaning.en.slice(1)} successfully.`;
+
+        case "failed":
+            return `Failed to ${meaning.en}.`;
+
+        case "enabled":
+            return `${meaning.en.charAt(0).toUpperCase() + meaning.en.slice(1)} enabled.`;
+
+        case "disabled":
+            return `${meaning.en.charAt(0).toUpperCase() + meaning.en.slice(1)} disabled.`;
+
+    }
+
+}
+// ---------- Common patterns ----------
+
+if (last.endsWith("_usage"))
+    return "Shows how to use this command.";
+
+if (last.endsWith("_success"))
+    return "Operation completed successfully.";
+
+if (last.endsWith("_failed"))
+    return "Operation failed.";
+
+if (last.endsWith("_enabled"))
+    return "Feature enabled successfully.";
+
+if (last.endsWith("_disabled"))
+    return "Feature disabled successfully.";
+
+if (last.endsWith("_title"))
+    return "Information";
+
+if (last.endsWith("_footer"))
+    return "End of message.";
+
+if (last.endsWith("_mention"))
+    return "Please mention a user.";
+
+if (last.endsWith("_reply"))
+    return "Reply to a message.";
+
+if (last.endsWith("_current"))
+    return "Current value.";
+
+if (last.endsWith("_updated"))
+    return "Updated successfully.";
+
+if (last.endsWith("_invalid"))
+    return "Invalid option.";
+
+if (last.endsWith("_only"))
+    return "This command cannot be used here.";
+const special = {
+    admin_count_message: "Total number of administrators.",
+    group_admins_title: "Group Administrators",
+    admin_membercount_total: "Total members.",
+    admin_only_groups: "This command can only be used in groups.",
+    admin_invalid_option: "Invalid option selected.",
+    group_closed: "The group has been closed.",
+    group_opened: "The group has been opened.",
+    admin_welcome_enabled: "Welcome messages enabled.",
+    admin_welcome_disabled: "Welcome messages disabled."
+};
+
+if (special[last]) return special[last];
+if (special[last]) {
+    return special[last];
+}
+
+    const words = last.split("_");
+if (key === "admin_count_message") {
+    console.log("KEY =", key);
+    console.log("LAST =", last);
+}
+
+    const action = words.pop();
+
+    const object = words.join(" ");
+
+    const actions = {
+
+        usage: `Usage: ${object}.`,
+
+        success: `${object} completed successfully.`,
+
+        failed: `Failed to ${object}.`,
+
+        enabled: `${object} enabled.`,
+
+        disabled: `${object} disabled.`,
+
+        updated: `${object} updated.`,
+
+        deleted: `${object} deleted.`,
+
+        added: `${object} added.`,
+
+        removed: `${object} removed.`
+
+    };
+
+    if (actions[action])
+
+        return actions[action];
+
+    return last.replace(/_/g, " ");
+
+}
+
+function autoFrench(key) {
+const last = key;
+const info = normalizeKey(key);
+
+const meaning = commandMeaning[info.command];
+if (meaning) {
+
+    switch (info.action) {
+
+        case "usage":
+            return `Répondez à un utilisateur ou mentionnez-le pour ${meaning.fr}.`;
+
+        case "success":
+            return `${meaning.fr.charAt(0).toUpperCase() + meaning.fr.slice(1)} avec succès.`;
+
+        case "failed":
+            return `Impossible de ${meaning.fr}.`;
+
+        case "enabled":
+            return `${meaning.fr.charAt(0).toUpperCase() + meaning.fr.slice(1)} activé.`;
+
+        case "disabled":
+            return `${meaning.fr.charAt(0).toUpperCase() + meaning.fr.slice(1)} désactivé.`;
+
+    }
+
+}
+if (last.endsWith("_usage"))
+    return "Affiche comment utiliser cette commande.";
+
+if (last.endsWith("_success"))
+    return "Opération réussie.";
+
+if (last.endsWith("_failed"))
+    return "Échec de l'opération.";
+
+if (last.endsWith("_enabled"))
+    return "Fonction activée.";
+
+if (last.endsWith("_disabled"))
+    return "Fonction désactivée.";
+
+if (last.endsWith("_title"))
+    return "Informations";
+
+if (last.endsWith("_footer"))
+    return "Fin du message.";
+
+if (last.endsWith("_mention"))
+    return "Veuillez mentionner un utilisateur.";
+
+if (last.endsWith("_reply"))
+    return "Répondez à un message.";
+
+if (last.endsWith("_current"))
+    return "Valeur actuelle.";
+
+if (last.endsWith("_updated"))
+    return "Mis à jour.";
+
+if (last.endsWith("_invalid"))
+    return "Option invalide.";
+
+if (last.endsWith("_only"))
+    return "Cette commande ne peut pas être utilisée ici.";
+const special = {
+    admin_count_message: "Nombre total d'administrateurs.",
+    group_admins_title: "Administrateurs du groupe",
+    admin_membercount_total: "Nombre total de membres.",
+    admin_only_groups: "Cette commande fonctionne uniquement dans les groupes.",
+    admin_invalid_option: "Option invalide.",
+    group_closed: "Le groupe est maintenant fermé.",
+    group_opened: "Le groupe est maintenant ouvert.",
+    admin_welcome_enabled: "Les messages de bienvenue sont activés.",
+    admin_welcome_disabled: "Les messages de bienvenue sont désactivés."
+};
+
+if (special[last]) return special[last];
+
+if (special[last]) {
+    return special[last];
+}
+
+    const words = last.split("_");
+
+    const action = words.pop();
+
+    const object = words.join(" ");
+
+    const actions = {
+
+        usage: `Utilisation : ${object}.`,
+
+        success: `${object} effectué avec succès.`,
+
+        failed: `Impossible de ${object}.`,
+
+        enabled: `${object} activé.`,
+
+        disabled: `${object} désactivé.`,
+
+        updated: `${object} mis à jour.`,
+
+        deleted: `${object} supprimé.`,
+
+        added: `${object} ajouté.`,
+
+        removed: `${object} retiré.`
+
+    };
+
+    if (actions[action])
+
+        return actions[action];
+
+    return last.replace(/_/g, " ");
+
+}
+
+
+
+for (const key of foundKeys) {
+
+    if (!en[key]) {
+
+if (key === "admin_count_message") {
+    console.log("FOUND KEY:", key);
+}
+        en[key] =
+            getTemplate(key, "en") ||
+            autoEnglish(key);
+
+        addedEn++;
+
+    }
+
+    if (!fr[key]) {
+
+        fr[key] =
+            getTemplate(key, "fr") ||
+            autoFrench(key);
+
+        addedFr++;
+
+    }
+
+}
+function getTemplate(key, lang) {
+
+    const info = normalizeKey(key);
+
+    // Try command + action
     if (
-        key === "global" ||
-        key === "key" ||
-        key === "_" ||
-        key.length < 3
+        templates[info.command] &&
+        templates[info.command][info.action]
     ) {
-        continue;
+        return templates[info.command][info.action][lang];
     }
 
-    foundKeys.add(key);
-
-}
-if (!nameMatch) {
-      skipped++;
-      return;
+    // Try full key (future support)
+    if (templates[key]) {
+        return templates[key][lang];
     }
-    const name = nameMatch[1];
-    
 
-if (dictionary[name]) {
-
-    fr[name] = dictionary[name];
-    en[name] = dictionary[name];
-    created++;
-
-} else {
-
-    console.log(`Missing command description: ${name}`);
-    missing.push(name);
-    skipped++;
+    return null;
 
 }
+function sortObject(obj) {
 
-} catch (e) {
-
-    console.log(`Error in ${file}: ${e.message}`);
+    return Object.fromEntries(
+        Object.entries(obj).sort((a, b) =>
+            a[0].localeCompare(b[0])
+        )
+    );
 
 }
-
-});
 
 fs.writeFileSync(
-    EN_FILE,
-    `module.exports = ${JSON.stringify(en, null, 2)};`
+    DICTIONARY,
+    "module.exports = " +
+    JSON.stringify(sortObject(dictionary), null, 2) +
+    ";\n"
 );
 
 fs.writeFileSync(
-    FR_FILE,
-    `module.exports = ${JSON.stringify(fr, null, 2)};`
+    EN,
+    "module.exports = " +
+    JSON.stringify(sortObject(en), null, 2) +
+    ";\n"
+);
+
+fs.writeFileSync(
+    FR,
+    "module.exports = " +
+    JSON.stringify(sortObject(fr), null, 2) +
+    ";\n"
 );
 
 console.log("\n══════════════════════════════");
 console.log(" WhisperBot Language Builder ");
 console.log("══════════════════════════════");
 
-console.log(`\nJavaScript files scanned : ${files.length}`);
-console.log(`Commands found           : ${created}`);
-console.log(`Library files           : ${skipped}`);
-console.log(`Translation keys found   : ${foundKeys.size}`);
+console.log(`Files scanned        : ${scanned}`);
+console.log(`Commands found       : ${foundCommands.size}`);
+console.log(`Translation keys     : ${foundKeys.size}`);
 
-for (const key of foundKeys) {
+console.log("");
 
-if (!dictionary[key]) {
-    missingKeys.add(key);
-}
-
-if (!enLang[key]) {
-enLang[key] = "[TODO] " + key;
-}
-
-if (!frLang[key]) {
-frLang[key] = "[TODO] " + key;
-}
-}
-for (const key of foundKeys) {
-
-    if (!enLang[key]) {
-        missingEnglish.push(key);
-    }
-
-    if (!frLang[key]) {
-        missingFrench.push(key);
-    }
-
-}
-
-if (missingKeys.size) {
-
-    console.log("\nMissing translation keys:\n");
-
-    let updated = false;
-
-    let dictionaryContent =
-        fs.readFileSync(DICT_FILE, "utf8");
-
-    for (const key of missingKeys) {
-
-        console.log(" - " + key);
-
-        if (!dictionaryContent.includes(`"${key}"`)) {
-
-            dictionaryContent =
-                dictionaryContent.replace(
-                    /module\.exports\s*=\s*{/,
-                    `module.exports = {\n  "${key}": "${key}",`
-                );
-
-            updated = true;
-        }
-    }
-
-
-    if (updated) {
-
-        fs.writeFileSync(
-            DICT_FILE,
-            dictionaryContent
-        );
-
-        console.log(
-            "\n✅ Missing keys automatically added to dictionary.js"
-        );
-
-    }
-
-} else {
-
-    console.log("\n✅ No missing translation keys.");
-
-}
-
-console.log("\n══════════════════════════════");
-console.log(" Language Status");
-console.log("══════════════════════════════");
-
-console.log(
-    `English : ${foundKeys.size - missingEnglish.length}/${foundKeys.size}`
-);
-
-console.log(
-    `French  : ${foundKeys.size - missingFrench.length}/${foundKeys.size}`
-);
-
-if (missingEnglish.length) {
-
-    console.log("\nMissing English:\n");
-
-    missingEnglish.forEach(k =>
-        console.log(" - " + k)
-    );
-
-}
-// ===========================================
-// Auto append missing translations
-// ===========================================
-
-function appendMissing(filePath, missing) {
-
-    if (!missing.length) return;
-
-    let content = fs.readFileSync(filePath, "utf8");
-
-    // Remove the closing };
-    content = content.replace(/\n?\};?\s*$/, "");
-
-    for (const key of missing) {
-
-        if (content.includes(`"${key}"`)) {
-            continue;
-        }
-const value =
-    filePath.endsWith("fr.js")
-        ? `À TRADUIRE: ${key}`
-        : `TODO: ${key}`;
-
-content += `,\n    "${key}": "${value}"`;
-
-    }
-
-    content += "\n};\n";
-
-    fs.writeFileSync(filePath, content);
-
-}
-
-appendMissing(EN_PATH, missingEnglish);
-appendMissing(FR_PATH, missingFrench);
-
-console.log("\n══════════════════════════════");
-console.log(" Builder Summary");
-console.log("══════════════════════════════");
-
-console.log(`English added : ${missingEnglish.length}`);
-console.log(`French added  : ${missingFrench.length}`);
+console.log(`Descriptions added   : ${addedDesc}`);
+console.log(`English keys added   : ${addedEn}`);
+console.log(`French keys added    : ${addedFr}`);
 
 if (
-    missingEnglish.length ||
-    missingFrench.length
+    addedDesc === 0 &&
+    addedEn === 0 &&
+    addedFr === 0
 ) {
 
-    console.log("\nRun 'npm run build' again to verify.");
+    console.log("\n✅ Everything is up to date.");
 
 } else {
 
-    console.log("\n✅ Everything is translated.");
-const sortedEn = Object.fromEntries(
-    Object.entries(enLang).sort((a, b) =>
-        a[0].localeCompare(b[0])
-    )
-);
-
-const sortedFr = Object.fromEntries(
-    Object.entries(frLang).sort((a, b) =>
-        a[0].localeCompare(b[0])
-    )
-);
-// Auto-update dictionary.js
-let dictionaryChanged = false;
-
-for (const file of files) {
-
-    const content = fs.readFileSync(file, "utf8");
-
-    const nameMatch = content.match(/name:\s*["']([^"']+)["']/);
-
-    if (!nameMatch) continue;
-
-    const command = nameMatch[1];
-
-    if (!dictionary[command]) {
-
-        dictionary[command] = "[TODO] Add description";
-
-        console.log("Added command description:", command);
-
-        dictionaryChanged = true;
-
-    }
+    console.log("\n✅ Language files updated.");
 
 }
-
-if (dictionaryChanged) {
-
-    const sortedDictionary = Object.fromEntries(
-        Object.entries(dictionary).sort((a, b) =>
-            a[0].localeCompare(b[0])
-        )
-    );
-
-    fs.writeFileSync(
-        DICT_FILE,
-        "module.exports = " +
-        JSON.stringify(sortedDictionary, null, 2)
-    );
-
-}
-
-fs.writeFileSync(
-    path.join(__dirname, "../language/en.js"),
-    "module.exports = " +
-    JSON.stringify(sortedEn, null, 2)
-);
-
-fs.writeFileSync(
-    path.join(__dirname, "../language/fr.js"),
-    "module.exports = " +
-    JSON.stringify(sortedFr, null, 2)
-);
-
-}
-
-if (missingFrench.length) {
-
-    console.log("\nMissing French:\n");
-
-    missingFrench.forEach(k =>
-        console.log(" - " + k)
-    );
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

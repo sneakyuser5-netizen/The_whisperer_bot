@@ -350,7 +350,7 @@ module.exports = {
   "owner.status_usage": "owner.status_usage",
   "owner.use_on_off": "owner.use_on_off",
   "owner.user": "owner.user",
-  "ping": "Pour vérifier la vitesse de réponse du bot.",
+  "ping": "Check bot response speed",
   "ping2": "Tester la vitesse de réponse du bot.",
   "pp": "Modifier la photo de profil",
   "prefix": "modifier le préfixe du bot",
@@ -408,6 +408,7 @@ module.exports = {
   "uptime": "Afficher le temps de fonctionnement.",
   "usage": "usage",
   "userinfo": "Afficher les informations d'un utilisateur.",
+  "userstatus": "[TODO] Add description",
   "version": "Afficher la version du bot.",
   "vv": "Voir un message a vue unique",
   "warn": "Avertir un membre.",
@@ -416,4 +417,4 @@ module.exports = {
   "welcome": "Configurer le message de bienvenue.",
   "whois": "Afficher les informations d'un utilisateur.",
   "yes": "yes"
-}
+};
