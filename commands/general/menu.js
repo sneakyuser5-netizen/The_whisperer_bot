@@ -152,8 +152,9 @@ const banner = categoryBanners[page] || page.toUpperCase();
 menu += `
 
 ╔══════════════════════════════════════╗
-║ ${banner.padEnd(36, " ")}║
-╠══════════════════════════════════════╣`;
+║          ${banner}          ║
+╠══════════════════════════════════════╣
+`;
 
 categories[page].forEach((command, index) => {
 
@@ -161,20 +162,26 @@ categories[page].forEach((command, index) => {
 ║ ${cmdIcon} *.${command.name}*
 ║   ${t(command.name)}`;
 
-    if (index < categories[page].length - 1) {
-        menu += `
-╠──────────────────────────────────────╣`;
+    if (index < categories[category].length - 1) {
+    menu += `╟──────────────────────────────────────╢\n`;
     }
 
 });
 
-menu += `
-╚══════════════════════════════════════╝
+if (!page) {
+    menu += `
 
-╔══════════════════════════════════════╗
+╔════════════════════════════════════╗
 ║ 📚 ${t("total_commands")}: ${commands.size}
 ║ 🤖 WhisperBot v${version}
-╚══════════════════════════════════════╝`;
+╚════════════════════════════════════╝`;
+} else {
+    menu += `
+
+💡 ${config.language === "fr"
+    ? "Tapez .menu pour revenir aux catégories."
+    : "Type .menu to return to categories."}`;
+}
 
 await sock.sendMessage(jid, {
     text: menu
