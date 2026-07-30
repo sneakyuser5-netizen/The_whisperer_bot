@@ -152,7 +152,7 @@ const banner = categoryBanners[page] || page.toUpperCase();
 menu += `
 
 ╔══════════════════════════════════════╗
-║          ${banner}          ║
+║ ${banner.padEnd(36, " ")}║
 ╠══════════════════════════════════════╣
 `;
 
@@ -162,11 +162,15 @@ categories[page].forEach((command, index) => {
 ║ ${cmdIcon} *.${command.name}*
 ║   ${t(command.name)}`;
 
-    if (index < categories[category].length - 1) {
-    menu += `╟──────────────────────────────────────╢\n`;
+    if (index < categories[page].length - 1) {
+        menu += `╟──────────────────────────────────────╢\n`;
     }
 
 });
+
+menu += `
+╚══════════════════════════════════════╝`;
+
 
 if (!page) {
     menu += `
