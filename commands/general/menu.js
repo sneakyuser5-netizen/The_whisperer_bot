@@ -118,101 +118,67 @@ Example:
 ║ 📚 Commands   │ ${commands.size}
 ╚══════════════════════════════════════╝`;
 
-        if (!page) {
-            const banner = categoryBanners[category] || category.toUpperCase();
+if (!page) {
 
-menu += `
-
-╔══════════════════════════════════════╗
-║ ${banner.padEnd(36, " ")}║
-╠══════════════════════════════════════╣
-║ ${icon} ${category.toUpperCase()} (${categories[category].length} commands)
-╚══════════════════════════════════════╝
-`;
-
-            
-
-};
-
-menu += `\n╚══════════════════════════════════════╝`;
-
-menu += `
-
-💡 ${config.language === "fr"
-    ? "Utilisez"
-    : "Use"}
-
-   *.menu <category>*
-
-📌 Examples
-• .menu admin
-• .menu tools
-• .menu fun`;
-        }
-
-        const pages = page ? [page] : [];
-
-        for (const category of pages) {
-
-            const icon = icons[category] || "📦";
-            const cmdIcon = commandIcons[category] || "⚙️";
-
-            menu += `
-
-╔══════════════════════════════════════╗
-║ ${icons[category]} ${category.toUpperCase()} (${categories[category].length} Commands)
-╠══════════════════════════════════════╣
-`;
-
-            categories[category].forEach((command, index) => {
-
-                menu += `│ ${cmdIcon} *.${command.name}*\n`;
-                menu += `│   ${t(command.name)}\n`;
-
-                if (index < categories[category].length - 1) {
-                    menu += `│\n`;
-                }
-
-            });
-
-            menu += `╚══════════════════════════════════════╝`;
-        }
-
-        menu += `
-
-╔════════════════════════════════════╗
-║ 📚 ${t("total_commands")}: ${commands.size}
-║ 🤖 WhisperBot v${version}
-╚════════════════════════════════════╝`;
-        if (!page) {
-            menu += `
+    menu += `
 
 ╔════════════ 📂 CATEGORIES ════════════╗`;
 
-Object.keys(categories).forEach(cat => {
-    menu += `\n║ ${icons[cat] || "📦"} ${cat.charAt(0).toUpperCase() + cat.slice(1).padEnd(10)} (${categories[cat].length})`;
-});
+    Object.keys(categories).forEach(cat => {
+        menu += `\n║ ${icons[cat] || "📦"} ${cat.charAt(0).toUpperCase() + cat.slice(1).padEnd(10)} (${categories[cat].length})`;
+    });
 
-menu += `\n╚══════════════════════════════════════╝`;
-
-menu += `
+    menu += `
+╚══════════════════════════════════════╝
 
 💡 ${config.language === "fr" ? "Utilisez" : "Use"}
 
    *.menu <category>*
 
-📌 Examples
+📌 ${config.language === "fr" ? "Exemples" : "Examples"}
 • .menu admin
 • .menu tools
 • .menu fun`;
+
     return await sock.sendMessage(jid, {
         text: menu
     });
-        }
+}
 
-        await sock.sendMessage(jid, {
-            text: menu
-        });
+const icon = icons[page] || "📦";
+const cmdIcon = commandIcons[page] || "⚙️";
+const banner = categoryBanners[page] || page.toUpperCase();
+
+menu += `
+
+╔══════════════════════════════════════╗
+║ ${banner.padEnd(36, " ")}║
+╠══════════════════════════════════════╣`;
+
+categories[page].forEach((command, index) => {
+
+    menu += `
+║ ${cmdIcon} *.${command.name}*
+║   ${t(command.name)}`;
+
+    if (index < categories[page].length - 1) {
+        menu += `
+╠──────────────────────────────────────╣`;
+    }
+
+});
+
+menu += `
+╚══════════════════════════════════════╝
+
+╔══════════════════════════════════════╗
+║ 📚 ${t("total_commands")}: ${commands.size}
+║ 🤖 WhisperBot v${version}
+╚══════════════════════════════════════╝`;
+
+await sock.sendMessage(jid, {
+    text: menu
+});
         
 
     }
