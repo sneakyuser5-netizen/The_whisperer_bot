@@ -59,6 +59,16 @@ module.exports = {
             tools: "🛠️",
             other: "📦"
         };
+        const categoryBanners = {
+    admin: "🛡️ GROUP ADMINISTRATION 🛡️",
+    group: "👥 GROUP MANAGEMENT 👥",
+    owner: "👑 OWNER PANEL 👑",
+    fun: "🎮 FUN & GAMES 🎮",
+    general: "📖 GENERAL COMMANDS 📖",
+    info: "ℹ️ INFORMATION ℹ️",
+    tools: "🛠️ UTILITIES 🛠️",
+    other: "📦 OTHER COMMANDS 📦"
+};
 
         const categories = {};
 
@@ -109,17 +119,18 @@ Example:
 ╚══════════════════════════════════════╝`;
 
         if (!page) {
+            const banner = categoryBanners[category] || category.toUpperCase();
 
-            menu += `
+menu += `
 
-╔════════════ 📂 CATEGORIES ════════════╗`;
+╔══════════════════════════════════════╗
+║ ${banner.padEnd(36, " ")}║
+╠══════════════════════════════════════╣
+║ ${icon} ${category.toUpperCase()} (${categories[category].length} commands)
+╚══════════════════════════════════════╝
+`;
 
-Object.keys(categories).forEach(cat => {
-
-    const title =
-        cat.charAt(0).toUpperCase() + cat.slice(1);
-
-    menu += `\n║ ${icons[cat] || "📦"} ${title.padEnd(10)} (${categories[cat].length})`;
+            
 
 });
 
