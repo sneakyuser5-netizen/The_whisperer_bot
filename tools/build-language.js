@@ -15,6 +15,11 @@ const en = require(EN);
 const fr = require(FR);
 const dictionary = require(DICTIONARY);
 const templates = require("../language/source/templates");
+
+// CLI: support --dry-run (or -n) to avoid writing language files.
+const DRY_RUN = process.argv.includes("--dry-run") || process.argv.includes("-n");
+if (DRY_RUN) console.log("Running in dry-run mode — language files will NOT be overwritten.");
+
 function normalizeKey(key, foundCommandsSet = new Set()) {
 
     // Split by both "." and "_"
@@ -160,7 +165,7 @@ for (const cmd of foundCommands) {
         const content = fs.readFileSync(file, "utf8");
 
         const match = content.match(
-            /description\s*:\s*(['\"])(([\s\S]*?))\1/
+            /description\s*:\s*(["'`])([\s\S]*?)\1/
         );
 
         if (match) {
@@ -475,29 +480,44 @@ for (const key of foundKeys) {
     }
 }
 
-// Persist dictionary and language files
-fs.writeFileSync(
-    DICTIONARY,
-    "module.exports = " +
-    JSON.stringify(sortObject(dictionary), null, 2) +
-    ";\n"
-);
+// Persist dictionary and language files unless dry-run
+if (!DRY_RUN) {
+    fs.writeFileSync(
+        DICTIONARY,
+        "module.exports = " +
+        JSON.stringify(sortObject(dictionary), null, 2) +
+        ";\n"
+    );
 
-fs.writeFileSync(
-    EN,
-    "module.exports = " +
-    JSON.stringify(sortObject(en), null, 2) +
-    ";\n"
-);
+    fs.writeFileSync(
+        EN,
+        "module.exports = " +
+        JSON.stringify(sortObject(en), null, 2) +
+        ";\n"
+    );
 
-fs.writeFileSync(
-    FR,
-    "module.exports = " +
-    JSON.stringify(sortObject(fr), null, 2) +
-    ";\n"
-);
+    fs.writeFileSync(
+        FR,
+        "module.exports = " +
+        JSON.stringify(sortObject(fr), null, 2) +
+        ";\n"
+    );
 
-// Write needs_review.json for maintainers
+    console.log("Language files written to disk.");
+} else {
+    // In dry-run mode write a suggested changes file to inspect differences
+    const suggested = {
+        dictionary: sortObject(dictionary),
+        en: sortObject(en),
+        fr: sortObject(fr),
+        translationConfidence
+    };
+    const suggestedPath = path.join(ROOT, 'language', 'suggested_translations.json');
+    fs.writeFileSync(suggestedPath, JSON.stringify(suggested, null, 2) + '\n');
+    console.log('Suggested translations written to', suggestedPath);
+}
+
+// Write needs_review.json for maintainers (helpful even in dry-run)
 const needsPath = path.join(ROOT, 'language', 'needs_review.json');
 fs.writeFileSync(needsPath, JSON.stringify(needsReview.sort((a,b)=>a.key.localeCompare(b.key)), null, 2) + '\n');
 
