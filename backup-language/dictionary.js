@@ -39,7 +39,7 @@ module.exports = {
   "mute": "Réduire temporairement un membre au silence",
   "mutelist": "Afficher les membres réduits au silence",
   "prefix": "modifier le préfixe du bot",
-  "online": "Afficher les membres en ligne.",
+  "online": "Toujours en ligne. Activer ou désactiver ,n\ exemple : n\ online on/off.",
   "owner": "Afficher le propriétaire du bot.",
   "ping": "Pour vérifier la vitesse de réponse du bot.",
   "ping2": "Tester la vitesse de réponse du bot.",
