@@ -3661,5 +3661,674 @@
     "messageTimestamp": "1785442941",
     "status": "PENDING",
     "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "A5C324B198716B275088ACBCBEA7CDA1": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "A5C324B198716B275088ACBCBEA7CDA1",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785506961,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "conversation": ".demote",
+      "messageContextInfo": {
+        "messageSecret": "7nPPEIi9a59TfWgmXpLAPUnYRgnE3vrpxhFDTLgC/ok="
+      }
+    }
+  },
+  "3EB07CAEB387699C6E1763": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB07CAEB387699C6E1763",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507053,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwim79WKBxDPARogDeogvtZB0VI+Jn4Zwd1cSrx/R7Bg1bBCbQsbJVEWw60iIQVe3VwjXrA606ALNQnZ/6oi4LCX6kB2PNn2RHRYE5CZTg=="
+      },
+      "extendedTextMessage": {
+        "text": "❌ Répondez à un admin ou mentionnez-le.\n\nExemple :\n.demote @user"
+      },
+      "messageContextInfo": {
+        "messageSecret": "s0C4i/Ve4Br94M5UeSG2Nvoe+sWvF5mTZfvLya4jeUs="
+      }
+    },
+    "verifiedBizName": "The-whisperer"
+  },
+  "3EB0C56BB7383F2C61662B": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0C56BB7383F2C61662B"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "❌ Répondez à un admin ou mentionnez-le.\n\nExemple :\n.demote @user"
+      },
+      "messageContextInfo": {
+        "messageSecret": "4GhwfKave0gmodHQVpyA0+TOQX1Aer4Dl3BO8RJ/N6M="
+      }
+    },
+    "messageTimestamp": "1785506962",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "A526047804E4A9F7DF6B59AC72EBB2B6": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "A526047804E4A9F7DF6B59AC72EBB2B6",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785506988,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "conversation": ".promote",
+      "messageContextInfo": {
+        "messageSecret": "wOrA6yxUBjydphqIQHcvRKDK5GwDvIeZm7GFqE6fY5k="
+      }
+    }
+  },
+  "3EB093F705A8972C30B24A": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB093F705A8972C30B24A"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez à un utilisateur ou mentionnez-le pour le promouvoir administrateur."
+      },
+      "messageContextInfo": {
+        "messageSecret": "JXHBfV5u6G4MimeycW9qj6NROegQk5wqEFXOe4B9LoU="
+      }
+    },
+    "messageTimestamp": "1785506989",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "3EB0E2847E84CE08E5D8BB": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0E2847E84CE08E5D8BB",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507054,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwim79WKBxDRARogSGFWpoDczRGp8XTAFO1eXHQ9O9MgQXX5eF4+X+skCvciIQVe3VwjXrA606ALNQnZ/6oi4LCX6kB2PNn2RHRYE5CZTg=="
+      },
+      "extendedTextMessage": {
+        "text": "❌ Répondez à un utilisateur ou mentionnez-le.\n\nExemple:\n.promote @user"
+      },
+      "messageContextInfo": {
+        "messageSecret": "gz/SOeA2Vq1tvJKqQes6Nn1ydX7X2/0k1hRnRUjXUDQ="
+      }
+    },
+    "verifiedBizName": "The-whisperer"
+  },
+  "3EB0E95CB699D863FD4B41": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0E95CB699D863FD4B41",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507049,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwim79WKBxDLARogg+5OCDK5E+D1XlAAMS2KTjq/XXFy+F1ntAgge5zLEU0iIQVe3VwjXrA606ALNQnZ/6oi4LCX6kB2PNn2RHRYE5CZTg=="
+      },
+      "extendedTextMessage": {
+        "text": "📊 Statistiques de WhispererBot\n\n📝 Commandes: 87\n⚡ Événements: 2\n💾 Fichiers de base de données: 9\n\n⏱ Temps de fonctionnement: 30h 42m 46s\n\n📦 Version: 1.0.0"
+      },
+      "messageContextInfo": {
+        "messageSecret": "UUlKJ20UNY/QlhA2IgLRqeuY9F3U6YLNAVcdcvum7bE="
+      }
+    },
+    "verifiedBizName": "The-whisperer"
+  },
+  "3EB0C43B5AC815733FCB88": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0C43B5AC815733FCB88",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507051,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwim79WKBxDNARog39oIpGyU4ATSjIrfRDQcnzAPu0kvxBuGX5xDJzv41yQiIQVe3VwjXrA606ALNQnZ/6oi4LCX6kB2PNn2RHRYE5CZTg=="
+      },
+      "extendedTextMessage": {
+        "text": "❌ Répondez au message d'un utilisateur ou mentionnez-le.\n\nExemple:\n.kick @user"
+      },
+      "messageContextInfo": {
+        "messageSecret": "S5YyPCIeQ9QeU05eruNpEjPcGEzQ+B3CGWdNzQPXbqM="
+      }
+    },
+    "verifiedBizName": "The-whisperer"
+  },
+  "A59E338E5777B436BCEF4D8D22994C90": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "A59E338E5777B436BCEF4D8D22994C90",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507589,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": ".demote",
+        "previewType": "NONE",
+        "contextInfo": {
+          "stanzaId": "3EB093F705A8972C30B24A",
+          "participant": "260851131019469@lid",
+          "quotedMessage": {
+            "conversation": "Répondez à un utilisateur ou mentionnez-le pour le promouvoir administrateur."
+          },
+          "quotedType": "EXPLICIT"
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "r3MAi0C9Wwhq3SaIA6eC5fZ0kFkjpc6bQv++Gt28X34="
+      }
+    }
+  },
+  "3EB09AB795617EAA0E89FF": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB09AB795617EAA0E89FF",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507590,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "✅ Utilisateur retiré de la liste des administrateurs."
+      },
+      "messageContextInfo": {
+        "messageSecret": "zrdNOocBXXMg1jwjJTdsZoh846ruJx7EeQ/OUSuOjbc="
+      }
+    }
+  },
+  "A51F773BF94B1E45290016AF2276B4B4": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "A51F773BF94B1E45290016AF2276B4B4",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507600,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": ". promote",
+        "previewType": "NONE",
+        "contextInfo": {
+          "stanzaId": "3EB093F705A8972C30B24A",
+          "participant": "260851131019469@lid",
+          "quotedMessage": {
+            "conversation": "Répondez à un utilisateur ou mentionnez-le pour le promouvoir administrateur."
+          },
+          "quotedType": "EXPLICIT"
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "m/SAu7v67PmCIo7uqusyZhEBVeCd7zef8JLkL+XTTV0="
+      }
+    }
+  },
+  "3EB0EB1353C45276BDB55A": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0EB1353C45276BDB55A",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507601,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "✅ Utilisateur promu administrateur."
+      },
+      "messageContextInfo": {
+        "messageSecret": "HeIy1nj+Dna1N9on78yhZIfdiAsyA47uK9Rxqv+MTMI="
+      }
+    },
+    "userReceipt": [
+      {
+        "userJid": "260851131019469@lid",
+        "readTimestamp": 1785507609
+      }
+    ]
+  },
+  "ACB04207D2DD9788999A4CE67842ED9E": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "ACB04207D2DD9788999A4CE67842ED9E",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507617,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "MwjE9LTeAhAAGiB1nJWy4MugP4KjO3JV28K7xotifbpdjmIhzFD2Q2h54SIhBbjIuCmSLjloF5hZVSPacIzoGlJgYCuoIdcWhdp9cZUP"
+      },
+      "extendedTextMessage": {
+        "text": ".demote",
+        "previewType": "NONE",
+        "contextInfo": {
+          "stanzaId": "3EB0EB1353C45276BDB55A",
+          "participant": "182704385589360@lid",
+          "quotedMessage": {
+            "conversation": "✅ Utilisateur promu administrateur."
+          },
+          "quotedType": "EXPLICIT"
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "xRsZqbpV4mfCoCzrIZ6s3j3qptxLMPeALTq4kg+8Sso="
+      }
+    }
+  },
+  "3EB038DAC5CAE057D5522A": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB038DAC5CAE057D5522A",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507618,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "✅ Utilisateur retiré de la liste des administrateurs."
+      },
+      "messageContextInfo": {
+        "messageSecret": "3OaSm4m1+dIq6MVI4AAcdnv/GQJKeacBS0u9B+YgHAA="
+      }
+    },
+    "userReceipt": [
+      {
+        "userJid": "260851131019469@lid",
+        "readTimestamp": 1785507618
+      }
+    ]
+  },
+  "3EB09239277403F6765869": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB09239277403F6765869",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507632,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "❌ Échec de la promotion de l'utilisateur."
+      },
+      "messageContextInfo": {
+        "messageSecret": "oELFEV18XufUFFHguAv65PXPsBcbBtZRCdn49EHPur8="
+      }
+    },
+    "userReceipt": [
+      {
+        "userJid": "260851131019469@lid",
+        "readTimestamp": 1785507632
+      }
+    ]
+  },
+  "ACC983533256311AA9862832C286FA35": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "ACC983533256311AA9862832C286FA35",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507654,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".ping",
+      "messageContextInfo": {
+        "messageSecret": "r77OEgE8B1WHtCBHWM8UEchW8pUNtAyFTDBZPUql67g="
+      }
+    }
+  },
+  "3EB085988CA7C3FD6B20AA": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB085988CA7C3FD6B20AA",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507654,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🏓 Pong !\nTemps de réponse :\n1ms"
+      },
+      "messageContextInfo": {
+        "messageSecret": "hJTvxsuHfZ0YEOGUovtJsIuUFqIwAVA4eOpOb4PVaWc="
+      }
+    },
+    "userReceipt": [
+      {
+        "userJid": "260851131019469@lid",
+        "readTimestamp": 1785507655
+      }
+    ]
+  },
+  "3EB06A43BC1E1F7380A4A7": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB06A43BC1E1F7380A4A7"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🚔 Stop right there!‼️\n\nOnly group admins have the VIP pass for this command. 😎"
+      },
+      "messageContextInfo": {
+        "messageSecret": "BnofVxRGLcrw/EYoxXtHf2hxr/Wl+EnxyjcsowN7pio="
+      }
+    },
+    "messageTimestamp": "1785507683",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "3EB0E97BED0D33167F30C5": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0E97BED0D33167F30C5"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🚔 Stop right there!‼️\n\nOnly group admins have the VIP pass for this command. 😎"
+      },
+      "messageContextInfo": {
+        "messageSecret": "R7oHZ8cqkPZG8qOGDUb38GncnBH/xTLiLTsLvo1hiU8="
+      }
+    },
+    "messageTimestamp": "1785507683",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "3EB06E82609FC1596F0170": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB06E82609FC1596F0170"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🏓 Pong !\nTemps de réponse :\n1ms"
+      },
+      "messageContextInfo": {
+        "messageSecret": "U9jiesb1QYz+JE/9qcy+dei8rh1xj7qsJLgXaG6X8xY="
+      }
+    },
+    "messageTimestamp": "1785507684",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "3EB02DEF3E365C1B99B5F7": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB02DEF3E365C1B99B5F7"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "✅ Utilisateur retiré de la liste des administrateurs."
+      },
+      "messageContextInfo": {
+        "messageSecret": "pLvYxLonfwfnuj5hZcWTLfIDrAiYf+k3r4o0KWLZwQ0="
+      }
+    },
+    "messageTimestamp": "1785507684",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "AC2EE587E7A8E6C55222BA717D4975A0": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "AC2EE587E7A8E6C55222BA717D4975A0",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507725,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ". promote",
+      "messageContextInfo": {
+        "messageSecret": "RJVwdZJvUcXrLimeL+5k3khjLbv+UYdtH7WxZMe0DlI="
+      }
+    }
+  },
+  "3EB09609AE14B268B2917C": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB09609AE14B268B2917C",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507726,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "❌ Répondez à un utilisateur ou mentionnez-le.\n\nExemple:\n.promote @user"
+      },
+      "messageContextInfo": {
+        "messageSecret": "jE14dWmo4iYIjka5yR4tU5X26GXqYUU0d6YmitxiuOE="
+      }
+    }
+  },
+  "3EB08375B36997039ABF9A": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB08375B36997039ABF9A"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez à un utilisateur ou mentionnez-le pour le promouvoir administrateur."
+      },
+      "messageContextInfo": {
+        "messageSecret": "OF+gg3FkpRm3pVj5lXsJq77yBppDI4WRkp0CVCvbq/Q="
+      }
+    },
+    "messageTimestamp": "1785507726",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "AC5A1A5C9C966C1A69B056F5D82450CF": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "AC5A1A5C9C966C1A69B056F5D82450CF",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507825,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu",
+      "messageContextInfo": {
+        "messageSecret": "aVa46YtzRw4AKesfnl8HzHE6LxefUlBi7t9NAEFjtAk="
+      }
+    }
+  },
+  "3EB019EA34132C31E7D8B1": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB019EA34132C31E7D8B1",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507826,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "╔══════════════════════════════════════╗\n║              🤖 WHISPERBOT           ║\n╠══════════════════════════════════════╣\n║ 👤 User      │ The-whisperer\n║ 🌍 Language  │ Français 🇫🇷\n║ ⚡ Prefix    │ .\n║ 📦 Version   │ 1.0.0\n║ ⏱️ Uptime     │ 31h 0m 43s\n║ 💾 RAM        │ 161.0 MB\n║ 📚 Commands   │ 89\n╚══════════════════════════════════════╝\n\n╔════════════ 📂 CATEGORIES ════════════╗\n║ 👮 Admin       (32)\n║ 👥 Group       (5)\n║ 👑 Owner       (18)\n║ 🎮 Fun         (8)\n║ 📖 General     (11)\n║ ℹ️ Info        (6)\n║ 🛠 Tools       (7)\n╚══════════════════════════════════════╝\n\n💡 Utilisez\n\n   *.menu <category>*\n\n📌 Exemples\n• .menu admin\n• .menu tools\n• .menu fun"
+      },
+      "messageContextInfo": {
+        "messageSecret": "BQOFEv7a10Fhr1YiRMkemitBchVJz45/bdCIg6I3FMo="
+      }
+    }
+  },
+  "3EB04D4F2946579F9E8D3B": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB04D4F2946579F9E8D3B"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "╔══════════════════════════════════════╗\n║              🤖 WHISPERBOT           ║\n╠══════════════════════════════════════╣\n║ 👤 User      │ The-whisperer\n║ 🌍 Language  │ Français 🇫🇷\n║ ⚡ Prefix    │ .\n║ 📦 Version   │ 1.0.0\n║ ⏱️ Uptime     │ 0h 2m 29s\n║ 💾 RAM        │ 66.1 MB\n║ 📚 Commands   │ 89\n╚══════════════════════════════════════╝\n\n╔════════════ 📂 CATEGORIES ════════════╗\n║ 👮 Admin       (32)\n║ 👥 Group       (5)\n║ 👑 Owner       (18)\n║ 🎮 Fun         (8)\n║ 📖 General     (11)\n║ ℹ️ Info        (6)\n║ 🛠 Tools       (7)\n╚══════════════════════════════════════╝\n\n💡 Utilisez\n\n   *.menu <category>*\n\n📌 Exemples\n• .menu admin\n• .menu tools\n• .menu fun"
+      },
+      "messageContextInfo": {
+        "messageSecret": "iUna4/BNs+enF4VG6FJrw2+XBBs8qHAG1Xl83g992MQ="
+      }
+    },
+    "messageTimestamp": "1785507825",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "AC3A035EA111CDEB6B146265B78446D9": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "AC3A035EA111CDEB6B146265B78446D9",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507843,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu admin",
+      "messageContextInfo": {
+        "messageSecret": "067i84SvIK4rj7hKuQRuXHPtmhpR0NHiA67s5GPxld8="
+      }
+    }
+  },
+  "3EB0013CC0069929625003": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0013CC0069929625003",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785507844,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "╔══════════════════════════════════════╗\n║              🤖 WHISPERBOT           ║\n╠══════════════════════════════════════╣\n║ 👤 User      │ The-whisperer\n║ 🌍 Language  │ Français 🇫🇷\n║ ⚡ Prefix    │ .\n║ 📦 Version   │ 1.0.0\n║ ⏱️ Uptime     │ 31h 1m 1s\n║ 💾 RAM        │ 156.6 MB\n║ 📚 Commands   │ 89\n╚══════════════════════════════════════╝\n\n╔══════════════════════════════════════╗\n║ 🛡️ GROUP ADMINISTRATION 🛡️        ║\n╠══════════════════════════════════════╣\n\n║ 🛡️ *.admincheck*\n║   Vérifier si un utilisateur est administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.admincount*\n║   Afficher le nombre d'administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.admins*\n║   Afficher la liste des administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antidelete*\n║   Récupérer les messages supprimés.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antilink*\n║   Activer ou désactiver l'anti-lien.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antispam*\n║   Activer ou désactiver l'anti-spam╟──────────────────────────────────────╢\n\n║ 🛡️ *.delrules*\n║   Supprimer les règles du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.demote*\n║   Rétrograder un administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.goodbye*\n║   Configurer le message d'au revoir.╟──────────────────────────────────────╢\n\n║ 🛡️ *.group*\n║   Ouvrir ou fermer le groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.groupinfo*\n║   Afficher les informations du groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.invite*\n║   Inviter un utilisateur dans le groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.invitelink*\n║   Afficher le lien d'invitation du groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.kick*\n║   Expulser un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.lock*\n║   Verrouiller un type de message du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.membercount*\n║   Afficher le nombre de membres.╟──────────────────────────────────────╢\n\n║ 🛡️ *.mute*\n║   Réduire temporairement un membre au silence╟──────────────────────────────────────╢\n\n║ 🛡️ *.mutelist*\n║   Afficher les membres réduits au silence╟──────────────────────────────────────╢\n\n║ 🛡️ *.promote*\n║   Promouvoir un membre administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.purge*\n║   Supprimer les messages récents╟──────────────────────────────────────╢\n\n║ 🛡️ *.resetwarn*\n║   Réinitialiser les avertissements d'un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.revoke*\n║   Générer un nouveau lien d'invitation du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.setrules*\n║   Définir les règles du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.settings*\n║   Afficher ou modifier les paramètres.╟──────────────────────────────────────╢\n\n║ 🛡️ *.slowmode*\n║   Définir le délai entre les messages╟──────────────────────────────────────╢\n\n║ 🛡️ *.tagadmins*\n║   Mentionner tous les administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.unlock*\n║   Déverrouiller un type de message du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.unmute*\n║   Réactiver un membre╟──────────────────────────────────────╢\n\n║ 🛡️ *.warn*\n║   Avertir un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.warnings*\n║   Afficher les avertissements.╟──────────────────────────────────────╢\n\n║ 🛡️ *.warnlist*\n║   Afficher la liste des avertissements.╟──────────────────────────────────────╢\n\n║ 🛡️ *.welcome*\n║   Configurer le message de bienvenue.\n╚══════════════════════════════════════╝\n\n💡 Tapez .menu pour revenir aux catégories."
+      },
+      "messageContextInfo": {
+        "messageSecret": "WJybLo8vGmS2OgOFPqqvojQxJ6eTY+ClV/ZlgvbRTGQ="
+      }
+    }
+  },
+  "3EB01BC4F2ABAFF267B973": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB01BC4F2ABAFF267B973"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "╔══════════════════════════════════════╗\n║              🤖 WHISPERBOT           ║\n╠══════════════════════════════════════╣\n║ 👤 User      │ The-whisperer\n║ 🌍 Language  │ Français 🇫🇷\n║ ⚡ Prefix    │ .\n║ 📦 Version   │ 1.0.0\n║ ⏱️ Uptime     │ 0h 2m 47s\n║ 💾 RAM        │ 66.8 MB\n║ 📚 Commands   │ 89\n╚══════════════════════════════════════╝\n\n╔══════════════════════════════════════╗\n║ 🛡️ GROUP ADMINISTRATION 🛡️        ║\n╠══════════════════════════════════════╣\n\n║ 🛡️ *.admincheck*\n║   Vérifier si un utilisateur est administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.admincount*\n║   Afficher le nombre d'administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.admins*\n║   Afficher la liste des administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antidelete*\n║   Récupérer les messages supprimés.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antilink*\n║   Activer ou désactiver l'anti-lien.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antispam*\n║   Activer ou désactiver l'anti-spam╟──────────────────────────────────────╢\n\n║ 🛡️ *.delrules*\n║   Supprimer les règles du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.demote*\n║   Rétrograder un administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.goodbye*\n║   Configurer le message d'au revoir.╟──────────────────────────────────────╢\n\n║ 🛡️ *.group*\n║   Ouvrir ou fermer le groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.groupinfo*\n║   Afficher les informations du groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.invite*\n║   Inviter un utilisateur dans le groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.invitelink*\n║   Afficher le lien d'invitation du groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.kick*\n║   Expulser un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.lock*\n║   Verrouiller un type de message du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.membercount*\n║   Afficher le nombre de membres.╟──────────────────────────────────────╢\n\n║ 🛡️ *.mute*\n║   Réduire temporairement un membre au silence╟──────────────────────────────────────╢\n\n║ 🛡️ *.mutelist*\n║   Afficher les membres réduits au silence╟──────────────────────────────────────╢\n\n║ 🛡️ *.promote*\n║   Promouvoir un membre administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.purge*\n║   Supprimer les messages récents╟──────────────────────────────────────╢\n\n║ 🛡️ *.resetwarn*\n║   Réinitialiser les avertissements d'un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.revoke*\n║   Générer un nouveau lien d'invitation du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.setrules*\n║   Définir les règles du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.settings*\n║   Afficher ou modifier les paramètres.╟──────────────────────────────────────╢\n\n║ 🛡️ *.slowmode*\n║   Définir le délai entre les messages╟──────────────────────────────────────╢\n\n║ 🛡️ *.tagadmins*\n║   Mentionner tous les administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.unlock*\n║   Déverrouiller un type de message du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.unmute*\n║   Réactiver un membre╟──────────────────────────────────────╢\n\n║ 🛡️ *.warn*\n║   Avertir un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.warnings*\n║   Afficher les avertissements.╟──────────────────────────────────────╢\n\n║ 🛡️ *.warnlist*\n║   Afficher la liste des avertissements.╟──────────────────────────────────────╢\n\n║ 🛡️ *.welcome*\n║   Configurer le message de bienvenue.\n╚══════════════════════════════════════╝\n\n💡 Tapez .menu pour revenir aux catégories."
+      },
+      "messageContextInfo": {
+        "messageSecret": "ghwXU7p4hz2GmKaCvZyz3tUVdQXkRjthokTse3191n4="
+      }
+    },
+    "messageTimestamp": "1785507843",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
   }
 }

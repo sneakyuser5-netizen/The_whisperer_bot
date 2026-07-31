@@ -1,6 +1,6 @@
 const fs = require("fs");
 const path = require("path");
-
+const verbs = require("../language/source/verbs");
 const ROOT = path.join(__dirname, "..");
 
 const COMMANDS = path.join(ROOT, "commands");
@@ -36,9 +36,11 @@ function normalizeKey(key) {
 }
 const foundKeys = new Set();
 const foundCommands = new Set();
-
+const commandMeaning = {};
 let scanned = 0;
-
+let templateUsed = 0;
+let verbRuleUsed = 0;
+let fallbackUsed = 0;
 function getFiles(dir) {
 
     let files = [];
@@ -126,8 +128,6 @@ let addedDesc = 0;
 
 for (const cmd of foundCommands) {
 
-if (!dictionary[cmd]) {
-
     const file = files.find(f => {
 
         const content = fs.readFileSync(f, "utf8");
@@ -148,124 +148,58 @@ if (!dictionary[cmd]) {
         );
 
         if (match) {
-
             description = match[1];
-
         }
 
     }
 
-    dictionary[cmd] = description;
+    // Build commandMeaning for EVERY command
+    const action = description
+        .replace(/\.$/, "")
+        .split(" ")[0]
+        .toLowerCase();
 
-    console.log("Added command description:", cmd);
+    commandMeaning[cmd] = { action };
 
-    addedDesc++;
+    // Only update dictionary if missing
+    if (!dictionary[cmd]) {
+
+        dictionary[cmd] = description;
+
+        console.log("Added command description:", cmd);
+
+        addedDesc++;
+
+    }
 
 }
 
-}
+
+
 
 // --------------------------------
 // Add missing translation keys
 // --------------------------------
 
-const commandMeaning = {
-
-    promote: {
-        en: "promote them to admin",
-        fr: "le promouvoir administrateur"
-    },
-
-    demote: {
-        en: "remove them from admin",
-        fr: "le rétrograder"
-    },
-
-    kick: {
-        en: "remove them from the group",
-        fr: "le retirer du groupe"
-    },
-
-    ban: {
-        en: "ban them",
-        fr: "le bannir"
-    },
-
-    mute: {
-        en: "mute them",
-        fr: "le rendre muet"
-    },
-
-    unmute: {
-        en: "unmute them",
-        fr: "le réactiver"
-    },
-
-    warn: {
-        en: "warn them",
-        fr: "l'avertir"
-    },
-
-    resetwarn: {
-        en: "reset their warnings",
-        fr: "réinitialiser ses avertissements"
-    },
-
-    revoke: {
-        en: "revoke the current group invite link",
-        fr: "révoquer le lien d'invitation du groupe"
-    },
-
-    welcome: {
-        en: "manage welcome messages",
-        fr: "gérer les messages de bienvenue"
-    },
-
-    goodbye: {
-        en: "manage goodbye messages",
-        fr: "gérer les messages d'au revoir"
-    },
-
-    antilink: {
-        en: "manage anti-link protection",
-        fr: "gérer la protection anti-liens"
-    },
-
-    antispam: {
-        en: "manage anti-spam protection",
-        fr: "gérer la protection anti-spam"
-    }
-
-};
 
 function autoEnglish(key) {
 const last = key;
 const info = normalizeKey(key);
-
 const meaning = commandMeaning[info.command];
-// Smart command sentences
+if (meaning && verbs[meaning.action]) {
 
-if (meaning) {
+    const verb = verbs[meaning.action].en;
 
-    switch (info.action) {
-
-        case "usage":
-            return `Reply to a user or mention them to ${meaning.en}.`;
-
-        case "success":
-            return `${meaning.en.charAt(0).toUpperCase() + meaning.en.slice(1)} successfully.`;
-
-        case "failed":
-            return `Failed to ${meaning.en}.`;
-
-        case "enabled":
-            return `${meaning.en.charAt(0).toUpperCase() + meaning.en.slice(1)} enabled.`;
-
-        case "disabled":
-            return `${meaning.en.charAt(0).toUpperCase() + meaning.en.slice(1)} disabled.`;
-
+    if (verb[info.action]) {
+verbRuleUsed++;
+return verb[info.action];
     }
 
+}
+// Smart command sentences
+if (meaning) {
+    // Verb not found in verbs.js.
+    // Continue to generic fallback below.
 }
 // ---------- Common patterns ----------
 
@@ -360,8 +294,8 @@ if (key === "admin_count_message") {
 
         return actions[action];
 
-    return last.replace(/_/g, " ");
-
+fallbackUsed++;
+return last.replace(/_/g, " ");
 }
 
 function autoFrench(key) {
@@ -369,27 +303,19 @@ const last = key;
 const info = normalizeKey(key);
 
 const meaning = commandMeaning[info.command];
-if (meaning) {
+if (meaning && verbs[meaning.action]) {
 
-    switch (info.action) {
+    const verb = verbs[meaning.action].fr;
 
-        case "usage":
-            return `Répondez à un utilisateur ou mentionnez-le pour ${meaning.fr}.`;
-
-        case "success":
-            return `${meaning.fr.charAt(0).toUpperCase() + meaning.fr.slice(1)} avec succès.`;
-
-        case "failed":
-            return `Impossible de ${meaning.fr}.`;
-
-        case "enabled":
-            return `${meaning.fr.charAt(0).toUpperCase() + meaning.fr.slice(1)} activé.`;
-
-        case "disabled":
-            return `${meaning.fr.charAt(0).toUpperCase() + meaning.fr.slice(1)} désactivé.`;
-
+    if (verb[info.action]) {
+verbRuleUsed++;
+return verb[info.action];
     }
 
+}
+if (meaning) {
+    // Verb not found in verbs.js.
+    // Continue to generic fallback below.
 }
 if (last.endsWith("_usage"))
     return "Affiche comment utiliser cette commande.";
@@ -479,14 +405,13 @@ if (special[last]) {
 
         return actions[action];
 
-    return last.replace(/_/g, " ");
-
+fallbackUsed++;
+return last.replace(/_/g, " ");
 }
 
 
 
 for (const key of foundKeys) {
-
     if (!en[key]) {
 
 if (key === "admin_count_message") {
@@ -520,7 +445,8 @@ function getTemplate(key, lang) {
         templates[info.command] &&
         templates[info.command][info.action]
     ) {
-        return templates[info.command][info.action][lang];
+        templateUsed++;
+return templates[info.command][info.action][lang];
     }
 
     // Try full key (future support)
@@ -575,7 +501,24 @@ console.log("");
 console.log(`Descriptions added   : ${addedDesc}`);
 console.log(`English keys added   : ${addedEn}`);
 console.log(`French keys added    : ${addedFr}`);
+console.log("");
+console.log("══════════════════════════════");
+console.log(" Builder Report");
+console.log("══════════════════════════════");
 
+console.log(`Commands processed : ${foundCommands.size}`);
+console.log(`Templates used     : ${templateUsed}`);
+console.log(`Verb rules used    : ${verbRuleUsed}`);
+console.log(`Fallback generated : ${fallbackUsed}`);
+
+const manual =
+    foundKeys.size -
+    templateUsed -
+    verbRuleUsed -
+    fallbackUsed;
+
+console.log(`Manual translations: ${manual > 0 ? manual : 0}`);
+console.log("");
 if (
     addedDesc === 0 &&
     addedEn === 0 &&

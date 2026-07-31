@@ -101,6 +101,7 @@ module.exports = {
   "antispam_usage": "antispam_usage",
   "autorecording": "Activer ou désactiver l'enregistrement automatique.",
   "autotyping": "Activer ou désactiver l'indicateur de saisie.",
+  "ban": "Ban a user.",
   "bot": "Afficher les informations du bot.",
   "botinfo": "Afficher les informations du bot.",
   "choose_one": "choose_one",
