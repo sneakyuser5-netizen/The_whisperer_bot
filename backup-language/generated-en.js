@@ -70,7 +70,7 @@ module.exports = {
   "getsudo": "Afficher les utilisateurs sudo.",
   "language": "Changer la langue du bot",
   "leave": "Quitter le groupe.",
-  "online": "Afficher les membres en ligne.",
+  "online": "Activiter ou désactiver le mode enligne. © Exemple : n\n\ . online on/off.",
   "pp": "Modifier la photo de profil",
   "prefix": "modifier le préfixe du bot",
   "private": "Passer le bot en mode privé.",
