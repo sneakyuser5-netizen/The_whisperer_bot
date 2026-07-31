@@ -251,6 +251,7 @@ module.exports = {
   "groupinfo": "Afficher les informations du groupe.",
   "groupstatus": "[TODO] Add description",
   "gstatus": "Afficher le statut du groupe",
+  "hidetag": "Mention all group members without showing their numbers",
   "info.alive_footer": "info.alive_footer",
   "info.alive_owner": "info.alive_owner",
   "info.alive_running": "info.alive_running",

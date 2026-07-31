@@ -4330,5 +4330,746 @@
     "messageTimestamp": "1785507843",
     "status": "PENDING",
     "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "ACC4072ACAAA5243918EFD965A69626C": {
+    "key": {
+      "remoteJid": "status@broadcast",
+      "remoteJidAlt": "237670623965@s.whatsapp.net",
+      "fromMe": false,
+      "id": "ACC4072ACAAA5243918EFD965A69626C",
+      "participant": "261834108071953@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785510680,
+    "pushName": "Pretty Gold 💝❤️❤️❤️💖💖🥰🥰",
+    "broadcast": true,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "status@broadcast",
+        "axolotlSenderKeyDistributionMessage": "Mwjl8P2fBBAAGiBzNIaEWpcaXdQYdAFHQ9qfiqCzQfG02j0dZSKG4yzF9yIhBYqdlKu39DHYK/ttoe3RAtlIB3Y0TPufFql550DAsMdH"
+      },
+      "videoMessage": {
+        "url": "https://mmg.whatsapp.net/v/t62.7161-24/634896189_1026167896702053_3774213382181014661_n.enc?ccb=11-4&oh=01_Q5Aa5AHBlnI42ngpBMZfcFqo7YJ_OxQ3rJXjlDpwMBe-0OGztA&oe=6A940980&_nc_sid=5e03e0",
+        "mimetype": "video/mp4",
+        "fileSha256": "ilg9ajslBTgw3vig9WgwXsKJE48Un1l+eAwTGewV6wY=",
+        "fileLength": "3278863",
+        "seconds": 0,
+        "mediaKey": "q+6gQvrmCd5wiVnmsE+1xE+WAxRFy8eKJImnYMOwNiA=",
+        "caption": "So happy 😊",
+        "height": 778,
+        "width": 576,
+        "fileEncSha256": "NqUlgmsRce8DuONryPNJtaAliobnT9lCedCWlKx5IZk=",
+        "directPath": "/v/t62.7161-24/634896189_1026167896702053_3774213382181014661_n.enc?ccb=11-4&oh=01_Q5Aa5AHBlnI42ngpBMZfcFqo7YJ_OxQ3rJXjlDpwMBe-0OGztA&oe=6A940980&_nc_sid=5e03e0&_nc_hot=1785510678",
+        "mediaKeyTimestamp": "1785495409",
+        "jpegThumbnail": "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",
+        "contextInfo": {
+          "forwardingScore": 1,
+          "featureEligibilities": {
+            "cannotBeRanked": false,
+            "canBeReshared": false,
+            "canReceiveMultiReact": true
+          },
+          "pairedMediaType": "NOT_PAIRED_MEDIA",
+          "forwardOrigin": "UNKNOWN"
+        },
+        "streamingSidecar": "EmGj2fC3cjgAMoxQ+tjzJSYfdZiAlJW3Ks6Bu1UjD5LwhepIyS05HPwawrm0PCVfF+xYxfdYm27QWQGuCBCMakbsiadjps5a+yDbvwJx9x0LiKBVLheO7F2QXP+LlrdGXpZyRDNwR0X+1Dwy2P4nYyT9nqWVJNR3JcXsMEYLc+dX7kU79OkP0QWx4n558Kb6mXMiRba1y1EXx42N8xuOKSdf9VmtBAZYfXz9MvfJy8fSvzlpcxsoBDOGbWr6G4FcOpoJ0b+/9Xl13fA8GV2f6IkHgVJf48knR+nMYjrvTjl5FUFefxwWFCCzmvHkc+fK/Gg37u0UqFvKA2XgT6bRO4UzXACgbrNWevZUQwIcx9ATGAUYbUEPrGGJqIqKrCaTBww/dzCoAc6fK2/fOwg4OrF3q+d5uVvnrZmEgIVwOzK8NhGxdlBBjAl1E+GFz91qzcT6tx5uGktIciIlatx+dfxGDXJFCc+0bcrSQLToWUwRMS3vKJBllcDg/2ZfzIzYpzhxYrgH6fdRFsswtDwCaL5rjr8gQknVJ2ZoL9FbnswsW2GGbXNj0dJFn+Iw6Ruzao3A9WqcxQ6hZCEiMumcU4Sawr+rLdG/7DlL8iVXQ4g+mdTydlfDePdWepZKP0ozYDCBL3R5LRhJGU75HzCMLNdVsViSoBNqhg62vkuJ",
+        "thumbnailDirectPath": "/v/t62.36147-24/573337359_1565436665310025_2824441894543200415_n.enc?ccb=11-4&oh=01_Q5Aa5AHm3CM0L3DW2DIOvK4yrnPljdd1Piw3H_Kg6PFzlB9juw&oe=6A9432E2&_nc_sid=5e03e0",
+        "thumbnailSha256": "JeWqkGaxW+qydTJ8ATcJmdLnKSBm0OZwLZld8OtR5ZI=",
+        "thumbnailEncSha256": "aYaNm1GzO1ykPx/X0gvWmraZ8QRfgCigyhAN1vCBgng=",
+        "externalShareFullVideoDurationInSeconds": 0
+      },
+      "messageContextInfo": {
+        "messageSecret": "sEYItermaIOQLHZU+L94KeF3wk/O9D4BHojB7iZEw64="
+      }
+    }
+  },
+  "A562B1E6DAA9EC754C30638BD7CB6E4F": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "A562B1E6DAA9EC754C30638BD7CB6E4F",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785516542,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "conversation": ".menu admin",
+      "messageContextInfo": {
+        "messageSecret": "lTCvD+ITSoXPNyN/n3V2mggJO/3Ip/ZFuJzNjRh216U="
+      }
+    }
+  },
+  "3EB051F82432343B9EB0D0": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB051F82432343B9EB0D0"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "╔══════════════════════════════════════╗\n║              🤖 WHISPERBOT           ║\n╠══════════════════════════════════════╣\n║ 👤 User      │ The-whisperer\n║ 🌍 Language  │ Français 🇫🇷\n║ ⚡ Prefix    │ .\n║ 📦 Version   │ 1.0.0\n║ ⏱️ Uptime     │ 0h 0m 37s\n║ 💾 RAM        │ 100.5 MB\n║ 📚 Commands   │ 90\n╚══════════════════════════════════════╝\n\n╔══════════════════════════════════════╗\n║ 🛡️ GROUP ADMINISTRATION 🛡️        ║\n╠══════════════════════════════════════╣\n\n║ 🛡️ *.admincheck*\n║   Vérifier si un utilisateur est administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.admincount*\n║   Afficher le nombre d'administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.admins*\n║   Afficher la liste des administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antidelete*\n║   Récupérer les messages supprimés.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antilink*\n║   Activer ou désactiver l'anti-lien.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antispam*\n║   Activer ou désactiver l'anti-spam╟──────────────────────────────────────╢\n\n║ 🛡️ *.delrules*\n║   Supprimer les règles du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.demote*\n║   Rétrograder un administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.goodbye*\n║   Configurer le message d'au revoir.╟──────────────────────────────────────╢\n\n║ 🛡️ *.group*\n║   Ouvrir ou fermer le groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.groupinfo*\n║   Afficher les informations du groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.invite*\n║   Inviter un utilisateur dans le groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.invitelink*\n║   Afficher le lien d'invitation du groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.kick*\n║   Expulser un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.lock*\n║   Verrouiller un type de message du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.membercount*\n║   Afficher le nombre de membres.╟──────────────────────────────────────╢\n\n║ 🛡️ *.mute*\n║   Réduire temporairement un membre au silence╟──────────────────────────────────────╢\n\n║ 🛡️ *.mutelist*\n║   Afficher les membres réduits au silence╟──────────────────────────────────────╢\n\n║ 🛡️ *.promote*\n║   Promouvoir un membre administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.purge*\n║   Supprimer les messages récents╟──────────────────────────────────────╢\n\n║ 🛡️ *.resetwarn*\n║   Réinitialiser les avertissements d'un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.revoke*\n║   Générer un nouveau lien d'invitation du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.setrules*\n║   Définir les règles du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.settings*\n║   Afficher ou modifier les paramètres.╟──────────────────────────────────────╢\n\n║ 🛡️ *.slowmode*\n║   Définir le délai entre les messages╟──────────────────────────────────────╢\n\n║ 🛡️ *.tagadmins*\n║   Mentionner tous les administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.unlock*\n║   Déverrouiller un type de message du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.unmute*\n║   Réactiver un membre╟──────────────────────────────────────╢\n\n║ 🛡️ *.warn*\n║   Avertir un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.warnings*\n║   Afficher les avertissements.╟──────────────────────────────────────╢\n\n║ 🛡️ *.warnlist*\n║   Afficher la liste des avertissements.╟──────────────────────────────────────╢\n\n║ 🛡️ *.welcome*\n║   Configurer le message de bienvenue.\n╚══════════════════════════════════════╝\n\n💡 Tapez .menu pour revenir aux catégories."
+      },
+      "messageContextInfo": {
+        "messageSecret": "RlBAkBr/dw1GsHMRxUsLGMFCe08Z9f2AxmIXzskxUjU="
+      }
+    },
+    "messageTimestamp": "1785516542",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "3EB02B55413276ED4EB2E5": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB02B55413276ED4EB2E5",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785516544,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "╔══════════════════════════════════════╗\n║              🤖 WHISPERBOT           ║\n╠══════════════════════════════════════╣\n║ 👤 User      │ The-whisperer\n║ 🌍 Language  │ Français 🇫🇷\n║ ⚡ Prefix    │ .\n║ 📦 Version   │ 1.0.0\n║ ⏱️ Uptime     │ 33h 26m 0s\n║ 💾 RAM        │ 155.2 MB\n║ 📚 Commands   │ 89\n╚══════════════════════════════════════╝\n\n╔══════════════════════════════════════╗\n║ 🛡️ GROUP ADMINISTRATION 🛡️        ║\n╠══════════════════════════════════════╣\n\n║ 🛡️ *.admincheck*\n║   Vérifier si un utilisateur est administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.admincount*\n║   Afficher le nombre d'administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.admins*\n║   Afficher la liste des administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antidelete*\n║   Récupérer les messages supprimés.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antilink*\n║   Activer ou désactiver l'anti-lien.╟──────────────────────────────────────╢\n\n║ 🛡️ *.antispam*\n║   Activer ou désactiver l'anti-spam╟──────────────────────────────────────╢\n\n║ 🛡️ *.delrules*\n║   Supprimer les règles du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.demote*\n║   Rétrograder un administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.goodbye*\n║   Configurer le message d'au revoir.╟──────────────────────────────────────╢\n\n║ 🛡️ *.group*\n║   Ouvrir ou fermer le groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.groupinfo*\n║   Afficher les informations du groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.invite*\n║   Inviter un utilisateur dans le groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.invitelink*\n║   Afficher le lien d'invitation du groupe.╟──────────────────────────────────────╢\n\n║ 🛡️ *.kick*\n║   Expulser un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.lock*\n║   Verrouiller un type de message du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.membercount*\n║   Afficher le nombre de membres.╟──────────────────────────────────────╢\n\n║ 🛡️ *.mute*\n║   Réduire temporairement un membre au silence╟──────────────────────────────────────╢\n\n║ 🛡️ *.mutelist*\n║   Afficher les membres réduits au silence╟──────────────────────────────────────╢\n\n║ 🛡️ *.promote*\n║   Promouvoir un membre administrateur.╟──────────────────────────────────────╢\n\n║ 🛡️ *.purge*\n║   Supprimer les messages récents╟──────────────────────────────────────╢\n\n║ 🛡️ *.resetwarn*\n║   Réinitialiser les avertissements d'un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.revoke*\n║   Générer un nouveau lien d'invitation du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.setrules*\n║   Définir les règles du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.settings*\n║   Afficher ou modifier les paramètres.╟──────────────────────────────────────╢\n\n║ 🛡️ *.slowmode*\n║   Définir le délai entre les messages╟──────────────────────────────────────╢\n\n║ 🛡️ *.tagadmins*\n║   Mentionner tous les administrateurs.╟──────────────────────────────────────╢\n\n║ 🛡️ *.unlock*\n║   Déverrouiller un type de message du groupe╟──────────────────────────────────────╢\n\n║ 🛡️ *.unmute*\n║   Réactiver un membre╟──────────────────────────────────────╢\n\n║ 🛡️ *.warn*\n║   Avertir un membre.╟──────────────────────────────────────╢\n\n║ 🛡️ *.warnings*\n║   Afficher les avertissements.╟──────────────────────────────────────╢\n\n║ 🛡️ *.warnlist*\n║   Afficher la liste des avertissements.╟──────────────────────────────────────╢\n\n║ 🛡️ *.welcome*\n║   Configurer le message de bienvenue.\n╚══════════════════════════════════════╝\n\n💡 Tapez .menu pour revenir aux catégories."
+      },
+      "messageContextInfo": {
+        "messageSecret": "4H/43sagEpFI26lpnuYultYR7P6YrOii2seXo8eCsWI="
+      }
+    }
+  },
+  "ACDF20C6F49C54CE9B2E763DDE62917B": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "ACDF20C6F49C54CE9B2E763DDE62917B",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785518353,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".hidetag Hello everyone",
+      "messageContextInfo": {
+        "messageSecret": "35jb1T+Yw2vJcUB/m+P9X3ybPdXXIqYzj02pJabufHs="
+      }
+    }
+  },
+  "3EB0741605D7B370137E53": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0741605D7B370137E53"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Hello everyone",
+        "contextInfo": {
+          "mentionedJid": [
+            "245848793444568@lid",
+            "173517366628547@lid",
+            "262101067112474@lid",
+            "95498631409720@lid",
+            "112803121774699@lid",
+            "131426234191919@lid",
+            "238538809454813@lid",
+            "14281403850849@lid",
+            "91178649309345@lid",
+            "3922026602594@lid",
+            "41141877633073@lid",
+            "232401368301802@lid",
+            "127685720305790@lid",
+            "201576404807761@lid",
+            "260851131019469@lid",
+            "210797682770056@lid",
+            "125804356870153@lid",
+            "182704385589360@lid",
+            "262530647769117@lid",
+            "237959022436503@lid",
+            "140025312342180@lid",
+            "214701774516459@lid",
+            "144590728360151@lid",
+            "225550442451162@lid",
+            "3883371884588@lid",
+            "277447035633799@lid",
+            "110711992791220@lid",
+            "177486033903660@lid",
+            "193604727349394@lid",
+            "150294579163169@lid"
+          ],
+          "nonJidMentions": 0
+        }
+      },
+      "messageContextInfo": {
+        "messageSecret": "pq6U/QV17uOf/31EcNTx+Xr7CJ4Xj4dli1curk5Vg1E="
+      }
+    },
+    "messageTimestamp": "1785518354",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "A54FEC72E5C8845AD37CE4FA99424A2F": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "A54FEC72E5C8845AD37CE4FA99424A2F",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785518386,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "conversation": ".hidetag",
+      "messageContextInfo": {
+        "messageSecret": "CVKGcdkeY15II1w9DLIBt2hcqtg+j0x0jm9p/9mOUh4="
+      }
+    }
+  },
+  "3EB0844FBA12DF72580639": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0844FBA12DF72580639"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🚔 Stop right there!‼️\n\nOnly group admins have the VIP pass for this command. 😎"
+      },
+      "messageContextInfo": {
+        "messageSecret": "90daPXJAHp7b+Ta9qX8s2rFNgHQhOfuES3WzPK4vwQI="
+      }
+    },
+    "messageTimestamp": "1785518387",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "A526D755F9122FB7980E1338DABF9953": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "A526D755F9122FB7980E1338DABF9953",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785518397,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "conversation": ". language fr",
+      "messageContextInfo": {
+        "messageSecret": "BfbEGkzrUqOObroDZtBiBD3+zDsMS+zGUIRLSB/9xyo="
+      }
+    }
+  },
+  "3EB03FF27012254301D4FB": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB03FF27012254301D4FB"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "😪 Vous n'êtes pas le propriétaire de ce bot.\n\nAllez emprunter le téléphone du propriétaire... s'il ose vous le donner."
+      },
+      "messageContextInfo": {
+        "messageSecret": "5PpKHOSSlrae10I/mg85wqdiBUljC5Wbg12GkiQ0YmU="
+      }
+    },
+    "messageTimestamp": "1785518397",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "3EB05DF00E374C16042D5A": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB05DF00E374C16042D5A",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785518399,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🇫🇷 Langue du bot changée en Français."
+      },
+      "messageContextInfo": {
+        "messageSecret": "W/J/2SdyW4nVzpFCROwnY+xlmFT28WSCangafwEuLac="
+      }
+    }
+  },
+  "AC04DBE633B0DCF2C8B4F5793ACBEECC": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "AC04DBE633B0DCF2C8B4F5793ACBEECC",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785518417,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "extendedTextMessage": {
+        "text": ". promote",
+        "previewType": "NONE",
+        "contextInfo": {
+          "stanzaId": "3EB05DF00E374C16042D5A",
+          "participant": "182704385589360@lid",
+          "quotedMessage": {
+            "conversation": "🇫🇷 Langue du bot changée en Français."
+          },
+          "quotedType": "EXPLICIT"
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "xxO+EbQ2WNLLUml3h7C4DjMFJtTbRSaUrxbLbpqPC30="
+      }
+    }
+  },
+  "3EB04C1FACB6FF8EA93AC9": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB04C1FACB6FF8EA93AC9",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785518418,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "❌ Échec de la promotion de l'utilisateur."
+      },
+      "messageContextInfo": {
+        "messageSecret": "aElppDB/chJvsy3qdfikhyZnPXHfChv9jEPhDa///2s="
+      }
+    }
+  },
+  "3EB00F4D4A5960CF6AAF1D": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB00F4D4A5960CF6AAF1D"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Le promouvoir administrateur avec succès."
+      },
+      "messageContextInfo": {
+        "messageSecret": "OnVidIaLaH8dro20nlZG+5r7rpy42zKXBG4W7kSg8lU="
+      }
+    },
+    "messageTimestamp": "1785518419",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "AC6475B44088E7BF11A42BF2CAE035E5": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "AC6475B44088E7BF11A42BF2CAE035E5",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785518435,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".hidetag",
+      "messageContextInfo": {
+        "messageSecret": "HupZM2xL2SSgX+kap3hKfoXet1R28XB73p7duhJc370="
+      }
+    }
+  },
+  "3EB06FE9A0B9D900E16DAD": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB06FE9A0B9D900E16DAD"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Attention à tous.",
+        "contextInfo": {
+          "mentionedJid": [
+            "245848793444568@lid",
+            "173517366628547@lid",
+            "262101067112474@lid",
+            "95498631409720@lid",
+            "112803121774699@lid",
+            "131426234191919@lid",
+            "238538809454813@lid",
+            "14281403850849@lid",
+            "91178649309345@lid",
+            "3922026602594@lid",
+            "41141877633073@lid",
+            "232401368301802@lid",
+            "127685720305790@lid",
+            "201576404807761@lid",
+            "260851131019469@lid",
+            "210797682770056@lid",
+            "125804356870153@lid",
+            "182704385589360@lid",
+            "262530647769117@lid",
+            "237959022436503@lid",
+            "140025312342180@lid",
+            "214701774516459@lid",
+            "144590728360151@lid",
+            "225550442451162@lid",
+            "3883371884588@lid",
+            "277447035633799@lid",
+            "110711992791220@lid",
+            "177486033903660@lid",
+            "193604727349394@lid",
+            "150294579163169@lid"
+          ],
+          "nonJidMentions": 0
+        }
+      },
+      "messageContextInfo": {
+        "messageSecret": "MRq77Up1ehSB8v6+NUlCelYmK5uuvhaXkvXVonR2B8U="
+      }
+    },
+    "messageTimestamp": "1785518436",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "AC7E174C0094CD2BEAF9B9C101C7586F": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "AC7E174C0094CD2BEAF9B9C101C7586F",
+      "participant": "237959022436503@lid",
+      "participantAlt": "237672334564@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785518578,
+    "pushName": "Sneaky User",
+    "broadcast": false,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwj97dBwEAAaINd61vmD+1CV51nnMdP4l9TTkMegl53BzAC9DFeO9uL5IiEF9hj6Ai2V66NyVCmb0UsU0I+o5jJHtpdPKETPbO8vqgk="
+      },
+      "protocolMessage": {
+        "type": "GROUP_MEMBER_LABEL_CHANGE",
+        "memberLabel": {
+          "label": "",
+          "labelTimestamp": "1785518517"
+        }
+      },
+      "messageContextInfo": {
+        "deviceListMetadata": {
+          "recipientKeyHash": "TK53ut5mptK4/g==",
+          "recipientTimestamp": "1785410473"
+        },
+        "deviceListMetadataVersion": 2
+      }
+    }
+  },
+  "ACB345161A73C3624D1A4274626B9DBE": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "ACB345161A73C3624D1A4274626B9DBE",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785519190,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".hidetag",
+      "messageContextInfo": {
+        "messageSecret": "eFXmpDVqw1d0X9/B4vOloDpx4/iKV1KQwal8Vb+KiHg="
+      }
+    }
+  },
+  "3EB0BDE529E2701690D18B": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0BDE529E2701690D18B"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Attention à tous.",
+        "contextInfo": {
+          "mentionedJid": [
+            "245848793444568@lid",
+            "173517366628547@lid",
+            "262101067112474@lid",
+            "95498631409720@lid",
+            "112803121774699@lid",
+            "131426234191919@lid",
+            "238538809454813@lid",
+            "14281403850849@lid",
+            "91178649309345@lid",
+            "3922026602594@lid",
+            "41141877633073@lid",
+            "232401368301802@lid",
+            "127685720305790@lid",
+            "201576404807761@lid",
+            "260851131019469@lid",
+            "210797682770056@lid",
+            "125804356870153@lid",
+            "182704385589360@lid",
+            "262530647769117@lid",
+            "237959022436503@lid",
+            "140025312342180@lid",
+            "214701774516459@lid",
+            "144590728360151@lid",
+            "225550442451162@lid",
+            "3883371884588@lid",
+            "277447035633799@lid",
+            "110711992791220@lid",
+            "177486033903660@lid",
+            "193604727349394@lid",
+            "150294579163169@lid"
+          ],
+          "nonJidMentions": 0
+        }
+      },
+      "messageContextInfo": {
+        "messageSecret": "pRa+g2rzH9aXPKtZG2FN+TQhRl2ar0Wv4CNB4j5JddM="
+      }
+    },
+    "messageTimestamp": "1785519193",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "ACAD49F277505859A7217E9B9F9CAA89": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "ACAD49F277505859A7217E9B9F9CAA89",
+      "participant": "237959022436503@lid",
+      "participantAlt": "237672334564@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785519238,
+    "pushName": "Sneaky User",
+    "broadcast": false,
+    "message": {
+      "conversation": ".hidetag",
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwjb9beNAhAAGiAdlrMg7B1s+UnHhWVx1ALWZX4XJt7PYxJYg/hxaAwP9SIhBc9TOktq4Blh2m6v1bzXiBgWg6TMX4K+/2hTE5PjC88U"
+      },
+      "messageContextInfo": {
+        "messageSecret": "PQLv37F7Qp9soz15l1E1X6Pe6RtZE6qK/yAnl/J2uMs="
+      }
+    }
+  },
+  "3EB0C47AE8B62E5715FC37": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0C47AE8B62E5715FC37"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Attention à tous.",
+        "contextInfo": {
+          "mentionedJid": [
+            "245848793444568@lid",
+            "173517366628547@lid",
+            "262101067112474@lid",
+            "95498631409720@lid",
+            "112803121774699@lid",
+            "131426234191919@lid",
+            "238538809454813@lid",
+            "14281403850849@lid",
+            "91178649309345@lid",
+            "3922026602594@lid",
+            "41141877633073@lid",
+            "232401368301802@lid",
+            "127685720305790@lid",
+            "201576404807761@lid",
+            "260851131019469@lid",
+            "210797682770056@lid",
+            "125804356870153@lid",
+            "182704385589360@lid",
+            "262530647769117@lid",
+            "237959022436503@lid",
+            "140025312342180@lid",
+            "214701774516459@lid",
+            "144590728360151@lid",
+            "225550442451162@lid",
+            "3883371884588@lid",
+            "277447035633799@lid",
+            "110711992791220@lid",
+            "177486033903660@lid",
+            "193604727349394@lid",
+            "150294579163169@lid"
+          ],
+          "nonJidMentions": 0
+        }
+      },
+      "messageContextInfo": {
+        "messageSecret": "l4xyNEa7CbcnZtlPjUbBbkT0WBYwdIHbHKVWlmo52f4="
+      }
+    },
+    "messageTimestamp": "1785519239",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "ACD65DBA4C01D8C7CFDDF00BFA0199EF": {
+    "key": {
+      "remoteJid": "260851131019469@lid",
+      "remoteJidAlt": "237682349827@s.whatsapp.net",
+      "fromMe": true,
+      "id": "ACD65DBA4C01D8C7CFDDF00BFA0199EF",
+      "participant": "",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785519266,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".hidetag"
+    }
+  },
+  "3EB0668071E289B3EB49F6": {
+    "key": {
+      "remoteJid": "260851131019469@lid",
+      "fromMe": true,
+      "id": "3EB0668071E289B3EB49F6"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "😭 Cette commande est seule.\n\nEmmenez-la d'abord dans un groupe."
+      },
+      "messageContextInfo": {
+        "messageSecret": "NuMKrGUu02/NfzhtRcVEkhqgNsbdgl7hDs+ly0uB4ec="
+      }
+    },
+    "messageTimestamp": "1785519266",
+    "status": "PENDING"
+  },
+  "AC14774CE26443FF580608204E40F43A": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "AC14774CE26443FF580608204E40F43A",
+      "participant": "260851131019469@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785519285,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "extendedTextMessage": {
+        "text": ".demote",
+        "previewType": "NONE",
+        "contextInfo": {
+          "stanzaId": "3EB04C1FACB6FF8EA93AC9",
+          "participant": "182704385589360@lid",
+          "quotedMessage": {
+            "conversation": "❌ Échec de la promotion de l'utilisateur."
+          },
+          "quotedType": "EXPLICIT"
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "2G5YEeYi6dRKbojIV5xX6p86XLrLD/G6TeAeWnHr4RI="
+      }
+    }
+  },
+  "3EB06A77344DAEDDED9222": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB06A77344DAEDDED9222",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785519288,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "✅ Utilisateur retiré de la liste des administrateurs."
+      },
+      "messageContextInfo": {
+        "messageSecret": "n5gbezqTykKn/zYvzOtG+yivQj0V9VPxaWYYuHp28DU="
+      }
+    }
+  },
+  "3EB09640B9D160B13F5743": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB09640B9D160B13F5743"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "✅ Utilisateur retiré de la liste des administrateurs."
+      },
+      "messageContextInfo": {
+        "messageSecret": "RAEIwZfx8xnRxDcFXhzpcFcWuQTNDh7ymRf2/ehdaEI="
+      }
+    },
+    "messageTimestamp": "1785519287",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
+  },
+  "A520AB93DA7B0AC76D3552893FDEEA18": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "A520AB93DA7B0AC76D3552893FDEEA18",
+      "participant": "182704385589360@lid",
+      "participantAlt": "237675310628@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1785519307,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "conversation": ".hidetag",
+      "messageContextInfo": {
+        "messageSecret": "Uth96cH/9LMzWqYyOkye+SyuCILJvKh2X0RpiRW/ki0="
+      }
+    }
+  },
+  "3EB0282F7DA8C2A35F37D2": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0282F7DA8C2A35F37D2"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🚔 Stop right there!‼️\n\nOnly group admins have the VIP pass for this command. 😎"
+      },
+      "messageContextInfo": {
+        "messageSecret": "7ZpbIRA5lxagkJrSPJuiqEuRGBadJ1mxqJpQr+Lszxg="
+      }
+    },
+    "messageTimestamp": "1785519308",
+    "status": "PENDING",
+    "participant": "237682349827:25@s.whatsapp.net"
   }
 }

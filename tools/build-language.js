@@ -202,7 +202,9 @@ if (meaning) {
     // Continue to generic fallback below.
 }
 // ---------- Common patterns ----------
-
+// Default messages
+if (last.endsWith("_default"))
+    return "Use this command with the required information.";
 if (last.endsWith("_usage"))
     return "Shows how to use this command.";
 
@@ -241,7 +243,21 @@ if (last.endsWith("_invalid"))
 
 if (last.endsWith("_only"))
     return "This command cannot be used here.";
+if (last.endsWith("_empty"))
+    return "No data found.";
+
+if (last.endsWith("_not_found"))
+    return "No result found.";
+
+if (last.endsWith("_required"))
+    return "This information is required.";
+
+if (last.endsWith("_invalid"))
+    return "Invalid option.";
 const special = {
+hidetag_default: "Attention everyone.",
+tagall_title: "Everyone",
+tagadmins_title: "Group administrators",
     admin_count_message: "Total number of administrators.",
     group_admins_title: "Group Administrators",
     admin_membercount_total: "Total members.",
@@ -317,6 +333,9 @@ if (meaning) {
     // Verb not found in verbs.js.
     // Continue to generic fallback below.
 }
+// Default messages
+if (last.endsWith("_default"))
+    return "Utilisez cette commande avec les informations nécessaires.";
 if (last.endsWith("_usage"))
     return "Affiche comment utiliser cette commande.";
 
@@ -355,7 +374,21 @@ if (last.endsWith("_invalid"))
 
 if (last.endsWith("_only"))
     return "Cette commande ne peut pas être utilisée ici.";
+if (last.endsWith("_empty"))
+    return "Aucune donnée trouvée.";
+
+if (last.endsWith("_not_found"))
+    return "Aucun résultat trouvé.";
+
+if (last.endsWith("_required"))
+    return "Cette information est requise.";
+
+if (last.endsWith("_invalid"))
+    return "Option invalide.";
 const special = {
+hidetag_default: "Attention à tous.",
+tagall_title: "Tout le monde",
+tagadmins_title: "Administrateurs du groupe",
     admin_count_message: "Nombre total d'administrateurs.",
     group_admins_title: "Administrateurs du groupe",
     admin_membercount_total: "Nombre total de membres.",

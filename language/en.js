@@ -19,6 +19,7 @@ module.exports = {
   "admin.gstatus_only_supported": "❌ Only photos and videos are supported.",
   "admin.gstatus_posted": "✅ Posted to WhatsApp status.",
   "admin.gstatus_reply_media": "❌ Reply to a photo or video.",
+  "admin.hidetag_default": "Use this command with the required information.",
   "admin.kick_failed": "❌ Failed to remove user. Make sure I am an admin.",
   "admin.kick_success": "✅ User removed successfully.",
   "admin.kick_usage": "❌ Reply to a user's message or mention them.\n\nExample:\n.kick @user",

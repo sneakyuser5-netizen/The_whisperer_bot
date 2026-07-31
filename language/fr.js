@@ -18,6 +18,7 @@ module.exports = {
   "admin.gstatus_only_supported": "❌ Seules les photos et les vidéos sont prises en charge.",
   "admin.gstatus_posted": "✅ Publié dans le statut WhatsApp.",
   "admin.gstatus_reply_media": "❌ Répondez à une photo ou une vidéo.",
+  "admin.hidetag_default": "Utilisez cette commande avec les informations nécessaires.",
   "admin.kick_failed": "❌ Échec de la suppression de l'utilisateur. Assurez-vous que je suis admin.",
   "admin.kick_success": "✅ Utilisateur supprimé avec succès.",
   "admin.kick_usage": "❌ Répondez au message d'un utilisateur ou mentionnez-le.\n\nExemple:\n.kick @user",
