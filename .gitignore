@@ -16,3 +16,8 @@ session/
 # OS files
 .DS_Store
 Thumbs.db
+node_modules/
+session/
+database/activity.json
+database/edited.json
+package-lock.json

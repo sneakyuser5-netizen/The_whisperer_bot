@@ -1,3 +1,31 @@
+function makeBox(lines, separatorIndexes = []) {
+    const width = Math.max(...lines.map(line => line.length), 38);
+
+    let text = "╔" + "═".repeat(width + 2) + "╗\n";
+
+    lines.forEach((line, index) => {
+        text += `║ ${line.padEnd(width)} ║`;
+
+        if (index !== lines.length - 1) {
+            if (separatorIndexes.includes(index)) {
+                text += "\n╠" + "═".repeat(width + 2) + "╣\n";
+            } else {
+                text += "\n";
+            }
+        }
+    });
+
+    text += "\n" + "╚" + "═".repeat(width + 2) + "╝";
+
+    return text;
+}
+function center(text, width = 38) {
+    const left = Math.floor((width - text.length) / 2);
+    const right = width - text.length - left;
+    return " ".repeat(Math.max(0, left)) +
+           text +
+           " ".repeat(Math.max(0, right));
+}
 module.exports = {
     name: "menu",
     category: "general",
@@ -37,6 +65,9 @@ module.exports = {
             1024 /
             1024
         ).toFixed(1);
+
+const infoLine = (label, value) =>
+    `║ ${label.padEnd(11)}│ ${String(value).padEnd(24)}║`;
 
         const icons = {
             admin: "👮",
@@ -104,42 +135,53 @@ Example:
 .menu admin`
             });
         }
-
-        let menu =
-`╔══════════════════════════════════════╗
-║              🤖 WHISPERBOT           ║
-╠══════════════════════════════════════╣
-║ 👤 User      │ ${msg.pushName || "User"}
-║ 🌍 Language  │ ${lang}
-║ ⚡ Prefix    │ .
-║ 📦 Version   │ ${version}
-║ ⏱️ Uptime     │ ${uptime}
-║ 💾 RAM        │ ${ram} MB
-║ 📚 Commands   │ ${commands.size}
-╚══════════════════════════════════════╝`;
+let menu =
+`╔════════════════════════════════════════╗
+║ 🤖 WHISPERBOT                          ║
+╠════════════════════════════════════════╣
+${infoLine("👤 User", msg.pushName || "User")}
+${infoLine("🌍 Language", lang)}
+${infoLine("⚡ Prefix", ".")}
+${infoLine("📦 Version", version)}
+${infoLine("⏱️ Uptime", uptime)}
+${infoLine("💾 RAM", `${ram} MB`)}
+${infoLine("📚 Commands", commands.size)}
+╚════════════════════════════════════════╝`;
 
 if (!page) {
 
-    menu += `
+menu += `
 
-╔════════════ 📂 CATEGORIES ════════════╗`;
+╔════════════════════════════════════════╗
+║ 📂 CATEGORIES                         ║
+╠════════════════════════════════════════╣`;
 
-    Object.keys(categories).forEach(cat => {
-        menu += `\n║ ${icons[cat] || "📦"} ${cat.charAt(0).toUpperCase() + cat.slice(1).padEnd(10)} (${categories[cat].length})`;
-    });
+Object.keys(categories).forEach(cat => {
 
-    menu += `
-╚══════════════════════════════════════╝
+    const name = cat.charAt(0).toUpperCase() + cat.slice(1);
 
-💡 ${config.language === "fr" ? "Utilisez" : "Use"}
+    const line =
+        `${icons[cat] || "📦"} ${name}`.padEnd(18) +
+        `(${categories[cat].length})`;
 
-   *.menu <category>*
+    menu += `\n║ ${line.padEnd(38)} ║`;
 
-📌 ${config.language === "fr" ? "Exemples" : "Examples"}
+});
+
+
+menu += `
+
+${config.language === "fr"
+? "💡 Tapez *.menu <catégorie>*"
+: "💡 Type *.menu <category>*"}
+
+${config.language === "fr"
+? "Exemples :"
+: "Examples:"}
+
 • .menu admin
 • .menu tools
 • .menu fun`;
-
     return await sock.sendMessage(jid, {
         text: menu
     });
@@ -158,15 +200,13 @@ menu += `
 
 categories[page].forEach((command, index) => {
 
-    menu += `
-║ ${cmdIcon} *.${command.name}*
-║   ${config.language === "fr"
-    ? t(command.name)
-    : command.description}`;
+    
+menu += `║ ${cmdIcon} *.${command.name}*\n`;
+menu += `║   ${t(command.name)}\n`;
 
-    if (index < categories[page].length - 1) {
-        menu += `╟──────────────────────────────────────╢\n`;
-    }
+if (index < categories[page].length - 1) {
+    menu += `╟──────────────────────────────────────╢\n`;
+}
 
 });
 
@@ -190,9 +230,10 @@ if (!page) {
 }
 
 await sock.sendMessage(jid, {
-    text: menu
-});
-        
+    text: `\`\`\`
+${menu}
+\`\`\``
+});        
 
     }
 };
