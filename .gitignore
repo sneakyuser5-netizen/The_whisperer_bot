@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+
+# Session files
+session/
+
+# Termux
+.termux/
+
+# Logs
+*.log
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
