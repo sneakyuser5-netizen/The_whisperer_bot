@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const verbs = require("../language/source/verbs");
+const infer = require("../language/source/inference");
 const ROOT = path.join(__dirname, "..");
 
 const COMMANDS = path.join(ROOT, "commands");
@@ -150,16 +151,10 @@ for (const cmd of foundCommands) {
         if (match) {
             description = match[1];
         }
+commandMeaning[cmd] = infer(description);
 
     }
 
-    // Build commandMeaning for EVERY command
-    const action = description
-        .replace(/\.$/, "")
-        .split(" ")[0]
-        .toLowerCase();
-
-    commandMeaning[cmd] = { action };
 
     // Only update dictionary if missing
     if (!dictionary[cmd]) {
@@ -197,9 +192,21 @@ return verb[info.action];
 
 }
 // Smart command sentences
-if (meaning) {
-    // Verb not found in verbs.js.
-    // Continue to generic fallback below.
+if (meaning && meaning.action) {
+
+    switch (last.split("_").pop()) {
+
+        case "usage":
+            return `${meaning.verb.charAt(0).toUpperCase() + meaning.verb.slice(1)} ${meaning.object}.`;
+
+        case "success":
+            return `${meaning.object} ${meaning.action.en}d successfully.`;
+
+        case "failed":
+            return `Failed to ${meaning.action.en} ${meaning.object}.`;
+
+    }
+
 }
 // ---------- Common patterns ----------
 // Default messages
@@ -329,10 +336,23 @@ return verb[info.action];
     }
 
 }
-if (meaning) {
-    // Verb not found in verbs.js.
-    // Continue to generic fallback below.
+if (meaning && meaning.action) {
+
+    switch (last.split("_").pop()) {
+
+        case "usage":
+            return `${meaning.verb} ${meaning.object}.`;
+
+        case "success":
+            return `${meaning.object} ${meaning.action.fr} avec succès.`;
+
+        case "failed":
+            return `Impossible de ${meaning.action.fr} ${meaning.object}.`;
+
+    }
+
 }
+
 // Default messages
 if (last.endsWith("_default"))
     return "Utilisez cette commande avec les informations nécessaires.";

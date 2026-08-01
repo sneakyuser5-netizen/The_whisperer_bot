@@ -1,4 +1,28 @@
 module.exports = {
+setwelcome: {
+    en: {
+        usage: "Enter the welcome message you want the bot to send to new users.",
+        success: "Welcome message saved successfully.",
+        failed: "Failed to save the welcome message."
+    },
+    fr: {
+        usage: "Entrez le message de bienvenue que le bot enverra aux nouveaux utilisateurs.",
+        success: "Message de bienvenue enregistré avec succès.",
+        failed: "Impossible d'enregistrer le message de bienvenue."
+    }
+},
+
+delwelcome: {
+    en: {
+        success: "Welcome message deleted successfully.",
+        failed: "Failed to delete the welcome message."
+    },
+    fr: {
+        success: "Message de bienvenue supprimé avec succès.",
+        failed: "Impossible de supprimer le message de bienvenue."
+    }
+},
+
 
     ban: {
         en: {
