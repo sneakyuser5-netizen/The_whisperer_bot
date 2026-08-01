@@ -160,7 +160,9 @@ categories[page].forEach((command, index) => {
 
     menu += `
 ║ ${cmdIcon} *.${command.name}*
-║   ${t(command.name)}`;
+║   ${config.language === "fr"
+    ? t(command.name)
+    : command.description}`;
 
     if (index < categories[page].length - 1) {
         menu += `╟──────────────────────────────────────╢\n`;
