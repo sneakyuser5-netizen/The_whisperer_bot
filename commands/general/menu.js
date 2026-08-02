@@ -1,31 +1,3 @@
-function makeBox(lines, separatorIndexes = []) {
-    const width = Math.max(...lines.map(line => line.length), 38);
-
-    let text = "╔" + "═".repeat(width + 2) + "╗\n";
-
-    lines.forEach((line, index) => {
-        text += `║ ${line.padEnd(width)} ║`;
-
-        if (index !== lines.length - 1) {
-            if (separatorIndexes.includes(index)) {
-                text += "\n╠" + "═".repeat(width + 2) + "╣\n";
-            } else {
-                text += "\n";
-            }
-        }
-    });
-
-    text += "\n" + "╚" + "═".repeat(width + 2) + "╝";
-
-    return text;
-}
-function center(text, width = 38) {
-    const left = Math.floor((width - text.length) / 2);
-    const right = width - text.length - left;
-    return " ".repeat(Math.max(0, left)) +
-           text +
-           " ".repeat(Math.max(0, right));
-}
 module.exports = {
     name: "menu",
     category: "general",
@@ -38,6 +10,9 @@ module.exports = {
         const { commands } = require("../../handler");
         const settings = require("../../lib/settings");
 
+        const dictionary = require("../../language/source/dictionary");
+        const commandFr = require("../../language/source/command-fr");
+        const fr = require("../../language/fr");
         const jid = msg.key.remoteJid;
         const page = (args[0] || "").toLowerCase();
 
@@ -48,8 +23,7 @@ module.exports = {
                 ? "Français 🇫🇷"
                 : "English 🇬🇧";
 
-        const version = "1.0.0";
-
+        const { version } = require("../../package.json");
         const seconds = Math.floor(
             (Date.now() - (global.START_TIME || Date.now())) / 1000
         );
@@ -66,8 +40,6 @@ module.exports = {
             1024
         ).toFixed(1);
 
-const infoLine = (label, value) =>
-    `║ ${label.padEnd(11)}│ ${String(value).padEnd(24)}║`;
 
         const icons = {
             admin: "👮",
@@ -135,85 +107,99 @@ Example:
 .menu admin`
             });
         }
-let menu =
-`╔════════════════════════════════════════╗
-║ 🤖 WHISPERBOT                          ║
-╠════════════════════════════════════════╣
-${infoLine("👤 User", msg.pushName || "User")}
-${infoLine("🌍 Language", lang)}
-${infoLine("⚡ Prefix", ".")}
-${infoLine("📦 Version", version)}
-${infoLine("⏱️ Uptime", uptime)}
-${infoLine("💾 RAM", `${ram} MB`)}
-${infoLine("📚 Commands", commands.size)}
-╚════════════════════════════════════════╝`;
+// ======================================
+// Bot Information
+// ======================================
 
+// uptime
+// RAM
+// language
+// version
+
+let menu =
+`🤖 *WHISPERBOT*
+
+━━━━━━━━━━━━━━━━━━
+
+👤 *User:* ${msg.pushName || "User"}
+🌍 *Language:* ${lang}
+⚡ *Prefix:* .
+📦 *Version:* ${version}
+⏱ *Uptime:* ${uptime}
+💾 *RAM:* ${ram} MB
+📚 *Commands:* ${commands.size}`;
 if (!page) {
 
-menu += `
+    menu += `
 
-╔════════════════════════════════════════╗
-║ 📂 CATEGORIES                         ║
-╠════════════════════════════════════════╣`;
+━━━━━━━━━━━━━━━━━━
 
-Object.keys(categories).forEach(cat => {
+📂 *${config.language === "fr" ? "CATÉGORIES" : "CATEGORIES"}*
 
-    const name = cat.charAt(0).toUpperCase() + cat.slice(1);
+`;
 
-    const line =
-        `${icons[cat] || "📦"} ${name}`.padEnd(18) +
-        `(${categories[cat].length})`;
+    Object.keys(categories).forEach(cat => {
 
-    menu += `\n║ ${line.padEnd(38)} ║`;
+        menu += `${icons[cat] || "📦"} *${cat.charAt(0).toUpperCase() + cat.slice(1)}* (${categories[cat].length})\n`;
 
-});
+    });
 
+    menu += `
 
-menu += `
+━━━━━━━━━━━━━━━━━━
 
-${config.language === "fr"
-? "💡 Tapez *.menu <catégorie>*"
-: "💡 Type *.menu <category>*"}
+💡 ${
+config.language === "fr"
+? "Utilisez"
+: "Use"
+}
 
-${config.language === "fr"
-? "Exemples :"
-: "Examples:"}
+*.menu <category>*
+
+${
+config.language === "fr"
+? "Exemples"
+: "Examples"
+}
 
 • .menu admin
 • .menu tools
 • .menu fun`;
+
     return await sock.sendMessage(jid, {
         text: menu
     });
 }
-
 const icon = icons[page] || "📦";
 const cmdIcon = commandIcons[page] || "⚙️";
 const banner = categoryBanners[page] || page.toUpperCase();
 
 menu += `
 
-╔══════════════════════════════════════╗
-║ ${banner.padEnd(36, " ")}║
-╠══════════════════════════════════════╣
+━━━━━━━━━━━━━━━━━━
+
+${icon} *${banner}*
+
+━━━━━━━━━━━━━━━━━━
+
 `;
 
-categories[page].forEach((command, index) => {
+for (const [index, command] of categories[page].entries()) {
 
-    
-menu += `║ ${cmdIcon} *.${command.name}*\n`;
-menu += `║   ${t(command.name)}\n`;
+let description =
+    config.language === "fr"
+        ? (commandFr[command.name] || dictionary[command.name] || command.description)
+        : (dictionary[command.name] || command.description);
+    menu += `${cmdIcon} *.${command.name}*\n`;
+    menu += `${description}\n`;
 
-if (index < categories[page].length - 1) {
-    menu += `╟──────────────────────────────────────╢\n`;
+    if (index < categories[page].length - 1) {
+        menu += `\n━━━━━━━━━━━━━━━━━━\n\n`;
+    }
 }
 
-});
 
-menu += `
-╚══════════════════════════════════════╝`;
-
-
+  
 if (!page) {
     menu += `
 
@@ -222,17 +208,19 @@ if (!page) {
 ║ 🤖 WhisperBot v${version}
 ╚════════════════════════════════════╝`;
 } else {
-    menu += `
+menu += `
 
-💡 ${config.language === "fr"
-    ? "Tapez .menu pour revenir aux catégories."
-    : "Type .menu to return to categories."}`;
+━━━━━━━━━━━━━━━━━━
+
+💡 ${
+config.language === "fr"
+? "Tapez *.menu* pour revenir aux catégories."
+: "Type *.menu* to return to categories."
+}`;
 }
 
 await sock.sendMessage(jid, {
-    text: `\`\`\`
-${menu}
-\`\`\``
+    text: menu
 });        
 
     }

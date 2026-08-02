@@ -1,7 +1,6 @@
+
 const fs = require("fs");
 const path = require("path");
-const { translate } = require("@vitalets/google-translate-api");
-
 const ROOT = path.join(__dirname, "..");
 
 const COMMANDS = path.join(ROOT, "commands");
@@ -15,10 +14,24 @@ const DICTIONARY_FILE = path.join(
     "language/source/dictionary.js"
 );
 
+let dictionary = {};
+const COMMAND_FR_FILE = path.join(
+    ROOT,
+    "language/source/command-fr.js"
+);
+
+let commandFr = {};
+
+if (fs.existsSync(COMMAND_FR_FILE)) {
+    commandFr = require(COMMAND_FR_FILE);
+}
+if (fs.existsSync(DICTIONARY_FILE)) {
+    dictionary = require(DICTIONARY_FILE);
+}
+
+
 const en = require(EN_FILE);
 const fr = require(FR_FILE);
-const dictionary = require(DICTIONARY_FILE);
-
 const foundCommands = new Map();
 const foundKeys = new Set();
 
@@ -65,22 +78,22 @@ for (const file of files) {
 
     const code = fs.readFileSync(file, "utf8");
 
-    const cmd = code.match(
-        /name\s*:\s*["'`](.*?)["'`]/
-    );
+try {
+    const command = require(file);
 
-    const desc = code.match(
-        /description\s*:\s*["'`]([^"'`]+)["'`]/
-    );
-
-    if (cmd) {
-
+    if (
+        file.startsWith(COMMANDS) &&
+        command.name
+    ) {
         foundCommands.set(
-            cmd[1],
-            desc ? desc[1] : "No description."
+            command.name,
+            command.description || "No description."
         );
-
     }
+} catch (err) {}
+
+
+
 
     const regex =
         /t\s*\(\s*(?:[^,]+,\s*)?["'`]([a-zA-Z0-9_.-]+)["'`]\s*\)/g;
@@ -95,39 +108,59 @@ for (const file of files) {
 
 }
 
-async function translateText(text) {
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
-    try {
+async function translateText(command, text) {
 
-        const result = await translate(text, {
+// Reuse only if it's already different from the English text.
+if (
+    fr[command] &&
+    fr[command] !== text &&
+    !/^[A-Za-z0-9 ,.'":;!?()/-]+$/.test(fr[command])
+) {
+    return fr[command];
+}
+try {
+    await sleep(1500);
+
+    const result = await translate(text, {
             from: "en",
             to: "fr"
         });
 
         return result.text;
-
-    } catch {
-
+    } catch (err) {
+        console.log(`[TRANSLATE FAILED] ${command}`);
         return text;
-
     }
-
 }
+
 
 (async () => {
 
     // ---------------------------------
     // Command descriptions
     // ---------------------------------
+for (const [command, description] of foundCommands) {
 
-    for (const [command, description] of foundCommands) {
+    // English command descriptions
+    dictionary[command] = description;
 
-        dictionary[command] = description;
-        en[command] = description;
-        fr[command] = await translateText(description);
+    // Remove command descriptions from language files
+    delete en[command];
+    delete fr[command];
 
+    // Use existing French description if available
+    if (commandFr[command]) {
+        // Keep it
+    } else {
+        // New command: leave English until translated
+        commandFr[command] = description;
     }
 
+}
     // ---------------------------------
     // Translation keys
     // ---------------------------------
@@ -143,6 +176,11 @@ async function translateText(text) {
         return key.replace(/[._]/g, " ");
 
     }
+
+// Remove command descriptions only from en.js
+for (const command of foundCommands.keys()) {
+    delete en[command];
+}
 
     for (const key of foundKeys) {
 
@@ -182,6 +220,13 @@ async function translateText(text) {
         ";\n"
     );
 
+fs.writeFileSync(
+    COMMAND_FR_FILE,
+    "module.exports = " +
+    JSON.stringify(sortObject(commandFr), null, 2) +
+    ";\n"
+);
+
     fs.writeFileSync(
         EN_FILE,
         "module.exports = " +
@@ -218,3 +263,9 @@ console.log(`Translation keys: ${foundKeys.size}`);
 console.log("");
 console.log("✅ Everything is synchronized.");
 })();
+
+
+
+
+
+
