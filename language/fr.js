@@ -370,7 +370,7 @@ module.exports = {
   "tools.whois_title": "📌 Informations du chat",
   "tools.whois_type": "Type :",
   "total_commands": "Nombre total de commandes",
-  "unlocked_success": "__TODO__",
+  "unlocked_success": "Déverrouillé avec succès ",
   "usage": "Utilisation :",
   "yes": "Oui"
 };
