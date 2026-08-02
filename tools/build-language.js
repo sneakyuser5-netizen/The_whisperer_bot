@@ -161,46 +161,6 @@ for (const [command, description] of foundCommands) {
     }
 
 }
-    // ---------------------------------
-    // Translation keys
-    // ---------------------------------
-
-    function autoEnglish(key) {
-
-        return key.replace(/[._]/g, " ");
-
-    }
-
-    function autoFrench(key) {
-
-        return key.replace(/[._]/g, " ");
-
-    }
-
-// Remove command descriptions only from en.js
-for (const command of foundCommands.keys()) {
-    delete en[command];
-}
-
-    for (const key of foundKeys) {
-
-        if (foundCommands.has(key)) continue;
-
-        if (!en[key]) {
-
-            en[key] = autoEnglish(key);
-            addedEn++;
-
-        }
-
-        if (!fr[key]) {
-
-            fr[key] = autoFrench(key);
-            addedFr++;
-
-        }
-
-    }
 
 
     function sortObject(obj) {
@@ -217,27 +177,6 @@ for (const command of foundCommands.keys()) {
         DICTIONARY_FILE,
         "module.exports = " +
         JSON.stringify(sortObject(dictionary), null, 2) +
-        ";\n"
-    );
-
-fs.writeFileSync(
-    COMMAND_FR_FILE,
-    "module.exports = " +
-    JSON.stringify(sortObject(commandFr), null, 2) +
-    ";\n"
-);
-
-    fs.writeFileSync(
-        EN_FILE,
-        "module.exports = " +
-        JSON.stringify(sortObject(en), null, 2) +
-        ";\n"
-    );
-
-    fs.writeFileSync(
-        FR_FILE,
-        "module.exports = " +
-        JSON.stringify(sortObject(fr), null, 2) +
         ";\n"
     );
 

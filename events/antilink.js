@@ -10,7 +10,7 @@ module.exports = {
         const groupSettings = settingsLib.get(jid);
         const fs = require("fs");
         const path = require("path");
-
+        const identity = require("../lib/identity");
         const settingsFile = path.join(__dirname, "../database/settings.json");
 
         let settings = {};
@@ -62,8 +62,15 @@ module.exports = {
                 return (p.id || p.jid) === sender;
             });
 
-            // Ignore admins and group owner
-            if (member?.admin) return;
+// Ignore group admins, bot owner, creator and sudo users
+if (
+    member?.admin ||
+    identity.isBotOwner(msg) ||
+    identity.isCreator(msg) ||
+    identity.isSudo(msg)
+) {
+    return;
+}
 
             await sock.sendMessage(jid, { delete: msg.key });
 
