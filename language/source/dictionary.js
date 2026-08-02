@@ -9,6 +9,7 @@ module.exports = {
   "antidelete": "Enable or disable anti-delete",
   "antilink": "Enable or disable anti-link",
   "antispam": "Enable or disable anti-spam",
+  "approve": "Approve all pending group join requests",
   "autorecording": "Enable or disable auto recording",
   "autotyping": "Enable or disable auto typing",
   "bot": "Show bot information",

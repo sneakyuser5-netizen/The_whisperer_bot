@@ -62,31 +62,33 @@ const result = await translate(text, {
     to: target
 });
 console.log(result);
+
 const from = languages[result.raw.src] || result.raw.src;
 const to = languages[target] || target;
 
 await sock.sendMessage(jid, {
-    text:
-`🌍 *Translation*
-
-🌐 From: ${from}
-🎯 To: ${to}
-
-📝 Original:
-${text}
-
-✅ Translation:
-${result.text}`
+    text: t(jid, "tools.translate_result")
+        .replace("{from}", from)
+        .replace("{to}", to)
+        .replace("{original}", text)
+        .replace("{translation}", result.text)
 });
 
-        } catch (err) {
+       } catch (err) {
 
-     console.error(err);
-            await sock.sendMessage(jid, {
-                text: t(jid, "tools.translate_failed")
-            });
+    console.error(err);
 
-        }
+    if (err.name === "TooManyRequestsError") {
+        return await sock.sendMessage(jid, {
+            text: t(jid, "tools.translate_rate_limit")
+        });
+    }
+
+    await sock.sendMessage(jid, {
+        text: t(jid, "tools.translate_failed")
+    });
+
+}
 
     }
 
