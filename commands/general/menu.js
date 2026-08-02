@@ -62,15 +62,16 @@ module.exports = {
             tools: "🛠️",
             other: "📦"
         };
-        const categoryBanners = {
-    admin: "🛡️ GROUP ADMINISTRATION 🛡️",
-    group: "👥 GROUP MANAGEMENT 👥",
-    owner: "👑 OWNER PANEL 👑",
-    fun: "🎮 FUN & GAMES 🎮",
-    general: "📖 GENERAL COMMANDS 📖",
-    info: "ℹ️ INFORMATION ℹ️",
-    tools: "🛠️ UTILITIES 🛠️",
-    other: "📦 OTHER COMMANDS 📦"
+
+const categoryBanners = {
+    admin: t("menu_banner_admin"),
+    group: t("menu_banner_group"),
+    owner: t("menu_banner_owner"),
+    fun: t("menu_banner_fun"),
+    general: t("menu_banner_general"),
+    info: t("menu_banner_info"),
+    tools: t("menu_banner_tools"),
+    other: t("menu_banner_other")
 };
 
         const categories = {};
@@ -91,9 +92,10 @@ module.exports = {
         if (page && !categories[page]) {
             return sock.sendMessage(jid, {
                 text:
-`❌ Unknown menu.
 
-Available pages:
+`${t("menu_unknown")}
+
+${t("menu_available_pages")}
 
 👮 admin
 👥 group
@@ -103,8 +105,9 @@ Available pages:
 ℹ️ info
 🛠 tools
 
-Example:
+${t("menu_example")}
 .menu admin`
+
             });
         }
 // ======================================
@@ -134,7 +137,7 @@ if (!page) {
 
 ━━━━━━━━━━━━━━━━━━
 
-📂 *${config.language === "fr" ? "CATÉGORIES" : "CATEGORIES"}*
+📂 *${t("menu_categories")}*
 
 `;
 
@@ -149,17 +152,13 @@ if (!page) {
 ━━━━━━━━━━━━━━━━━━
 
 💡 ${
-config.language === "fr"
-? "Utilisez"
-: "Use"
+t("menu_use")
 }
 
 *.menu <category>*
 
 ${
-config.language === "fr"
-? "Exemples"
-: "Examples"
+t("menu_examples")
 }
 
 • .menu admin
@@ -213,9 +212,7 @@ menu += `
 ━━━━━━━━━━━━━━━━━━
 
 💡 ${
-config.language === "fr"
-? "Tapez *.menu* pour revenir aux catégories."
-: "Type *.menu* to return to categories."
+t("menu_return")
 }`;
 }
 
