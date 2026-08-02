@@ -1,5 +1,4 @@
 module.exports = {
-  "_": " ",
   "admin_check_confirmed": "✅ *Vérification admin effectuée*",
   "admin_count_message": "📊 *Nombre total d'administrateurs :*",
   "admin_only": "🚔 *Réservé aux admins*\n\nSeuls les administrateurs du groupe peuvent utiliser cette commande.",
