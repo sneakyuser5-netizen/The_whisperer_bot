@@ -24,6 +24,8 @@ database/settings.json
 database/setup.json
 database/activity.json
 database/edited.json
+PROJECT.md
+README.md
 
 # Logs
 *.log
