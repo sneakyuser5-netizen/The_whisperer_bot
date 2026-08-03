@@ -21,3 +21,6 @@ session/
 database/activity.json
 database/edited.json
 package-lock.json
+database/settings.json
+database/setup.json
+package.json
