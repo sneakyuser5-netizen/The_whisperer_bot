@@ -1,1 +1,13 @@
-{}
+{
+  "global": {
+    "autotyping": false,
+    "autorecording": false,
+    "autoread": false,
+    "anticall": false,
+    "language": "fr",
+    "mode": "public"
+  },
+  "120363426993971039@g.us": {
+    "antilink": false
+  }
+}

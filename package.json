@@ -11,6 +11,9 @@
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",
     "@whiskeysockets/baileys": "latest",
-    "pino": "latest"
+    "axios": "^1.19.0",
+    "dotenv": "^17.4.2",
+    "pino": "latest",
+    "qrcode": "^1.5.4"
   }
 }
