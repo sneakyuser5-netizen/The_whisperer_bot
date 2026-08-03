@@ -1,36 +1,41 @@
 const settings = require("../lib/settings");
+
 module.exports = {
-
     name: "welcome",
-
     trigger: "group-participants.update",
 
     execute: async (sock, update) => {
 
-    const { id, participants, action } = update;
-
-    if (action !== "add") return;
-
-
-    for (const participant of participants) {
-
-        const user = participant.id || participant;
+        if (update.action !== "add") return;
 
         const group = update.id;
 
-if (!settings.get(group).welcome) {
-    return;
-}
-        await sock.sendMessage(id, {
-            text:
-`👋 Welcome @${user.split("@")[0]}
+        if (!settings.get(group).welcome) return;
 
-Welcome to the group.
-Enjoy your stay!`,
-            mentions: [user]
-        });
+        const metadata = await sock.groupMetadata(group);
 
+        const groupSettings = settings.get(group);
+
+        for (const participant of update.participants) {
+
+            const user =
+                typeof participant === "string"
+                    ? participant
+                    : participant.id || participant.jid;
+
+            let message =
+                groupSettings.welcome_message ||
+                "👋 Welcome {user} to *{group}*!";
+
+            message = message
+                .replace(/{user}/g, `@${user.split("@")[0]}`)
+                .replace(/{group}/g, metadata.subject);
+
+            await sock.sendMessage(group, {
+                text: message,
+                mentions: [user]
+            });
+
+        }
     }
-
-}
 };

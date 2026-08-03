@@ -1,4 +1,6 @@
 module.exports = {
+"setwelcome": "Définir le message de bienvenue.",
+"setgoodbye": "Définir le message d'au revoir.",
 "chat": "Discuter avec WhisperBot.",
 "clear": "Ouvrir le gestionnaire de nettoyage des discussions",
   "8ball": "Poser une question à la boule magique",

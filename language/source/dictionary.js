@@ -76,6 +76,7 @@ module.exports = {
   "seen": "Show when a user was last active",
   "send": "No description.",
   "server": "Show server information",
+  "setgoodbye": "Set the goodbye message",
   "setrules": "Set group rules",
   "setsudo": "Add a sudo member",
   "settings": "Show current group settings",

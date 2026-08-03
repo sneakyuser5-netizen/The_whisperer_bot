@@ -1,4 +1,9 @@
 module.exports = {
+"admin.setwelcome_usage": "Usage:\n.setwelcome <message>",
+"admin.setwelcome_saved": "✅ Welcome message updated.",
+
+"admin.setgoodbye_usage": "Usage:\n.setgoodbye <message>",
+"admin.setgoodbye_saved": "✅ Goodbye message updated.",
 "owner.clear_title": "🗑️ CLEAR MANAGER",
 "owner.clear_choose": "Choose what to clear:",
 "tools.chat_rate_limit": "⚠️ AI service is currently busy. Please try again in a few moments.",

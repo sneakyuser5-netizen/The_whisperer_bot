@@ -1,4 +1,10 @@
 module.exports = {
+"admin.setwelcome_usage": "Utilisation :\n.setwelcome <message>",
+"admin.setwelcome_saved": "✅ Le message de bienvenue a été mis à jour.",
+
+"admin.setgoodbye_usage": "Utilisation :\n.setgoodbye <message>",
+"admin.setgoodbye_saved": "✅ Le message d'au revoir a été mis à jour.",
+
 "tools.chat_usage": "📌 Utilisation :\n.chat <message>",
 "tools.chat_failed": "❌ Impossible de contacter le service d'IA.",
 "tools.chat_rate_limit": "⚠️ Le service IA est actuellement occupé. Veuillez réessayer dans quelques instants.",

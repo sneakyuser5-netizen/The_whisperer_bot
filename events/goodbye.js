@@ -1,44 +1,41 @@
 const settings = require("../lib/settings");
 
 module.exports = {
-
     name: "goodbye",
-
     trigger: "group-participants.update",
 
     execute: async (sock, update) => {
 
-        console.log("GOODBYE EVENT:", update);
+        if (update.action !== "remove") return;
 
         const group = update.id;
 
         if (!settings.get(group).goodbye) return;
 
-        if (update.action !== "remove") return;
+        const metadata = await sock.groupMetadata(group);
+
+        const groupSettings = settings.get(group);
 
         for (const participant of update.participants) {
 
-    console.log("LEAVING USER:", participant);
+            const user =
+                typeof participant === "string"
+                    ? participant
+                    : participant.id || participant.jid;
 
-    const jid =
-        typeof participant === "string"
-            ? participant
-            : participant.id ||
-              participant.jid ||
-              participant.phoneNumber ||
-              participant.lid;
+            let message =
+                groupSettings.goodbye_message ||
+                "👋 Goodbye {user}.";
 
-    if (!jid) continue;
+            message = message
+                .replace(/{user}/g, `@${user.split("@")[0]}`)
+                .replace(/{group}/g, metadata.subject);
 
-    await sock.sendMessage(group, {
-        text: `👋 Goodbye @${jid.split("@")[0]}
-
-We hope to see you again!`,
-        mentions: [jid]
-    });
+            await sock.sendMessage(group, {
+                text: message,
+                mentions: [user]
+            });
 
         }
-
     }
-
 };
