@@ -1,5 +1,9 @@
 module.exports = {
-  "_": " ",
+"info.movie_usage": "Utilisation : .movie <titre>",
+"info.movie_not_found": "Film introuvable.",
+"info.movie_error": "Impossible de récupérer les informations du film.",
+"info.movie_no_description": "Aucune description disponible.",
+"info.movie_no_api": "TMDB_API_KEY n'est pas configurée.",
 "tools.dictionary_usage": "Utilisation : .dictionary <mot>",
 "tools.dictionary_not_found": "Mot introuvable.",
 "tools.dictionary_none": "Aucun",
