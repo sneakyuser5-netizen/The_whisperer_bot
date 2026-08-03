@@ -1,12 +1,22 @@
+
 # Dependencies
 node_modules/
 package-lock.json
-.pm2
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# PM2
+.pm2/
+*.pid
 .npm
+.mp2
+
 # Baileys Session
 session/
 creds.json
 auth_info_baileys.json
+session
 
 # Local Config - DO NOT COMMIT
 .env
