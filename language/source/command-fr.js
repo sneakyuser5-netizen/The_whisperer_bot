@@ -1,4 +1,5 @@
 module.exports = {
+"clear": "Ouvrir le gestionnaire de nettoyage des discussions",
   "8ball": "Poser une question à la boule magique",
 "news": "Afficher les derniers titres de l'actualité",
   "admincheck": "Vérifier les permissions d'administrateur",

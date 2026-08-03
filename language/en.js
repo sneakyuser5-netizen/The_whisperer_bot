@@ -1,4 +1,15 @@
 module.exports = {
+"owner.clear_title": "🗑️ CLEAR MANAGER",
+"owner.clear_choose": "Choose what to clear:",
+"owner.clear_current": "Current chat",
+"owner.clear_private": "Private chats",
+"owner.clear_groups": "Group chats",
+"owner.clear_all": "Everything",
+"owner.clear_cancel": "Cancel",
+
+"owner.clear_success": "Chat cleared successfully.",
+"owner.clear_error": "Unable to clear this chat.",
+"owner.clear_empty": "Nothing to clear.",
 "info.movie_usage": "Usage: .movie <title>",
 "info.movie_not_found": "Movie not found.",
 "info.movie_error": "Unable to retrieve movie information.",
