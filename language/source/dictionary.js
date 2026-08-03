@@ -14,6 +14,8 @@ module.exports = {
   "autotyping": "Enable or disable auto typing",
   "bot": "Show bot information",
   "botinfo": "Show information about the bot",
+  "chat": "Chat with WhisperBot",
+  "clear": "Clear chats",
   "compliment": "Give someone a compliment",
   "currency": "Convert currencies",
   "dare": "Random dare challenge",

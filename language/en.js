@@ -1,12 +1,15 @@
 module.exports = {
 "owner.clear_title": "🗑️ CLEAR MANAGER",
 "owner.clear_choose": "Choose what to clear:",
+"tools.chat_rate_limit": "⚠️ AI service is currently busy. Please try again in a few moments.",
+"tools.chat_failed": "❌ Failed to get a response from the AI.",
 "owner.clear_current": "Current chat",
 "owner.clear_private": "Private chats",
 "owner.clear_groups": "Group chats",
 "owner.clear_all": "Everything",
 "owner.clear_cancel": "Cancel",
-
+"tools.chat_usage": "📌 Usage:\n.chat <message>",
+"tools.chat_failed": "❌ Unable to contact the AI service.",
 "owner.clear_success": "Chat cleared successfully.",
 "owner.clear_error": "Unable to clear this chat.",
 "owner.clear_empty": "Nothing to clear.",

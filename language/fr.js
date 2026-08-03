@@ -1,4 +1,8 @@
 module.exports = {
+"tools.chat_usage": "📌 Utilisation :\n.chat <message>",
+"tools.chat_failed": "❌ Impossible de contacter le service d'IA.",
+"tools.chat_rate_limit": "⚠️ Le service IA est actuellement occupé. Veuillez réessayer dans quelques instants.",
+"tools.chat_failed": "❌ Impossible d'obtenir une réponse de l'IA.",
 "owner.clear_title": "🗑️ GESTIONNAIRE DE NETTOYAGE",
 "owner.clear_choose": "Choisissez ce que vous voulez supprimer :",
 "owner.clear_current": "Discussion actuelle",
