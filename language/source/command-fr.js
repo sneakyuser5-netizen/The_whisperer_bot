@@ -6,6 +6,8 @@ module.exports = {
   "admincount": "Afficher le nombre d'administrateurs du groupe",
 "qr": "Générer un code QR",
   "admins": "Afficher tous les administrateurs du groupe",
+"dictionary": "Rechercher la définition d'un mot",
+
   "afk": "Vous mettre en mode absent",
   "alive": "Vérifier si le bot est en ligne",
   "anticall": "Activer ou désactiver le rejet automatique des appels",

@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { t } = require("../../lib/lang");
-
+const api = require("../../lib/api");
 module.exports = {
     name: "news",
     description: "Show latest headlines",
@@ -11,8 +11,7 @@ module.exports = {
     execute: async (sock, msg, args) => {
 
         const jid = msg.key.remoteJid;
-
-        const apiKey = process.env.NEWS_API_KEY;
+        const apiKey = api.keys.news;
 
         if (!apiKey) {
             return sock.sendMessage(jid, {
@@ -25,7 +24,7 @@ module.exports = {
         try {
 
             const { data } = await axios.get(
-                "https://newsdata.io/api/1/latest",
+            api.urls.news,
                 {
                     params: {
                         apikey: apiKey,

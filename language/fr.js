@@ -1,5 +1,8 @@
 module.exports = {
   "_": " ",
+"tools.dictionary_usage": "Utilisation : .dictionary <mot>",
+"tools.dictionary_not_found": "Mot introuvable.",
+"tools.dictionary_none": "Aucun",
   "admin_check_confirmed": "✅ *Vérification admin effectuée*",
 "tools.currency_usage": "Utilisation : .currency <montant> <de> <vers>",
 "tools.currency_invalid_amount": "Montant invalide.",

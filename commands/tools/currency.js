@@ -1,6 +1,6 @@
 const { t } = require("../../lib/lang");
 const axios = require("axios");
-
+const api = require("../../lib/api");
 module.exports = {
     name: "currency",
     description: "Convert currencies",
@@ -32,7 +32,7 @@ module.exports = {
         try {
 
             const { data } = await axios.get(
-                `https://open.er-api.com/v6/latest/${from}`
+                `${api.exchange.url}/${from}`
             );
 
             if (data.result !== "success") {

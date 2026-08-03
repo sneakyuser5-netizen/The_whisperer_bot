@@ -1,5 +1,7 @@
 module.exports = {
-  "_": " ",
+"tools.dictionary_usage": "Usage: .dictionary <word>",
+"tools.dictionary_not_found": "Word not found.",
+"tools.dictionary_none": "None",
 "tools.currency_usage": "Usage: .currency <amount> <from> <to>",
 "tools.currency_invalid_amount": "Invalid amount.",
 "tools.currency_invalid_code": "Invalid currency code.",
