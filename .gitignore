@@ -1,30 +1,23 @@
 # Dependencies
 node_modules/
+package-lock.json
 
-# Session files
+# Baileys Session
 session/
+creds.json
+auth_info_baileys.json
 
-# Termux
-.termux/
+# Local Config - DO NOT COMMIT
+.env
+database/settings.json
+database/setup.json
+database/activity.json
+database/edited.json
 
 # Logs
 *.log
 
-# Environment variables
-.env
-
-# OS files
+# OS junk
 .DS_Store
 Thumbs.db
-node_modules/
-session/
-database/activity.json
-database/edited.json
-package-lock.json
-database/settings.json
-database/setup.json
-package.json
-.env
-.env
-.env
-.env
+.termux/
