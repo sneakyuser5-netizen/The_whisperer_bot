@@ -84,9 +84,9 @@ async function handleMessage(sock, msg) {
     if (body.startsWith(prefix + " ")) {
         body = prefix + body.slice(prefix.length + 1);
     }
-    if (!body.startsWith(prefix)) {
-        return;
-    }
+    //if (!body.startsWith(prefix)) {
+       // return;
+   // }
 // Handle interactive sessions
 if (!body.startsWith(prefix)) {
 
