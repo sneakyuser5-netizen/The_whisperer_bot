@@ -91,6 +91,8 @@ async function handleMessage(sock, msg) {
 if (!body.startsWith(prefix)) {
 
     const current = session.get(jid);
+    console.log("SESSION FOUND:", current);
+console.log("BODY:", body);
 
     if (current?.type === "clear") {
 
