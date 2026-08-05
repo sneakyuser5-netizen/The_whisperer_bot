@@ -30,6 +30,8 @@ ${t(jid, "owner.clear_choose")}
 session.set(jid, {
     type: "clear"
 });
+        console.log("CLEAR SESSION:", 
+                    session.get(jid));
 
         await sock.sendMessage(
             jid,
