@@ -1,4 +1,4 @@
-
+const session = require("../../lib/session");
 const { t } = require("../../lib/lang");
 
 module.exports = {
@@ -27,6 +27,9 @@ ${t(jid, "owner.clear_choose")}
 
 ❌ 0 - ${t(jid, "owner.clear_cancel")}
 `;
+session.set(jid, {
+    type: "clear"
+});
 
         await sock.sendMessage(
             jid,

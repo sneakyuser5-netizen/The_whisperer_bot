@@ -1,7 +1,7 @@
 module.exports = {
 "admin.setwelcome_usage": "Utilisation :\n.setwelcome <message>",
 "admin.setwelcome_saved": "✅ Le message de bienvenue a été mis à jour.",
-
+"owner.clear_cancelled": "Opération annulée.",
 "admin.setgoodbye_usage": "Utilisation :\n.setgoodbye <message>",
 "admin.setgoodbye_saved": "✅ Le message d'au revoir a été mis à jour.",
 

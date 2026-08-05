@@ -6,7 +6,7 @@ const sudo = require("./lib/sudo");
 const ownerDB = require("./lib/owner");
 const commands = new Map();
 const cooldowns = new Map();
-
+const session = require("./lib/session");
 async function isAdmin(sock, msg) {
     const jid = msg.key.remoteJid;
     if (!jid.endsWith("@g.us")) {
@@ -87,6 +87,57 @@ async function handleMessage(sock, msg) {
     if (!body.startsWith(prefix)) {
         return;
     }
+// Handle interactive sessions
+if (!body.startsWith(prefix)) {
+
+    const current = session.get(jid);
+
+    if (current?.type === "clear") {
+
+        switch (body) {
+
+            case "0":
+                session.delete(jid);
+
+                return sock.sendMessage(jid, {
+                    text: t(jid, "owner.clear_cancelled")
+                });
+
+            case "1":
+                session.delete(jid);
+
+                return sock.sendMessage(jid, {
+                    text: "🗑️ Current chat clearing is coming soon."
+                });
+
+            case "2":
+                session.delete(jid);
+
+                return sock.sendMessage(jid, {
+                    text: "🗑️ Private chats clearing is coming soon."
+                });
+
+            case "3":
+                session.delete(jid);
+
+                return sock.sendMessage(jid, {
+                    text: "🗑️ Group chats clearing is coming soon."
+                });
+
+            case "4":
+                session.delete(jid);
+
+                return sock.sendMessage(jid, {
+                    text: "🗑️ Full cleanup is coming soon."
+                });
+
+        }
+
+    }
+
+    return;
+
+}
     // Parse commands (.cmd arg) and (.cmd=arg)
 const content = body.slice(prefix.length).trim();
 

@@ -1,7 +1,7 @@
 module.exports = {
 "admin.setwelcome_usage": "Usage:\n.setwelcome <message>",
 "admin.setwelcome_saved": "✅ Welcome message updated.",
-
+"owner.clear_cancelled": "Operation cancelled.",
 "admin.setgoodbye_usage": "Usage:\n.setgoodbye <message>",
 "admin.setgoodbye_saved": "✅ Goodbye message updated.",
 "owner.clear_title": "🗑️ CLEAR MANAGER",
