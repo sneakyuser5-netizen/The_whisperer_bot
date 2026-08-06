@@ -193,6 +193,8 @@ console.log("BODY:", body);
     return;
 
 }
+
+}
     // Parse commands (.cmd arg) and (.cmd=arg)
 const content = body.slice(prefix.length).trim();
 
