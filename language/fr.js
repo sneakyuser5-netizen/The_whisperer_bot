@@ -1,16 +1,15 @@
 module.exports = {
-owner: {
-    clear_title: "GESTIONNAIRE DE NETTOYAGE",
-    clear_choose: "Choisissez ce que vous voulez supprimer :",
-    clear_current_100: "Supprimer les 100 derniers messages de cette discussion",
-    clear_current_all: "Supprimer tous les messages en cache de cette discussion",
-    clear_private_all: "Supprimer tous les messages en cache des discussions privées",
-    clear_group_all: "Supprimer tous les messages en cache des groupes",
-    clear_everything: "Supprimer tous les messages en cache",
-    clear_done: "{{count}} messages supprimés.",
-    clear_cancelled: "Opération annulée.",
-    cancel: "Annuler"
-}
+    "clear_title": "GESTIONNAIRE DE NETTOYAGE",
+    "clear_choose": "Choisissez ce que vous voulez supprimer :",
+    "clear_current_100": "Supprimer les 100 derniers messages de cette discussion",
+    "clear_current_all": "Supprimer tous les messages en cache de cette discussion",
+    "clear_private_all": "Supprimer tous les messages en cache des discussions privées",
+    "clear_group_all": "Supprimer tous les messages en cache des groupes",
+    "clear_everything": "Supprimer tous les messages en cache",
+    "clear_done": "{{count}} messages supprimés.",
+   "clear_cancelled": "Opération annulée.",
+    "cancel": "Annuler",
+
 
 "admin.setwelcome_usage": "Utilisation :\n.setwelcome <message>",
 "admin.setwelcome_saved": "✅ Le message de bienvenue a été mis à jour.",
