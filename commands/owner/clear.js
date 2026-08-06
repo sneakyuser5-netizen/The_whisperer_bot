@@ -13,19 +13,21 @@ module.exports = {
         const jid = msg.key.remoteJid;
 
 const text = `
-${t(jid, "owner.clear_title")}
+🗑️ *${t(jid, "owner.clear_title")}*
 
 ${t(jid, "owner.clear_choose")}
 
-1️⃣ ${t(jid, "owner.clear_current")}
+1️⃣ ${t(jid, "owner.clear_current_100")}
 
-2️⃣ ${t(jid, "owner.clear_private")}
+2️⃣ ${t(jid, "owner.clear_current_all")}
 
-3️⃣ ${t(jid, "owner.clear_groups")}
+3️⃣ ${t(jid, "owner.clear_private_all")}
 
-4️⃣ ${t(jid, "owner.clear_all")}
+4️⃣ ${t(jid, "owner.clear_group_all")}
 
-❌ 0 - ${t(jid, "owner.clear_cancel")}
+5️⃣ ${t(jid, "owner.clear_everything")}
+
+❌ 0 - ${t(jid, "owner.cancel")}
 `;
 session.set(jid, {
     type: "clear"
