@@ -49,13 +49,14 @@ async function handleMessage(sock, msg) {
         await new Promise(resolve => setTimeout(resolve, 2000));
     }
 
-    if (msg.key.remoteJid.endsWith("@g.us")) {
-        global.messageCache = global.messageCache || {};
-        global.messageCache[msg.key.remoteJid] = global.messageCache[msg.key.remoteJid] || [];
-        global.messageCache[msg.key.remoteJid].push(msg);
-        if (global.messageCache[msg.key.remoteJid].length > 100) {
-            global.messageCache[msg.key.remoteJid].shift();
-        }
+    global.messageCache = global.messageCache || {};
+
+global.messageCache[jid] = global.messageCache[jid] || [];
+
+global.messageCache[jid].push(msg);
+
+if (global.messageCache[jid].length > 100) {
+    global.messageCache[jid].shift();
     }
 
     if (!text) return;
