@@ -1,4 +1,5 @@
 const fs = require("fs");
+const clear = require("./lib/clear");
 const { t } = require("./lib/lang");
 const config = require("./config");
 const settings = require("./lib/settings");
@@ -98,44 +99,93 @@ console.log("BODY:", body);
 
         switch (body) {
 
-            case "0":
-                session.delete(jid);
+    case "0":
 
-                return sock.sendMessage(jid, {
-                    text: t(jid, "owner.clear_cancelled")
-                });
+        session.delete(jid);
 
-            case "1":
-                session.delete(jid);
+        return sock.sendMessage(jid, {
+            text: t(jid, "owner.clear_cancelled")
+        });
 
-                return sock.sendMessage(jid, {
-                    text: "🗑️ Current chat clearing is coming soon."
-                });
+    case "1": {
 
-            case "2":
-                session.delete(jid);
+        session.delete(jid);
 
-                return sock.sendMessage(jid, {
-                    text: "🗑️ Private chats clearing is coming soon."
-                });
+        const count = await clear.clearCurrent100(
+            sock,
+            jid
+        );
 
-            case "3":
-                session.delete(jid);
-
-                return sock.sendMessage(jid, {
-                    text: "🗑️ Group chats clearing is coming soon."
-                });
-
-            case "4":
-                session.delete(jid);
-
-                return sock.sendMessage(jid, {
-                    text: "🗑️ Full cleanup is coming soon."
-                });
-
-        }
+        return sock.sendMessage(jid, {
+            text: t(jid, "owner.clear_done")
+                .replace("{{count}}", count)
+        });
 
     }
+
+    case "2": {
+
+        session.delete(jid);
+
+        const count = await clear.clearCurrentAll(
+            sock,
+            jid
+        );
+
+        return sock.sendMessage(jid, {
+            text: t(jid, "owner.clear_done")
+                .replace("{{count}}", count)
+        });
+
+    }
+
+    case "3": {
+
+        session.delete(jid);
+
+        const count = await clear.clearPrivateChats(
+            sock
+        );
+
+        return sock.sendMessage(jid, {
+            text: t(jid, "owner.clear_done")
+                .replace("{{count}}", count)
+        });
+
+    }
+
+    case "4": {
+
+        session.delete(jid);
+
+        const count = await clear.clearGroupChats(
+            sock
+        );
+
+        return sock.sendMessage(jid, {
+            text: t(jid, "owner.clear_done")
+                .replace("{{count}}", count)
+        });
+
+    }
+
+    case "5": {
+
+        session.delete(jid);
+
+        const count = await clear.clearEverything(
+            sock
+        );
+
+        return sock.sendMessage(jid, {
+            text: t(jid, "owner.clear_done")
+                .replace("{{count}}", count)
+        });
+
+    }
+
+        }
+            
 
     return;
 
