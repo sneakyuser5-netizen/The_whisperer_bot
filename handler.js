@@ -49,6 +49,13 @@ async function handleMessage(sock, msg) {
         await new Promise(resolve => setTimeout(resolve, 2000));
     }
 
+
+
+    if (!text) return;
+
+    const sender = msg.key.remoteJid;
+    const jid = msg.key.remoteJid;
+    
     global.messageCache = global.messageCache || {};
 
 global.messageCache[jid] = global.messageCache[jid] || [];
@@ -57,12 +64,7 @@ global.messageCache[jid].push(msg);
 
 if (global.messageCache[jid].length > 100) {
     global.messageCache[jid].shift();
-    }
-
-    if (!text) return;
-
-    const sender = msg.key.remoteJid;
-    const jid = msg.key.remoteJid;
+}
     const groupSettings = settings.get(jid);
     let prefix = groupSettings.prefix || "."; // let not const
 
