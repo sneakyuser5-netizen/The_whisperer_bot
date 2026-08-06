@@ -1,4 +1,16 @@
 module.exports = {
+owner: {
+    clear_title: "CLEAR MANAGER",
+    clear_choose: "Choose what to clear:",
+    clear_current_100: "Delete last 100 messages in this chat",
+    clear_current_all: "Delete all cached messages in this chat",
+    clear_private_all: "Delete all cached private chats",
+    clear_group_all: "Delete all cached group chats",
+    clear_everything: "Delete every cached message",
+    clear_done: "Deleted {{count}} messages.",
+    clear_cancelled: "Operation cancelled.",
+    cancel: "Cancel"
+}
 "admin.setwelcome_usage": "Usage:\n.setwelcome <message>",
 "admin.setwelcome_saved": "✅ Welcome message updated.",
 "owner.clear_cancelled": "Operation cancelled.",
