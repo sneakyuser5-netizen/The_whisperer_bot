@@ -1,4 +1,6 @@
 module.exports = {
+   "owner.setbotname_usage": "Usage:\n.setbotname <name>",
+"owner.setbotname_success": "✅ Bot name changed to *{name}*.",
    "owner.broadcast_usage": "Usage:\n.broadcast <message>",
 "owner.broadcast_done": "✅ Broadcast sent to {count} groups.",
    "admin.need_owner_rights": "I need administrator rights in this group to remove members.",
