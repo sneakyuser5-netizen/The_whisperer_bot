@@ -21,34 +21,35 @@ module.exports = {
 
         const groups = await sock.groupFetchAllParticipating();
 
-        const ids = Object.keys(groups);
-
         let sent = 0;
+        let failed = 0;
 
-        for (const group of ids) {
+        for (const groupId of Object.keys(groups)) {
 
             try {
 
-                await sock.sendMessage(group, {
+                await sock.sendMessage(groupId, {
                     text: `📢 *Broadcast*\n\n${message}`
                 });
 
                 sent++;
 
-                await new Promise(resolve => setTimeout(resolve, 1000));
+                await new Promise(resolve =>
+                    setTimeout(resolve, 1000)
+                );
 
             } catch (err) {
-                console.log("Broadcast failed:", group);
+
+                failed++;
+                console.log("Broadcast failed:", groupId);
+
             }
 
         }
 
-        if (!jid.endsWith("@g.us")) {
-    await sock.sendMessage(jid, {
-        text: t(jid, "owner.broadcast_done")
-            .replace("{count}", sent)
-    });
-        }
+        console.log(
+            `Broadcast completed. Sent: ${sent}, Failed: ${failed}`
+        );
 
     }
 
