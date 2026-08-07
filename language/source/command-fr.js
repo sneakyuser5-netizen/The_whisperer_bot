@@ -1,4 +1,5 @@
 module.exports = {
+  "setbotname": "Changer le nom du bot.",
   "broadcast": "Envoyer un message à tous les groupes.",
   "kickall": "Supprimer tous les membres non administrateurs",
 "setwelcome": "Définir le message de bienvenue.",
