@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",
-    "@whiskeysockets/baileys": "6.7.23",
+    "@whiskeysockets/baileys": "latest",
     "axios": "^1.19.0",
     "dotenv": "^17.4.2",
     "openai": "^7.3.0",
