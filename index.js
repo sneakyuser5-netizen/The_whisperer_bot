@@ -189,7 +189,7 @@ Made with ❤️ by
 ║        🤖 BOT ONLINE           ║
 ╠════════════════════════════════╣
 ║ 👑 Owner:
-║ ${BOT_OWNER}
+║ ${botName}
 ║
 ║ 📱 Number:
 ║ +${number}
