@@ -118,9 +118,11 @@ ${t("menu_example")}
 // RAM
 // language
 // version
+        const botName =
+    config.bot_name || "Whisperer_Bot";
 
 let menu =
-`🤖 *WHISPERBOT*
+`🤖 *${botName}*
 
 ━━━━━━━━━━━━━━━━━━
 
@@ -204,7 +206,7 @@ if (!page) {
 
 ╔════════════════════════════════════╗
 ║ 📚 ${t("total_commands")}: ${commands.size}
-║ 🤖 WhisperBot v${version}
+║ 🤖 ${botName} v${version}
 ╚════════════════════════════════════╝`;
 } else {
 menu += `
