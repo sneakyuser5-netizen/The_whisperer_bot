@@ -1,4 +1,5 @@
 const { t } = require("../../lib/lang");
+const settings = require("../../lib/settings");
 
 module.exports = {
 
@@ -12,8 +13,12 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
+        const botName =
+            settings.get("global").bot_name ||
+            "Whisperer_Bot";
+
         const text =
-`${t(jid, "general.botinfo_title")}
+`🤖 *${botName}*
 
 ${t(jid, "general.botinfo_version")}: 1.0.0
 ${t(jid, "general.botinfo_library")}: Baileys
