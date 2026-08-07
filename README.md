@@ -208,8 +208,3 @@ MIT License — see LICENSE file.
 ## Author
 
 THE-WHISPERER — https://github.com/sneakyuser5-netizen
-
-If you’d like, I can:
-- Commit this README.md to the repository for you, or
-- Create a shorter README for npm/github landing page, or
-- Generate a CHANGELOG or CONTRIBUTING.md next. Which would you like me to do?
