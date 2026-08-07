@@ -20,8 +20,8 @@ module.exports = {
         const metadata = await sock.groupMetadata(jid);
 
         const bot = metadata.participants.find(
-            p => p.id === sock.user.id
-        );
+    p => p.id.includes(sock.user.id.split("@")[0].split(":")[0])
+);
 
         if (!bot?.admin) {
             return sock.sendMessage(jid, {
