@@ -1,4 +1,7 @@
 module.exports = {
+   "admin.kickall_done": "✅ Removed {{count}} members.",
+"admin.kickall_none": "There are no non-admin members to remove.",
+"admin.bot_not_admin": "I must be an admin to remove members.",
    "owner.clear_title": "CLEAR MANAGER",
 "owner.clear_choose": "Choose what to clear:",
 "owner.clear_current_100": "Delete the last 100 messages in this chat",
