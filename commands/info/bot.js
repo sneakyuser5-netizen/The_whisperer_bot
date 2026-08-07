@@ -39,7 +39,7 @@ const text =
 ━━━━━━━━━━━━━━
 
 👑 ${t("info.bot_creator")}
-THE-WHISPERER-237
+THE-WHISPERER
 
 🤖 ${t("info.bot_owner")}
 ${owner}
