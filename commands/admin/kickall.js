@@ -19,15 +19,17 @@ module.exports = {
 
         const metadata = await sock.groupMetadata(jid);
 
-        const bot = metadata.participants.find(
-    p => p.id.includes(sock.user.id.split("@")[0].split(":")[0])
+        const botId = sock.user.id.split(":")[0] + "@s.whatsapp.net";
+
+const me = metadata.participants.find(
+    p => p.id === botId
 );
 
-        if (!bot?.admin) {
-            return sock.sendMessage(jid, {
-                text: t(jid, "admin.bot_not_admin")
-            });
-        }
+if (!me?.admin) {
+    return sock.sendMessage(jid, {
+        text: t(jid, "admin.need_owner_rights")
+    });
+}
 
         const members = metadata.participants.filter(
             p => !p.admin && p.id !== sock.user.id
