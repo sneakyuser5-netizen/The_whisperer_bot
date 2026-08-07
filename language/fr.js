@@ -1,4 +1,13 @@
 module.exports = {
+"admin.bot_not_admin": "❌ Je dois être administrateur du groupe pour utiliser cette commande.",
+"admin.antilink_action_usage": "Utilisation :\n.antilinkaction delete|warn|kick",
+"admin.antilink_action_set": "✅ Action Anti-link définie sur *{action}*.",
+"owner.setbio_usage": "📌 Utilisation :\n.setbio <texte>",
+"owner.setbio_success": "✅ La bio WhatsApp a été mise à jour.\n\n📝 {bio}",
+"owner.setbio_failed": "❌ Impossible de modifier la bio WhatsApp.",
+"owner.setprofilename_usage": "📌 Utilisation :\n.setprofilename <nom>",
+"owner.setprofilename_success": "✅ Le nom du profil WhatsApp a été changé en *{name}*.",
+"owner.setprofilename_failed": "❌ Impossible de modifier le nom du profil WhatsApp.",
   "owner.setbotname_usage": "Utilisation :\n.setbotname <nom>",
 "owner.setbotname_success": "✅ Le nom du bot est maintenant *{name}*.",
   "owner.broadcast_usage": "Utilisation :\n.broadcast <message>",

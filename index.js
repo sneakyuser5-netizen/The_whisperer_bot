@@ -13,6 +13,31 @@ const botName =
     settings.get("global").bot_name ||
     "Whisperer_Bot";
 
+const originalLog = console.log;
+
+console.log = (...args) => {
+
+    // Hide all object dumps (WhatsApp messages, updates, etc.)
+    if (args.some(arg => typeof arg === "object")) {
+        return;
+    }
+
+    const text = args.join(" ");
+
+    // Hide old debug logs
+    if (
+        text.startsWith("COMMAND:") ||
+        text.startsWith("ARGS:") ||
+        text.startsWith("GOODBYE EVENT:") ||
+        text.startsWith("LEAVING USER:") ||
+        text.startsWith("[STATUS]")
+    ) {
+        return;
+    }
+
+    originalLog(...args);
+
+};
 async function startBot() {
     try {
     
@@ -188,19 +213,19 @@ Made with ❤️ by
 ╔════════════════════════════════╗
 ║        🤖 BOT ONLINE           ║
 ╠════════════════════════════════╣
-║ 👑 Owner:
+║ BOT NAME:
 ║ ${botName}
 ║
-║ 📱 Number:
+║ 📱NUMBER:
 ║ +${number}
 ║
-║ 📦 Version:
+║ 📦 VERSION:
 ║ ${BOT_VERSION}
 ║
-║ ⚡ Status:
+║ ⚡ STATUS:
 ║ Connected ✅
 ║
-║ ⏱️ Uptime:
+║ ⏱️ UPTIME:
 ║ ${uptime()}
 ╚════════════════════════════════╝
     `);

@@ -46,14 +46,34 @@ module.exports = {
                 text: t("demote_success")
             });
 
-        } catch (err) {
+} catch (err) {
 
-            console.log("Demote error:", err);
+    console.log("Demote error:", err);
 
-            await sock.sendMessage(jid, {
-                text: t("demote_failed")
-            });
-        }
+    const message = (
+        err?.message ||
+        err?.data ||
+        ""
+    ).toString().toLowerCase();
+
+    if (
+        message.includes("not-authorized") ||
+        message.includes("not authorized") ||
+        message.includes("not admin") ||
+        message.includes("403")
+    ) {
+
+        return await sock.sendMessage(jid, {
+            text: t(jid, "admin.bot_not_admin")
+        });
+
+    }
+
+    await sock.sendMessage(jid, {
+        text: t(jid, "admin.demote_failed")
+    });
+
+}
 
     }
 };

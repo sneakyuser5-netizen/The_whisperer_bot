@@ -47,14 +47,34 @@ module.exports = {
                 text: t(jid, "admin.promote_success")
             });
 
-        } catch (err) {
+} catch (err) {
 
-            console.log("Promote error:", err);
+    console.log("Promote error:", err);
 
-            await sock.sendMessage(jid, {
-                text: t(jid, "admin.promote_failed")
-            });
-        }
+    const message = (
+        err?.message ||
+        err?.data ||
+        ""
+    ).toString().toLowerCase();
+
+    if (
+        message.includes("not-authorized") ||
+        message.includes("not authorized") ||
+        message.includes("not admin") ||
+        message.includes("403")
+    ) {
+
+        return await sock.sendMessage(jid, {
+            text: t(jid, "admin.bot_not_admin")
+        });
+
+    }
+
+    await sock.sendMessage(jid, {
+        text: t(jid, "admin.promote_failed")
+    });
+
+}
 
     }
 };

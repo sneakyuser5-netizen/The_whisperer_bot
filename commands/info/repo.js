@@ -22,7 +22,7 @@ module.exports = {
 Whisper Bot
 
 👑 ${t("info.repo_owner")}
-THE-WHISPERER-237
+THE-WHISPERER
 
 🔗 GitHub:
 https://github.com/sneakyuser5-netizen/The_whisperer_bot

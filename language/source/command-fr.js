@@ -1,4 +1,7 @@
 module.exports = {
+"antilinkaction": "Définir l'action de l'anti-lien.",
+"setbio": "Modifier la bio WhatsApp",
+"setprofilename": "Modifier le nom du profil WhatsApp",
   "setbotname": "Changer le nom du bot.",
   "broadcast": "Envoyer un message à tous les groupes.",
   "kickall": "Supprimer tous les membres non administrateurs",

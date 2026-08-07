@@ -1,4 +1,8 @@
-const { downloadMediaMessage } = require("@whiskeysockets/baileys");
+const {
+    downloadMediaMessage
+} = require("@whiskeysockets/baileys");
+
+const { Readable } = require("stream");
 const { t } = require("../../lib/lang");
 
 module.exports = {
@@ -17,33 +21,50 @@ module.exports = {
 
         const quoted =
             msg.message?.extendedTextMessage
-            ?.contextInfo
-            ?.quotedMessage;
+                ?.contextInfo?.quotedMessage;
 
         if (!quoted?.imageMessage) {
-
             return sock.sendMessage(jid, {
-                text: t("owner.pp_usage")
+                text: t(jid, "owner.pp_usage")
+            });
+        }
+
+        try {
+
+            const image = await downloadMediaMessage(
+                {
+                    message: quoted
+                },
+                "buffer",
+                {},
+                {
+                    logger: sock.logger,
+                    reuploadRequest: sock.updateMediaMessage
+                }
+            );
+
+            const stream = Readable.from(image);
+
+            await sock.updateProfilePicture(
+                sock.user.id,
+                {
+                    stream
+                }
+            );
+
+            await sock.sendMessage(jid, {
+                text: t(jid, "owner.pp_updated")
+            });
+
+        } catch (err) {
+
+            console.error("Profile picture error:", err);
+
+            await sock.sendMessage(jid, {
+                text: "❌ Failed to update profile picture."
             });
 
         }
-
-        const image = await downloadMediaMessage(
-            {
-                message: quoted
-            },
-            "buffer",
-            {}
-        );
-
-        await sock.updateProfilePicture(
-            sock.user.id,
-            image
-        );
-
-        await sock.sendMessage(jid, {
-            text: t("owner.pp_updated")
-        });
 
     }
 

@@ -69,7 +69,7 @@ if (global.messageCache[jid].length > 100) {
     let prefix = groupSettings.prefix || "."; // let not const
 
     const identity = require("./lib/identity");
-    identity.debug(msg);
+    //identity.debug(msg);
     const senderId = identity.getSender(msg);
     const isOwner = identity.isOwner(msg);
     const isSudo = identity.isSudo(msg);
@@ -95,8 +95,8 @@ if (global.messageCache[jid].length > 100) {
 if (!body.startsWith(prefix)) {
 
     const current = session.get(jid);
-    console.log("SESSION FOUND:", current);
-console.log("BODY:", body);
+//    console.log("SESSION FOUND:", current);
+//console.log("BODY:", body);
 
     if (current?.type === "clear") {
 
@@ -261,8 +261,8 @@ if (!command) return;
         }
     }
 
-    console.log("COMMAND:", command.name);
-    console.log("ARGS:", args);
+  //  console.log("COMMAND:", command.name);
+    //console.log("ARGS:", args);
     await command.execute(sock, msg, args);
 }
 

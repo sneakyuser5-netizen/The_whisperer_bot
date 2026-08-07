@@ -5,9 +5,11 @@
     "autoread": false,
     "anticall": false,
     "language": "fr",
-    "mode": "public"
+    "mode": "public",
+    "bot_name": "WHISPERERBOT"
   },
   "120363426993971039@g.us": {
-    "antilink": false
+    "antilink": false,
+    "antilink_action": "delete"
   }
 }

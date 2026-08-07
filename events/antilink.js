@@ -1,45 +1,74 @@
+
 module.exports = {
+
     name: "antilink",
+
     trigger: "messages.upsert",
 
     execute: async (sock, msg) => {
+
         if (!msg.message) return;
 
         const jid = msg.key.remoteJid;
-        const settingsLib = require("../lib/settings");
-        const groupSettings = settingsLib.get(jid);
-        const fs = require("fs");
-        const path = require("path");
-        const identity = require("../lib/identity");
-        const settingsFile = path.join(__dirname, "../database/settings.json");
 
-        let settings = {};
-        try {
-            settings = JSON.parse(fs.readFileSync(settingsFile));
-        } catch {
-            settings = {};
-        }
-
-        if (!settings[jid]?.antilink) return;
         if (!jid.endsWith("@g.us")) return;
 
-        // Sticker lock
-        if (groupSettings.lock_sticker && msg.message?.stickerMessage) {
-            const metadata = await sock.groupMetadata(jid);
+        const settingsLib = require("../lib/settings");
+        const identity = require("../lib/identity");
 
-            const sender = msg.key.participant || msg.key.remoteJid;
+        const groupSettings = settingsLib.get(jid);
 
-            const member = metadata.participants.find(p => {
-                return (p.id || p.jid) === sender;
+        if (!groupSettings.antilink) return;
+
+        const action = groupSettings.antilink_action || "delete";
+
+        const metadata = await sock.groupMetadata(jid);
+
+        const botId = sock.user.id.split(":")[0] + "@s.whatsapp.net";
+
+        const bot = metadata.participants.find(
+            p => (p.id || p.jid) === botId
+        );
+
+        // Bot is no longer an admin
+        if (!bot?.admin) {
+
+            settingsLib.set(jid, "antilink", false);
+
+            await sock.sendMessage(jid, {
+                text: "⚠️ Anti-link has been disabled because I'm no longer a group administrator."
             });
 
+            return;
+
+        }
+
+        // Sticker lock
+        if (
+            groupSettings.lock_sticker &&
+            msg.message?.stickerMessage
+        ) {
+
+            const sender =
+                msg.key.participant ||
+                msg.key.remoteJid;
+
+            const member = metadata.participants.find(
+                p => (p.id || p.jid) === sender
+            );
+
             if (!member?.admin) {
-                await sock.sendMessage(jid, { delete: msg.key });
+
+                await sock.sendMessage(jid, {
+                    delete: msg.key
+                });
 
                 return sock.sendMessage(jid, {
                     text: "🚫 Stickers are currently locked."
                 });
+
             }
+
         }
 
         const text =
@@ -49,38 +78,84 @@ module.exports = {
             msg.message.videoMessage?.caption ||
             "";
 
-        const linkRegex = /(https?:\/\/|www\.|chat\.whatsapp\.com)/i;
+        const linkRegex =
+            /(https?:\/\/|www\.|chat\.whatsapp\.com)/i;
 
         if (!linkRegex.test(text)) return;
 
         try {
-            const metadata = await sock.groupMetadata(jid);
 
-            const sender = msg.key.participant || msg.key.remoteJid;
+            const sender =
+                msg.key.participant ||
+                msg.key.remoteJid;
 
-            const member = metadata.participants.find(p => {
-                return (p.id || p.jid) === sender;
+            const member = metadata.participants.find(
+                p => (p.id || p.jid) === sender
+            );
+
+            // Ignore admins, creator, owner and sudo
+            if (
+                member?.admin ||
+                identity.isBotOwner(msg) ||
+                identity.isCreator(msg) ||
+                identity.isSudo(msg)
+            ) {
+                return;
+            }
+
+            // Delete the offending message
+            await sock.sendMessage(jid, {
+                delete: msg.key
             });
 
-// Ignore group admins, bot owner, creator and sudo users
-if (
-    member?.admin ||
-    identity.isBotOwner(msg) ||
-    identity.isCreator(msg) ||
-    identity.isSudo(msg)
-) {
-    return;
-}
+            if (action === "warn") {
 
-            await sock.sendMessage(jid, { delete: msg.key });
+                const warnings = require("../lib/warnings");
 
+                const count = warnings.add(jid, sender);
+
+                return await sock.sendMessage(jid, {
+                    text:
+`⚠️ @${sender.split("@")[0]} has been warned.
+
+Warnings: ${count}`,
+                    mentions: [sender]
+                });
+
+            }
+
+            if (action === "kick") {
+
+                await sock.sendMessage(jid, {
+                    text:
+`🚫 @${sender.split("@")[0]} was removed for sending links.`,
+                    mentions: [sender]
+                });
+
+                return await sock.groupParticipantsUpdate(
+                    jid,
+                    [sender],
+                    "remove"
+                );
+
+            }
+
+            // Default action: delete only
             await sock.sendMessage(jid, {
-                text: `🚫 Anti-link activated!\n\n@${sender.split("@")[0]}, links are not allowed here.`,
+                text:
+`🚫 @${sender.split("@")[0]}, links are not allowed here.`,
                 mentions: [sender]
             });
 
         } catch (err) {
+
             console.log("Anti-link error:", err);
+
         }
+
     }
+
 };
+
+
+
