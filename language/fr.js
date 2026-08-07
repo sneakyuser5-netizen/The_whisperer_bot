@@ -1,4 +1,7 @@
 module.exports = {
+  "admin.kickall_done": "✅ {{count}} membres ont été supprimés.",
+"admin.kickall_none": "Aucun membre non administrateur à supprimer.",
+"admin.bot_not_admin": "Je dois être administrateur pour supprimer des membres.",
 "owner.clear_title": "GESTIONNAIRE DE NETTOYAGE",
 "owner.clear_choose": "Choisissez ce que vous voulez supprimer :",
 "owner.clear_current_100": "Supprimer les 100 derniers messages de cette discussion",
