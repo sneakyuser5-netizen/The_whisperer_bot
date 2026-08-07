@@ -7,8 +7,11 @@ const settings = require("./lib/settings");
 
 
 const setup = require("./lib/setup");
-const BOT_OWNER = "THE-WHISPERER";
 const BOT_VERSION = "1.0.0";
+
+const botName =
+    settings.get("global").bot_name ||
+    "Whisperer_Bot";
 
 async function startBot() {
     try {
