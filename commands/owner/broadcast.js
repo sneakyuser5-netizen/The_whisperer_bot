@@ -43,10 +43,12 @@ module.exports = {
 
         }
 
-        await sock.sendMessage(jid, {
-            text: t(jid, "owner.broadcast_done")
-                .replace("{count}", sent)
-        });
+        if (!jid.endsWith("@g.us")) {
+    await sock.sendMessage(jid, {
+        text: t(jid, "owner.broadcast_done")
+            .replace("{count}", sent)
+    });
+        }
 
     }
 
