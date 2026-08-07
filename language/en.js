@@ -1,4 +1,5 @@
 module.exports = {
+   "admin.need_owner_rights": "I need administrator rights in this group to remove members.",
    "admin.kickall_done": "✅ Removed {{count}} members.",
 "admin.kickall_none": "There are no non-admin members to remove.",
 "admin.bot_not_admin": "I must be an admin to remove members.",
