@@ -28,8 +28,13 @@ module.exports = {
         const sudos = sudo.all(owner).length;
         const mode = settings.get("global").mode || "private";
 
-        const text =
-`${t("info.bot_title")}
+        
+const botName =
+    settings.get("global").bot_name ||
+    "Whisperer_Bot";
+
+const text =
+`🤖 *${botName}*
 
 ━━━━━━━━━━━━━━
 
