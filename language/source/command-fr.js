@@ -1,4 +1,5 @@
 module.exports = {
+  "kickall": "Supprimer tous les membres non administrateurs",
 "setwelcome": "Définir le message de bienvenue.",
 "setgoodbye": "Définir le message d'au revoir.",
 "chat": "Discuter avec WhisperBot.",
