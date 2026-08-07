@@ -1,4 +1,6 @@
 module.exports = {
+  "owner.broadcast_usage": "Utilisation :\n.broadcast <message>",
+"owner.broadcast_done": "✅ Diffusion envoyée dans {count} groupe(s).",
   "admin.need_owner_rights": "J'ai besoin des droits d'administrateur dans ce groupe pour supprimer des membres.",
   "admin.kickall_done": "✅ {{count}} membres ont été supprimés.",
 "admin.kickall_none": "Aucun membre non administrateur à supprimer.",
