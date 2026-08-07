@@ -20,11 +20,11 @@ module.exports = {
             });
         }
 
-        try {
-            await sock.updateProfileName(name);
-        } catch (err) {
-            console.log("Couldn't update WhatsApp profile name:", err);
-        }
+       // try {
+          //  await sock.updateProfileName(name);
+       // } catch (err) {
+          //  console.log("Couldn't update WhatsApp profile name:", err);
+       // }
 
         settings.set("global", "bot_name", name);
 
