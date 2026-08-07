@@ -1,4 +1,5 @@
 module.exports = {
+  "kickall": "Remove all non-admin members",
   "8ball": "Ask the magic ball",
   "admincheck": "Test admin permission",
   "admincount": "Show the number of group admins",
