@@ -19,6 +19,18 @@ A fast, modular and production-ready WhatsApp bot built with Node.js and Baileys
 
 ---
 
+## 📢 WhatsApp Channel
+
+Follow the official **WhisperBot WhatsApp Channel** to stay up to date with:
+
+- 🚀 New features and commands
+- 🛠️ Updates and improvements
+- 🐛 Bug fixes and important notices
+- 📚 Tips and usage examples
+- 🔔 Important project announcements
+
+👉 **[Join the official WhisperBot WhatsApp Channel](https://whatsapp.com/channel/0029VbCmque7Noa0J2BLR82e)**
+
 ## Features
 
 - Multi-device connection and pairing-code login
