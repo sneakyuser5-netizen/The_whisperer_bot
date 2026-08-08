@@ -1,4 +1,16 @@
 module.exports = {
+"admin.warnlimit_usage":
+    "📌 Utilisation :\n.warnlimit=3",
+
+"admin.warnlimit_set":
+    "✅ Limite d'avertissements définie à {limit}. Un membre sera expulsé après {limit} avertissements.",
+"admin_warnlimit_usage":
+    "📌 Utilisation :\n.warnlimit=3",
+
+"admin_warnlimit_set":
+    "✅ Limite d'avertissements définie à {limit}. Un membre sera expulsé après {limit} avertissements.",
+"antilink_action_usage": "📌 Utilisation :\n.antilink action delete/warn/kick",
+"antilink_action_set": "✅ Action anti-lien définie sur : {action}",
 "admin.bot_not_admin": "❌ Je dois être administrateur du groupe pour utiliser cette commande.",
 "admin.antilink_action_usage": "Utilisation :\n.antilinkaction delete|warn|kick",
 "admin.antilink_action_set": "✅ Action Anti-link définie sur *{action}*.",

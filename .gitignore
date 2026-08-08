@@ -34,3 +34,8 @@ README.md
 .DS_Store
 Thumbs.db
 .termux/
+node_modules/
+session/
+database/settings.json
+database/warns.json
+.env

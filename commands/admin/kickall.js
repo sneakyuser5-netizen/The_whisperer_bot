@@ -31,9 +31,13 @@ if (!me?.admin) {
     });
 }
 
-        const members = metadata.participants.filter(
-            p => !p.admin && p.id !== sock.user.id
-        );
+const myNumber = sock.user.id.split("@")[0].split(":")[0];
+
+const members = metadata.participants.filter(p => {
+    const number = p.id.split("@")[0].split(":")[0];
+
+    return !p.admin && number !== myNumber;
+});
 
         if (!members.length) {
             return sock.sendMessage(jid, {
@@ -51,7 +55,13 @@ if (!me?.admin) {
                     "remove"
                 );
                 kicked++;
-            } catch {}
+            } catch (err) {
+
+    console.dir(err, { depth: null });
+
+    failed++;
+
+}
         }
 
         await sock.sendMessage(jid, {

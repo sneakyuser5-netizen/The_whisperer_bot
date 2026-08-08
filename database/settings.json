@@ -1,15 +1,20 @@
 {
   "global": {
     "autotyping": false,
-    "autorecording": false,
+    "autorecording": true,
     "autoread": false,
     "anticall": false,
     "language": "fr",
-    "mode": "public",
-    "bot_name": "WHISPERERBOT"
+    "mode": "private",
+    "bot_name": "LOIC MR LORD",
+    "status_saver": true
   },
   "120363426993971039@g.us": {
-    "antilink": false,
-    "antilink_action": "delete"
+    "antilink": true,
+    "antilink_action": "kick",
+    "warn_limit": 3
+  },
+  "120363429863144213@g.us": {
+    "prefix": "."
   }
 }
