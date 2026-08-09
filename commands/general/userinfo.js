@@ -108,25 +108,60 @@ module.exports = {
                         contact.verifiedName ||
                         contact.pushName ||
                         name;
+
+                    // Prefer contact-provided about/status if available
+                    about =
+                        contact.status ||
+                        contact.statusMessage ||
+                        contact.bio ||
+                        about;
+
+                    // Try to recover phone number from contact if not already found
+                    if (!phoneNumber) {
+                        const maybe =
+                            String(contact.id || contact.jid || "")
+                                .replace("@s.whatsapp.net", "")
+                                .split(":")[0]
+                                .trim();
+
+                        if (/^\d{7,15}$/.test(maybe)) {
+                            phoneNumber = maybe;
+                        }
+                    }
+                } else {
+                    // If contact not in store, try to derive a number/name from the JID itself
+                    const fallbackNumber =
+                        targetJid.replace(/@.*$/, "").split(":")[0];
+
+                    if (/^\d{7,15}$/.test(fallbackNumber)) {
+                        // use the numeric value as a fallback name only if no better name
+                        if (name === "Unknown") name = fallbackNumber;
+                        if (!phoneNumber) phoneNumber = fallbackNumber;
+                    }
                 }
 
-            } catch {}
+            } catch (e) {
+                // swallow errors but log for debugging
+                console.log("Userinfo contact lookup error:", e);
+            }
 
             /*
-             * Fetch profile status / About.
+             * Fetch profile status / About if still not available.
              */
-            if (phoneNumber) {
+            if ((!about || about === "Not available") && phoneNumber) {
 
                 try {
 
                     const profile =
-                        await sock.fetchStatus(realJid);
+                        await sock.fetchStatus(`${phoneNumber}@s.whatsapp.net`);
 
                     if (profile?.status) {
                         about = profile.status;
                     }
 
-                } catch {}
+                } catch (err) {
+                    // ignore fetch errors
+                }
             }
 
             /*
@@ -184,12 +219,20 @@ module.exports = {
             }
 
             /*
-             * Final number.
+             * Final number (fall back to extracting from targetJid when needed).
              */
-            const displayNumber =
-                phoneNumber
-                    ? `+${phoneNumber}`
-                    : "Unavailable";
+            let displayNumber = "Unavailable";
+
+            if (phoneNumber) {
+                displayNumber = `+${phoneNumber}`;
+            } else {
+                const fallbackNumber =
+                    targetJid.replace(/@.*$/, "").split(":")[0];
+
+                if (/^\d{7,15}$/.test(fallbackNumber)) {
+                    displayNumber = `+${fallbackNumber}`;
+                }
+            }
 
             await sock.sendMessage(jid, {
 
