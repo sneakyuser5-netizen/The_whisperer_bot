@@ -1,4 +1,3 @@
 {
-  "_comment": "phone — WhatsApp number (digits only, include country code, no leading +). Example: \"14155552671\" (for +1 415-555-2671). Use only digits (E.164 numeric form without '+', up to 15 digits).",
-  "phone": "Whatsapp number with country code and no + sign"
+  "phone": "14155552671"
 }
