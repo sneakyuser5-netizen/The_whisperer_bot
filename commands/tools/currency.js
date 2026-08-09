@@ -31,10 +31,9 @@ module.exports = {
 
         try {
 
-            const { data } = await axios.get(
-                `${api.exchange.url}/${from}`
-            );
-
+const { data } = await axios.get(
+    `${api.urls.exchange}/${from}`
+);
             if (data.result !== "success") {
                 throw new Error();
             }
@@ -66,13 +65,15 @@ Rate: 1 ${from} = ${rate} ${to}`
                 }
             );
 
-        } catch {
+} catch (err) {
+    console.error(
+        "Currency error:",
+        err.response?.data || err.message
+    );
 
-            await sock.sendMessage(jid, {
-                text: t(jid, "tools.currency_error")
-            });
-
-        }
-
+    await sock.sendMessage(jid, {
+        text: t(jid, "tools.currency_error")
+    });
+}
     }
 };

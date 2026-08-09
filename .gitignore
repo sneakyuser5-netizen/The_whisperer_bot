@@ -1,3 +1,9 @@
+# Keep local secrets and data
+.env
+database/*.json
+senku-xmd/
+node_modules/
+
 .gitignore 
 # Dependencies
 node_modules/

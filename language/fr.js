@@ -1,4 +1,18 @@
 module.exports = {
+"general.userinfo_name":
+    "Nom",
+
+"general.userinfo_number":
+    "Numéro",
+
+"general.userinfo_about":
+    "Bio",
+
+"general.userinfo_role":
+    "Rôle",
+
+"general.userinfo_failed":
+    "❌ Impossible de récupérer les informations de l'utilisateur.",
 "admin.warnlimit_usage":
     "📌 Utilisation :\n.warnlimit=3",
 
