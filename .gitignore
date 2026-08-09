@@ -1,50 +1,56 @@
-# Keep local secrets and data
-.env
-database/*.json
-senku-xmd/
-node_modules/
+# .gitignore for The_whisperer_bot
+# Purpose: keep local, sensitive, and environment-specific files out of the repository.
 
-.gitignore 
-# Dependencies
+# Local environment files
+.env
+.env.local
+.env.*.local
+
+# Node modules and package manager debug logs
 node_modules/
-package-lock.json
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+.pnpm-debug.log*
+
+# Logs
+logs/
+*.log
 
 # PM2
 .pm2/
 *.pid
-.npm
-.mp2
 
-# Baileys Session
+# Baileys session files / credentials
 session/
-creds.json
 auth_info_baileys.json
-session
+creds.json
 
-# Local Config - DO NOT COMMIT
-.env
-database/settings.json
-database/setup.json
-database/activity.json
-database/edited.json
-PROJECT.md
-README.md
+# Local database JSON files (keep examples if you use them)
+database/*.json
+!database/*.example.json
 
-# Logs
-*.log
+# Termux local config
+.termux/
 
 # OS junk
 .DS_Store
 Thumbs.db
-.termux/
-node_modules/
-session/
-database/settings.json
-database/warns.json
-.env
-database/settings.json
-session/
-database/warns.json
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# Build / coverage
+coverage/
+dist/
+build/
+
+# Private keys, certificates
+*.pem
+*.key
+
+# Notes:
+# - Do NOT ignore README.md or other documentation files — they should stay tracked.
+# - If any of the files above are already tracked in the repository, you must remove them from the index
+#   with 'git rm --cached <path>' and commit; .gitignore only prevents new untracked files from being added.
