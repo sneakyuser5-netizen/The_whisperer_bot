@@ -5,7 +5,17 @@
 .env
 .env.local
 .env.*.local
-
+package-lock.json
+node_modules/
+session/
+npm2/
+telegram-bot/
+.env
+database/activity.json
+database/edited.json
+database/owner.json
+database/setup.json
+database/read.json
 # Node modules and package manager debug logs
 node_modules/
 npm-debug.log*
