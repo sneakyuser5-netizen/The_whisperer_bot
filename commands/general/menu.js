@@ -3,8 +3,8 @@ const { commands } = require("../../handler");
 const settings = require("../../lib/settings");
 const fs = require("fs");
 const path = require("path");
- const sharp = require("sharp");
-//const Jimp = require("jimp");
+const sharp = require("sharp");
+
 module.exports = {
     name: "menu",
     category: "general",
@@ -390,27 +390,33 @@ ${prefix}menu admin`
 
 </svg>
 `;
-try {
-    // Jimp v1 can read SVG directly
-    const image = await Jimp.read(Buffer.from(svg));
-    
-    // Resize a bit bigger so text is clear on WhatsApp
-    image.resize({ w: 900 }); 
 
-    const buffer = await image.getBuffer("image/png");
+            try {
 
-    return await sock.sendMessage(jid, {
-        image: buffer,
-        caption: `🤖 *${botName}*\n\n${prefix}menu <category>`
-    });
+                const image = await sharp(
+                    Buffer.from(svg)
+                )
+                .png()
+                .toBuffer();
 
-} catch (error) {
-    console.error("MENU IMAGE ERROR:", error);
-    // fallback to text if image fails
-    return sock.sendMessage(jid, {
-        text: `🤖 *${botName}*\n\n${t("menu_categories")}`
-    });
-}
+                return await sock.sendMessage(jid, {
+                    image,
+                    caption:
+                        `🤖 *${botName}*\n\n` +
+                        `${prefix}menu <category>`
+                });
+
+            } catch (error) {
+
+                console.error(
+                    "MENU IMAGE ERROR:",
+                    error
+                );
+
+                return sock.sendMessage(jid, {
+                    text: `🤖 *${botName}*\n\n${t("menu_categories")}`
+                });
+            }
         }
 
         // =====================================================
