@@ -4,7 +4,7 @@ const settings = require("../../lib/settings");
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
-
+const { generateMenuImage } = require("../../lib/menuImage");
 module.exports = {
     name: "menu",
     category: "general",
@@ -18,6 +18,9 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
         const page = (args[0] || "").toLowerCase();
+        if (page === "admin") {
+    return await generateMenuImage(sock, msg, "admin");
+        }
         const config = settings.get("global");
 
         const { version } = require("../../package.json");
