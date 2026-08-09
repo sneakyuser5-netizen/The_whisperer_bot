@@ -19,7 +19,14 @@ module.exports = {
         const jid = msg.key.remoteJid;
         const page = (args[0] || "").toLowerCase();
         if (page === "admin") {
-    return await generateMenuImage(sock, msg, "admin");
+    const imagePage = parseInt(args[1]) || 1;
+
+    return await generateMenuImage(
+        sock,
+        msg,
+        "admin",
+        imagePage
+    );
         }
         const config = settings.get("global");
 
