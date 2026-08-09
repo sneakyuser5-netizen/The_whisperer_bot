@@ -1,4 +1,5 @@
 const { t } = require("../../lib/lang");
+const session = require("../../lib/session");
 
 module.exports = {
     name: "kickall",
@@ -19,25 +20,17 @@ module.exports = {
 
         const metadata = await sock.groupMetadata(jid);
 
-        const botId = sock.user.id.split(":")[0] + "@s.whatsapp.net";
+        const myNumber = sock.user.id
+            .split("@")[0]
+            .split(":")[0];
 
-const me = metadata.participants.find(
-    p => p.id === botId
-);
+        const members = metadata.participants.filter(p => {
+            const number = p.id
+                .split("@")[0]
+                .split(":")[0];
 
-if (!me?.admin) {
-    return sock.sendMessage(jid, {
-        text: t(jid, "admin.need_owner_rights")
-    });
-}
-
-const myNumber = sock.user.id.split("@")[0].split(":")[0];
-
-const members = metadata.participants.filter(p => {
-    const number = p.id.split("@")[0].split(":")[0];
-
-    return !p.admin && number !== myNumber;
-});
+            return !p.admin && number !== myNumber;
+        });
 
         if (!members.length) {
             return sock.sendMessage(jid, {
@@ -45,29 +38,35 @@ const members = metadata.participants.filter(p => {
             });
         }
 
-        let kicked = 0;
+session.set(jid, {
+    type: "kickall",
+    members,
+    expires: Date.now() + 30000
+});
 
-        for (const member of members) {
-            try {
-                await sock.groupParticipantsUpdate(
-                    jid,
-                    [member.id],
-                    "remove"
-                );
-                kicked++;
-            } catch (err) {
+setTimeout(async () => {
 
-    console.dir(err, { depth: null });
+    const current = session.get(jid);
 
-    failed++;
+    // Make sure this is still the same pending kickall
+    if (current?.type !== "kickall") {
+        return;
+    }
 
-}
-        }
+    // Clear the session
+    session.delete(jid);
+
+    // Notify the group
+    await sock.sendMessage(jid, {
+        text: t(jid, "admin.kickall_expired")
+    });
+
+}, 30000);
+        const warning = t(jid, "admin.kickall_confirm")
+            .replace("{{count}}", members.length);
 
         await sock.sendMessage(jid, {
-            text: t(jid, "admin.kickall_done")
-                .replace("{{count}}", kicked)
+            text: warning
         });
-
     }
 };

@@ -1,1 +1,10 @@
-{}
+{
+  "global": {
+    "autotyping": false,
+    "autorecording": false,
+    "autoread": false,
+    "anticall": false,
+    "language": "fr",
+    "mode": "private"
+  }
+}

@@ -1,19 +1,19 @@
 module.exports = {
-"general.userinfo_name":
-    "Name",
+"admin.kickall_confirm": "⚠️ WARNING\n\nThis will remove {{count}} non-admin members.\n\nReply with:\n\nYES\n\nwithin 30 seconds to continue.\n\nReply with:\n\nNO\n\nto cancel.",
+"admin.kickall_reply": "Please reply YES to continue or NO to cancel.",
+"admin.kickall_expired": "⏱️ Confirmation expired. The operation was cancelled.",
+"admin.kickall_cancelled": "❌ Operation cancelled.",
+"admin.kickall_none": "There are no non-admin members to remove.",
+"admin.kickall_done": "✅ Removed {{count}} members.\n❌ Failed: {{failed}}",
+"admin.kickall_done": "✅ Removed {{count}} members.\n❌ Failed: {{failed}}",
+"general.getpp_failed":
+    "❌ Unable to determine the user.",
 
-"general.userinfo_number":
-    "Number",
+"general.getpp_unavailable":
+    "❌ This user does not have a profile picture available.",
 
-"general.userinfo_about":
-    "About",
-
-"general.userinfo_role":
-    "Role",
-
-"general.userinfo_failed":
-    "❌ Unable to retrieve user information.",
-
+"general.getpp_caption":
+    "👤 Profile Picture",
 "admin.warnlimit_usage":
     "📌 Usage:\n.warnlimit=3",
 

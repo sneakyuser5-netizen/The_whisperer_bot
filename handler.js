@@ -97,6 +97,60 @@ if (!body.startsWith(prefix)) {
     const current = session.get(jid);
 //    console.log("SESSION FOUND:", current);
 //console.log("BODY:", body);
+if (current?.type === "kickall") {
+
+    const answer = body.trim().toLowerCase();
+
+    if (Date.now() > current.expires) {
+        session.delete(jid);
+
+        return sock.sendMessage(jid, {
+            text: t(jid, "admin.kickall_expired")
+        });
+    }
+
+    if (answer === "no") {
+        session.delete(jid);
+
+        return sock.sendMessage(jid, {
+            text: t(jid, "admin.kickall_cancelled")
+        });
+    }
+
+if (answer !== "yes") {
+    return;
+}
+    session.delete(jid);
+
+    let kicked = 0;
+    let failed = 0;
+
+    for (const member of current.members) {
+
+        try {
+
+            await sock.groupParticipantsUpdate(
+                jid,
+                [member.id],
+                "remove"
+            );
+
+            kicked++;
+
+        } catch (err) {
+
+            console.dir(err, { depth: null });
+
+            failed++;
+        }
+    }
+
+    return sock.sendMessage(jid, {
+        text: t(jid, "admin.kickall_done")
+            .replace("{{count}}", kicked)
+            .replace("{{failed}}", failed)
+    });
+}
 
     if (current?.type === "clear") {
 

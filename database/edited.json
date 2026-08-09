@@ -1,1 +1,2868 @@
-{}
+{
+  "A510F01907A6F128B2B0FB3A6AB22626": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A510F01907A6F128B2B0FB3A6AB22626",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786277710,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwj5lazTBBAAGiBRg8ne86407QSWe4YEgRD0KPJxnQY/VFusazG9ZhUS3yIhBW6f0NOmU2GmotIj+Lv/PB120XPIvntUKc750IImqnJE"
+      },
+      "extendedTextMessage": {
+        "text": ". userinfo @140025312342180",
+        "previewType": "NONE",
+        "contextInfo": {
+          "mentionedJid": [
+            "140025312342180@lid"
+          ]
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "slLXHcqGm0TYoNhiKcW245Su/zCJrwB90MAVQz+PogQ="
+      }
+    },
+    "verifiedBizName": "The-whisperer"
+  },
+  "3EB0707570F75F71031DAD": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0707570F75F71031DAD",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786277711,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "MwjGlKXTBhAHGiA7S+0qvWzLi1IU71GIkUYVUUxvxJR7lxMfEAa4nkpegSIhBeK6R4nhJ4vzJGbqucGc9TvddQd/JsAZSK8+9YclZ8Fh"
+      },
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "COZ6BLZLcSexCST6FldVKh8oVXYegpMPKXSmUi5C2WA="
+      }
+    }
+  },
+  "3EB0D2BBBF3120AB9124EC": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0D2BBBF3120AB9124EC"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "👤 *User Information*\n\nName: Unknown\nNumber: Unavailable\nAbout: Not available\nRole: Group Admin"
+      },
+      "messageContextInfo": {
+        "messageSecret": "SQa3DBZCzmeughwMb7kdHygRImni/+rR1bKT523FZDc="
+      }
+    },
+    "messageTimestamp": "1786277710",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5E2E9D83086970787BB17254FDFFA50": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5E2E9D83086970787BB17254FDFFA50",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786277724,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".admins",
+      "messageContextInfo": {
+        "messageSecret": "Gh1qcvHBKy8bsj1/wY9p30EDlgQ06Z4Dx7qsu68TSfI="
+      }
+    }
+  },
+  "3EB0865CCDBBEC0692B6AD": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0865CCDBBEC0692B6AD",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786277725,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "1RRlN+UdinzqKjW8mVUhfF2yaq4yo6kDhZafUDYQqO8="
+      }
+    }
+  },
+  "3EB0CB63BCAD0F31CAAD32": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0CB63BCAD0F31CAAD32"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "👑 *Group Administrators*\n\n• @245848793444568\n• @173517366628547\n• @262101067112474\n• @95498631409720\n• @112803121774699\n• @131426234191919\n• @91178649309345\n• @3922026602594\n• @232401368301802\n• @127685720305790\n• @201576404807761\n• @260851131019469\n• @210797682770056\n• @125804356870153\n• @182704385589360\n• @267280814493909\n• @262530647769117\n• @140025312342180\n• @214701774516459\n• @215749830422601\n• @144590728360151\n• @225550442451162\n• @3883371884588\n• @277447035633799\n• @110711992791220\n• @177486033903660\n• @193604727349394\n• @150294579163169\n",
+        "contextInfo": {
+          "mentionedJid": [
+            "245848793444568@lid",
+            "173517366628547@lid",
+            "262101067112474@lid",
+            "95498631409720@lid",
+            "112803121774699@lid",
+            "131426234191919@lid",
+            "91178649309345@lid",
+            "3922026602594@lid",
+            "232401368301802@lid",
+            "127685720305790@lid",
+            "201576404807761@lid",
+            "260851131019469@lid",
+            "210797682770056@lid",
+            "125804356870153@lid",
+            "182704385589360@lid",
+            "267280814493909@lid",
+            "262530647769117@lid",
+            "140025312342180@lid",
+            "214701774516459@lid",
+            "215749830422601@lid",
+            "144590728360151@lid",
+            "225550442451162@lid",
+            "3883371884588@lid",
+            "277447035633799@lid",
+            "110711992791220@lid",
+            "177486033903660@lid",
+            "193604727349394@lid",
+            "150294579163169@lid"
+          ],
+          "nonJidMentions": 0
+        }
+      },
+      "messageContextInfo": {
+        "messageSecret": "nAH/cnf7shiZEBYG1lK6QU1fPZ/upkJ7HL39SLl9FNg="
+      }
+    },
+    "messageTimestamp": "1786277724",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5D3FFB6A64DAC058A9B55FA408C6BDE": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5D3FFB6A64DAC058A9B55FA408C6BDE",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278062,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "extendedTextMessage": {
+        "text": ". userinfo @262530647769117",
+        "previewType": "NONE",
+        "contextInfo": {
+          "mentionedJid": [
+            "262530647769117@lid"
+          ]
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "dmOY67/F8iFNB7BK3HFMKVwqujT0H5XuvbxJL+JERqo="
+      }
+    }
+  },
+  "3EB0284F5C3F2373C3590F": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0284F5C3F2373C3590F",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278063,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "6sXbfevppN//tWNYE8S1/3KaeexrhJf6nqNgtAgbKIs="
+      }
+    }
+  },
+  "3EB001C31F66590074D777": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB001C31F66590074D777"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "👤 *User Information*\n\nName: Unknown\nNumber: Unavailable\nAbout: Not available\nRole: Group Admin",
+        "contextInfo": {
+          "stanzaId": "A5D3FFB6A64DAC058A9B55FA408C6BDE",
+          "participant": "237675310628@s.whatsapp.net",
+          "quotedMessage": {
+            "extendedTextMessage": {
+              "text": ". userinfo @262530647769117",
+              "previewType": "NONE",
+              "inviteLinkGroupTypeV2": "DEFAULT"
+            }
+          }
+        }
+      },
+      "messageContextInfo": {
+        "messageSecret": "8nfVjtlx0NDZIK7bc8yAXUThuPDcC4BxbFgyi4xkgjo="
+      }
+    },
+    "messageTimestamp": "1786278062",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "AC7CE5DA39CF5831B210194B18F33FE8": {
+    "key": {
+      "remoteJid": "120363408383847309@g.us",
+      "fromMe": false,
+      "id": "AC7CE5DA39CF5831B210194B18F33FE8",
+      "participant": "45218137165905@lid",
+      "participantAlt": "22667691547@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278496,
+    "pushName": "🔥 MØÝĘŃĞÅ✌️PØPŠÝ🔥",
+    "broadcast": false,
+    "retryCount": 1,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363408383847309@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwj//aPRARABGiClQfPnJBhJNF8J0HTBrZ057o+J+QpPruN1sUog4QxxPCIhBajwDc5oMy8mAhjIRhYMOgia9TLGVE8FHbq893vRI8pk"
+      },
+      "messageContextInfo": {
+        "deviceListMetadata": {
+          "recipientKeyHash": "xh0uOQIqrEC8wA==",
+          "recipientTimestamp": "1786277660"
+        },
+        "deviceListMetadataVersion": 2
+      },
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363408383847309@g.us",
+          "fromMe": false,
+          "id": "A598A7FA699CB7B7356DBAB1CC5B4B22",
+          "participant": "165683027529980@lid"
+        },
+        "text": "🙏",
+        "senderTimestampMs": "1786278120654"
+      }
+    }
+  },
+  "A56AEF9DED8D36E034F48309FF95E70C": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A56AEF9DED8D36E034F48309FF95E70C",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278508,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu general",
+      "messageContextInfo": {
+        "messageSecret": "4kNTbCNF+alJnbCVJT3EMjQbUnCXPqnsKVhw9xaeskY="
+      }
+    }
+  },
+  "3EB0CD67F42ABDE1A13516": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0CD67F42ABDE1A13516",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278509,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "YDxDbaP+czv/fRrYpciaU+gE8nu8FYBxY9peoksvXsY="
+      }
+    }
+  },
+  "3EB0E50615AB48120347A8": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0E50615AB48120347A8"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🤖 *Whisperer_Bot*\n\n━━━━━━━━━━━━━━━━━━\n\n👤 *User:* 𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫\n🌍 *Language:* English 🇬🇧\n⚡ *Prefix:* .\n📦 *Version:* 1.0.0\n⏱ *Uptime:* 0h 0m 19s\n💾 *RAM:* 122.4 MB\n📚 *Commands:* 110\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *📖 *GENERAL COMMANDS* 📖*\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.botinfo*\nShow information about the bot\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.getpp*\nGet a user's profile picture\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.memory*\nShow current memory usage\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.menu*\nShow bot commands\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.owner*\nShow bot owner\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.rules*\nShow group rules\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.runtime*\nShow Node.js runtime version\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.server*\nShow server information\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.stats*\nShow bot statistics\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.time*\nShow current date and time\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.uptime*\nShow bot uptime\n\n\n━━━━━━━━━━━━━━━━━━\n\n💡 Type .menu to return to categories."
+      },
+      "messageContextInfo": {
+        "messageSecret": "KfEgZ9iqTOX3ytTIfpLsotQAmH7iQJUNoK8VsyGvd7s="
+      }
+    },
+    "messageTimestamp": "1786278508",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5F9C791C8FC8D627964F8E0031970E3": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5F9C791C8FC8D627964F8E0031970E3",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278523,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ". language fr",
+      "messageContextInfo": {
+        "messageSecret": "f2nwRp0BnS3X7stlkG8zP+nOZZbaOkpJ4VmTIC8XxAk="
+      }
+    }
+  },
+  "3EB0BA69044190B133A227": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0BA69044190B133A227"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🇫🇷 Langue du bot changée en Français."
+      },
+      "messageContextInfo": {
+        "messageSecret": "CPjmvbOOby14uDgndDRV6ygp+mWe6FRfb4iIJ8xEFfc="
+      }
+    },
+    "messageTimestamp": "1786278522",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB0EE2149841FF0991F67": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0EE2149841FF0991F67",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278524,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "kcACrjeAdtSndH8JzuShMUzDRwAeCiEa5i62itrn6bA="
+      }
+    }
+  },
+  "A5EFD17FA337D511B835B45568502C71": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5EFD17FA337D511B835B45568502C71",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278527,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu general",
+      "messageContextInfo": {
+        "messageSecret": "apGpn+p5r4PrXbNbJPNJOhPUNlZhS+y7KG+lYMyQXrQ="
+      }
+    }
+  },
+  "3EB09DEE666876EF2DCAD5": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB09DEE666876EF2DCAD5"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🤖 *Whisperer_Bot*\n\n━━━━━━━━━━━━━━━━━━\n\n👤 *User:* 𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫\n🌍 *Language:* Français 🇫🇷\n⚡ *Prefix:* .\n📦 *Version:* 1.0.0\n⏱ *Uptime:* 0h 0m 38s\n💾 *RAM:* 122.4 MB\n📚 *Commands:* 110\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *📖 *COMMANDES GÉNÉRALES* 📖*\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.botinfo*\nAfficher les informations sur le bot\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.getpp*\nObtenir la photo de profil d'un utilisateur\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.memory*\nAfficher l'utilisation actuelle de la mémoire\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.menu*\nAfficher les commandes du bot\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.owner*\nAfficher le propriétaire du bot\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.rules*\nAfficher les règles du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.runtime*\nAfficher la version d'exécution de Node.js\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.server*\nAfficher les informations du serveur\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.stats*\nAfficher les statistiques du bot\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.time*\nAfficher la date et l'heure actuelles\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.uptime*\nAfficher le temps de fonctionnement du bot\n\n\n━━━━━━━━━━━━━━━━━━\n\n💡 Tapez .menu pour revenir aux catégories."
+      },
+      "messageContextInfo": {
+        "messageSecret": "d8tAnVpWTZUnmFDW6Gxr6lK5UwhP4eGq0olp3iC6GkQ="
+      }
+    },
+    "messageTimestamp": "1786278526",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB0E3D7D8DFE76514BEDE": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0E3D7D8DFE76514BEDE",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278528,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "XLDwdp9NZJr+Gj7nKSHBqpL+CqoMUrPUsq3ton02tjM="
+      }
+    }
+  },
+  "A5E82A4ED9A3FE86535F8F1B940EC6CB": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5E82A4ED9A3FE86535F8F1B940EC6CB",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278545,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "extendedTextMessage": {
+        "text": ".getpp",
+        "previewType": "NONE",
+        "contextInfo": {
+          "stanzaId": "3EB0EE2149841FF0991F67",
+          "participant": "260851131019469@lid",
+          "quotedMessage": {
+            "conversation": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+          },
+          "quotedType": "EXPLICIT"
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "c47YnzeOoVo5dKw76DM8GzpnLkSO2oiCuRwkNln3mQg="
+      }
+    }
+  },
+  "3EB0ADDEBDB27661D888DB": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0ADDEBDB27661D888DB"
+    },
+    "message": {
+      "imageMessage": {
+        "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m235/AQOv_p0RT-n9LAQaPt39ZCen6-ri2M1T5IOPqANtV9TIE4rIVkiAZw4g4ogXXs1tv9MP5g0adcun68nBAOnnptuZagfqUeYmORWAbeuBeA?ccb=9-4&oh=01_Q5Aa5QGKlplwWzYe-TjbWG0F2HusJjOOAcvULj4gEBI3QZiXLw&oe=6A9FFA94&_nc_sid=e6ed6c&mms3=true",
+        "mimetype": "image/jpeg",
+        "caption": "👤 Photo de profil",
+        "fileSha256": "MQmndCBhnPDtLotLnUhb/STq1q8qT8UPpRHOCZzuvCY=",
+        "fileLength": "28711",
+        "mediaKey": "CPgaDsC5VTyANl9EONCD/QifotdIlbncGFTNB+oIt9s=",
+        "fileEncSha256": "Y8dEKWzw575TpHUL1VvearFNh3dZi2aW6asIYx4CbMI=",
+        "directPath": "/o1/v/t24/f2/m235/AQOv_p0RT-n9LAQaPt39ZCen6-ri2M1T5IOPqANtV9TIE4rIVkiAZw4g4ogXXs1tv9MP5g0adcun68nBAOnnptuZagfqUeYmORWAbeuBeA?ccb=9-4&oh=01_Q5Aa5QGKlplwWzYe-TjbWG0F2HusJjOOAcvULj4gEBI3QZiXLw&oe=6A9FFA94&_nc_sid=e6ed6c",
+        "mediaKeyTimestamp": "1786278549",
+        "contextInfo": {
+          "stanzaId": "A5E82A4ED9A3FE86535F8F1B940EC6CB",
+          "participant": "237675310628@s.whatsapp.net",
+          "quotedMessage": {
+            "extendedTextMessage": {
+              "text": ".getpp",
+              "previewType": "NONE",
+              "inviteLinkGroupTypeV2": "DEFAULT"
+            }
+          }
+        }
+      },
+      "messageContextInfo": {
+        "messageSecret": "xFAtHqR0Z2gsgYNJAHuMjk3VhDyyDFipuQqfnzwrBrI="
+      }
+    },
+    "messageTimestamp": "1786278549",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A539C257C687D29FCD4EEB2E9EC8F6C6": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A539C257C687D29FCD4EEB2E9EC8F6C6",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278562,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".getpp",
+      "messageContextInfo": {
+        "messageSecret": "qcTsbklH7chbJBQd5e2/Q8L46n1nMw+22zh6z7uvrL8="
+      }
+    }
+  },
+  "3EB0D15189909AFE0B4093": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0D15189909AFE0B4093"
+    },
+    "message": {
+      "imageMessage": {
+        "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m239/AQMdNRvfXp6nhkMR0Z9YeOf2zTNn5wPZzHL8hUdN0f3DBqawn5CuaNVAXuO1UMJMn0nVffCLK13VfwjuUrUPxF6yQPnM7Xnz0YhIdQlvHQ?ccb=9-4&oh=01_Q5Aa5QFTOEeO5KqBbAaI5lKkhKzknLZJepcKsZKci-kItZSx4A&oe=6A9FF4EE&_nc_sid=e6ed6c&mms3=true",
+        "mimetype": "image/jpeg",
+        "caption": "👤 Photo de profil",
+        "fileSha256": "ic0QVaPFD1ccI25/oAvEvhuWCby9HjfKdDZA9asn3cc=",
+        "fileLength": "21817",
+        "mediaKey": "CIh5lIXlcHQQGP1OmcSPBrbWrWOvl8F/anCYXpSW4/Q=",
+        "fileEncSha256": "0sjzOB7u+APsoXkLeHoyUVYZX0pFFBrMQi14Ta83YxI=",
+        "directPath": "/o1/v/t24/f2/m239/AQMdNRvfXp6nhkMR0Z9YeOf2zTNn5wPZzHL8hUdN0f3DBqawn5CuaNVAXuO1UMJMn0nVffCLK13VfwjuUrUPxF6yQPnM7Xnz0YhIdQlvHQ?ccb=9-4&oh=01_Q5Aa5QFTOEeO5KqBbAaI5lKkhKzknLZJepcKsZKci-kItZSx4A&oe=6A9FF4EE&_nc_sid=e6ed6c",
+        "mediaKeyTimestamp": "1786278563",
+        "contextInfo": {
+          "stanzaId": "A539C257C687D29FCD4EEB2E9EC8F6C6",
+          "participant": "237675310628@s.whatsapp.net",
+          "quotedMessage": {
+            "conversation": ".getpp"
+          }
+        }
+      },
+      "messageContextInfo": {
+        "messageSecret": "qPkW2MZbUHAnrZGXLx26ElndS65I6kK1UNfatWOki6k="
+      }
+    },
+    "messageTimestamp": "1786278563",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A57AA8317557CC59E422B65D12AB77C3": {
+    "key": {
+      "remoteJid": "120363429863144213@g.us",
+      "fromMe": true,
+      "id": "A57AA8317557CC59E422B65D12AB77C3",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278595,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363429863144213@g.us",
+        "axolotlSenderKeyDistributionMessage": "MwjTzu0kEAAaICpmiASaY7yKnMF3koxPRcBSYKjBY4MLmBU1mMY6ShztIiEFQma7ichvtC/IGMfu+ZgAA9KwvQ2CfElj8cMSQaDSnVc="
+      },
+      "extendedTextMessage": {
+        "text": ".getpp",
+        "previewType": "NONE",
+        "contextInfo": {
+          "stanzaId": "A5B3CF572360DF2DD8B2A65A8542B075",
+          "participant": "55637828436223@lid",
+          "quotedMessage": {
+            "conversation": "Linklayer vpn"
+          },
+          "quotedType": "EXPLICIT"
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "Of3k/7zlhyWdYByfiMDU00MtnlqJGeC4Mlx2Ai+sawo="
+      }
+    },
+    "verifiedBizName": "The-whisperer"
+  },
+  "3EB0F73E54ED8CCC004CBE": {
+    "key": {
+      "remoteJid": "120363429863144213@g.us",
+      "fromMe": true,
+      "id": "3EB0F73E54ED8CCC004CBE"
+    },
+    "message": {
+      "imageMessage": {
+        "url": "https://mmg.whatsapp.net/o1/v/t24/f2/m232/AQMMhaRSpvIA6Ixglq7SIqcHv8-Nota_gd1odG3rTuDFaCsnJQ4I3xecXit1IR2Uds4-_KAwijBXk7Dof6T9ZQkE2KSg391R5nklt0aBiA?ccb=9-4&oh=01_Q5Aa5QH5_srF7ExMfuuLnxlfO-e59zgmfgoy-UBIjD15E7PcUg&oe=6A9FE65D&_nc_sid=e6ed6c&mms3=true",
+        "mimetype": "image/jpeg",
+        "caption": "👤 Photo de profil",
+        "fileSha256": "s4+ieHppc1EamQ8Njl3vYnQTO4rig5r++VVrI/krZrY=",
+        "fileLength": "68654",
+        "mediaKey": "h7FdtDIrgzDAOEjA9a1YCebmdMsMc/L+Xqpu7mrbZDc=",
+        "fileEncSha256": "OzdXQwQxtZlU/dn8aT1EvZadMcvx8aHKMRSDgLMnKWE=",
+        "directPath": "/o1/v/t24/f2/m232/AQMMhaRSpvIA6Ixglq7SIqcHv8-Nota_gd1odG3rTuDFaCsnJQ4I3xecXit1IR2Uds4-_KAwijBXk7Dof6T9ZQkE2KSg391R5nklt0aBiA?ccb=9-4&oh=01_Q5Aa5QH5_srF7ExMfuuLnxlfO-e59zgmfgoy-UBIjD15E7PcUg&oe=6A9FE65D&_nc_sid=e6ed6c",
+        "mediaKeyTimestamp": "1786278596",
+        "contextInfo": {
+          "stanzaId": "A57AA8317557CC59E422B65D12AB77C3",
+          "participant": "237675310628@s.whatsapp.net",
+          "quotedMessage": {
+            "extendedTextMessage": {
+              "text": ".getpp",
+              "previewType": "NONE",
+              "inviteLinkGroupTypeV2": "DEFAULT"
+            }
+          }
+        }
+      },
+      "messageContextInfo": {
+        "messageSecret": "Q6vIWrc647sa957UEYEB4zpWDrNCxYqpxB2cvi9ePk4="
+      }
+    },
+    "messageTimestamp": "1786278596",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A52218CF2D49E9139AD42290BF838F0F": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A52218CF2D49E9139AD42290BF838F0F",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278618,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ". private",
+      "messageContextInfo": {
+        "messageSecret": "fXRWkAHhwEvaVYUGxqHU9mMuXTH3bf8aWu5/j4qqx4Y="
+      }
+    }
+  },
+  "3EB0BA906185F4A9A13B82": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0BA906185F4A9A13B82"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *MODE PRIVÉ ACTIVÉ*\n\nSeuls le propriétaire et les membres sudo peuvent utiliser le bot."
+      },
+      "messageContextInfo": {
+        "messageSecret": "EStUrLsJqDi4QYNMylfETpUl/7sAn4rdt7OLD0VSBFo="
+      }
+    },
+    "messageTimestamp": "1786278617",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB0E47D9B60AC7D06A196": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0E47D9B60AC7D06A196",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278619,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "mih5xpgJfb7jXKRJKKjRLwH4O3XKsbtmK+qwoYrw0HY="
+      }
+    }
+  },
+  "A5442767CBD2FAE96C585A15C3ABB618": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5442767CBD2FAE96C585A15C3ABB618",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278802,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "ZLe+rN45LYa+HbAxZFtp0MY69KfkLHPJYDYZFKsNMCs="
+      }
+    }
+  },
+  "3EB06F9F0A32EAF286DA7C": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB06F9F0A32EAF286DA7C",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278803,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "kKA+0ug81Fk/OehI/yKsOzQl9KUSQh8W9vofgCYDoeY="
+      }
+    }
+  },
+  "3EB088E029E235FB7B1CA9": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB088E029E235FB7B1CA9"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "J'ai besoin des droits d'administrateur dans ce groupe pour supprimer des membres."
+      },
+      "messageContextInfo": {
+        "messageSecret": "ghVRywm1iHkm8V+1olr7sD8TMuivvSxS8gBW5iu4dPw="
+      }
+    },
+    "messageTimestamp": "1786278802",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A577294DD46E0B7EDE79310B8995B7D3": {
+    "key": {
+      "remoteJid": "120363410238460636@g.us",
+      "fromMe": false,
+      "id": "A577294DD46E0B7EDE79310B8995B7D3",
+      "participant": "134406723342551@lid",
+      "participantAlt": "237654236537@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279047,
+    "pushName": "WRYTER",
+    "broadcast": false,
+    "retryCount": 1,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363410238460636@g.us",
+        "axolotlSenderKeyDistributionMessage": "MwiHupAFEAAaIE3yTrD4+fvN97rUYJ4DsbrHV3pAUuNgbnPWN9sYHgY/IiEFDHEN491Hxnts5Q2bCI952rKpEmWKgzMqQ0UVTQs0/UQ="
+      },
+      "messageContextInfo": {
+        "deviceListMetadata": {
+          "recipientKeyHash": "xh0uOQIqrEC8wA==",
+          "recipientTimestamp": "1786277660"
+        },
+        "deviceListMetadataVersion": 2
+      },
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363410238460636@g.us",
+          "fromMe": false,
+          "id": "3A70E72F389FD1DD4031",
+          "participant": "69669419520241@lid"
+        },
+        "text": "🙏🏾",
+        "senderTimestampMs": "1786278869163"
+      }
+    }
+  },
+  "A561C1B61CA53D9C07DE626C3093AC49": {
+    "key": {
+      "remoteJid": "120363399995858657@g.us",
+      "fromMe": false,
+      "id": "A561C1B61CA53D9C07DE626C3093AC49",
+      "participant": "134406723342551@lid",
+      "participantAlt": "237654236537@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786278994,
+    "pushName": "WRYTER",
+    "broadcast": false,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363399995858657@g.us",
+        "axolotlSenderKeyDistributionMessage": "MwjPjbSTARAAGiA1JaC84k1oE98ZaFMxBtgemrCuHe0GPFmMeniokcbfKiIhBQOx7wJx4oUC1BRwINo/2OR2IDCu1+EhCAiUXCwss3gj"
+      },
+      "messageContextInfo": {
+        "deviceListMetadata": {
+          "recipientKeyHash": "xh0uOQIqrEC8wA==",
+          "recipientTimestamp": "1786277660"
+        },
+        "deviceListMetadataVersion": 2
+      },
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363399995858657@g.us",
+          "fromMe": true,
+          "id": "A59857BEA54C93CF7B9BB8E21E9C6217",
+          "participant": "182704385589360@lid"
+        },
+        "text": "👍🏽",
+        "senderTimestampMs": "1786278969261"
+      }
+    }
+  },
+  "A53BDC4085FD03C3E67E1448DB8A9082": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A53BDC4085FD03C3E67E1448DB8A9082",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279065,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "7it7smS4PoQL/9z1PnKjeQOs2kPF8/1XKjMWW1MZFgA="
+      }
+    }
+  },
+  "3EB011A2CFE9B8AE0EFF10": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB011A2CFE9B8AE0EFF10",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279066,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "1Jmx3B+1IzaRR6JBAGyI5K9/UBAq5hp4GXiN8eAcXBU="
+      }
+    }
+  },
+  "3EB0F1375E59AD159465F8": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0F1375E59AD159465F8"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "J'ai besoin des droits d'administrateur dans ce groupe pour supprimer des membres."
+      },
+      "messageContextInfo": {
+        "messageSecret": "t0gjUAyKTJcTj1ekSBab85mhiQd33FVBLO6Lc2LZcZw="
+      }
+    },
+    "messageTimestamp": "1786279065",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A597CA9AE1D246B46E0C3A2198D6CD74": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A597CA9AE1D246B46E0C3A2198D6CD74",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279312,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "/KYOcPu5l0R6cfN9pKgb4sAOMUynZTvoUttBleP6dzg="
+      }
+    }
+  },
+  "3EB0BF2DFFD7CFBC6E0131": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0BF2DFFD7CFBC6E0131",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279313,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "11dxREYCrBeM39loHCR0TIs+RRSlzFwZcx/3yiKNjy0="
+      }
+    }
+  },
+  "3EB073DEA6C7D3CD4BE6D8": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB073DEA6C7D3CD4BE6D8"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Aucun membre non administrateur à supprimer."
+      },
+      "messageContextInfo": {
+        "messageSecret": "Po6Pn1sFg9oNcrQT6UywPt9lEMpm6XgqSrjTyI4uer8="
+      }
+    },
+    "messageTimestamp": "1786279312",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A55D60C796B097DAF2CD231733D6B724": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A55D60C796B097DAF2CD231733D6B724",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279366,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "nm6oqBFqEz1LP+fuvHY6EDjXdCo1Y0cueYPUw9N4fW4="
+      }
+    }
+  },
+  "3EB0C8FC8607FEF2E85279": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0C8FC8607FEF2E85279",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279367,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "Ii3fiLOLyH/LBFYt2P1MlrTTf+Og2hF8KuyJpLly6Ls="
+      }
+    }
+  },
+  "3EB0D57C8650FA31F9C72D": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0D57C8650FA31F9C72D"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "✅ 3 membres ont été supprimés."
+      },
+      "messageContextInfo": {
+        "messageSecret": "HWeoKoLEJA6Z0iqr/Y2vmM2AgNRHLyx5in1n4T2XPI0="
+      }
+    },
+    "messageTimestamp": "1786279368",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A59F77292B2F68B44AD810945CF30A9D": {
+    "key": {
+      "remoteJid": "120363429863144213@g.us",
+      "fromMe": true,
+      "id": "A59F77292B2F68B44AD810945CF30A9D",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279388,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "VyrW78C1CoKkElQycjDQbPx9WYIsGok6G5vxxXkYry4="
+      }
+    }
+  },
+  "3EB0AEAAC90655CA2541A6": {
+    "key": {
+      "remoteJid": "120363429863144213@g.us",
+      "fromMe": true,
+      "id": "3EB0AEAAC90655CA2541A6"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🚔 *Réservé aux admins*\n\nSeuls les administrateurs du groupe peuvent utiliser cette commande."
+      },
+      "messageContextInfo": {
+        "messageSecret": "fBxhMKP+WKjKyuCbanWHWeGM/zas/p64L9Ov/XJHmhA="
+      }
+    },
+    "messageTimestamp": "1786279388",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "ACACD05C758BB23B5E4EB4A0AF02B578": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "ACACD05C758BB23B5E4EB4A0AF02B578",
+      "participant": "237959022436503@lid",
+      "participantAlt": "237672334564@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279484,
+    "pushName": "sneaky user",
+    "broadcast": false,
+    "message": {
+      "conversation": ".kickall",
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "MwiE0ffkBRAAGiA/LHj7i1x/MweRRoFScAj/l2DOv3uh3aL/Mk6L6qGpZiIhBdjoAe/y3GwREnBO/khY/Rqy14camrrP2jxJ+CG6kqFi"
+      },
+      "messageContextInfo": {
+        "messageSecret": "yTNHGglsPvsXVPu850TvdgSa4DZdJrx5+z1oGvIaBNw="
+      }
+    }
+  },
+  "3EB09640D55E6A609E44C1": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB09640D55E6A609E44C1",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279485,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "Blq3YJIjhmLHKS9oR1JiV5XAFre60g0Qy+8g7P6JZVo="
+      }
+    }
+  },
+  "3EB071437AA3069FCA7163": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB071437AA3069FCA7163"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot est en mode privé.*\n\nSeuls le propriétaire et les sudo de confiance peuvent l'utiliser.\nDemandez au propriétaire d'exécuter *.public* pour l'ouvrir."
+      },
+      "messageContextInfo": {
+        "messageSecret": "W+y4EKEmMAW9QKWukDei/TZ3O2xmvgVWyeTP0M/Gz7U="
+      }
+    },
+    "messageTimestamp": "1786279483",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5FEDF857EB83F8027194EA642AC3DB5": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5FEDF857EB83F8027194EA642AC3DB5",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279498,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwi5luq9BRAAGiDRZtMiENhBXx+uu669s6XghEBV1JKDJJI8229i4wtB7CIhBR51KjyQhz9doJHbTvMVFe3dE0Hrb3sUgx2gPZw0fsFr"
+      },
+      "extendedTextMessage": {
+        "text": ". promote",
+        "previewType": "NONE",
+        "contextInfo": {
+          "stanzaId": "ACACD05C758BB23B5E4EB4A0AF02B578",
+          "participant": "237959022436503@lid",
+          "quotedMessage": {
+            "conversation": ".kickall"
+          },
+          "quotedType": "EXPLICIT"
+        },
+        "inviteLinkGroupTypeV2": "DEFAULT"
+      },
+      "messageContextInfo": {
+        "messageSecret": "aB0Wk8Y1DkA1ct9KKQtAdLTfg1SYO88qe7avjt0f7uM="
+      }
+    },
+    "verifiedBizName": "The-whisperer"
+  },
+  "3EB007F9D3A58230BD5A06": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB007F9D3A58230BD5A06",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279499,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "ZffwWZzovboSxUu9H77TJnngHVHtAK36umnqzVn6sg0="
+      }
+    }
+  },
+  "3EB0382BEFAC2AEF740C88": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0382BEFAC2AEF740C88"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "✅ *Utilisateur promu administrateur avec succès.*"
+      },
+      "messageContextInfo": {
+        "messageSecret": "9dl06dNis8nLhEdD3LyQY3KJGQFYbJ7U/EYFDPPJrh8="
+      }
+    },
+    "messageTimestamp": "1786279499",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "AC8D0011836516912972872768C5A622": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "AC8D0011836516912972872768C5A622",
+      "participant": "237959022436503@lid",
+      "participantAlt": "237672334564@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279506,
+    "pushName": "sneaky user",
+    "broadcast": false,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "gGkyAQkn2F7IAxb9l8AP31MfreRai0jTx7a2tkRvaiI="
+      }
+    }
+  },
+  "3EB06C3EBE9D18547C8767": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB06C3EBE9D18547C8767",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279507,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "/jx8/IG7CXN65UvXkR2VeCzmGe/SS8rarFhxX3ivVYw="
+      }
+    }
+  },
+  "3EB0309F4322F461A9B7C9": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0309F4322F461A9B7C9"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot est en mode privé.*\n\nSeuls le propriétaire et les sudo de confiance peuvent l'utiliser.\nDemandez au propriétaire d'exécuter *.public* pour l'ouvrir."
+      },
+      "messageContextInfo": {
+        "messageSecret": "qjK5F2WJz4H2vDo88wtMsu/u57DZxFbM0QMPTzE7l1Q="
+      }
+    },
+    "messageTimestamp": "1786279506",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5377237CBB05F859BFD7A6C3B1D6636": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5377237CBB05F859BFD7A6C3B1D6636",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279537,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ". public",
+      "messageContextInfo": {
+        "messageSecret": "Gmu1k+tBaPemh6mYo86xWH1vRBkT8eUgsRnAT+0y8I8="
+      }
+    }
+  },
+  "3EB0C1AEC5245850287D2C": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0C1AEC5245850287D2C",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279538,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "Jhce8bqDm2VCpOQYWDt7IRqNBeHIwyi6Dfvcbq1nRQk="
+      }
+    }
+  },
+  "3EB01CB016C1B87C4C460D": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB01CB016C1B87C4C460D"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🌍 *MODE PUBLIC ACTIVÉ*\n\nTout le monde peut utiliser les commandes publiques maintenant. (Le propriétaire et les sudo conservent des privilèges.)"
+      },
+      "messageContextInfo": {
+        "messageSecret": "2zQM8Q7MbE8xd5xuUZwMyxlJILgWL6b6rWC2AT10fgQ="
+      }
+    },
+    "messageTimestamp": "1786279536",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "ACD853578637EAF5FB64D94C89E7596D": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "ACD853578637EAF5FB64D94C89E7596D",
+      "participant": "237959022436503@lid",
+      "participantAlt": "237672334564@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279543,
+    "pushName": "sneaky user",
+    "broadcast": false,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "P1xyk7JkxglflkBrlOw691/eSgXBx6VvMbuYLoQfg/8="
+      }
+    }
+  },
+  "3EB093545B5E879F7FA983": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB093545B5E879F7FA983",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279544,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "ofeKYj/4cGJot5fhpXqtSn7+sqA/jvzt+iONwL24b6g="
+      }
+    }
+  },
+  "3EB0993011846372476597": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0993011846372476597"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Aucun membre non administrateur à supprimer."
+      },
+      "messageContextInfo": {
+        "messageSecret": "vwu3yqCMHrJvXLycgJ7hMY3dqeIbd2UAIjAbecdC21o="
+      }
+    },
+    "messageTimestamp": "1786279543",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A536997C0EC8261A9A0AB3E001170A04": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A536997C0EC8261A9A0AB3E001170A04",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279555,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ". private",
+      "messageContextInfo": {
+        "messageSecret": "OBogWyS/rwBMIQp5e8FK3yWQwlzm0mVocfxiRogc4Ns="
+      }
+    }
+  },
+  "3EB018BD855F3A9AC24ABC": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB018BD855F3A9AC24ABC",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279556,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "T39VOJcbQdSVHFlnd15U+7rIjR3VoYyKVXqBWJe9k58="
+      }
+    }
+  },
+  "3EB0F3DF166E1B817A0BED": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0F3DF166E1B817A0BED"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *MODE PRIVÉ ACTIVÉ*\n\nSeuls le propriétaire et les membres sudo peuvent utiliser le bot."
+      },
+      "messageContextInfo": {
+        "messageSecret": "/9rDqbgHOrzr68M2qgddQBswU/IMOjLfdz2nOxxg9jw="
+      }
+    },
+    "messageTimestamp": "1786279554",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "AC3B208A018BBD67643EEC47C4C2FBAA": {
+    "key": {
+      "remoteJid": "120363426037727221@g.us",
+      "fromMe": false,
+      "id": "AC3B208A018BBD67643EEC47C4C2FBAA",
+      "participant": "188631188816034@lid",
+      "participantAlt": "237686921422@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279672,
+    "pushName": "Santa 😈😈 Thierry 😇",
+    "broadcast": false,
+    "message": {
+      "messageContextInfo": {
+        "deviceListMetadata": {
+          "recipientKeyHash": "xh0uOQIqrEC8wA==",
+          "recipientTimestamp": "1786277660"
+        },
+        "deviceListMetadataVersion": 2
+      },
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363426037727221@g.us",
+          "fromMe": false,
+          "id": "AC782212C4D905FFB42C6FD0A1BD5AE1",
+          "participant": "91178649309345@lid"
+        },
+        "text": "👍",
+        "senderTimestampMs": "1786276115813"
+      }
+    }
+  },
+  "A539523DE74D84A877653F79D174E020": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A539523DE74D84A877653F79D174E020",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279885,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "8raxgLhUXWsamAN8jsXKDANlyEmd6tQNBtqoKU/vweg="
+      }
+    }
+  },
+  "3EB0AD1AD5C2A28A8A4102": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0AD1AD5C2A28A8A4102",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279886,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "6bN0QXk6V8rnkT6lBu6KI3vOVfjgq+P7Ql+hQ90VSMw="
+      }
+    }
+  },
+  "3EB0A8B3F80808ABE55C5A": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0A8B3F80808ABE55C5A"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Aucun membre non administrateur à supprimer."
+      },
+      "messageContextInfo": {
+        "messageSecret": "jlm7y9yCMu72JoF4rqlabBv1onFM6KgIHoKU9EE7ULg="
+      }
+    },
+    "messageTimestamp": "1786279885",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5458891F010BF6209371FCBF34711C4": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5458891F010BF6209371FCBF34711C4",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279923,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "q+SZrHy0h7nCHmQRJlQUUIF2mFaRhmvgMXfUQuwmEHE="
+      }
+    }
+  },
+  "3EB0EF1907C1E84C89EA41": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0EF1907C1E84C89EA41",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279924,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "0ALPW1zTgDsbBQp1uxziXAt+zR/VcioAhNusETWk5oM="
+      }
+    }
+  },
+  "3EB0E5417C571D46DB8F80": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0E5417C571D46DB8F80"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "⚠️ AVERTISSEMENT\n\nCette opération supprimera 2 membres non administrateurs.\n\nRépondez :\n\nYES\n\n dans les 30 secondes pour continuer.\n\nRépondez :\n\nNO\n\npour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "bMNO+ilTcO7gT424F9DcuQH4OcTB6om8DVKHqfFmL+I="
+      }
+    },
+    "messageTimestamp": "1786279923",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB003552043CC22761931": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB003552043CC22761931"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "Uux3hgdoVCJ3w0UCfyxMYdHpiCuqaiWn6TdseXnTncs="
+      }
+    },
+    "messageTimestamp": "1786279923",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB0B342EE3175C1F4F29A": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0B342EE3175C1F4F29A"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "ZT31hRkdtSVTkQLlDw+FJYXIJIWS1rKK6qeDuLZhrGY="
+      }
+    },
+    "messageTimestamp": "1786279924",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB03D10409747730FA116": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB03D10409747730FA116"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "Srdq8qZa7X79gzKpe/SakZXMBzvf49FyejrXPDheVhY="
+      }
+    },
+    "messageTimestamp": "1786279924",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB011859C54BCD9F25C6F": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB011859C54BCD9F25C6F"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "OiNiN1yCJfLX+h6fmbVm8nnFVsZ/aDSxoxxai772CzY="
+      }
+    },
+    "messageTimestamp": "1786279925",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB054FA5BC5BF6AEA0930": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB054FA5BC5BF6AEA0930"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "PJTH4tC7M1yuh38sRCMquZzodJS9LSlouGZp1wkxmsU="
+      }
+    },
+    "messageTimestamp": "1786279926",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB05E257D880BE4290818": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB05E257D880BE4290818"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "gNgCyo1F7RWwHVljMGSo4Win1X6eDPvIjx2spuN/i+w="
+      }
+    },
+    "messageTimestamp": "1786279926",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB070C3C63EFE38CF33DE": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB070C3C63EFE38CF33DE"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "QCuZq26txuxie3JnCbckZzo6tPxvzjA1QnAKVC8UZvI="
+      }
+    },
+    "messageTimestamp": "1786279927",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB07C092FE6684762CF56": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB07C092FE6684762CF56"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "7YphusO2ZjSeUPZVWFoY2Vb4egODcnMgVksni6krh/c="
+      }
+    },
+    "messageTimestamp": "1786279927",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB0066189772667100428": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0066189772667100428"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "Gix2UVjOB8KUBHFOqYvfHJPP5KIFXWT3PoVMDbwBnGc="
+      }
+    },
+    "messageTimestamp": "1786279928",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB0B1C9CB0ADEE5B279C3": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0B1C9CB0ADEE5B279C3"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "WOHtXDwDqB2HuGvZ88sojvUsK9WTJzOw8NseEFWVEiY="
+      }
+    },
+    "messageTimestamp": "1786279929",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB009D109577E3C2C8315": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB009D109577E3C2C8315"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "WZQqObxi0gNHi3TTjr1AXwZyOEvIuRAXliUifeF/s20="
+      }
+    },
+    "messageTimestamp": "1786279929",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5DF4D15C0788E3F7BD35CB640A84E20": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5DF4D15C0788E3F7BD35CB640A84E20",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786279931,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": "No",
+      "messageContextInfo": {
+        "messageSecret": "vo0LJvPz2KNfU/kz75xd+WKzOGAuPr5fiIaNrlRDI48="
+      }
+    }
+  },
+  "3EB0DAECABC185F5A034AA": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0DAECABC185F5A034AA"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "Répondez YES pour continuer ou NO pour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "jjUEHj1/iHxKE94BUC7tcc6oPrXIs1COBtzVXdSriPo="
+      }
+    },
+    "messageTimestamp": "1786279930",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB01C06B854A232B5AF37": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB01C06B854A232B5AF37"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "❌ Opération annulée."
+      },
+      "messageContextInfo": {
+        "messageSecret": "EtMi8ySdLwBJEeujkwTkPFVOmvuCjN1GupYcioMSMnQ="
+      }
+    },
+    "messageTimestamp": "1786279930",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A512FB54565C808F5E7D1E85FD1748E0": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A512FB54565C808F5E7D1E85FD1748E0",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280275,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "s9PoNSz1vZA0i5XrNsGfE1lv65KlVkYqx6eT5pb0/UM="
+      }
+    }
+  },
+  "3EB0727E8579D1C7515D47": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0727E8579D1C7515D47",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280276,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "KXV3O/qbgOa+/XhEuPe0Dlz+YEWTe/rXYeDWepwfjeo="
+      }
+    }
+  },
+  "3EB0CEBD5547CB87D72058": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0CEBD5547CB87D72058"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "⚠️ AVERTISSEMENT\n\nCette opération supprimera 2 membres non administrateurs.\n\nRépondez :\n\nYES\n\n dans les 30 secondes pour continuer.\n\nRépondez :\n\nNO\n\npour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "ham9gov5SBl73uyGSAlbqHk9d/TRv8TZmyF5iJyXbKI="
+      }
+    },
+    "messageTimestamp": "1786280275",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A567514994714C86589D44A23FD05BE6": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A567514994714C86589D44A23FD05BE6",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280287,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": "No",
+      "messageContextInfo": {
+        "messageSecret": "FZ8+4I0TWAMIu3TP6wxf7qHxbxQ2dtoPLa+F1dUfDH0="
+      }
+    }
+  },
+  "3EB0C56C419157F1619256": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0C56C419157F1619256"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "❌ Opération annulée."
+      },
+      "messageContextInfo": {
+        "messageSecret": "kfJ9SZ2s9wl7nsH+dh8UHz3Cai99453699EVWk9kTyA="
+      }
+    },
+    "messageTimestamp": "1786280286",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A53F30587C663FB934EBEC7BE5A8175E": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A53F30587C663FB934EBEC7BE5A8175E",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280292,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "hdx59XRRpFfKYtjlSKeK2pHz/sRaJoMsDqSHNR0GtMU="
+      }
+    }
+  },
+  "3EB0FDB205581CA4C01156": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0FDB205581CA4C01156",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280293,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "EsA1Nbt7hrjMhd82xS+AriV69aAH8GNgCSiZZj2XWtk="
+      }
+    }
+  },
+  "3EB0EA136A697C574EC46D": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0EA136A697C574EC46D"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "⚠️ AVERTISSEMENT\n\nCette opération supprimera 2 membres non administrateurs.\n\nRépondez :\n\nYES\n\n dans les 30 secondes pour continuer.\n\nRépondez :\n\nNO\n\npour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "e/CeZXBSfyo03+whXsc0G1Gr0fwrRbykMwPWpGa8Pv0="
+      }
+    },
+    "messageTimestamp": "1786280292",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A56C8BA2E03730081FE780F07F0F9E8B": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A56C8BA2E03730081FE780F07F0F9E8B",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280298,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": "Yes",
+      "messageContextInfo": {
+        "messageSecret": "aaIKmLbLRdLpvxdFSAhHyjVKiSa9AEgIKvHkVuM6mfk="
+      }
+    }
+  },
+  "3EB0C3E2B080C5994CFFE9": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0C3E2B080C5994CFFE9"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "✅ 2 membres ont été supprimés."
+      },
+      "messageContextInfo": {
+        "messageSecret": "GqTsfBnvgg/jxxrJ+oPWSjS3J8VMLrkq2Wb5W8f1vKA="
+      }
+    },
+    "messageTimestamp": "1786280299",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5073D6626BCB8807C2D4A1B9755800D": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5073D6626BCB8807C2D4A1B9755800D",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280435,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ". kickall",
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwjw9+elBxAAGiD/+oZMWiCQZQlpX1UDt9PZVTdZM2IaDVBd7t3qnVE31SIhBcCgCPWPXfteiKKce8pa8/gWuYo7KKNRa+FzaZCmz34M"
+      },
+      "messageContextInfo": {
+        "messageSecret": "TDmCW1q3HeUANooKCMFOE1CWP9z0LjB2sBSfFiwVEjU="
+      }
+    },
+    "verifiedBizName": "The-whisperer"
+  },
+  "3EB0521D16DBD8C4130CEC": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0521D16DBD8C4130CEC",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280436,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "nMuI9aJxGKo+ZEQ+c8ov5PibfHO7jEVPDQSMtfytxQ4="
+      }
+    }
+  },
+  "3EB07EA5911BA85F89B9AA": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB07EA5911BA85F89B9AA"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "⚠️ AVERTISSEMENT\n\nCette opération supprimera 1 membres non administrateurs.\n\nRépondez :\n\nYES\n\n dans les 30 secondes pour continuer.\n\nRépondez :\n\nNO\n\npour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "labylagA9zCq8cOa1+bGQ0ZVB7T52cs/iijA6nIhk8I="
+      }
+    },
+    "messageTimestamp": "1786280435",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5089A320F17FF8E69F5692664D79BA6": {
+    "key": {
+      "remoteJid": "120363402994282725@g.us",
+      "fromMe": false,
+      "id": "A5089A320F17FF8E69F5692664D79BA6",
+      "participant": "132096668479580@lid",
+      "participantAlt": "237621671648@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280483,
+    "pushName": "꧁ƬĤƐ S𒈞꧂ᴷⁱⁿᴳ",
+    "broadcast": false,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363402994282725@g.us",
+        "axolotlSenderKeyDistributionMessage": "MwiwzfMlEAAaIFIW/rDm1mNfJcQwOO7yUAZ6DtSaZAOsJF9WBLtQNNjAIiEFUXCqgeKHc16Ze/3AR3A04iLosLK7E1i7yeNxjwfDeTg="
+      },
+      "messageContextInfo": {
+        "deviceListMetadata": {
+          "recipientKeyHash": "xh0uOQIqrEC8wA==",
+          "recipientTimestamp": "1786277660"
+        },
+        "deviceListMetadataVersion": 2
+      },
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363402994282725@g.us",
+          "fromMe": false,
+          "id": "ACA6B44A25E3FB63CA499BBD12F1049C",
+          "participant": "117515422314613@lid"
+        },
+        "text": "👍🏼",
+        "senderTimestampMs": "1786280472416"
+      }
+    }
+  },
+  "A57DB785A3835954A52AA55ACA3B6DFC": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A57DB785A3835954A52AA55ACA3B6DFC",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280512,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": "No",
+      "messageContextInfo": {
+        "messageSecret": "+t2+f6Pk4MZqurlH+9AgvqGsH42lnnwMcFhfxTVc6O8="
+      }
+    }
+  },
+  "3EB0C57640A040743D0789": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0C57640A040743D0789"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "⏱️ Le délai de confirmation est dépassé. Opération annulée."
+      },
+      "messageContextInfo": {
+        "messageSecret": "SDlPe1VPTU34F0ebdMIskZUxBtpf+ycsVntlF5E4Qqg="
+      }
+    },
+    "messageTimestamp": "1786280511",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5BAC4DD746685F408C1CC41C11CF380": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5BAC4DD746685F408C1CC41C11CF380",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280522,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": "Yes",
+      "messageContextInfo": {
+        "messageSecret": "MefDgTimIu4pdfikBMPgBKQ0DSmi0pHUngNl4do5wok="
+      }
+    }
+  },
+  "A573CC7E65977FC6A0A41F1B4E965582": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A573CC7E65977FC6A0A41F1B4E965582",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280673,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".kickall",
+      "messageContextInfo": {
+        "messageSecret": "G2I5nfYv+7tHi8UrHiUhYc2hfvB7Ugl/HmPePvRciQA="
+      }
+    }
+  },
+  "3EB02A3482268CD958C303": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB02A3482268CD958C303",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280674,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "jWFG+RtvETI8vf2E4XRXxAqou/ZdoXJhvd3b7UesyYA="
+      }
+    }
+  },
+  "3EB0DCBEF358D608E888D0": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0DCBEF358D608E888D0"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "⚠️ AVERTISSEMENT\n\nCette opération supprimera 1 membres non administrateurs.\n\nRépondez :\n\nYES\n\n dans les 30 secondes pour continuer.\n\nRépondez :\n\nNO\n\npour annuler."
+      },
+      "messageContextInfo": {
+        "messageSecret": "iPsnVSX8p3kM8Fxp2zL6xUMsHi2BjKswy0+31ToyRnU="
+      }
+    },
+    "messageTimestamp": "1786280673",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB07FDFBA58069C29B208": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB07FDFBA58069C29B208"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "⏱️ Le délai de confirmation est dépassé. Opération annulée."
+      },
+      "messageContextInfo": {
+        "messageSecret": "e6LHimMLNr5Z8fjBRQAZmpzL5i2QI8wl9TcqaXEF7wk="
+      }
+    },
+    "messageTimestamp": "1786280703",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5506D770B51D2D26A65F5DCB44A1A97": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5506D770B51D2D26A65F5DCB44A1A97",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786280716,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": "Yes",
+      "messageContextInfo": {
+        "messageSecret": "0T9L6nBgxmsg/jc4uVI+6HI8yxOBBghKUNqb/L7yRwc="
+      }
+    }
+  },
+  "A58DF48326DD2886D77CFAC6F684C0F3": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A58DF48326DD2886D77CFAC6F684C0F3",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786282792,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu",
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426993971039@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwjw9+elBxAFGiACRb0ALmt6+7vwmxG+9YMmwO7lQ+ZO2SCKekdjfNX35iIhBcCgCPWPXfteiKKce8pa8/gWuYo7KKNRa+FzaZCmz34M"
+      },
+      "messageContextInfo": {
+        "messageSecret": "GuRBVSw50mkWqsLkfIh9nGzJqrw1Ss+KPCKbi95TW+g="
+      }
+    }
+  },
+  "3EB0B943720B8F638F4313": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0B943720B8F638F4313",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786282793,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "YYetusWBtIslz7cxD6ahcRmNz6KtCYO5Vpb26EKlXTc="
+      }
+    }
+  },
+  "3EB045EB48E5D326D6D98B": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB045EB48E5D326D6D98B"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🤖 *Whisperer_Bot*\n\n📚 *CATÉGORIES*"
+      },
+      "messageContextInfo": {
+        "messageSecret": "etjusGpjO7jz57VSN3J1llMfaNpCpnjSNaUwEfgW0vY="
+      }
+    },
+    "messageTimestamp": "1786282793",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5B2B7EA36DFEBF892DBD9C208138C34": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5B2B7EA36DFEBF892DBD9C208138C34",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786282806,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "stickerMessage": {
+        "url": "https://mmg.whatsapp.net/v/t62.15575-24/637996173_1232464025658939_6835737579483383457_n.enc?ccb=11-4&oh=01_Q5Aa5QHNX5f9s4fjiUbA3PPQ2bKg4P2pmcszNC521gGVZNst4g&oe=6A9F02C3&_nc_sid=5e03e0",
+        "fileSha256": "RXvYwGquxGItb+r9zRF3mh6oPNYolew1lZDQJWOSSGo=",
+        "fileEncSha256": "OKKM5CUHTNXc6ZyREO1LkVyt1m0Ze8s9cvVk5xQ6nUY=",
+        "mediaKey": "n9XZ/E2RNbwiPu/Ls3WYlLlcrC84zM1PKrhL1PgmoAc=",
+        "mimetype": "image/webp",
+        "height": 64,
+        "width": 64,
+        "directPath": "/v/t62.15575-24/637996173_1232464025658939_6835737579483383457_n.enc?ccb=11-4&oh=01_Q5Aa5QHNX5f9s4fjiUbA3PPQ2bKg4P2pmcszNC521gGVZNst4g&oe=6A9F02C3&_nc_sid=5e03e0",
+        "fileLength": "14126",
+        "mediaKeyTimestamp": "1786225801",
+        "isAnimated": false,
+        "stickerSentTs": "1786282806018",
+        "isAvatar": false,
+        "isAiSticker": false,
+        "isLottie": false
+      },
+      "messageContextInfo": {
+        "messageSecret": "RuljgGURTVivSLJyd3OMDI6iwtPAg5a6+lV2HJ6nUlw="
+      }
+    }
+  },
+  "A534129A0A15D89FC40BB50AB04FEDBB": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A534129A0A15D89FC40BB50AB04FEDBB",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786282874,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu general",
+      "messageContextInfo": {
+        "messageSecret": "PNmMABfYojsCAfhN1BWbf1ZweRTwRWDFjLTcGDfFJ+Y="
+      }
+    }
+  },
+  "3EB096D56C49D2ACD89FBD": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB096D56C49D2ACD89FBD",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786282875,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "ZmhhoWeBeA+4bcwb5I0Uif+V1hVc5iC7hLGTv8NTTGY="
+      }
+    }
+  },
+  "3EB0E2F0049F1022F3BAB8": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0E2F0049F1022F3BAB8"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "\n━━━━━━━━━━━━━━━━━━\n\n📖 *📖 *COMMANDES GÉNÉRALES* 📖*\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.botinfo*\nAfficher les informations sur le bot\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.getpp*\nObtenir la photo de profil d'un utilisateur\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.memory*\nAfficher l'utilisation actuelle de la mémoire\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.menu*\nAfficher les commandes du bot\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.owner*\nAfficher le propriétaire du bot\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.rules*\nAfficher les règles du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.runtime*\nAfficher la version d'exécution de Node.js\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.server*\nAfficher les informations du serveur\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.stats*\nAfficher les statistiques du bot\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.time*\nAfficher la date et l'heure actuelles\n\n━━━━━━━━━━━━━━━━━━\n\n📖 *.uptime*\nAfficher le temps de fonctionnement du bot\n\n━━━━━━━━━━━━━━━━━━\n\n\n💡 Tapez .menu pour revenir aux catégories.\n\n.menu\n"
+      },
+      "messageContextInfo": {
+        "messageSecret": "rr2QEKSlikm8t/y4yWGDiu4qL7QWj7B9JX7sSyzHKpo="
+      }
+    },
+    "messageTimestamp": "1786282874",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5B514D6DAF8C3AA490A30917CB6ADF6": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5B514D6DAF8C3AA490A30917CB6ADF6",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786282899,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu hh",
+      "messageContextInfo": {
+        "messageSecret": "XvpNeS8Ezo0JgTbGXr4PiAoqd9RpskByZZwAdHf4g2A="
+      }
+    }
+  },
+  "3EB09E78453709979D75E0": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB09E78453709979D75E0"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "❌ *Menu inconnu.*\n\n📄 *Pages disponibles :*\n\n👮 admin\n👥 group\n👑 owner\n🎮 fun\n📖 general\nℹ️ info\n🛠 tools\n\nExemple :\n.menu admin"
+      },
+      "messageContextInfo": {
+        "messageSecret": "u8EXbfMA+PW8zKFbOeJGt4xxp+aNIxDGYRSJT/70l/Q="
+      }
+    },
+    "messageTimestamp": "1786282898",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB0F7B744907A2EE21B6A": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0F7B744907A2EE21B6A",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786282900,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "YVmGVJ+DBFdMSKVa1dS33jmTTfrvJASuyUpA0CUTI+4="
+      }
+    }
+  },
+  "A546CE81B6541375265FBFCE011A6FD7": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A546CE81B6541375265FBFCE011A6FD7",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283008,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu admin",
+      "messageContextInfo": {
+        "messageSecret": "7PbgsMgSrntgV1wrVfeXGSkq/aE9WYRdEbhjuoypFRA="
+      }
+    }
+  },
+  "3EB01E15A59F0D89B9815F": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB01E15A59F0D89B9815F"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "\n━━━━━━━━━━━━━━━━━━\n\n👮 *🛡️ *ADMINISTRATION DU GROUPE* 🛡️*\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.admincheck*\nVérifier les permissions d'administrateur\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.admincount*\nAfficher le nombre d'administrateurs du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.admins*\nAfficher tous les administrateurs du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.antidelete*\nActiver ou désactiver l'anti-suppression\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.antilink*\nActiver ou désactiver l'anti-liens\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.antilinkaction*\nDéfinir l'action de l'anti-lien.\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.antispam*\nActiver ou désactiver l'anti-spam\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.approve*\nApprouver toutes les demandes d'adhésion au groupe en attente\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.delrules*\nSupprimer les règles du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.demote*\nRetirer les droits d'administrateur à un membre\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.goodbye*\nActiver ou désactiver les messages d'au revoir\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.group*\nOuvrir ou fermer le groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.groupinfo*\nAfficher les informations du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.hidetag*\nMentionner tous les membres sans afficher leurs numéros\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.invite*\nObtenir le lien d'invitation du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.invitelink*\nAfficher le lien d'invitation du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.kick*\nRetirer un membre du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.kickall*\nSupprimer tous les membres non administrateurs\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.lock*\nVerrouiller un type de message\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.membercount*\nAfficher le nombre de membres du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.mute*\nRendre un membre muet temporairement\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.mutelist*\nAfficher les membres muets\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.promote*\nPromouvoir un membre administrateur\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.purge*\nSupprimer les messages récents\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.resetwarn*\nRéinitialiser les avertissements d'un utilisateur\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.revoke*\nGénérer un nouveau lien d'invitation du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.setgoodbye*\nDéfinir le message d'au revoir.\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.setrules*\nDéfinir les règles du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.settings*\nAfficher les paramètres actuels du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.setwelcome*\nDéfinir le message de bienvenue privé\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.slowmode*\nDéfinir le mode lent du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.tagadmins*\nMentionner tous les administrateurs du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.unlock*\nDéverrouiller un type de message\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.unmute*\nRétablir la parole d'un membre\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.warn*\nAvertir un membre du groupe\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.warnings*\nAfficher les avertissements d'un utilisateur\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.warnlimit*\nSet the maximum warnings before a member is removed\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.warnlist*\nAfficher tous les utilisateurs avertis\n\n━━━━━━━━━━━━━━━━━━\n\n🛡️ *.welcome*\nActiver ou désactiver les messages de bienvenue\n\n━━━━━━━━━━━━━━━━━━\n\n\n💡 Tapez .menu pour revenir aux catégories.\n\n.menu\n"
+      },
+      "messageContextInfo": {
+        "messageSecret": "b0RZ4w0/PlbRsN0v7Gvb+Le6NGnsclTcoAv0NP2hg1Q="
+      }
+    },
+    "messageTimestamp": "1786283007",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "3EB00E7694254CF7A5FAB6": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB00E7694254CF7A5FAB6",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283009,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "YvCX7E4qj9VouDLBDc+qfZwITEeVri6dT03nS8a9mHg="
+      }
+    }
+  },
+  "A5B6C073BCFBC58110FFE51F7BA32684": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5B6C073BCFBC58110FFE51F7BA32684",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283522,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu",
+      "messageContextInfo": {
+        "messageSecret": "IDI1VHY+9RmizcmwXFrw8eO/yblAtBFLs2cNusEQJxc="
+      }
+    }
+  },
+  "3EB0420CC40F79B76F5772": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0420CC40F79B76F5772",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283523,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "rK+fCWmndhVs2V6AQAJkhpEl9uBN6HuJTywUbjMBSqU="
+      }
+    }
+  },
+  "3EB0242E3720640E683D7C": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0242E3720640E683D7C"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🤖 *Whisperer_Bot*\n\n📚 *CATÉGORIES*"
+      },
+      "messageContextInfo": {
+        "messageSecret": "AKd0ogyMHAzzsOiKFqUmbPsmKOxMnRe6nq2fbxq0H2g="
+      }
+    },
+    "messageTimestamp": "1786283521",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5D916EE1574BA14E2C8011084753238": {
+    "key": {
+      "remoteJid": "120363426332401158@g.us",
+      "fromMe": false,
+      "id": "A5D916EE1574BA14E2C8011084753238",
+      "participant": "53919875117152@lid",
+      "participantAlt": "237699098442@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283772,
+    "pushName": "𝗜𝗠𝗥𝗔𝗡 𝗧𝗘𝗖𝗛",
+    "broadcast": false,
+    "message": {
+      "senderKeyDistributionMessage": {
+        "groupId": "120363426332401158@g.us",
+        "axolotlSenderKeyDistributionMessage": "Mwj7k9usAxAAGiB6guukt/DbhLxsLtmystFswNwJyXA6pxXH1xL4QyOfkiIhBX4VOJhQWzGggNxiWULU06aiyL4+kTYB8lS0AN7rOyQ6"
+      },
+      "messageContextInfo": {
+        "deviceListMetadata": {
+          "senderTimestamp": "1785603951",
+          "recipientKeyHash": "xh0uOQIqrEC8wA==",
+          "recipientTimestamp": "1786277660"
+        },
+        "deviceListMetadataVersion": 2
+      },
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363426332401158@g.us",
+          "fromMe": true,
+          "id": "A551AEFD4142F93CC23E2C20AB23C8D4",
+          "participant": "182704385589360@lid"
+        },
+        "text": "👍",
+        "senderTimestampMs": "1786283763751"
+      }
+    }
+  },
+  "A52AF7F3D3E1BE5F2805E0BA50809C4B": {
+    "key": {
+      "remoteJid": "120363426332401158@g.us",
+      "fromMe": false,
+      "id": "A52AF7F3D3E1BE5F2805E0BA50809C4B",
+      "participant": "53919875117152@lid",
+      "participantAlt": "237699098442@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283773,
+    "pushName": "𝗜𝗠𝗥𝗔𝗡 𝗧𝗘𝗖𝗛",
+    "broadcast": false,
+    "message": {
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363426332401158@g.us",
+          "fromMe": true,
+          "id": "A5E6BA44257176BE2447FD224EE49201",
+          "participant": "182704385589360@lid"
+        },
+        "text": "🙏",
+        "senderTimestampMs": "1786283766823"
+      }
+    }
+  },
+  "A5BEC47CCDDE4D1B34A185F3079702EE": {
+    "key": {
+      "remoteJid": "120363426332401158@g.us",
+      "fromMe": false,
+      "id": "A5BEC47CCDDE4D1B34A185F3079702EE",
+      "participant": "53919875117152@lid",
+      "participantAlt": "237699098442@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283773,
+    "pushName": "𝗜𝗠𝗥𝗔𝗡 𝗧𝗘𝗖𝗛",
+    "broadcast": false,
+    "message": {
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363426332401158@g.us",
+          "fromMe": true,
+          "id": "A5A51D087E8B7BEB173F200FFB64709E",
+          "participant": "182704385589360@lid"
+        },
+        "text": "🙏",
+        "senderTimestampMs": "1786283768490"
+      }
+    }
+  },
+  "A5268A41128924A91D0B59D10429B79B": {
+    "key": {
+      "remoteJid": "120363426332401158@g.us",
+      "fromMe": false,
+      "id": "A5268A41128924A91D0B59D10429B79B",
+      "participant": "53919875117152@lid",
+      "participantAlt": "237699098442@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283774,
+    "pushName": "𝗜𝗠𝗥𝗔𝗡 𝗧𝗘𝗖𝗛",
+    "broadcast": false,
+    "message": {
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363426332401158@g.us",
+          "fromMe": true,
+          "id": "A52D1DE7A7652E12B390204BDF0A439F",
+          "participant": "182704385589360@lid"
+        },
+        "text": "🙏",
+        "senderTimestampMs": "1786283773274"
+      }
+    }
+  },
+  "A5EE3F482BBB2057B43698072BAFDDDC": {
+    "key": {
+      "remoteJid": "120363426332401158@g.us",
+      "fromMe": false,
+      "id": "A5EE3F482BBB2057B43698072BAFDDDC",
+      "participant": "53919875117152@lid",
+      "participantAlt": "237699098442@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283779,
+    "pushName": "𝗜𝗠𝗥𝗔𝗡 𝗧𝗘𝗖𝗛",
+    "broadcast": false,
+    "message": {
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363426332401158@g.us",
+          "fromMe": true,
+          "id": "A576483254BA75D4DD71DD650713EC15",
+          "participant": "182704385589360@lid"
+        },
+        "text": "🙏",
+        "senderTimestampMs": "1786283777967"
+      }
+    }
+  },
+  "A5E85BBCF000C9978DCE1FFD7D7EE223": {
+    "key": {
+      "remoteJid": "120363426332401158@g.us",
+      "fromMe": false,
+      "id": "A5E85BBCF000C9978DCE1FFD7D7EE223",
+      "participant": "53919875117152@lid",
+      "participantAlt": "237699098442@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786283783,
+    "pushName": "𝗜𝗠𝗥𝗔𝗡 𝗧𝗘𝗖𝗛",
+    "broadcast": false,
+    "message": {
+      "reactionMessage": {
+        "key": {
+          "remoteJid": "120363426332401158@g.us",
+          "fromMe": true,
+          "id": "A580FD3B9DD6B2540E2508E596D19EB5",
+          "participant": "182704385589360@lid"
+        },
+        "text": "🙏",
+        "senderTimestampMs": "1786283782960"
+      }
+    }
+  },
+  "A5CAB72B9FC38E0E4E201129DC36689E": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5CAB72B9FC38E0E4E201129DC36689E",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786284057,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".alive",
+      "messageContextInfo": {
+        "messageSecret": "Sc0D8T6AFL1yp0TEKjKHl8xL60r3TXiK54uNtyffbJs="
+      }
+    }
+  },
+  "3EB00A8C7D041373EC912D": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB00A8C7D041373EC912D",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786284058,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "v4v+mdY4cjh3lGE+kIhkU0J9BXciDwwO888PkDhuCH4="
+      }
+    }
+  },
+  "3EB0D45B013755C37B9E94": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0D45B013755C37B9E94"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🤖 *WHISPER BOT EST EN LIGNE*\n\n👑 Propriétaire :\nTHE-WHISPERER\n\n⚡ Statut :\n✅ *Fonctionne correctement*\n\n😂 😴 *Je suis réveillé... toujours en train de corriger des bugs.*"
+      },
+      "messageContextInfo": {
+        "messageSecret": "rjGB90CVncH8En+YMdrxuW0lpnD1yeIyxWaly/ZpUeI="
+      }
+    },
+    "messageTimestamp": "1786284191",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  },
+  "A5C85041B69667D91A843D8B9C7318C4": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "A5C85041B69667D91A843D8B9C7318C4",
+      "participant": "182704385589360@lid",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786284236,
+    "pushName": "𝐓𝐡𝐞-𝐰𝐡𝐢𝐬𝐩𝐞𝐫𝐞𝐫",
+    "broadcast": false,
+    "status": 2,
+    "message": {
+      "conversation": ".menu",
+      "messageContextInfo": {
+        "messageSecret": "QMSQbUL9OWN+8iA+XKQKbB/etkau5tNNWmX9k1omuww="
+      }
+    }
+  },
+  "3EB0A00C84A6373DC3C496": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": false,
+      "id": "3EB0A00C84A6373DC3C496",
+      "participant": "260851131019469@lid",
+      "participantAlt": "237682349827@s.whatsapp.net",
+      "addressingMode": "lid"
+    },
+    "messageTimestamp": 1786284237,
+    "pushName": "The-whisperer",
+    "broadcast": false,
+    "message": {
+      "extendedTextMessage": {
+        "text": "🔒 *WhisperBot is in private mode.*\n\nOnly the owner and trusted sudo members can use it.\nAsk the owner to run *.public* to open it."
+      },
+      "messageContextInfo": {
+        "messageSecret": "YzjH0yBboGNNyFslIswxEI0ZxwHhzc8sLeNt0kTf1LA="
+      }
+    }
+  },
+  "3EB0C884ABC7459DEF8E00": {
+    "key": {
+      "remoteJid": "120363426993971039@g.us",
+      "fromMe": true,
+      "id": "3EB0C884ABC7459DEF8E00"
+    },
+    "message": {
+      "extendedTextMessage": {
+        "text": "🤖 *Whisperer_Bot*\n\n📚 *CATÉGORIES*"
+      },
+      "messageContextInfo": {
+        "messageSecret": "soWcKKYqrkYpX9hJQoHnn2H3CQn4g9OsMV7gU+hHjIg="
+      }
+    },
+    "messageTimestamp": "1786284236",
+    "status": "PENDING",
+    "participant": "237675310628:21@s.whatsapp.net"
+  }
+}

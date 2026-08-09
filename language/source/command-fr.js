@@ -1,4 +1,5 @@
 module.exports = {
+"getpp":"Obtenir la photo de profil d'un utilisateur",
 "antilinkaction": "Définir l'action de l'anti-lien.",
 "setbio": "Modifier la bio WhatsApp",
 "setprofilename": "Modifier le nom du profil WhatsApp",
