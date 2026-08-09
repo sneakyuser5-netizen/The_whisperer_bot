@@ -102,10 +102,12 @@ module.exports = {
 
                 if (contact) {
 
+                    // Prefer several possible name fields
                     name =
                         contact.name ||
                         contact.notify ||
                         contact.verifiedName ||
+                        contact.formattedName ||
                         contact.pushName ||
                         name;
 
@@ -129,13 +131,11 @@ module.exports = {
                         }
                     }
                 } else {
-                    // If contact not in store, try to derive a number/name from the JID itself
+                    // If contact not in store, only derive a number fallback (do NOT use it as the display name)
                     const fallbackNumber =
                         targetJid.replace(/@.*$/, "").split(":")[0];
 
                     if (/^\d{7,15}$/.test(fallbackNumber)) {
-                        // use the numeric value as a fallback name only if no better name
-                        if (name === "Unknown") name = fallbackNumber;
                         if (!phoneNumber) phoneNumber = fallbackNumber;
                     }
                 }
