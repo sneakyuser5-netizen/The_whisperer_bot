@@ -1,3 +1,4 @@
+//Tu peux ajouter quelques choses 
 const fs = require("fs");
 const clear = require("./lib/clear");
 const { t } = require("./lib/lang");
