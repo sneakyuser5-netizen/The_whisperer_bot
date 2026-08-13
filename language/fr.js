@@ -1,4 +1,5 @@
 module.exports = {
+ "admin.demote_failed":"Échec de la rétrogradation de l'utilisateur du poste d'administrateur. \n\n Veuillez me désigner comme administrateur du groupe pour que cette opération réussisse.",   
 "owner.add_invalid": "❌ Veuillez fournir un numéro de téléphone valide.",
 "owner.add_adding": "⏳ Ajout de {{number}} au groupe...",
 "owner.add_success": "✅ {{number}} a été ajouté avec succès.",
