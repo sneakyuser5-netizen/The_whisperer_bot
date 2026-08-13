@@ -1,5 +1,5 @@
 module.exports = {
- "admin.demote_failed":"Failed to demote user from admin post. Make me a group admin for this to be successful.",
+ "admin.demote_failed":"Failed to demote user from admin post. \n\nMake me a group admin for this to be successful.",
 "owner.add_invalid": "❌ Please provide a valid phone number.",
 "owner.add_adding": "⏳ Adding {{number}} to the group...",
 "owner.add_success": "✅ {{number}} was added successfully.",
