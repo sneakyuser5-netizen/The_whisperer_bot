@@ -1,5 +1,5 @@
 module.exports = {
-"add": "Ajouter un membre au groupe"
+"add": "Ajouter un membre au groupe",
 "getpp":"Obtenir la photo de profil d'un utilisateur",
 "antilinkaction": "Définir l'action de l'anti-lien.",
 "setbio": "Modifier la bio WhatsApp",
