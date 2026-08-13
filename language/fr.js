@@ -1,4 +1,8 @@
 module.exports = {
+"owner.add_invalid": "❌ Veuillez fournir un numéro de téléphone valide.",
+"owner.add_adding": "⏳ Ajout de {{number}} au groupe...",
+"owner.add_success": "✅ {{number}} a été ajouté avec succès.",
+"owner.add_failed": "❌ WhatsApp n'a pas pu ajouter {{number}} au groupe.",
 "admin.kickall_confirm": "⚠️ AVERTISSEMENT\n\nCette opération supprimera {{count}} membres non administrateurs.\n\nRépondez :\n\nYES\n\n dans les 30 secondes pour continuer.\n\nRépondez :\n\nNO\n\npour annuler.",
 "admin.kickall_reply": "Répondez YES pour continuer ou NO pour annuler.",
 "admin.kickall_expired": "⏱️ Le délai de confirmation est dépassé. Opération annulée.",
