@@ -1,4 +1,5 @@
 module.exports = {
+"tag": "Activer ou désactiver la réponse audio aux mentions du propriétaire",
 "add": "Ajouter un membre au groupe",
 "getpp":"Obtenir la photo de profil d'un utilisateur",
 "antilinkaction": "Définir l'action de l'anti-lien.",

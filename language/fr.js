@@ -1,4 +1,7 @@
 module.exports = {
+"owner.tag_usage": "⚙️ Utilisation : .tag on | .tag off",
+"owner.tag_on": "🔊 Réponse audio aux mentions du propriétaire : ACTIVÉE",
+"owner.tag_off": "🔇 Réponse audio aux mentions du propriétaire : DÉSACTIVÉE",
  "admin.demote_failed":"Échec de la rétrogradation de l'utilisateur du poste d'administrateur. \n\n Veuillez me désigner comme administrateur du groupe pour que cette opération réussisse.",   
 "owner.add_invalid": "❌ Veuillez fournir un numéro de téléphone valide.",
 "owner.add_adding": "⏳ Ajout de {{number}} au groupe...",

@@ -1,4 +1,3 @@
-//Tu peux ajouter quelques choses 
 const fs = require("fs");
 const clear = require("./lib/clear");
 const { t } = require("./lib/lang");
@@ -9,6 +8,7 @@ const ownerDB = require("./lib/owner");
 const commands = new Map();
 const cooldowns = new Map();
 const session = require("./lib/session");
+
 async function isAdmin(sock, msg) {
     const jid = msg.key.remoteJid;
     if (!jid.endsWith("@g.us")) {
@@ -41,7 +41,77 @@ function loadCommands(dir = "./commands") {
 }
 
 async function handleMessage(sock, msg) {
-    const text = msg.message?.conversation || msg.message?.extendedTextMessage?.text;
+    const text =
+        msg.message?.conversation ||
+        msg.message?.extendedTextMessage?.text;
+
+    const jid = msg.key.remoteJid;
+    // ==========================================
+    // BOT ACCOUNT TAG DETECTION
+    // ==========================================
+
+    const ownerTagAudio = settings.get("global").ownerTagAudio;
+
+    if (ownerTagAudio) {
+        const contextInfo =
+            msg.message?.extendedTextMessage?.contextInfo ||
+            msg.message?.imageMessage?.contextInfo ||
+            msg.message?.videoMessage?.contextInfo ||
+            msg.message?.documentMessage?.contextInfo;
+        const mentionedJid = contextInfo?.mentionedJid || [];
+
+        if (mentionedJid.length && sock.user?.id) {
+            const botNumber = sock.user.id.split("@")[0].split(":")[0];
+            let botWasMentioned = false;
+            for (const mentioned of mentionedJid) {
+                const mentionedNumber = mentioned.split("@")[0].split(":")[0];
+
+                if (mentionedNumber === botNumber) {
+                    botWasMentioned = true;
+                    break;
+                }
+
+                if (mentioned.endsWith("@lid")) {
+                    try {
+                        const pn = await sock.signalRepository.lidMapping.getPNForLID(mentioned);
+                        if (!pn) continue;
+                        const resolvedNumber = pn.split("@")[0].split(":")[0];
+
+                        console.log("🔄 MENTION LID:", mentioned, "→", pn);
+                        console.log("🔍 COMPARE:", resolvedNumber, "===", botNumber, "?", resolvedNumber === botNumber);
+
+                        if (String(resolvedNumber) === String(botNumber)) {
+                            botWasMentioned = true;
+                            break;
+                        }
+                    } catch (err) {
+                        console.log("❌ LID RESOLUTION ERROR:", err.message);
+                    }
+                }
+            }
+
+
+            if (botWasMentioned) {
+                console.log("🔔 BOT ACCOUNT MENTIONED:", mentionedJid);
+
+                try {
+                    await sock.sendMessage(jid, {
+                        audio: {
+                            url: "./media/owner-tag.mp3"
+                        },
+                        mimetype: "audio/mpeg",
+                        ptt: true
+                    });
+
+                    console.log("🔊 Owner-tag audio sent successfully.");
+                } catch (err) {
+                    console.error("❌ Failed to send owner-tag audio:", err);
+                }
+            }
+        }
+    }
+
+
 
     const isTypingOn = settings.get("global").autotyping;
     if (isTypingOn && text) {
@@ -50,27 +120,21 @@ async function handleMessage(sock, msg) {
         await new Promise(resolve => setTimeout(resolve, 2000));
     }
 
-
-
     if (!text) return;
-
     const sender = msg.key.remoteJid;
-    const jid = msg.key.remoteJid;
-    
+
     global.messageCache = global.messageCache || {};
+    global.messageCache[jid] = global.messageCache[jid] || [];
+    global.messageCache[jid].push(msg);
 
-global.messageCache[jid] = global.messageCache[jid] || [];
+    if (global.messageCache[jid].length > 100) {
+        global.messageCache[jid].shift();
+    }
 
-global.messageCache[jid].push(msg);
-
-if (global.messageCache[jid].length > 100) {
-    global.messageCache[jid].shift();
-}
     const groupSettings = settings.get(jid);
-    let prefix = groupSettings.prefix || "."; // let not const
+    let prefix = groupSettings.prefix || ".";
 
     const identity = require("./lib/identity");
-    //identity.debug(msg);
     const senderId = identity.getSender(msg);
     const isOwner = identity.isOwner(msg);
     const isSudo = identity.isSudo(msg);
@@ -81,190 +145,111 @@ if (global.messageCache[jid].length > 100) {
     }
 
     const mode = settings.get("global").mode || "private";
-
     let body = text.trim();
-
-    
 
     if (body.startsWith(prefix + " ")) {
         body = prefix + body.slice(prefix.length + 1);
     }
-    //if (!body.startsWith(prefix)) {
-       // return;
-   // }
-// Handle interactive sessions
-if (!body.startsWith(prefix)) {
 
-    const current = session.get(jid);
-//    console.log("SESSION FOUND:", current);
-//console.log("BODY:", body);
-if (current?.type === "kickall") {
+    // Handle interactive sessions
+    if (!body.startsWith(prefix)) {
+        const current = session.get(jid);
 
-    const answer = body.trim().toLowerCase();
+        if (current?.type === "kickall") {
+            const answer = body.trim().toLowerCase();
 
-    if (Date.now() > current.expires) {
-        session.delete(jid);
+            if (Date.now() > current.expires) {
+                session.delete(jid);
+                return sock.sendMessage(jid, {
+                    text: t(jid, "admin.kickall_expired")
+                });
+            }
 
-        return sock.sendMessage(jid, {
-            text: t(jid, "admin.kickall_expired")
-        });
-    }
+            if (answer === "no") {
+                session.delete(jid);
+                return sock.sendMessage(jid, {
+                    text: t(jid, "admin.kickall_cancelled")
+                });
+            }
 
-    if (answer === "no") {
-        session.delete(jid);
+            if (answer!== "yes") {
+                return;
+            }
 
-        return sock.sendMessage(jid, {
-            text: t(jid, "admin.kickall_cancelled")
-        });
-    }
+            session.delete(jid);
+            let kicked = 0;
+            let failed = 0;
+            for (const member of current.members) {
+                try {
+                    await sock.groupParticipantsUpdate(jid, [member.id], "remove");
+                    kicked++;
+                } catch (err) {
+                    console.dir(err, { depth: null });
+                    failed++;
+                }
+            }
+            return sock.sendMessage(jid, {
+                text: t(jid, "admin.kickall_done")
+                   .replace("{{count}}", kicked)
+                   .replace("{{failed}}", failed)
+            });
+        }
 
-if (answer !== "yes") {
-    return;
-}
-    session.delete(jid);
-
-    let kicked = 0;
-    let failed = 0;
-
-    for (const member of current.members) {
-
-        try {
-
-            await sock.groupParticipantsUpdate(
-                jid,
-                [member.id],
-                "remove"
-            );
-
-            kicked++;
-
-        } catch (err) {
-
-            console.dir(err, { depth: null });
-
-            failed++;
+        if (current?.type === "clear") {
+            switch (body) {
+                case "0":
+                    session.delete(jid);
+                    return sock.sendMessage(jid, {
+                        text: t(jid, "owner.clear_cancelled")
+                    });
+                case "1": {
+                    session.delete(jid);
+                    const count = await clear.clearCurrent100(sock, jid);
+                    return sock.sendMessage(jid, {
+                        text: t(jid, "owner.clear_done").replace("{{count}}", count)
+                    });
+                }
+                case "2": {
+                    session.delete(jid);
+                    const count = await clear.clearCurrentAll(sock, jid);
+                    return sock.sendMessage(jid, {
+                        text: t(jid, "owner.clear_done").replace("{{count}}", count)
+                    });
+                }
+                case "3": {
+                    session.delete(jid);
+                    const count = await clear.clearPrivateChats(sock);
+                    return sock.sendMessage(jid, {
+                        text: t(jid, "owner.clear_done").replace("{{count}}", count)
+                    });
+                }
+                case "4": {
+                    session.delete(jid);
+                    const count = await clear.clearGroupChats(sock);
+                    return sock.sendMessage(jid, {
+                        text: t(jid, "owner.clear_done").replace("{{count}}", count)
+                    });
+                }
+                case "5": {
+                    session.delete(jid);
+                    const count = await clear.clearEverything(sock);
+                    return sock.sendMessage(jid, {
+                        text: t(jid, "owner.clear_done").replace("{{count}}", count)
+                    });
+                }
+            }
+            return;
         }
     }
 
-    return sock.sendMessage(jid, {
-        text: t(jid, "admin.kickall_done")
-            .replace("{{count}}", kicked)
-            .replace("{{failed}}", failed)
-    });
-}
-
-    if (current?.type === "clear") {
-
-        switch (body) {
-
-    case "0":
-
-        session.delete(jid);
-
-        return sock.sendMessage(jid, {
-            text: t(jid, "owner.clear_cancelled")
-        });
-
-    case "1": {
-
-        session.delete(jid);
-
-        const count = await clear.clearCurrent100(
-            sock,
-            jid
-        );
-
-        return sock.sendMessage(jid, {
-            text: t(jid, "owner.clear_done")
-                .replace("{{count}}", count)
-        });
-
-    }
-
-    case "2": {
-
-        session.delete(jid);
-
-        const count = await clear.clearCurrentAll(
-            sock,
-            jid
-        );
-
-        return sock.sendMessage(jid, {
-            text: t(jid, "owner.clear_done")
-                .replace("{{count}}", count)
-        });
-
-    }
-
-    case "3": {
-
-        session.delete(jid);
-
-        const count = await clear.clearPrivateChats(
-            sock
-        );
-
-        return sock.sendMessage(jid, {
-            text: t(jid, "owner.clear_done")
-                .replace("{{count}}", count)
-        });
-
-    }
-
-    case "4": {
-
-        session.delete(jid);
-
-        const count = await clear.clearGroupChats(
-            sock
-        );
-
-        return sock.sendMessage(jid, {
-            text: t(jid, "owner.clear_done")
-                .replace("{{count}}", count)
-        });
-
-    }
-
-    case "5": {
-
-        session.delete(jid);
-
-        const count = await clear.clearEverything(
-            sock
-        );
-
-        return sock.sendMessage(jid, {
-            text: t(jid, "owner.clear_done")
-                .replace("{{count}}", count)
-        });
-
-    }
-
-        }
-            
-
-    return;
-
-}
-
-}
     // Parse commands (.cmd arg) and (.cmd=arg)
-const content = body.slice(prefix.length).trim();
-
-const [commandPart, ...rest] = content.split(/\s+/);
-
-const [cmdName, inlineArg] = commandPart.split("=");
-
-const cmd = cmdName.toLowerCase();
-
-const args = inlineArg
-    ? [inlineArg, ...rest]
-    : rest;
-
-const command = commands.get(cmd);
-if (!command) return;
+    const content = body.slice(prefix.length).trim();
+    const [commandPart,...rest] = content.split(/\s+/);
+    const [cmdName, inlineArg] = commandPart.split("=");
+    const cmd = cmdName.toLowerCase();
+    const args = inlineArg? [inlineArg,...rest] : rest;
+    const command = commands.get(cmd);
+    if (!command) return;
 
     if (command.cooldown) {
         const now = Date.now();
@@ -282,23 +267,18 @@ if (!command) return;
 
     const permission = command.permission || "public";
 
-    // Private mode
     if (mode === "private" &&!isOwner &&!isSudo) {
         return sock.sendMessage(sender, { text: t("private_mode") });
     }
-    // Creator only
     if (permission === "creator" &&!identity.isCreator(msg)) {
         return sock.sendMessage(sender, { text: t("creator_only") });
     }
-    // Owner only
     if (permission === "owner" &&!isOwner) {
         return sock.sendMessage(sender, { text: t("owner_only") });
     }
-    // Sudo
     if (permission === "sudo" &&!isOwner &&!isSudo) {
         return sock.sendMessage(sender, { text: t("sudo_only") });
     }
-    // Admin commands
     if (permission === "admin") {
         if (!jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, { text: t("group_only") });
@@ -316,8 +296,6 @@ if (!command) return;
         }
     }
 
-  //  console.log("COMMAND:", command.name);
-    //console.log("ARGS:", args);
     await command.execute(sock, msg, args);
 }
 

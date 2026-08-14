@@ -1,4 +1,7 @@
 module.exports = {
+"owner.tag_usage": "⚙️ Usage: .tag on | .tag off",
+"owner.tag_on": "🔊 Owner mention audio: ON",
+"owner.tag_off": "🔇 Owner mention audio: OFF",
  "admin.demote_failed":"Failed to demote user from admin post. \n\nMake me a group admin for this to be successful.",
 "owner.add_invalid": "❌ Please provide a valid phone number.",
 "owner.add_adding": "⏳ Adding {{number}} to the group...",
