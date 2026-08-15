@@ -68,3 +68,21 @@ telegram_config.py
 telegram_session.session
 telegram_session.session-journal
 telegram_media_test/
+# Python cache
+__pycache__/
+*.pyc
+
+# Telegram test files
+telegram_test/
+
+# Temporary audio tests
+test-audio.mp3
+test-play.mp3
+
+# Telegram credentials/session
+telegram_config.py
+telegram_session.session
+telegram_session.session-journal
+
+# Runtime database
+database/*.json
