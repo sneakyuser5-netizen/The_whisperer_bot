@@ -1,4 +1,8 @@
 module.exports = {
+"owner.block_private_only": "❌ This command can only be used in a private chat.",
+"owner.block_invalid": "❌ This user cannot be blocked.",
+"owner.block_success": "🚫 User has been blocked successfully.",
+"owner.block_failed": "❌ Failed to block this user.",
 "owner.tag_usage": "⚙️ Usage: .tag on | .tag off",
 "owner.tag_on": "🔊 Owner mention audio: ON",
 "owner.tag_off": "🔇 Owner mention audio: OFF",

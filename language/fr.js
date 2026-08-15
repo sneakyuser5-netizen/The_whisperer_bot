@@ -1,4 +1,8 @@
 module.exports = {
+"owner.block_private_only": "❌ Cette commande peut uniquement être utilisée dans une discussion privée.",
+"owner.block_invalid": "❌ Cet utilisateur ne peut pas être bloqué.",
+"owner.block_success": "🚫 L'utilisateur a été bloqué avec succès.",
+"owner.block_failed": "❌ Échec du blocage de cet utilisateur.",
 "owner.tag_usage": "⚙️ Utilisation : .tag on | .tag off",
 "owner.tag_on": "🔊 Réponse audio aux mentions du propriétaire : ACTIVÉE",
 "owner.tag_off": "🔇 Réponse audio aux mentions du propriétaire : DÉSACTIVÉE",
