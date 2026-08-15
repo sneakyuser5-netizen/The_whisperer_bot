@@ -11,29 +11,46 @@ module.exports = {
     execute: async (sock, msg) => {
         const jid = msg.key.remoteJid;
 
-        // Block command only works in private chats
+        // Only allow .block in private chats
         if (jid.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
                 text: t(jid, "owner.block_private_only")
             });
         }
 
-        // Don't allow blocking the bot itself
-        if (msg.key.fromMe) {
+        // WhatsApp may provide the private chat as a LID.
+        // Use remoteJidAlt when it contains the phone-number JID.
+        let target = jid;
+
+        if (jid.endsWith("@lid") && msg.key.remoteJidAlt) {
+            target = msg.key.remoteJidAlt;
+        }
+
+        // Safety check: make sure we have a valid user JID
+        if (!target || !target.endsWith("@s.whatsapp.net")) {
+            console.log("❌ INVALID BLOCK TARGET:", {
+                remoteJid: jid,
+                remoteJidAlt: msg.key.remoteJidAlt
+            });
+
             return sock.sendMessage(jid, {
                 text: t(jid, "owner.block_invalid")
             });
         }
 
+        console.log("🚫 BLOCK TARGET:", target);
+
         try {
-            await sock.updateBlockStatus(jid, "block");
+            await sock.updateBlockStatus(target, "block");
 
             await sock.sendMessage(jid, {
                 text: t(jid, "owner.block_success")
             });
 
+            console.log("✅ USER BLOCKED:", target);
+
         } catch (err) {
-            console.error("BLOCK ERROR:", err);
+            console.error("❌ BLOCK ERROR:", err);
 
             await sock.sendMessage(jid, {
                 text: t(jid, "owner.block_failed")
