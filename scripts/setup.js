@@ -9,6 +9,7 @@ const path = require("path");
 
 const platform = os.platform();
 const arch = os.arch();
+const rootDir = process.cwd();
 
 function commandExists(command, args = ["--version"]) {
     try {
@@ -32,14 +33,14 @@ function run(command, args, options = {}) {
     return result.status === 0;
 }
 
-function runQuiet(command, args) {
+function runCapture(command, args) {
     try {
-        execFileSync(command, args, {
-            stdio: "ignore"
-        });
-        return true;
+        return execFileSync(command, args, {
+            encoding: "utf8",
+            stdio: ["ignore", "pipe", "pipe"]
+        }).trim();
     } catch {
-        return false;
+        return "";
     }
 }
 
@@ -81,13 +82,15 @@ function canUsePacman() {
 
 function installSystemPackage(packageName) {
     /*
-     * ------------------------------------------------------
+     * ======================================================
      * TERMUX
-     * ------------------------------------------------------
+     * ======================================================
      */
 
     if (isTermux() && commandExists("pkg", ["--help"])) {
-        console.log(`📱 Termux detected. Installing ${packageName}...`);
+        console.log(
+            `📱 Termux detected. Installing ${packageName}...`
+        );
 
         return run("pkg", [
             "install",
@@ -97,9 +100,9 @@ function installSystemPackage(packageName) {
     }
 
     /*
-     * ------------------------------------------------------
+     * ======================================================
      * LINUX
-     * ------------------------------------------------------
+     * ======================================================
      */
 
     if (!isLinux()) {
@@ -107,49 +110,55 @@ function installSystemPackage(packageName) {
     }
 
     /*
-     * APT
+     * APT / Debian / Ubuntu
      */
 
     if (canUseApt()) {
-        console.log(`🐧 APT detected. Installing ${packageName}...`);
+        console.log(
+            `🐧 APT detected. Installing ${packageName}...`
+        );
 
         if (process.getuid && process.getuid() === 0) {
-            return run("apt-get", [
-                "update"
-            ]) &&
-            run("apt-get", [
-                "install",
-                "-y",
-                packageName
-            ]);
+            return (
+                run("apt-get", ["update"]) &&
+                run("apt-get", [
+                    "install",
+                    "-y",
+                    packageName
+                ])
+            );
         }
 
         if (canUseSudo()) {
-            return run("sudo", [
-                "apt-get",
-                "update"
-            ]) &&
-            run("sudo", [
-                "apt-get",
-                "install",
-                "-y",
-                packageName
-            ]);
+            return (
+                run("sudo", [
+                    "apt-get",
+                    "update"
+                ]) &&
+                run("sudo", [
+                    "apt-get",
+                    "install",
+                    "-y",
+                    packageName
+                ])
+            );
         }
 
         console.log(
-            "⚠️ APT is available, but this process has no root/sudo permission."
+            "⚠️ APT is available, but root/sudo permission is unavailable."
         );
 
         return false;
     }
 
     /*
-     * APK - Alpine Linux
+     * Alpine
      */
 
     if (canUseApk()) {
-        console.log(`🐧 Alpine APK detected. Installing ${packageName}...`);
+        console.log(
+            `🐧 Alpine APK detected. Installing ${packageName}...`
+        );
 
         return run("apk", [
             "add",
@@ -159,11 +168,13 @@ function installSystemPackage(packageName) {
     }
 
     /*
-     * DNF
+     * Fedora / RHEL
      */
 
     if (canUseDnf()) {
-        console.log(`🐧 DNF detected. Installing ${packageName}...`);
+        console.log(
+            `🐧 DNF detected. Installing ${packageName}...`
+        );
 
         if (process.getuid && process.getuid() === 0) {
             return run("dnf", [
@@ -181,14 +192,18 @@ function installSystemPackage(packageName) {
                 packageName
             ]);
         }
+
+        return false;
     }
 
     /*
-     * YUM
+     * Older RHEL / CentOS
      */
 
     if (canUseYum()) {
-        console.log(`🐧 YUM detected. Installing ${packageName}...`);
+        console.log(
+            `🐧 YUM detected. Installing ${packageName}...`
+        );
 
         if (process.getuid && process.getuid() === 0) {
             return run("yum", [
@@ -206,14 +221,18 @@ function installSystemPackage(packageName) {
                 packageName
             ]);
         }
+
+        return false;
     }
 
     /*
-     * PACMAN
+     * Arch
      */
 
     if (canUsePacman()) {
-        console.log(`🐧 Pacman detected. Installing ${packageName}...`);
+        console.log(
+            `🐧 Pacman detected. Installing ${packageName}...`
+        );
 
         if (process.getuid && process.getuid() === 0) {
             return run("pacman", [
@@ -231,6 +250,8 @@ function installSystemPackage(packageName) {
                 packageName
             ]);
         }
+
+        return false;
     }
 
     return false;
@@ -245,6 +266,7 @@ function installSystemPackage(packageName) {
 console.log("");
 console.log("========================================");
 console.log(" The-whisperer Bot Automatic Setup");
+console.log(" Media + Telegram Support");
 console.log("========================================");
 console.log("");
 
@@ -263,40 +285,30 @@ console.log("");
 
 /*
  * ==========================================================
- * NODE
+ * NODE.JS
  * ==========================================================
  */
 
 console.log("🔎 Checking Node.js...");
 
-if (!commandExists(process.execPath)) {
+if (!commandExists(process.execPath, ["--version"])) {
     console.error("❌ Node.js is not available.");
     process.exit(1);
 }
 
-console.log(
-    `✅ Node.js: ${process.version}`
-);
+console.log(`✅ Node.js: ${process.version}`);
 
 /*
  * ==========================================================
- * NPM DEPENDENCIES
+ * NODE MODULES
  * ==========================================================
  */
 
 console.log("");
 console.log("📦 Checking Node.js packages...");
 
-/*
- * Don't recursively run npm install if this script was
- * already launched by npm start.
- *
- * npm itself normally installs dependencies during the
- * hosting platform's build stage.
- */
-
 const nodeModules = path.join(
-    process.cwd(),
+    rootDir,
     "node_modules"
 );
 
@@ -341,28 +353,71 @@ if (!pythonCommand) {
 
     if (isTermux()) {
         console.log("");
-        console.log("📱 Install Python in Termux with:");
+        console.log("📱 Install with:");
         console.log("   pkg install python");
     } else if (isLinux()) {
         console.log("");
-        console.log("🐧 This Linux container needs Python installed.");
+        console.log("🐧 Linux container needs Python.");
     }
 
     console.log(
-        "⚠️ Telegram sticker/media features may not work."
+        "⚠️ Telegram and yt-dlp features may not work."
     );
 } else {
-    const pythonVersion = spawnSync(
-        pythonCommand,
-        ["--version"],
-        {
-            encoding: "utf8"
-        }
+    console.log(
+        `✅ Python: ${runCapture(
+            pythonCommand,
+            ["--version"]
+        )}`
+    );
+}
+
+/*
+ * ==========================================================
+ * PYTHON REQUIREMENTS
+ * ==========================================================
+ */
+
+if (pythonCommand) {
+    console.log("");
+    console.log("📚 Checking Python requirements...");
+
+    const requirementsFile = path.join(
+        rootDir,
+        "requirements.txt"
     );
 
-    console.log(
-        `✅ Python: ${(pythonVersion.stdout || pythonVersion.stderr).trim()}`
-    );
+    if (fs.existsSync(requirementsFile)) {
+        console.log(
+            "📄 requirements.txt found."
+        );
+
+        const pipResult = run(
+            pythonCommand,
+            [
+                "-m",
+                "pip",
+                "install",
+                "-U",
+                "-r",
+                requirementsFile
+            ]
+        );
+
+        if (pipResult) {
+            console.log(
+                "✅ Python requirements installed."
+            );
+        } else {
+            console.log(
+                "⚠️ Could not automatically install all Python requirements."
+            );
+        }
+    } else {
+        console.log(
+            "⚠️ requirements.txt not found."
+        );
+    }
 }
 
 /*
@@ -375,26 +430,22 @@ if (pythonCommand) {
     console.log("");
     console.log("📡 Checking Telethon...");
 
-    const telethonCheck = spawnSync(
+    const telethonVersion = runCapture(
         pythonCommand,
         [
             "-c",
             "import telethon; print(telethon.__version__)"
-        ],
-        {
-            encoding: "utf8",
-            stdio: ["ignore", "pipe", "pipe"]
-        }
+        ]
     );
 
-    if (telethonCheck.status === 0) {
+    if (telethonVersion) {
         console.log(
-            `✅ Telethon: ${telethonCheck.stdout.trim()}`
+            `✅ Telethon: ${telethonVersion}`
         );
     } else {
-        console.log("⚠️ Telethon is not installed.");
-
-        console.log("📦 Attempting to install Telethon...");
+        console.log(
+            "⚠️ Telethon is not available."
+        );
 
         const installed = run(
             pythonCommand,
@@ -408,13 +459,195 @@ if (pythonCommand) {
         );
 
         if (installed) {
-            console.log("✅ Telethon installed.");
+            console.log(
+                "✅ Telethon installed."
+            );
         } else {
             console.log(
-                "⚠️ Could not automatically install Telethon."
+                "❌ Telethon installation failed."
             );
         }
     }
+}
+
+/*
+ * ==========================================================
+ * TELEGRAM CONFIGURATION
+ * ==========================================================
+ */
+
+console.log("");
+console.log("========================================");
+console.log(" Telegram Configuration");
+console.log("========================================");
+console.log("");
+
+const telegramConfig = path.join(
+    rootDir,
+    "telegram_config.py"
+);
+
+const telegramExample = path.join(
+    rootDir,
+    "telegram_config.example.py"
+);
+
+if (fs.existsSync(telegramConfig)) {
+    console.log(
+        "✅ telegram_config.py found."
+    );
+} else {
+    console.log(
+        "⚠️ telegram_config.py is missing."
+    );
+
+    if (fs.existsSync(telegramExample)) {
+        try {
+            fs.copyFileSync(
+                telegramExample,
+                telegramConfig
+            );
+
+            console.log(
+                "📄 Created telegram_config.py from telegram_config.example.py"
+            );
+        } catch (error) {
+            console.log(
+                "⚠️ Could not create telegram_config.py:"
+            );
+
+            console.log(
+                error.message
+            );
+        }
+    } else {
+        console.log(
+            "⚠️ telegram_config.example.py is also missing."
+        );
+    }
+}
+
+/*
+ * ==========================================================
+ * VALIDATE TELEGRAM CREDENTIALS
+ * ==========================================================
+ */
+
+if (
+    pythonCommand &&
+    fs.existsSync(telegramConfig)
+) {
+    const credentialCheck = spawnSync(
+        pythonCommand,
+        [
+            "-c",
+            `
+from telegram_config import API_ID, API_HASH
+print("API_ID:", bool(API_ID))
+print("API_HASH:", bool(API_HASH))
+`
+        ],
+        {
+            cwd: rootDir,
+            encoding: "utf8",
+            stdio: [
+                "ignore",
+                "pipe",
+                "pipe"
+            ]
+        }
+    );
+
+    if (credentialCheck.status === 0) {
+        const output =
+            credentialCheck.stdout || "";
+
+        if (
+            output.includes("API_ID: True") &&
+            output.includes("API_HASH: True")
+        ) {
+            console.log(
+                "✅ Telegram API credentials are configured."
+            );
+        } else {
+            console.log(
+                "⚠️ Telegram API credentials are not configured."
+            );
+
+            console.log("");
+            console.log(
+                "Edit telegram_config.py and add your:"
+            );
+            console.log(
+                "   API_ID"
+            );
+            console.log(
+                "   API_HASH"
+            );
+        }
+    } else {
+        console.log(
+            "⚠️ Could not validate telegram_config.py."
+        );
+    }
+}
+
+/*
+ * ==========================================================
+ * TELEGRAM SESSION
+ * ==========================================================
+ */
+
+console.log("");
+console.log("🔐 Checking Telegram session...");
+
+const sessionFile = path.join(
+    rootDir,
+    "telegram_session.session"
+);
+
+if (fs.existsSync(sessionFile)) {
+    console.log(
+        "✅ Telegram session file found."
+    );
+
+    console.log(
+        "🔐 Telegram account login has already been completed."
+    );
+} else {
+    console.log(
+        "⚠️ Telegram session file not found."
+    );
+
+    console.log("");
+    console.log(
+        "ℹ️ A fresh installation requires a one-time Telegram login."
+    );
+
+    console.log(
+        "After configuring telegram_config.py, run:"
+    );
+
+    console.log(
+        "   python lib/telegram_stickers.py \"https://t.me/addstickers/DEDSECH\" telegram_test"
+    );
+
+    console.log("");
+    console.log(
+        "You will be asked for your Telegram phone number"
+    );
+
+    console.log(
+        "and the verification code."
+    );
+
+    console.log(
+        "After successful login, telegram_session.session"
+    );
+
+    console.log(
+        "will be created and reused by the bot."
+    );
 }
 
 /*
@@ -426,31 +659,29 @@ if (pythonCommand) {
 console.log("");
 console.log("🎵 Checking yt-dlp...");
 
-if (commandExists("yt-dlp", ["--version"])) {
-    let version = "";
+let ytDlpReady = commandExists(
+    "yt-dlp",
+    ["--version"]
+);
 
-    try {
-        version = execFileSync(
+if (ytDlpReady) {
+    console.log(
+        `✅ yt-dlp: ${runCapture(
             "yt-dlp",
-            ["--version"],
-            {
-                encoding: "utf8"
-            }
-        ).trim();
-    } catch {}
-
-    console.log(`✅ yt-dlp: ${version}`);
+            ["--version"]
+        )}`
+    );
 } else {
-    console.log("⚠️ yt-dlp is not installed.");
+    console.log(
+        "⚠️ yt-dlp is not installed."
+    );
 
     let installed = false;
 
-    /*
-     * First try Python.
-     */
-
     if (pythonCommand) {
-        console.log("📦 Installing yt-dlp through Python...");
+        console.log(
+            "📦 Installing yt-dlp through Python..."
+        );
 
         installed = run(
             pythonCommand,
@@ -464,36 +695,28 @@ if (commandExists("yt-dlp", ["--version"])) {
         );
     }
 
-    /*
-     * If Python installation failed, try package manager.
-     */
-
     if (!installed && isTermux()) {
-        console.log("📱 Trying Termux package manager...");
-
-        installed = installSystemPackage("yt-dlp");
+        installed =
+            installSystemPackage("yt-dlp");
     }
 
-    if (!installed) {
-        console.log("");
-        console.log(
-            "⚠️ yt-dlp could not be installed automatically."
+    if (installed) {
+        ytDlpReady = commandExists(
+            "yt-dlp",
+            ["--version"]
         );
 
-        if (isTermux()) {
+        if (ytDlpReady) {
             console.log(
-                "Run: pkg install python"
-            );
-            console.log(
-                "Then: python -m pip install -U yt-dlp"
-            );
-        } else {
-            console.log(
-                "Install yt-dlp and make sure it is available in PATH."
+                "✅ yt-dlp is ready."
             );
         }
-    } else {
-        console.log("✅ yt-dlp installation completed.");
+    }
+
+    if (!ytDlpReady) {
+        console.log(
+            "❌ yt-dlp could not be installed automatically."
+        );
     }
 }
 
@@ -506,56 +729,51 @@ if (commandExists("yt-dlp", ["--version"])) {
 console.log("");
 console.log("🎬 Checking FFmpeg...");
 
-if (commandExists("ffmpeg", ["-version"])) {
-    let version = "";
+let ffmpegReady = commandExists(
+    "ffmpeg",
+    ["-version"]
+);
 
-    try {
-        version = execFileSync(
-            "ffmpeg",
-            ["-version"],
-            {
-                encoding: "utf8"
-            }
-        ).split("\n")[0];
-    } catch {}
-
-    console.log(`✅ ${version}`);
-} else {
-    console.log("⚠️ FFmpeg is not installed.");
-
+if (ffmpegReady) {
     console.log(
-        "📦 Attempting automatic FFmpeg installation..."
+        `✅ ${runCapture(
+            "ffmpeg",
+            ["-version"]
+        ).split("\n")[0]}`
+    );
+} else {
+    console.log(
+        "⚠️ FFmpeg is not installed."
     );
 
-    const installed = installSystemPackage("ffmpeg");
+    console.log(
+        "📦 Attempting automatic installation..."
+    );
 
-    if (installed && commandExists("ffmpeg", ["-version"])) {
-        console.log("✅ FFmpeg installed successfully.");
-    } else {
-        console.log("");
-        console.log(
-            "⚠️ FFmpeg could not be installed automatically."
+    const installed =
+        installSystemPackage("ffmpeg");
+
+    ffmpegReady =
+        installed &&
+        commandExists(
+            "ffmpeg",
+            ["-version"]
         );
 
-        if (isTermux()) {
-            console.log("");
-            console.log("📱 Termux:");
-            console.log("   pkg install ffmpeg");
-        } else if (isLinux()) {
-            console.log("");
-            console.log(
-                "🐧 Linux hosting:"
-            );
-            console.log(
-                "   The hosting container must provide FFmpeg or allow package installation."
-            );
-        }
+    if (ffmpegReady) {
+        console.log(
+            "✅ FFmpeg installed successfully."
+        );
+    } else {
+        console.log(
+            "❌ FFmpeg could not be installed automatically."
+        );
     }
 }
 
 /*
  * ==========================================================
- * FINAL VERIFICATION
+ * FINAL CHECK
  * ==========================================================
  */
 
@@ -565,54 +783,114 @@ console.log(" Final Dependency Check");
 console.log("========================================");
 console.log("");
 
+const nodeReady =
+    commandExists(
+        process.execPath,
+        ["--version"]
+    );
+
+const pythonReady =
+    pythonCommand &&
+    commandExists(
+        pythonCommand,
+        ["--version"]
+    );
+
+const telegramConfigReady =
+    fs.existsSync(telegramConfig);
+
+const telegramSessionReady =
+    fs.existsSync(sessionFile);
+
 const finalChecks = [
-    ["Node.js", process.execPath, ["--version"]],
-    ["yt-dlp", "yt-dlp", ["--version"]],
-    ["FFmpeg", "ffmpeg", ["-version"]]
+    [
+        "Node.js",
+        nodeReady
+    ],
+    [
+        "Python",
+        pythonReady
+    ],
+    [
+        "yt-dlp",
+        ytDlpReady
+    ],
+    [
+        "FFmpeg",
+        ffmpegReady
+    ],
+    [
+        "Telegram config",
+        telegramConfigReady
+    ],
+    [
+        "Telegram session",
+        telegramSessionReady
+    ]
 ];
 
-let missing = [];
-
-for (const [name, command, args] of finalChecks) {
-    if (commandExists(command, args)) {
-        console.log(`✅ ${name} ready`);
+for (const [name, ready] of finalChecks) {
+    if (ready) {
+        console.log(
+            `✅ ${name} ready`
+        );
     } else {
-        console.log(`❌ ${name} missing`);
-        missing.push(name);
+        console.log(
+            `⚠️ ${name} not ready`
+        );
     }
-}
-
-if (pythonCommand && commandExists(pythonCommand, ["--version"])) {
-    console.log("✅ Python ready");
-} else {
-    console.log("⚠️ Python missing");
 }
 
 console.log("");
 
-if (missing.length > 0) {
+if (
+    nodeReady &&
+    pythonReady &&
+    ytDlpReady &&
+    ffmpegReady &&
+    telegramConfigReady &&
+    telegramSessionReady
+) {
     console.log(
-        `⚠️ Missing required dependency: ${missing.join(", ")}`
+        "🎉 Media + Telegram setup is completely ready."
     );
-
-    console.log("");
-
-    console.log(
-        "The bot can still start, but commands requiring these"
-    );
-
-    console.log(
-        "dependencies may not work."
-    );
-
-    console.log("");
 } else {
     console.log(
-        "🎉 All required .play dependencies are ready."
+        "⚠️ Setup completed with some items still requiring attention."
     );
 
     console.log("");
+
+    if (!telegramConfigReady) {
+        console.log(
+            "➡️ Configure telegram_config.py"
+        );
+    }
+
+    if (
+        telegramConfigReady &&
+        !telegramSessionReady
+    ) {
+        console.log(
+            "➡️ Perform the one-time Telegram login to create the session."
+        );
+    }
+
+    if (!ytDlpReady) {
+        console.log(
+            "➡️ Install yt-dlp."
+        );
+    }
+
+    if (!ffmpegReady) {
+        console.log(
+            "➡️ Install FFmpeg."
+        );
+    }
 }
 
-console.log("🚀 Setup completed.");
+console.log("");
+console.log(
+    "🚀 Setup finished."
+);
 console.log("");
