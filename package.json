@@ -4,11 +4,11 @@
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "start": "node scripts/setup.js && node index.js",
-    "translate": "node tools/build-language.js",
-    "build": "node tools/build-language.js",
+    "start": "node index.js",
     "setup": "node scripts/setup.js",
-    "check": "node scripts/check-dependencies.js"
+    "check": "node scripts/check-dependencies.js",
+    "translate": "node tools/build-language.js",
+    "build": "node tools/build-language.js"
   },
   "dependencies": {
     "@vitalets/google-translate-api": "^9.2.1",
