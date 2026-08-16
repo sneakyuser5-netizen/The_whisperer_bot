@@ -82,7 +82,7 @@ module.exports = {
 "admin.setgoodbye_saved": "✅ Le message d'au revoir a été mis à jour.",
 
 "tools.chat_usage": "📌 Utilisation :\n.chat <message>",
-"tools.chat_failed": "❌ Impossible de contacter le service d'IA.",
+"tools.chat_failed": "⚠️ Le service IA est actuellement occupé. Veuillez réessayer dans quelques instants.",
 "tools.chat_rate_limit": "⚠️ Le service IA est actuellement occupé. Veuillez réessayer dans quelques instants.",
 "tools.chat_failed": "❌ Impossible d'obtenir une réponse de l'IA.",
 "owner.clear_title": "🗑️ GESTIONNAIRE DE NETTOYAGE",
@@ -114,7 +114,7 @@ module.exports = {
 "info.news_error": "Impossible de récupérer les dernières actualités.",
 "info.news_empty": "Aucune actualité trouvée.",
 "info.news_no_api": "NEWS_API_KEY n'est pas configurée.",
-  "admin_count_message": "📊 *Nombre total d'administrateurs :*",
+  "admin_count_message": "📊 *Nombre total d'administrateurs :* _{count}_",
 "github_title": "📂 *GitHub de WhisperBot*",
 "github_repository": "Dépôt :",
 "github_star": "Si vous aimez WhisperBot, pensez à laisser une ⭐ au dépôt.",
