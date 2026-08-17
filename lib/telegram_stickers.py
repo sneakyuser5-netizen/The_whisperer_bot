@@ -4,15 +4,12 @@ import re
 import asyncio
 
 from telethon import TelegramClient
-from telethon.tl.functions.messages import GetMessagesRequest
-from telethon.tl.types import (
-    PeerChannel,
-    PeerUser,
-    PeerChat,
-)
+from telethon.tl.functions.messages import GetStickerSetRequest
+from telethon.tl.types import InputStickerSetShortName
+
 
 # ============================================================
-# LOAD PROJECT ROOT
+# PROJECT ROOT
 # ============================================================
 
 PROJECT_ROOT = os.path.dirname(
@@ -26,7 +23,7 @@ if PROJECT_ROOT not in sys.path:
 
 
 # ============================================================
-# LOAD TELEGRAM CREDENTIALS
+# TELEGRAM CREDENTIALS
 # ============================================================
 
 from telegram_config import API_ID, API_HASH
@@ -43,83 +40,47 @@ SESSION_NAME = os.path.join(
 
 
 # ============================================================
-# EXTRACT TELEGRAM MESSAGE LINK
+# EXTRACT STICKER PACK SHORT NAME
 # ============================================================
 
-def parse_telegram_link(url):
+def extract_short_name(url):
     """
-    Supports public Telegram message links such as:
+    Extract the sticker-pack short name from:
 
-    https://t.me/channelname/123
-    https://t.me/channelname/123?single
-    https://t.me/c/1234567890/123
-
-    Returns:
-        {
-            "type": "public" or "private",
-            "chat": ...,
-            "message_id": ...
-        }
+    https://t.me/addstickers/DEDSECH
     """
 
     url = url.strip()
 
-    # --------------------------------------------------------
-    # PUBLIC CHANNEL / GROUP
-    # --------------------------------------------------------
-
-    match = re.match(
-        r"^https?://t\.me/([A-Za-z0-9_]+)/(\d+)(?:\?.*)?$",
+    match = re.search(
+        r"^(?:https?://)?t\.me/addstickers/([A-Za-z0-9_]+)(?:\?.*)?$",
         url
     )
 
-    if match:
-        return {
-            "type": "public",
-            "chat": match.group(1),
-            "message_id": int(match.group(2)),
-        }
+    if not match:
+        raise ValueError(
+            "Invalid Telegram sticker pack link."
+        )
 
-    # --------------------------------------------------------
-    # PRIVATE CHANNEL / GROUP
-    #
-    # Example:
-    # https://t.me/c/1234567890/123
-    # --------------------------------------------------------
-
-    match = re.match(
-        r"^https?://t\.me/c/(\d+)/(\d+)(?:\?.*)?$",
-        url
-    )
-
-    if match:
-        return {
-            "type": "private",
-            "chat": int(match.group(1)),
-            "message_id": int(match.group(2)),
-        }
-
-    raise ValueError(
-        "Invalid Telegram message link."
-    )
+    return match.group(1)
 
 
 # ============================================================
-# DOWNLOAD TELEGRAM MEDIA
+# DOWNLOAD TELEGRAM STICKER PACK
 # ============================================================
 
-async def download_telegram_media(
+async def download_stickers(
     url,
     output_dir
 ):
     """
-    Download media from a Telegram message.
+    Download every sticker from a Telegram sticker pack.
 
     Returns:
-        downloaded file path
+        list of downloaded .webp file paths
     """
 
-    parsed = parse_telegram_link(url)
+    short_name = extract_short_name(url)
 
     os.makedirs(
         output_dir,
@@ -135,75 +96,74 @@ async def download_telegram_media(
     await client.start()
 
     try:
+
         # ----------------------------------------------------
-        # RESOLVE CHAT
+        # GET STICKER PACK
         # ----------------------------------------------------
 
-        if parsed["type"] == "public":
-            entity = await client.get_entity(
-                parsed["chat"]
+        sticker_set = await client(
+            GetStickerSetRequest(
+                stickerset=InputStickerSetShortName(
+                    short_name=short_name
+                ),
+                hash=0
             )
-
-        else:
-            # Telegram's /c/ internal ID normally needs
-            # the -100 prefix when resolving the entity.
-            channel_id = int(
-                f"-100{parsed['chat']}"
-            )
-
-            entity = await client.get_entity(
-                channel_id
-            )
-
-        # ----------------------------------------------------
-        # GET MESSAGE
-        # ----------------------------------------------------
-
-        messages = await client.get_messages(
-            entity,
-            ids=parsed["message_id"]
         )
 
-        if not messages:
+        documents = sticker_set.documents
+
+        if not documents:
             raise ValueError(
-                "Telegram message was not found."
+                "Sticker pack is empty."
             )
 
-        message = messages
+        downloaded = []
 
         # ----------------------------------------------------
-        # CHECK MEDIA
+        # DOWNLOAD EACH STICKER
         # ----------------------------------------------------
 
-        if not message.media:
-            raise ValueError(
-                "This Telegram message does not contain media."
+        for index, document in enumerate(
+            documents,
+            start=1
+        ):
+
+            filename = os.path.join(
+                output_dir,
+                f"sticker_{index}.webp"
             )
 
-        # ----------------------------------------------------
-        # DOWNLOAD
-        # ----------------------------------------------------
+            try:
 
-        downloaded = await client.download_media(
-            message,
-            file=output_dir
-        )
+                downloaded_file = await client.download_media(
+                    document,
+                    file=filename
+                )
+
+                if (
+                    downloaded_file
+                    and os.path.exists(downloaded_file)
+                ):
+                    downloaded.append(
+                        downloaded_file
+                    )
+
+            except Exception as error:
+
+                print(
+                    f"WARNING: Sticker {index} failed: {error}",
+                    file=sys.stderr
+                )
 
         if not downloaded:
             raise ValueError(
-                "Telegram media could not be downloaded."
+                "No stickers could be downloaded."
             )
-
-        if not os.path.exists(downloaded):
-            raise ValueError(
-                "Downloaded Telegram file does not exist."
-            )
-
-        print(downloaded)
 
         return downloaded
 
     finally:
+
         await client.disconnect()
 
 
@@ -214,10 +174,12 @@ async def download_telegram_media(
 if __name__ == "__main__":
 
     if len(sys.argv) != 3:
+
         print(
-            "Usage: python lib/telegram_media.py "
-            "<telegram_message_link> <output_dir>"
+            "Usage: python lib/telegram_stickers.py "
+            "<sticker_pack_url> <output_dir>"
         )
+
         sys.exit(1)
 
     url = sys.argv[1]
@@ -225,16 +187,15 @@ if __name__ == "__main__":
 
     try:
 
-        file_path = asyncio.run(
-            download_telegram_media(
+        files = asyncio.run(
+            download_stickers(
                 url,
                 output_dir
             )
         )
 
-        print(
-            f"SUCCESS:{file_path}"
-        )
+        for file_path in files:
+            print(file_path)
 
     except Exception as error:
 

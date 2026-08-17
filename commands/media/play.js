@@ -6,7 +6,7 @@ const { execFile } = require("child_process");
 module.exports = {
     name: "play",
     description: "Search and download authorized audio",
-    category: "general",
+    category: "media",
     permission: "public",
     usage: ".play <song name>",
     minArgs: 1,
