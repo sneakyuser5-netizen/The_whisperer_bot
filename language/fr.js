@@ -413,9 +413,6 @@ module.exports = {
   "missing_argument": "❌ *Argument manquant.*",
   "no": "Non",
   "owner_only": "😉 *Réservé au propriétaire.*\n\nVous n'êtes pas le propriétaire du bot.",
-  "owner.afk_footer": "J'informerai tout le monde que vous êtes AFK.",
-  "owner.afk_no_reason": "Aucune raison fournie.",
-  "owner.afk_set": "😴 *Vous êtes maintenant AFK.*",
   "owner.anticall_disabled": "📞 *Anti-appel désactivé.*",
   "owner.anticall_enabled": "📵 *Anti-appel activé.*",
   "owner.anticall_usage": "📌 *Utilisation :*\n.anticall on\n.anticall off",
@@ -452,7 +449,6 @@ module.exports = {
   "owner.read_disabled": "✅ *Lecture automatique désactivée.*",
   "owner.read_enabled": "✅ *Lecture automatique activée.*",
   "owner.read_usage": "📌 *Utilisation :*\n.read on\n.read off",
-  "owner.reason": "Raison :",
   "owner.restart": "🔄 *Redémarrage de WhisperBot...*\n\nJe reviens dans un instant !",
   "owner.secret_success": "👑 *Accès propriétaire confirmé !*",
   "owner.setsudo_note": "peut désormais gérer le bot (presque 😏).",
@@ -507,5 +503,9 @@ module.exports = {
   "total_commands": "📚 *Nombre total de commandes*",
   "unlocked_success": "✅ *Déverrouillé avec succès*",
   "usage": "📌 *Utilisation :*",
-  "yes": "Oui"
+  "yes": "Oui",
+  "owner.afk_no_reason": "Aucune raison fournie.",
+  "owner.afk_set": "😴 *Vous êtes maintenant AFK.*",
+  "owner.afk_reason": "📝 *Raison :*",
+  "owner.afk_footer": "J'informerai tout le monde que vous êtes AFK.",
 };

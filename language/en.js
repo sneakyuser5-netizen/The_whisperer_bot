@@ -412,9 +412,6 @@ module.exports = {
   "missing_argument": "❌ *Missing argument.*",
   "no": "No",
   "owner_only": "😉 *Owner only.*\n\nYou're not the bot owner.",
-  "owner.afk_footer": "I'll let everyone know you're AFK.",
-  "owner.afk_no_reason": "No reason given.",
-  "owner.afk_set": "😴 *You are now AFK.*",
   "owner.anticall_disabled": "📞 *Anti-call disabled.*",
   "owner.anticall_enabled": "📵 *Anti-call enabled.*",
   "owner.anticall_usage": "📌 *Usage:*\n.anticall on\n.anticall off",
@@ -451,7 +448,6 @@ module.exports = {
   "owner.read_disabled": "✅ *Auto read disabled.*",
   "owner.read_enabled": "✅ *Auto read enabled.*",
   "owner.read_usage": "📌 *Usage:*\n.read on\n.read off",
-  "owner.reason": "Reason:",
   "owner.restart": "🔄 *Restarting WhisperBot...*\n\nI'll be back shortly!",
   "owner.secret_success": "👑 *Owner access confirmed!*",
   "owner.setsudo_note": "can now manage the bot (almost 😏).",
@@ -506,5 +502,9 @@ module.exports = {
   "total_commands": "📚 *Total commands*",
   "unlocked_success": "✅ *Unlocked successfully*",
   "usage": "📌 *Usage:*",
-  "yes": "Yes"
+  "yes": "Yes",
+  "owner.afk_no_reason": "No reason given.",
+  "owner.afk_set": "😴 *You are now AFK.*",
+  "owner.afk_reason": "📝 *Reason:*",
+  "owner.afk_footer": "I'll let everyone know you're AFK.",
 };
