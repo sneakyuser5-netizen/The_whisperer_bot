@@ -1,3 +1,4 @@
+const { t } = require("./lib/lang");
 const { default: makeWASocket, useMultiFileAuthState, DisconnectReason } = require("@whiskeysockets/baileys");
 const pino = require("pino");
 const fs = require("fs");
@@ -315,33 +316,6 @@ if (
     );
 }
 
-if (afk.has(sender)) {
-
-    const data = afk.get(sender);
-
-    const duration = afk.format(
-        Date.now() - data.time
-    );
-
-    afk.remove(sender);
-
-    await sock.sendMessage(
-        msg.key.remoteJid,
-        {
-            text:
-`🎉 Welcome back!
-
-⏰ You were away for:
-${duration}
-
-📝 Reason:
-${data.reason}
-
-😂 Hope you didn't forget about me 😎`
-        }
-    );
-
-}
 
     const read = require("./lib/read");
 
@@ -380,16 +354,14 @@ if (mentions.length) {
         msg.key.remoteJid,
         {
             text:
-
-`😴 That user is currently AFK.
-
-📝 Reason:
+`${t(msg.key.remoteJid, "owner.afk_user")}
+${t(msg.key.remoteJid, "owner.afk_return_reason")}
 ${data.reason}
 
-⏰ Away for:
+${t(msg.key.remoteJid, "owner.afk_user_away")}
 ${duration}
 
-😂 They're probably hiding from responsibilities.`,
+${t(msg.key.remoteJid, "owner.afk_user_footer")}`
             
         }
     );
