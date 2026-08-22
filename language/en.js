@@ -1,4 +1,12 @@
 module.exports = {
+"facebook_missing": "📌 Send a Facebook video link or reply to a message containing one.",
+"facebook_downloading": "⏳ Downloading Facebook video...",
+"facebook_success": "✅ Facebook video downloaded successfully.",
+"facebook_failed": "❌ Failed to download the Facebook video.",
+"tiktok_missing": "📌 Send a TikTok link or reply to a message containing one.",
+"tiktok_downloading": "⏳ Downloading TikTok video...",
+"tiktok_success": "✅ TikTok video downloaded successfully.",
+"tiktok_failed": "❌ Failed to download the TikTok video.",
 "owner.afk_user": "😴 This user is currently AFK.",
 "owner.afk_user_footer": "They're probably hiding from responsibilities.",
 "sticker_missing": "❌ Please provide a Telegram sticker pack link.",
