@@ -1,0 +1,91 @@
+# .gitignore for The_whisperer_bot
+# Purpose: keep local, sensitive, and environment-specific files out of the repository.
+
+# Local environment files
+.env
+.env.local
+.env.*.local
+package-lock.json
+node_modules/
+session/
+npm2/
+telegram-bot/
+.env
+database/activity.json
+database/edited.json
+database/owner.json
+database/setup.json
+database/read.json
+# Node modules and package manager debug logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Logs
+logs/
+*.log
+
+# PM2
+.pm2/
+*.pid
+
+# Baileys session files / credentials
+session/
+auth_info_baileys.json
+creds.json
+
+# Local database JSON files (keep examples if you use them)
+database/*.json
+!database/*.example.json
+
+# Termux local config
+.termux/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# Build / coverage
+coverage/
+dist/
+build/
+
+# Private keys, certificates
+*.pem
+*.key
+
+# Notes:
+# - Do NOT ignore README.md or other documentation files — they should stay tracked.
+# - If any of the files above are already tracked in the repository, you must remove them from the index
+#   with 'git rm --cached <path>' and commit; .gitignore only prevents new untracked files from being added.
+telegram_config.py
+telegram_session.session
+telegram_session.session-journal
+telegram_media_test/
+# Python cache
+__pycache__/
+*.pyc
+
+# Telegram test files
+telegram_test/
+
+# Temporary audio tests
+test-audio.mp3
+test-play.mp3
+
+# Telegram credentials/session
+telegram_config.py
+telegram_session.session
+telegram_session.session-journal
+
+# Runtime database
+database/*.json
+
+# WhisperBot persistent AI memory
+.whisperer-memory/
