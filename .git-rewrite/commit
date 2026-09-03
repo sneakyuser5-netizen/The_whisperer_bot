@@ -1,6 +1,0 @@
-tree 99e2f3664322a34acd5b2748fb9bf82989770f01
-parent 2247672de792060a375a03523cf162c850027dd5
-author evader056-netizen <evader056@gmail.com> 1784805229 +0100
-committer GitHub <noreply@github.com> 1784805229 +0100
-
-Add admin_only message for command restriction
