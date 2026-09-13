@@ -1,4 +1,5 @@
 const { t } = require("../../lib/lang");
+const settings = require("../../lib/settings");
 
 module.exports = {
     name: "img",
@@ -12,6 +13,13 @@ module.exports = {
         const jid = msg?.key?.remoteJid;
 
         if (!jid) return;
+
+        // Respect group image lock
+        if (jid.endsWith("@g.us") && settings.get(jid).lock_image === true) {
+            return sock.sendMessage(jid, {
+                text: `${t(jid, "admin.lock_locked_emoji")} image ${t(jid, "admin.lock_locked_text")}`
+            });
+        }
 
         const prompt = args.join(" ").trim();
 
