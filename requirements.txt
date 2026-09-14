@@ -1,2 +1,1 @@
-telethon>=1.44.0
-yt-dlp>=2026.7.4
+Telethon>=1.44,<2
