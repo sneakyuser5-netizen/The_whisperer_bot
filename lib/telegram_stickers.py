@@ -4,6 +4,7 @@ import re
 import asyncio
 
 from telethon import TelegramClient
+from telethon.sessions import StringSession
 from telethon.tl.functions.messages import GetStickerSetRequest
 from telethon.tl.types import InputStickerSetShortName
 
@@ -87,53 +88,71 @@ async def download_stickers(
         exist_ok=True
     )
 
-    client = TelegramClient(
-        SESSION_NAME,
-        API_ID,
-        API_HASH
-    )
+    telegram_session = os.getenv("TELEGRAM_SESSION", "").strip()
+
+    if telegram_session:
+        client = TelegramClient(
+            StringSession(telegram_session),
+            API_ID,
+            API_HASH
+        )
+    else:
+        client = TelegramClient(
+            SESSION_NAME,
+            API_ID,
+            API_HASH
+        )
+
+    print("TELEGRAM: starting client...", flush=True)
 
     await client.start()
 
+    print("TELEGRAM: client started.", flush=True)
+
     try:
+        print(
+            f"TELEGRAM: requesting sticker pack {short_name}...",
+            flush=True
+        )
 
-        # ----------------------------------------------------
-        # GET STICKER PACK
-        # ----------------------------------------------------
-
-        sticker_set = await client(
-            GetStickerSetRequest(
-                stickerset=InputStickerSetShortName(
-                    short_name=short_name
-                ),
-                hash=0
-            )
+        sticker_set = await asyncio.wait_for(
+            client(
+                GetStickerSetRequest(
+                    stickerset=InputStickerSetShortName(
+                        short_name=short_name
+                    ),
+                    hash=0
+                )
+            ),
+            timeout=60
         )
 
         documents = sticker_set.documents
 
+        print(
+            f"TELEGRAM: sticker pack received ({len(documents)} stickers).",
+            flush=True
+        )
+
         if not documents:
-            raise ValueError(
-                "Sticker pack is empty."
-            )
+            raise ValueError("Sticker pack is empty.")
 
         downloaded = []
-
-        # ----------------------------------------------------
-        # DOWNLOAD EACH STICKER
-        # ----------------------------------------------------
 
         for index, document in enumerate(
             documents,
             start=1
         ):
-
             filename = os.path.join(
                 output_dir,
                 f"sticker_{index}.webp"
             )
 
             try:
+                print(
+                    f"TELEGRAM: downloading sticker {index}/{len(documents)}...",
+                    flush=True
+                )
 
                 downloaded_file = await client.download_media(
                     document,
@@ -144,15 +163,13 @@ async def download_stickers(
                     downloaded_file
                     and os.path.exists(downloaded_file)
                 ):
-                    downloaded.append(
-                        downloaded_file
-                    )
+                    downloaded.append(downloaded_file)
 
             except Exception as error:
-
                 print(
                     f"WARNING: Sticker {index} failed: {error}",
-                    file=sys.stderr
+                    file=sys.stderr,
+                    flush=True
                 )
 
         if not downloaded:
@@ -160,10 +177,14 @@ async def download_stickers(
                 "No stickers could be downloaded."
             )
 
+        print(
+            f"TELEGRAM: completed. Downloaded {len(downloaded)} stickers.",
+            flush=True
+        )
+
         return downloaded
 
     finally:
-
         await client.disconnect()
 
 
