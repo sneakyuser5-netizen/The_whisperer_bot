@@ -78,7 +78,7 @@ async def download_stickers(
     Download every sticker from a Telegram sticker pack.
 
     Returns:
-        list of downloaded .webp file paths
+        list of downloaded .tgs file paths
     """
 
     short_name = extract_short_name(url)
@@ -145,7 +145,7 @@ async def download_stickers(
         ):
             filename = os.path.join(
                 output_dir,
-                f"sticker_{index}.webp"
+                f"sticker_{index}.tgs"
             )
 
             try:

@@ -114,7 +114,7 @@ module.exports = {
             });
 
             // ==========================================
-            // FIND DOWNLOADED WEBP FILES
+            // CONVERT TGS STICKERS TO ANIMATED WEBP
             // ==========================================
 
             if (!fs.existsSync(packDir)) {
@@ -122,6 +122,114 @@ module.exports = {
                     "Sticker download directory was not created."
                 );
             }
+
+            const rootDir = path.resolve(
+                __dirname,
+                "../.."
+            );
+
+            const converter = path.join(
+                rootDir,
+                ".lottie-converter",
+                "bin",
+                "lottie_to_webp.sh"
+            );
+
+            if (!fs.existsSync(converter)) {
+                throw new Error(
+                    "Lottie converter is not installed."
+                );
+            }
+
+            const tgsFiles = fs
+                .readdirSync(packDir)
+                .filter(file =>
+                    /^sticker_\d+\.tgs$/i.test(file)
+                )
+                .sort((a, b) => {
+                    const numberA = parseInt(
+                        a.match(/\d+/)[0],
+                        10
+                    );
+
+                    const numberB = parseInt(
+                        b.match(/\d+/)[0],
+                        10
+                    );
+
+                    return numberA - numberB;
+                });
+
+            console.log(
+                `🎨 Telegram TGS stickers downloaded: ${tgsFiles.length}`
+            );
+
+            if (!tgsFiles.length) {
+                throw new Error(
+                    "No TGS stickers were downloaded."
+                );
+            }
+
+            for (const file of tgsFiles) {
+                const inputFile = path.join(
+                    packDir,
+                    file
+                );
+
+                const outputFile = path.join(
+                    packDir,
+                    file.replace(/\.tgs$/i, ".webp")
+                );
+
+                console.log(
+                    `🎨 Converting ${file} → ${path.basename(outputFile)}`
+                );
+
+                await new Promise((resolve, reject) => {
+                    execFile(
+                        converter,
+                        [
+                            "--output",
+                            outputFile,
+                            inputFile
+                        ],
+                        {
+                            maxBuffer: 20 * 1024 * 1024
+                        },
+                        (error, stdout, stderr) => {
+                            if (stdout) {
+                                console.log(
+                                    "LOTTIE CONVERTER:",
+                                    stdout
+                                );
+                            }
+
+                            if (stderr) {
+                                console.error(
+                                    "LOTTIE CONVERTER STDERR:",
+                                    stderr
+                                );
+                            }
+
+                            if (error) {
+                                console.error(
+                                    `LOTTIE CONVERTER ERROR ${file}:`,
+                                    error.message
+                                );
+
+                                reject(error);
+                                return;
+                            }
+
+                            resolve();
+                        }
+                    );
+                });
+            }
+
+            // ==========================================
+            // FIND CONVERTED WEBP FILES
+            // ==========================================
 
             const stickerFiles = fs
                 .readdirSync(packDir)
@@ -143,12 +251,12 @@ module.exports = {
                 });
 
             console.log(
-                `🎨 Telegram stickers downloaded: ${stickerFiles.length}`
+                `🎨 Telegram stickers ready for WhatsApp: ${stickerFiles.length}`
             );
 
             if (!stickerFiles.length) {
                 throw new Error(
-                    "No WEBP stickers were downloaded."
+                    "No converted WEBP stickers were produced."
                 );
             }
 

@@ -95,3 +95,5 @@ media/
 
 # Local Python virtual environment
 .venv/
+
+.lottie-converter/
