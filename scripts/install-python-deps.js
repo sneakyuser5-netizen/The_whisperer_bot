@@ -1,59 +1,95 @@
 const fs = require("fs");
+const os = require("os");
 const https = require("https");
 const { execFileSync } = require("child_process");
 
-function run(args, options = {}) {
-    return execFileSync("python3", args, {
+const ROOT = process.cwd();
+const VENV = `${ROOT}/.venv`;
+const PYTHON = `${VENV}/bin/python`;
+const VIRTUALENV = `${os.tmpdir()}/virtualenv.pyz`;
+
+function run(command, args) {
+    console.log(`> ${command} ${args.join(" ")}`);
+    execFileSync(command, args, {
         stdio: "inherit",
-        ...options
+        cwd: ROOT
     });
 }
 
-function pipWorks() {
-    try {
-        run(["-m", "pip", "--version"]);
-        return true;
-    } catch {
-        return false;
-    }
-}
+function download(url, output) {
+    return new Promise((resolve, reject) => {
+        const file = fs.createWriteStream(output);
 
-console.log("Checking Python and pip...");
+        const request = https.get(url, response => {
+            if (
+                response.statusCode >= 300 &&
+                response.statusCode < 400 &&
+                response.headers.location
+            ) {
+                file.close();
+                fs.rmSync(output, { force: true });
+                return download(response.headers.location, output)
+                    .then(resolve)
+                    .catch(reject);
+            }
 
-if (!pipWorks()) {
-    console.log("pip not found. Trying ensurepip...");
+            if (response.statusCode !== 200) {
+                file.close();
+                fs.rmSync(output, { force: true });
+                return reject(
+                    new Error(`Download failed with HTTP ${response.statusCode}`)
+                );
+            }
 
-    try {
-        run(["-m", "ensurepip", "--upgrade", "--user"]);
-    } catch {
-        console.log("ensurepip unavailable. Bootstrapping pip with official PyPA installer...");
+            response.pipe(file);
 
-        const output = "/tmp/get-pip.py";
-
-        execFileSync("node", ["-e", `
-            const fs=require("fs");
-            const https=require("https");
-            const out=fs.createWriteStream(${JSON.stringify(output)});
-            https.get("https://bootstrap.pypa.io/get-pip.py", res => {
-                if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
-                    https.get(res.headers.location, r => r.pipe(out));
-                } else {
-                    res.pipe(out);
-                }
-                out.on("finish", () => out.close(() => process.exit(0)));
-            }).on("error", err => {
-                console.error(err);
-                process.exit(1);
+            file.on("finish", () => {
+                file.close(resolve);
             });
-        `]);
+        });
 
-        run([output, "--user"]);
-        fs.rmSync(output, { force: true });
-    }
+        request.on("error", err => {
+            file.close();
+            fs.rmSync(output, { force: true });
+            reject(err);
+        });
+    });
 }
 
-console.log("Installing Python dependencies...");
+async function main() {
+    console.log("==========================================");
+    console.log(" Python dependency installer");
+    console.log("==========================================");
 
-run(["-m", "pip", "install", "--user", "-r", "requirements.txt"]);
+    if (!fs.existsSync(PYTHON)) {
+        console.log("Python virtual environment not found.");
+        console.log("Downloading official PyPA virtualenv...");
 
-console.log("Python dependencies installed successfully.");
+        await download(
+            "https://bootstrap.pypa.io/virtualenv.pyz",
+            VIRTUALENV
+        );
+
+        console.log("Creating local Python virtual environment...");
+        run("python3", [VIRTUALENV, VENV]);
+
+        fs.rmSync(VIRTUALENV, { force: true });
+    } else {
+        console.log("Python virtual environment already exists.");
+    }
+
+    if (!fs.existsSync(PYTHON)) {
+        throw new Error("Failed to create .venv/bin/python");
+    }
+
+    console.log("Installing Python dependencies inside .venv...");
+    run(PYTHON, ["-m", "pip", "install", "-r", "requirements.txt"]);
+
+    console.log("Python dependencies installed successfully.");
+}
+
+main().catch(error => {
+    console.error("Python dependency installation failed:");
+    console.error(error);
+    process.exit(1);
+});

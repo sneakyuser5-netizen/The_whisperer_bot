@@ -68,11 +68,14 @@ module.exports = {
 
             await new Promise((resolve, reject) => {
                 execFile(
-                    "python3",
+                    fs.existsSync(path.join(path.resolve(__dirname, "../.."), ".venv", "bin", "python"))
+                        ? path.join(path.resolve(__dirname, "../.."), ".venv", "bin", "python")
+                        : "python3",
                     [
                         path.join(
-                            __dirname,
-                            "../../lib/telegram_stickers.py"
+                            path.resolve(__dirname, "../.."),
+                            "lib",
+                            "telegram_stickers.py"
                         ),
                         link,
                         packDir

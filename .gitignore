@@ -92,3 +92,6 @@ database/*.json
 database/*.json
 session/
 media/
+
+# Local Python virtual environment
+.venv/
