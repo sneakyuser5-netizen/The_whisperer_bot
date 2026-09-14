@@ -1,7 +1,10 @@
 const { t } = require("../../lib/lang");
 const fs = require("fs");
 const path = require("path");
+const https = require("https");
+const http = require("http");
 const { execFile } = require("child_process");
+const { yts, youtube } = require("btch-downloader");
 
 module.exports = {
     name: "play",
@@ -28,20 +31,92 @@ module.exports = {
         }
 
         const baseName = `play-${Date.now()}`;
+        const downloadedFile = path.join(mediaDir, `${baseName}.mp3`);
+        const output = path.join(mediaDir, `${baseName}.ogg`);
 
-        // yt-dlp temporary download
-        const downloadTemplate = path.join(
-            mediaDir,
-            `${baseName}.%(ext)s`
-        );
+        // ==========================================
+        // DOWNLOAD FILE WITH REDIRECT SUPPORT
+        // ==========================================
 
-        // Final WhatsApp voice-note file
-        const output = path.join(
-            mediaDir,
-            `${baseName}.ogg`
-        );
+        function downloadFile(url, filePath, redirects = 0) {
+            return new Promise((resolve, reject) => {
+                if (redirects > 10) {
+                    reject(new Error("Too many redirects"));
+                    return;
+                }
 
-        let downloadedFile = null;
+                const client = url.startsWith("https://")
+                    ? https
+                    : http;
+
+                const request = client.get(url, response => {
+                    // Follow redirects
+                    if (
+                        [301, 302, 303, 307, 308].includes(
+                            response.statusCode
+                        )
+                    ) {
+                        response.resume();
+
+                        const location = response.headers.location;
+
+                        if (!location) {
+                            reject(
+                                new Error(
+                                    `Redirect without location: HTTP ${response.statusCode}`
+                                )
+                            );
+                            return;
+                        }
+
+                        downloadFile(
+                            location,
+                            filePath,
+                            redirects + 1
+                        )
+                            .then(resolve)
+                            .catch(reject);
+
+                        return;
+                    }
+
+                    // 200 = normal response
+                    // 206 = partial content, valid for media/CDN downloads
+                    if (![200, 206].includes(response.statusCode)) {
+                        response.resume();
+
+                        reject(
+                            new Error(
+                                `HTTP ${response.statusCode}`
+                            )
+                        );
+
+                        return;
+                    }
+
+                    const stream = fs.createWriteStream(filePath);
+
+                    response.pipe(stream);
+
+                    stream.on("finish", () => {
+                        stream.close(resolve);
+                    });
+
+                    stream.on("error", err => {
+                        stream.close();
+                        reject(err);
+                    });
+                });
+
+                request.setTimeout(120000, () => {
+                    request.destroy(
+                        new Error("Download timed out")
+                    );
+                });
+
+                request.on("error", reject);
+            });
+        }
 
         try {
             // ==========================================
@@ -53,81 +128,100 @@ module.exports = {
             });
 
             // ==========================================
-            // DOWNLOAD AUDIO WITH YT-DLP
+            // SEARCH YOUTUBE
             // ==========================================
 
-            await new Promise((resolve, reject) => {
-                execFile(
-                    "yt-dlp",
-                    [
-                        `ytsearch1:${query}`,
+            console.log("🔎 Searching YouTube:", query);
 
-                        // Extract audio
-                        "-x",
+            const search = await yts(query);
 
-                        // Let yt-dlp/FFmpeg produce Opus
-                        "--audio-format", "opus",
-                        "--audio-quality", "128K",
-
-                        // Only first search result
-                        "--no-playlist",
-
-                        // Retry temporary network failures
-                        "--retries", "3",
-                        "--fragment-retries", "3",
-
-                        // Don't fill the bot log with progress
-                        "--no-warnings",
-
-                        // Output
-                        "-o", downloadTemplate
-                    ],
-                    {
-                        maxBuffer: 20 * 1024 * 1024
-                    },
-                    (error, stdout, stderr) => {
-                        if (error) {
-                            console.error(
-                                "❌ YT-DLP ERROR:",
-                                stderr || error.message
-                            );
-
-                            reject(error);
-                            return;
-                        }
-
-                        console.log("🎵 YT-DLP:", stdout);
-                        resolve();
-                    }
-                );
-            });
-
-            // ==========================================
-            // FIND THE FILE CREATED BY YT-DLP
-            // ==========================================
-
-            const files = fs.readdirSync(mediaDir);
-
-            const downloadedFiles = files.filter(file =>
-                file.startsWith(`${baseName}.`) &&
-                !file.endsWith(".part") &&
-                !file.endsWith(".ytdl")
-            );
-
-            if (!downloadedFiles.length) {
+            if (!search || !search.status) {
                 throw new Error(
-                    "yt-dlp completed but no audio file was found."
+                    "YouTube search failed."
                 );
             }
 
-            downloadedFile = path.join(
-                mediaDir,
-                downloadedFiles[0]
+            const results =
+                search.result?.videos ||
+                search.result?.all ||
+                [];
+
+            if (!results.length) {
+                throw new Error(
+                    "No YouTube results found."
+                );
+            }
+
+            const video = results.find(
+                item =>
+                    item &&
+                    item.type === "video" &&
+                    item.url
+            ) || results[0];
+
+            if (!video || !video.url) {
+                throw new Error(
+                    "Could not find a playable YouTube video."
+                );
+            }
+
+            console.log(
+                "🎵 Selected:",
+                video.title || video.url
             );
 
             console.log(
-                "🎧 Downloaded audio:",
+                "🔗 YouTube URL:",
+                video.url
+            );
+
+            // ==========================================
+            // GET AUDIO DOWNLOAD URL
+            // ==========================================
+
+            const result = await youtube(video.url);
+
+            if (!result || !result.status) {
+                throw new Error(
+                    "YouTube audio downloader failed."
+                );
+            }
+
+            const audioUrl = result.mp3;
+
+            if (!audioUrl) {
+                throw new Error(
+                    "YouTube downloader did not return an MP3 URL."
+                );
+            }
+
+            console.log(
+                "⬇️ Downloading audio..."
+            );
+
+            // ==========================================
+            // DOWNLOAD MP3
+            // ==========================================
+
+            await downloadFile(
+                audioUrl,
                 downloadedFile
+            );
+
+            if (
+                !fs.existsSync(downloadedFile) ||
+                fs.statSync(downloadedFile).size === 0
+            ) {
+                throw new Error(
+                    "Downloaded audio file is empty."
+                );
+            }
+
+            console.log(
+                "🎧 Downloaded:",
+                downloadedFile,
+                fs.statSync(downloadedFile).size,
+                "bytes"
             );
 
             // ==========================================
@@ -140,31 +234,43 @@ module.exports = {
                     [
                         "-y",
 
-                        "-i", downloadedFile,
+                        "-i",
+                        downloadedFile,
 
                         // Audio only
                         "-vn",
 
                         // WhatsApp voice-note friendly Opus
-                        "-c:a", "libopus",
-                        "-b:a", "128k",
+                        "-c:a",
+                        "libopus",
 
-                        // Mono voice-note style audio
-                        "-ac", "1",
+                        "-b:a",
+                        "128k",
+
+                        // Mono
+                        "-ac",
+                        "1",
 
                         // Standard Opus sample rate
-                        "-ar", "48000",
+                        "-ar",
+                        "48000",
 
                         output
                     ],
                     {
-                        maxBuffer: 20 * 1024 * 1024
+                        maxBuffer:
+                            20 * 1024 * 1024
                     },
-                    (error, stdout, stderr) => {
+                    (
+                        error,
+                        stdout,
+                        stderr
+                    ) => {
                         if (error) {
                             console.error(
                                 "❌ FFMPEG ERROR:",
-                                stderr || error.message
+                                stderr ||
+                                    error.message
                             );
 
                             reject(error);
@@ -180,7 +286,10 @@ module.exports = {
                 );
             });
 
-            if (!fs.existsSync(output)) {
+            if (
+                !fs.existsSync(output) ||
+                fs.statSync(output).size === 0
+            ) {
                 throw new Error(
                     "Final OGG/Opus file was not created."
                 );
@@ -202,7 +311,8 @@ module.exports = {
                 audio: {
                     url: output
                 },
-                mimetype: "audio/ogg; codecs=opus",
+                mimetype:
+                    "audio/ogg; codecs=opus",
                 ptt: true
             });
 
@@ -214,49 +324,44 @@ module.exports = {
                 text: t(jid, "play_success")
             });
 
+            console.log(
+                "✅ PLAY completed successfully."
+            );
+
         } catch (err) {
-            console.error("❌ PLAY ERROR:", err);
+            console.error(
+                "❌ PLAY ERROR:",
+                err
+            );
 
             await sock.sendMessage(jid, {
                 text: t(jid, "play_failed")
             });
 
         } finally {
-
             // ==========================================
             // CLEANUP
             // ==========================================
 
-            try {
-                const files = fs.readdirSync(mediaDir);
+            for (const file of [
+                downloadedFile,
+                output
+            ]) {
+                try {
+                    if (fs.existsSync(file)) {
+                        fs.unlinkSync(file);
 
-                for (const file of files) {
-                    if (file.startsWith(`${baseName}.`)) {
-                        const fullPath = path.join(
-                            mediaDir,
+                        console.log(
+                            "🧹 Deleted:",
                             file
                         );
-
-                        try {
-                            fs.unlinkSync(fullPath);
-
-                            console.log(
-                                "🧹 Deleted:",
-                                fullPath
-                            );
-                        } catch (err) {
-                            console.error(
-                                "❌ Cleanup error:",
-                                err.message
-                            );
-                        }
                     }
+                } catch (err) {
+                    console.error(
+                        "❌ Cleanup error:",
+                        err.message
+                    );
                 }
-            } catch (err) {
-                console.error(
-                    "❌ Cleanup scan error:",
-                    err.message
-                );
             }
         }
     }

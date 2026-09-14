@@ -1,10 +1,11 @@
 const { t } = require("../../lib/lang");
 const fs = require("fs");
 const path = require("path");
-const { execFile } = require("child_process");
+const https = require("https");
+const http = require("http");
+const { download } = require("@silent-tech-offc/ttdl");
 
 function extractTikTokUrl(msg, args = []) {
-    // 1. Check command arguments
     const text = args.join(" ").trim();
 
     const urlFromArgs = text.match(
@@ -15,7 +16,6 @@ function extractTikTokUrl(msg, args = []) {
         return urlFromArgs[0].replace(/[)\]}>.,]+$/, "");
     }
 
-    // 2. Check quoted/replied message
     const context =
         msg.message?.extendedTextMessage?.contextInfo;
 
@@ -42,6 +42,82 @@ function extractTikTokUrl(msg, args = []) {
     }
 
     return null;
+}
+
+function downloadFile(url, outputPath, redirects = 0) {
+    return new Promise((resolve, reject) => {
+        if (redirects > 10) {
+            reject(new Error("Too many redirects."));
+            return;
+        }
+
+        const client = url.startsWith("https://")
+            ? https
+            : http;
+
+        const request = client.get(url, response => {
+            if (
+                response.statusCode >= 300 &&
+                response.statusCode < 400 &&
+                response.headers.location
+            ) {
+                response.resume();
+
+                const nextUrl = new URL(
+                    response.headers.location,
+                    url
+                ).toString();
+
+                downloadFile(
+                    nextUrl,
+                    outputPath,
+                    redirects + 1
+                )
+                    .then(resolve)
+                    .catch(reject);
+
+                return;
+            }
+
+            if (response.statusCode !== 200) {
+                response.resume();
+
+                reject(
+                    new Error(
+                        `Download failed with HTTP ${response.statusCode}`
+                    )
+                );
+
+                return;
+            }
+
+            const file = fs.createWriteStream(outputPath);
+
+            response.pipe(file);
+
+            file.on("finish", () => {
+                file.close(resolve);
+            });
+
+            file.on("error", err => {
+                file.destroy();
+
+                try {
+                    fs.unlinkSync(outputPath);
+                } catch {}
+
+                reject(err);
+            });
+        });
+
+        request.setTimeout(60000, () => {
+            request.destroy(
+                new Error("TikTok download timed out.")
+            );
+        });
+
+        request.on("error", reject);
+    });
 }
 
 module.exports = {
@@ -75,10 +151,9 @@ module.exports = {
         }
 
         const baseName = `tiktok-${Date.now()}`;
-
-        const outputTemplate = path.join(
+        const videoFile = path.join(
             mediaDir,
-            `${baseName}.%(ext)s`
+            `${baseName}.mp4`
         );
 
         try {
@@ -86,71 +161,42 @@ module.exports = {
                 text: t(jid, "tiktok_downloading")
             });
 
-            await new Promise((resolve, reject) => {
-                execFile(
-                    "yt-dlp",
-                    [
-                        url,
+            console.log("🔎 TikTok URL:", url);
 
-                        "--no-playlist",
+            const result = await download(url);
 
-                        "--retries",
-                        "3",
+            const videoUrl =
+                result.videoNoWatermark ||
+                result.video;
 
-                        "--fragment-retries",
-                        "3",
-
-                        "--no-warnings",
-
-                        "-o",
-                        outputTemplate
-                    ],
-                    {
-                        maxBuffer: 20 * 1024 * 1024
-                    },
-                    (error, stdout, stderr) => {
-                        if (error) {
-                            console.error(
-                                "❌ TIKTOK YT-DLP ERROR:",
-                                stderr || error.message
-                            );
-
-                            reject(error);
-                            return;
-                        }
-
-                        console.log(
-                            "🎵 TIKTOK YT-DLP:",
-                            stdout
-                        );
-
-                        resolve();
-                    }
-                );
-            });
-
-            const files = fs.readdirSync(mediaDir);
-
-            const downloadedFiles = files.filter(file =>
-                file.startsWith(`${baseName}.`) &&
-                !file.endsWith(".part") &&
-                !file.endsWith(".ytdl")
-            );
-
-            if (!downloadedFiles.length) {
+            if (!videoUrl) {
                 throw new Error(
-                    "yt-dlp completed but no TikTok video was found."
+                    "TikTok downloader returned no video URL."
                 );
             }
 
-            const videoFile = path.join(
-                mediaDir,
-                downloadedFiles[0]
+            console.log(
+                "🎬 TikTok video URL received."
             );
 
-            console.log(
-                "🎬 TikTok video:",
+            await downloadFile(
+                videoUrl,
                 videoFile
+            );
+
+            if (
+                !fs.existsSync(videoFile) ||
+                fs.statSync(videoFile).size === 0
+            ) {
+                throw new Error(
+                    "TikTok video download produced an empty file."
+                );
+            }
+
+            console.log(
+                "📦 TikTok video saved:",
+                videoFile,
+                `${fs.statSync(videoFile).size} bytes`
             );
 
             await sock.sendMessage(jid, {
@@ -171,38 +217,18 @@ module.exports = {
             });
 
         } finally {
-
             try {
-                const files = fs.readdirSync(mediaDir);
+                if (fs.existsSync(videoFile)) {
+                    fs.unlinkSync(videoFile);
 
-                for (const file of files) {
-                    if (file.startsWith(`${baseName}.`)) {
-
-                        const fullPath = path.join(
-                            mediaDir,
-                            file
-                        );
-
-                        try {
-                            fs.unlinkSync(fullPath);
-
-                            console.log(
-                                "🧹 Deleted:",
-                                fullPath
-                            );
-
-                        } catch (err) {
-                            console.error(
-                                "❌ TikTok cleanup error:",
-                                err.message
-                            );
-                        }
-                    }
+                    console.log(
+                        "🧹 Deleted:",
+                        videoFile
+                    );
                 }
-
             } catch (err) {
                 console.error(
-                    "❌ TikTok cleanup scan error:",
+                    "❌ TikTok cleanup error:",
                     err.message
                 );
             }

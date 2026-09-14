@@ -1,21 +1,21 @@
 const { t } = require("../../lib/lang");
 const fs = require("fs");
 const path = require("path");
-const { execFile } = require("child_process");
+const https = require("https");
+const http = require("http");
+const { fbdown } = require("btch-downloader");
 
 function extractFacebookUrl(msg, args = []) {
-    // Check command arguments first
     const text = args.join(" ").trim();
 
     const urlFromArgs = text.match(
-        /https?:\/\/(?:www\.|m\.|web\.)?facebook\.com\/\S+/i
+        /https?:\/\/(?:www\.|m\.)?(?:facebook\.com|fb\.watch)\/\S+/i
     );
 
     if (urlFromArgs) {
         return urlFromArgs[0].replace(/[)\]}>.,]+$/, "");
     }
 
-    // Check replied message
     const context =
         msg.message?.extendedTextMessage?.contextInfo;
 
@@ -34,7 +34,7 @@ function extractFacebookUrl(msg, args = []) {
         "";
 
     const urlFromReply = quotedText.match(
-        /https?:\/\/(?:www\.|m\.|web\.)?facebook\.com\/\S+/i
+        /https?:\/\/(?:www\.|m\.)?(?:facebook\.com|fb\.watch)\/\S+/i
     );
 
     if (urlFromReply) {
@@ -44,12 +44,88 @@ function extractFacebookUrl(msg, args = []) {
     return null;
 }
 
+function downloadFile(url, outputPath, redirects = 0) {
+    return new Promise((resolve, reject) => {
+        if (redirects > 10) {
+            reject(new Error("Too many redirects."));
+            return;
+        }
+
+        const client = url.startsWith("https://")
+            ? https
+            : http;
+
+        const request = client.get(url, response => {
+            if (
+                response.statusCode >= 300 &&
+                response.statusCode < 400 &&
+                response.headers.location
+            ) {
+                response.resume();
+
+                const nextUrl = new URL(
+                    response.headers.location,
+                    url
+                ).toString();
+
+                downloadFile(
+                    nextUrl,
+                    outputPath,
+                    redirects + 1
+                )
+                    .then(resolve)
+                    .catch(reject);
+
+                return;
+            }
+
+            if (response.statusCode !== 200) {
+                response.resume();
+
+                reject(
+                    new Error(
+                        `Download failed with HTTP ${response.statusCode}`
+                    )
+                );
+
+                return;
+            }
+
+            const file = fs.createWriteStream(outputPath);
+
+            response.pipe(file);
+
+            file.on("finish", () => {
+                file.close(resolve);
+            });
+
+            file.on("error", err => {
+                file.destroy();
+
+                try {
+                    fs.unlinkSync(outputPath);
+                } catch {}
+
+                reject(err);
+            });
+        });
+
+        request.setTimeout(60000, () => {
+            request.destroy(
+                new Error("Facebook download timed out.")
+            );
+        });
+
+        request.on("error", reject);
+    });
+}
+
 module.exports = {
     name: "facebook",
     description: "Download a Facebook video",
     category: "media",
     permission: "public",
-    usage: ".facebook <Facebook URL> or reply to a Facebook video URL",
+    usage: ".facebook <Facebook URL> or reply to a Facebook URL",
     minArgs: 0,
 
     execute: async (sock, msg, args = []) => {
@@ -76,9 +152,9 @@ module.exports = {
 
         const baseName = `facebook-${Date.now()}`;
 
-        const outputTemplate = path.join(
+        const videoFile = path.join(
             mediaDir,
-            `${baseName}.%(ext)s`
+            `${baseName}.mp4`
         );
 
         try {
@@ -86,71 +162,51 @@ module.exports = {
                 text: t(jid, "facebook_downloading")
             });
 
-            await new Promise((resolve, reject) => {
-                execFile(
-                    "yt-dlp",
-                    [
-                        url,
-
-                        "--no-playlist",
-
-                        "--retries",
-                        "3",
-
-                        "--fragment-retries",
-                        "3",
-
-                        "--no-warnings",
-
-                        "-o",
-                        outputTemplate
-                    ],
-                    {
-                        maxBuffer: 20 * 1024 * 1024
-                    },
-                    (error, stdout, stderr) => {
-                        if (error) {
-                            console.error(
-                                "❌ FACEBOOK YT-DLP ERROR:",
-                                stderr || error.message
-                            );
-
-                            reject(error);
-                            return;
-                        }
-
-                        console.log(
-                            "📘 FACEBOOK YT-DLP:",
-                            stdout
-                        );
-
-                        resolve();
-                    }
-                );
-            });
-
-            const files = fs.readdirSync(mediaDir);
-
-            const downloadedFiles = files.filter(file =>
-                file.startsWith(`${baseName}.`) &&
-                !file.endsWith(".part") &&
-                !file.endsWith(".ytdl")
+            console.log(
+                "🔎 Facebook URL:",
+                url
             );
 
-            if (!downloadedFiles.length) {
+            const result = await fbdown(url);
+
+            if (!result || result.status === false) {
                 throw new Error(
-                    "yt-dlp completed but no Facebook video was found."
+                    "Facebook downloader failed to retrieve the video."
                 );
             }
 
-            const videoFile = path.join(
-                mediaDir,
-                downloadedFiles[0]
-            );
+            const videoUrl =
+                result.HD ||
+                result.Normal_video;
+
+            if (!videoUrl) {
+                throw new Error(
+                    "Facebook downloader returned no video URL."
+                );
+            }
 
             console.log(
-                "🎬 Facebook video:",
+                "🎬 Facebook video URL received."
+            );
+
+            await downloadFile(
+                videoUrl,
                 videoFile
+            );
+
+            if (
+                !fs.existsSync(videoFile) ||
+                fs.statSync(videoFile).size === 0
+            ) {
+                throw new Error(
+                    "Facebook video download produced an empty file."
+                );
+            }
+
+            console.log(
+                "📦 Facebook video saved:",
+                videoFile,
+                `${fs.statSync(videoFile).size} bytes`
             );
 
             await sock.sendMessage(jid, {
@@ -171,38 +227,18 @@ module.exports = {
             });
 
         } finally {
-
             try {
-                const files = fs.readdirSync(mediaDir);
+                if (fs.existsSync(videoFile)) {
+                    fs.unlinkSync(videoFile);
 
-                for (const file of files) {
-                    if (file.startsWith(`${baseName}.`)) {
-
-                        const fullPath = path.join(
-                            mediaDir,
-                            file
-                        );
-
-                        try {
-                            fs.unlinkSync(fullPath);
-
-                            console.log(
-                                "🧹 Deleted:",
-                                fullPath
-                            );
-
-                        } catch (err) {
-                            console.error(
-                                "❌ Facebook cleanup error:",
-                                err.message
-                            );
-                        }
-                    }
+                    console.log(
+                        "🧹 Deleted:",
+                        videoFile
+                    );
                 }
-
             } catch (err) {
                 console.error(
-                    "❌ Facebook cleanup scan error:",
+                    "❌ Facebook cleanup error:",
                     err.message
                 );
             }
