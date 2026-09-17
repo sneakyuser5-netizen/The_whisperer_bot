@@ -434,58 +434,92 @@ await handleMessage(
         setTimeout(async () => {
             try {
 
-                if (!sock.authState.creds.registered) {
-                    const phone = setup.getPhone();
+                if (!sock.authState.creds.registered) {                    
+const phone = setup.getPhone()?.trim();
 
-if (
-    !phone?.trim() ||
-    phone.trim() === "237612345678"
-) {
-
+if (!phone) {
     console.log(`
 ╔══════════════════════════════════════╗
-║          🤖 WHISPERBOT SETUP         ║
+║ 🤖 WHISPERBOT SETUP                 ║
 ╚══════════════════════════════════════╝
 
-Welcome to WhisperBot!
+❌ NO PHONE NUMBER FOUND
 
-Follow these steps:
+Please add your WhatsApp number to:
 
-1️⃣ Open:
-   database/setup.json
+database/setup.json
 
-2️⃣ Replace:
+Example:
+{
+  "phone": "2376XXXXXXXX"
+}
 
-   {
-     "phone": ""
-   }
-
-3️⃣ With your WhatsApp number:
-
-   {
-     "phone": "237612345678"
-   }
-
-4️⃣ Save the file.
-
-5️⃣ Restart the bot.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-After restarting,
-your Pairing Code will appear here.
+Then save the file and restart the bot.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 `);
-
     return;
-
 }
-                    const code = await sock.requestPairingCode(phone);
 
-                    console.log("\n======================");
-                    console.log("PAIR CODE 👉", code);
-                    console.log("======================\n");
+// Reject placeholder number
+if (phone === "237612345678") {
+    console.log(`
+❌ INVALID PHONE NUMBER
+
+The default/example number is still being used.
+
+Please replace it in:
+database/setup.json
+
+Use your real WhatsApp number in international format.
+
+Example:
+{
+  "phone": "2376XXXXXXXX"
+}
+
+Then restart the bot.
+`);
+    return;
+}
+
+// Validate Cameroon WhatsApp number
+if (!/^2376\d{8}$/.test(phone)) {
+    console.log(`
+❌ INVALID PHONE NUMBER
+
+The number found in database/setup.json is not valid.
+
+Current format:
+${phone}
+
+Required format:
+2376XXXXXXXX
+
+Example:
+2376XXXXXXXX
+
+Do not use:
++237
+spaces
+dashes
+or parentheses.
+
+Please correct the number and restart the bot.
+`);
+    return;
+}
+
+console.log(`📱 Phone number found: +${phone}`);
+console.log("⏳ Requesting WhatsApp pairing code...");
+
+const code = await sock.requestPairingCode(phone);
+
+console.log("\n======================");
+console.log("PAIR CODE 👉", code);
+console.log("======================\n");
+
+  
                 }
 
             } catch (err) {
