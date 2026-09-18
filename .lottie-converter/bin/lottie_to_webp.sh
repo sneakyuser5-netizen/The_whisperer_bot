@@ -1,4 +1,4 @@
-#!/data/data/com.termux/files/usr/bin/bash
+#!/usr/bin/env bash
 HEIGHT=512
 WIDTH=512
 FPS=60
