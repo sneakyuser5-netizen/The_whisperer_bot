@@ -9,6 +9,18 @@ const ZIP_PATH = path.join(ROOT, ".lottie-converter.zip");
 
 const VERSION = "v1.2.0";
 
+const CUSTOM_WEBP_SCRIPT = path.join(
+    ROOT,
+    "scripts",
+    "lottie_to_webp.sh"
+);
+
+const INSTALLED_WEBP_SCRIPT = path.join(
+    INSTALL_DIR,
+    "bin",
+    "lottie_to_webp.sh"
+);
+
 function detectAsset() {
     switch (process.arch) {
         case "x64":
@@ -22,6 +34,35 @@ function detectAsset() {
                 `Unsupported CPU architecture: ${process.arch}`
             );
     }
+}
+
+function installCustomWebpScript() {
+    if (!fs.existsSync(CUSTOM_WEBP_SCRIPT)) {
+        throw new Error(
+            `Custom WebP converter script not found: ${CUSTOM_WEBP_SCRIPT}`
+        );
+    }
+
+    fs.mkdirSync(
+        path.dirname(INSTALLED_WEBP_SCRIPT),
+        {
+            recursive: true
+        }
+    );
+
+    fs.copyFileSync(
+        CUSTOM_WEBP_SCRIPT,
+        INSTALLED_WEBP_SCRIPT
+    );
+
+    fs.chmodSync(
+        INSTALLED_WEBP_SCRIPT,
+        0o755
+    );
+
+    console.log(
+        "Custom Lottie WebP converter installed."
+    );
 }
 
 function download(url, destination) {
@@ -86,6 +127,9 @@ async function main() {
         console.log(
             `Lottie converter already installed for ${process.arch}.`
         );
+
+        installCustomWebpScript();
+
         return;
     }
 
@@ -96,13 +140,21 @@ async function main() {
         `Installing Lottie converter ${VERSION} (${process.arch})...`
     );
 
-    fs.mkdirSync(INSTALL_DIR, {
-        recursive: true
-    });
+    fs.mkdirSync(
+        INSTALL_DIR,
+        {
+            recursive: true
+        }
+    );
 
-    await download(url, ZIP_PATH);
+    await download(
+        url,
+        ZIP_PATH
+    );
 
-    console.log("Lottie converter archive downloaded.");
+    console.log(
+        "Lottie converter archive downloaded."
+    );
 
     execFileSync(
         "unzip",
@@ -121,6 +173,8 @@ async function main() {
         executable,
         0o755
     );
+
+    installCustomWebpScript();
 
     fs.unlinkSync(ZIP_PATH);
 
