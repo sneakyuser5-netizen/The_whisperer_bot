@@ -402,11 +402,6 @@ module.exports = {
   "fun.truth_7": "🔥 *𝙌𝙪𝙞 𝙩𝙚 𝙛𝙖𝙞𝙩 𝙡𝙚 𝙥𝙡𝙪𝙨 𝙧𝙞𝙧𝙚 𝙙𝙖𝙣𝙨 𝙘𝙚 𝙜𝙧𝙤𝙪𝙥𝙚 ?*",
   "fun.truth_footer": "✋ *𝙍é𝙥𝙤𝙣𝙙𝙨 𝙝𝙤𝙣𝙣ê𝙩𝙚𝙢𝙚𝙣𝙩... 𝙨𝙞𝙣𝙤𝙣 𝙡𝙚 𝙗𝙤𝙩 𝙡𝙚 𝙨𝙖𝙪𝙧𝙖 !*",
   "fun.truth_title": "😈 *𝙃𝙀𝙐𝙍𝙀 𝘿𝙀 𝙇𝘼 𝙑É𝙍𝙄𝙏É*",
-  "general.botinfo_developer": "Développeur",
-  "general.botinfo_language": "Langage",
-  "general.botinfo_library": "Bibliothèque",
-  "general.botinfo_title": "🤖 *𝙒𝙝𝙞𝙨𝙥𝙚𝙧𝙚𝙧𝘽𝙤𝙩*",
-  "general.botinfo_version": "Version",
 
   "general.memory_title": "💾 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 𝙙𝙚 𝙡𝙖 𝙢é𝙢𝙤𝙞𝙧𝙚*",
   "general.owner": "👑 *𝙋𝙧𝙤𝙥𝙧𝙞é𝙩𝙖𝙞𝙧𝙚 :* The-whisperer",
@@ -414,12 +409,6 @@ module.exports = {
   "general.rules_none": "📜 *𝘼𝙪𝙘𝙪𝙣𝙚 𝙧è𝙜𝙡𝙚 𝙙é𝙛𝙞𝙣𝙞𝙚 𝙥𝙤𝙪𝙧 𝙡’𝙞𝙣𝙨𝙩𝙖𝙣𝙩.*\n\nLe groupe fonctionne sur les bonnes vibes.",
   "general.rules_title": "📜 *𝙍è𝙜𝙡𝙚𝙨 𝙙𝙪 𝙜𝙧𝙤𝙪𝙥𝙚 :*",
 
-  "general.runtime_title": "🖥️ *𝙀𝙣𝙫𝙞𝙧𝙤𝙣𝙣𝙚𝙢𝙚𝙣𝙩 𝙙’𝙚𝙭é𝙘𝙪𝙩𝙞𝙤𝙣*",
-  "general.server_architecture": "Architecture",
-  "general.server_cpu": "Cœurs CPU",
-  "general.server_hostname": "Nom d’hôte",
-  "general.server_platform": "Plateforme",
-  "general.server_title": "🖥️ *𝙄𝙣𝙛𝙤𝙧𝙢𝙖𝙩𝙞𝙤𝙣𝙨 𝙨𝙚𝙧𝙫𝙚𝙪𝙧*",
 
   "general.stats_commands": "Commandes",
   "general.stats_database": "Fichiers de base de données",
@@ -497,18 +486,7 @@ module.exports = {
   "info.ping_testing": "🏓 *𝙏𝙚𝙨𝙩 𝙙𝙚 𝙡𝙖 𝙘𝙤𝙣𝙣𝙚𝙭𝙞𝙤𝙣...*",
   "info.ping_title": "🏓 *𝙋𝙊𝙉𝙂 !*",
 
-  "info.repo_footer": "📦 *𝙎𝙤𝙪𝙩𝙚𝙣𝙚𝙯 𝙡𝙚 𝙥𝙧𝙤𝙟𝙚𝙩 𝙨𝙞 𝙫𝙤𝙪𝙨 𝙡’𝙖𝙥𝙥𝙧é𝙘𝙞𝙚𝙯.*",
-  "info.repo_owner": "Propriétaire :",
-  "info.repo_project": "Projet :",
-  "info.repo_title": "📦 *𝘿É𝙋Ô𝙏 𝘿𝙐 𝘽𝙊𝙏*",
 
-  "info.system_architecture": "Architecture :",
-  "info.system_cores": "Cœur(s)",
-  "info.system_cpu": "CPU :",
-  "info.system_footer": "💪 *𝙈𝙤𝙣 𝙥𝙚𝙩𝙞𝙩 𝙨𝙚𝙧𝙫𝙚𝙪𝙧 𝙜è𝙧𝙚 𝙙𝙚 𝙡𝙤𝙪𝙧𝙙𝙚𝙨 𝙘𝙝𝙖𝙧𝙜𝙚𝙨 𝙒𝙝𝙖𝙩𝙨𝘼𝙥𝙥 !*",
-  "info.system_node": "Node :",
-  "info.system_platform": "Plateforme :",
-  "info.system_title": "💻 *𝙄𝙣𝙛𝙤𝙧𝙢𝙖𝙩𝙞𝙤𝙣𝙨 𝙨𝙮𝙨𝙩è𝙢𝙚*",
 
   "info.version_title": "Version de Baileys :",
 
@@ -619,9 +597,6 @@ module.exports = {
   "tools.ip_invalid": "❌ Adresse IP invalide.",
   "tools.ip_result": "🌍 *𝙄𝙣𝙛𝙤𝙧𝙢𝙖𝙩𝙞𝙤𝙣𝙨 𝙨𝙪𝙧 𝙡’𝙖𝙙𝙧𝙚𝙨𝙨𝙚 𝙄𝙋*",
   "tools.ping": "🏓 *𝙋𝙤𝙣𝙜 !*\nTemps de réponse :",
-  "tools.say_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :*\n.say Bonjour",
-  "tools.test_sent": "Vous avez envoyé :",
-  "tools.test_success": "✅ *𝙉𝙤𝙪𝙫𝙚𝙖𝙪 𝙥𝙡𝙪𝙜𝙞𝙣 𝙛𝙤𝙣𝙘𝙩𝙞𝙤𝙣𝙣𝙚𝙡 !*",
 
   "tools.translate_failed": "❌ *É𝙘𝙝𝙚𝙘 𝙙𝙚 𝙡𝙖 𝙩𝙧𝙖𝙙𝙪𝙘𝙩𝙞𝙤𝙣.*",
   "tools.translate_rate_limit": "⚠️ Service de traduction occupé. Réessayez plus tard.",
