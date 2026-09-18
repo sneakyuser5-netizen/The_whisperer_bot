@@ -68,8 +68,20 @@ module.exports = {
 
             await new Promise((resolve, reject) => {
                 execFile(
-                    fs.existsSync(path.join(path.resolve(__dirname, "../.."), ".venv", "bin", "python"))
-                        ? path.join(path.resolve(__dirname, "../.."), ".venv", "bin", "python")
+                    fs.existsSync(
+                        path.join(
+                            path.resolve(__dirname, "../.."),
+                            ".venv",
+                            "bin",
+                            "python"
+                        )
+                    )
+                        ? path.join(
+                            path.resolve(__dirname, "../.."),
+                            ".venv",
+                            "bin",
+                            "python"
+                        )
                         : "python3",
                     [
                         path.join(
@@ -114,7 +126,12 @@ module.exports = {
             });
 
             // ==========================================
-            // CONVERT TGS STICKERS TO ANIMATED WEBP
+            // PROCESS TELEGRAM STICKERS
+            //
+            // WEBP    = send directly
+            // WEBM    = convert to animated WEBP
+            // TGS     = convert with Lottie converter
+            // UNKNOWN = skip safely
             // ==========================================
 
             if (!fs.existsSync(packDir)) {
@@ -135,16 +152,10 @@ module.exports = {
                 "lottie_to_webp.sh"
             );
 
-            if (!fs.existsSync(converter)) {
-                throw new Error(
-                    "Lottie converter is not installed."
-                );
-            }
-
-            const tgsFiles = fs
+            const files = fs
                 .readdirSync(packDir)
                 .filter(file =>
-                    /^sticker_\d+\.tgs$/i.test(file)
+                    /^sticker_\d+\.(tgs|webp|webm|unknown)$/i.test(file)
                 )
                 .sort((a, b) => {
                     const numberA = parseInt(
@@ -161,70 +172,183 @@ module.exports = {
                 });
 
             console.log(
-                `🎨 Telegram TGS stickers downloaded: ${tgsFiles.length}`
+                `🎨 Telegram stickers downloaded: ${files.length}`
             );
 
-            if (!tgsFiles.length) {
+            if (!files.length) {
                 throw new Error(
-                    "No TGS stickers were downloaded."
+                    "No Telegram stickers were downloaded."
                 );
             }
 
-            for (const file of tgsFiles) {
+            for (const file of files) {
                 const inputFile = path.join(
                     packDir,
                     file
                 );
 
-                const outputFile = path.join(
-                    packDir,
-                    file.replace(/\.tgs$/i, ".webp")
-                );
+                // ==========================================
+                // WEBP = ALREADY READY
+                // ==========================================
 
-                console.log(
-                    `🎨 Converting ${file} → ${path.basename(outputFile)}`
-                );
-
-                await new Promise((resolve, reject) => {
-                    execFile(
-                        converter,
-                        [
-                            "--output",
-                            outputFile,
-                            inputFile
-                        ],
-                        {
-                            maxBuffer: 20 * 1024 * 1024
-                        },
-                        (error, stdout, stderr) => {
-                            if (stdout) {
-                                console.log(
-                                    "LOTTIE CONVERTER:",
-                                    stdout
-                                );
-                            }
-
-                            if (stderr) {
-                                console.error(
-                                    "LOTTIE CONVERTER STDERR:",
-                                    stderr
-                                );
-                            }
-
-                            if (error) {
-                                console.error(
-                                    `LOTTIE CONVERTER ERROR ${file}:`,
-                                    error.message
-                                );
-
-                                reject(error);
-                                return;
-                            }
-
-                            resolve();
-                        }
+                if (/\.webp$/i.test(file)) {
+                    console.log(
+                        `🎨 Telegram WebP ready: ${file}`
                     );
-                });
+
+                    continue;
+                }
+
+                // ==========================================
+                // WEBM = CONVERT TO ANIMATED WEBP
+                // ==========================================
+
+                if (/\.webm$/i.test(file)) {
+                    const outputFile = path.join(
+                        packDir,
+                        file.replace(
+                            /\.webm$/i,
+                            ".webp"
+                        )
+                    );
+
+                    console.log(
+                        `🎬 Converting ${file} → ${path.basename(outputFile)}`
+                    );
+
+                    await new Promise((resolve, reject) => {
+                        execFile(
+                            "ffmpeg",
+                            [
+                                "-y",
+                                "-i",
+                                inputFile,
+                                "-vf",
+                                "scale=512:512:force_original_aspect_ratio=decrease,fps=30",
+                                "-c:v",
+                                "libwebp_anim",
+                                "-lossless",
+                                "0",
+                                "-q:v",
+                                "75",
+                                outputFile
+                            ],
+                            {
+                                maxBuffer: 20 * 1024 * 1024
+                            },
+                            (error, stdout, stderr) => {
+                                if (stdout) {
+                                    console.log(
+                                        "FFMPEG:",
+                                        stdout
+                                    );
+                                }
+
+                                if (stderr) {
+                                    console.error(
+                                        "FFMPEG STDERR:",
+                                        stderr
+                                    );
+                                }
+
+                                if (error) {
+                                    console.error(
+                                        `FFMPEG ERROR ${file}:`,
+                                        error.message
+                                    );
+
+                                    reject(error);
+                                    return;
+                                }
+
+                                console.log(
+                                    `🎬 WebM converted successfully: ${file}`
+                                );
+
+                                resolve();
+                            }
+                        );
+                    });
+
+                    continue;
+                }
+
+                // ==========================================
+                // UNKNOWN = SKIP SAFELY
+                // ==========================================
+
+                if (/\.unknown$/i.test(file)) {
+                    console.warn(
+                        `⚠️ Skipping unknown Telegram sticker format: ${file}`
+                    );
+
+                    continue;
+                }
+
+                // ==========================================
+                // TGS = USE LOTTIE CONVERTER
+                // ==========================================
+
+                if (/\.tgs$/i.test(file)) {
+                    if (!fs.existsSync(converter)) {
+                        throw new Error(
+                            "Lottie converter is not installed."
+                        );
+                    }
+
+                    const outputFile = path.join(
+                        packDir,
+                        file.replace(
+                            /\.tgs$/i,
+                            ".webp"
+                        )
+                    );
+
+                    console.log(
+                        `🎨 Converting ${file} → ${path.basename(outputFile)}`
+                    );
+
+                    await new Promise((resolve, reject) => {
+                        execFile(
+                            converter,
+                            [
+                                "--output",
+                                outputFile,
+                                inputFile
+                            ],
+                            {
+                                maxBuffer: 20 * 1024 * 1024
+                            },
+                            (error, stdout, stderr) => {
+                                if (stdout) {
+                                    console.log(
+                                        "LOTTIE CONVERTER:",
+                                        stdout
+                                    );
+                                }
+
+                                if (stderr) {
+                                    console.error(
+                                        "LOTTIE CONVERTER STDERR:",
+                                        stderr
+                                    );
+                                }
+
+                                if (error) {
+                                    console.error(
+                                        `LOTTIE CONVERTER ERROR ${file}:`,
+                                        error.message
+                                    );
+
+                                    reject(error);
+                                    return;
+                                }
+
+                                resolve();
+                            }
+                        );
+                    });
+                }
             }
 
             // ==========================================
@@ -287,9 +411,8 @@ module.exports = {
 
                     // Prevent flooding WhatsApp
                     await new Promise(resolve =>
-                        setTimeout(resolve, 500)
+                        setTimeout(resolve, 200)
                     );
-
                 } catch (err) {
                     console.error(
                         `WHATSAPP STICKER ${file} ERROR:`,

@@ -2,7 +2,7 @@ import sys
 import os
 import re
 import asyncio
-
+import fcntl
 from telethon import TelegramClient
 from telethon.sessions import StringSession
 from telethon.tl.functions.messages import GetStickerSetRequest
@@ -38,7 +38,14 @@ SESSION_NAME = os.path.join(
     PROJECT_ROOT,
     "telegram_session"
 )
+# ============================================================
+# TELEGRAM SESSION PROCESS LOCK
+# ============================================================
 
+LOCK_FILE = os.path.join(
+    PROJECT_ROOT,
+    "telegram_stickers.lock"
+)
 
 # ============================================================
 # EXTRACT STICKER PACK SHORT NAME
@@ -143,9 +150,11 @@ async def download_stickers(
             documents,
             start=1
         ):
+            # Telegram's MIME type is not always reliable.
+            # Download first, then detect the actual file format.
             filename = os.path.join(
                 output_dir,
-                f"sticker_{index}.tgs"
+                f"sticker_{index}.tmp"
             )
 
             try:
@@ -163,7 +172,33 @@ async def download_stickers(
                     downloaded_file
                     and os.path.exists(downloaded_file)
                 ):
-                    downloaded.append(downloaded_file)
+                    with open(downloaded_file, "rb") as handle:
+                        header = handle.read(16)
+
+                    if header[:4] == b"RIFF" and header[8:12] == b"WEBP":
+                        extension = ".webp"
+                    elif header[:4] == b"\x1a\x45\xdf\xa3":
+                        extension = ".webm"
+                    elif header[:2] == b"\x1f\x8b":
+                        extension = ".tgs"
+                    else:
+                        extension = ".unknown"
+                    final_file = os.path.join(
+                        output_dir,
+                        f"sticker_{index}{extension}"
+                    )
+
+                    os.replace(
+                        downloaded_file,
+                        final_file
+                    )
+
+                    downloaded.append(final_file)
+
+                    print(
+                        f"TELEGRAM: detected sticker {index} as {extension}",
+                        flush=True
+                    )
 
             except Exception as error:
                 print(
@@ -193,7 +228,6 @@ async def download_stickers(
 # ============================================================
 
 if __name__ == "__main__":
-
     if len(sys.argv) != 3:
 
         print(
@@ -206,17 +240,56 @@ if __name__ == "__main__":
     url = sys.argv[1]
     output_dir = sys.argv[2]
 
+    lock_handle = None
+
     try:
 
-        files = asyncio.run(
-            download_stickers(
-                url,
-                output_dir
-            )
+        # ----------------------------------------------------
+        # Prevent multiple Telethon processes from sharing
+        # the same SQLite session database.
+        # ----------------------------------------------------
+
+        lock_handle = open(
+            LOCK_FILE,
+            "w"
         )
 
-        for file_path in files:
-            print(file_path)
+        try:
+            fcntl.flock(
+                lock_handle,
+                fcntl.LOCK_EX
+            )
+
+            print(
+                "TELEGRAM: session lock acquired.",
+                flush=True
+            )
+
+            files = asyncio.run(
+                download_stickers(
+                    url,
+                    output_dir
+                )
+            )
+
+            for file_path in files:
+                print(
+                    file_path
+                )
+
+        finally:
+
+            fcntl.flock(
+                lock_handle,
+                fcntl.LOCK_UN
+            )
+
+            lock_handle.close()
+
+            print(
+                "TELEGRAM: session lock released.",
+                flush=True
+            )
 
     except Exception as error:
 
