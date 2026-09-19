@@ -57,7 +57,11 @@ module.exports = {
 
         function matchesRequestedSong(title, requested) {
             const normalizedTitle = normalizeText(title);
-            const normalizedQuery = normalizeText(requested);
+
+            const normalizedQuery = normalizeText(requested)
+                .replace(/\b(feat|ft|featuring)\b/g, " ")
+                .replace(/\s+/g, " ")
+                .trim();
 
             if (!normalizedTitle || !normalizedQuery) {
                 return false;
@@ -67,29 +71,34 @@ module.exports = {
                 return true;
             }
 
-            const queryTokens = getTokens(requested);
-            const titleTokens = new Set(getTokens(title));
+            const queryTokens = normalizedQuery
+                .split(/\s+/)
+                .filter(Boolean);
+
+            const titleTokens = new Set(
+                getTokens(title)
+            );
 
             if (!queryTokens.length) {
                 return false;
             }
 
-            const allTokensPresent = queryTokens.every(
+            const matched = queryTokens.filter(
                 token => titleTokens.has(token)
-            );
+            ).length;
 
-            if (allTokensPresent) {
+            // All meaningful words matched.
+            if (matched === queryTokens.length) {
                 return true;
             }
 
-            if (queryTokens.length >= 2) {
-                const matched = queryTokens.filter(
-                    token => titleTokens.has(token)
-                ).length;
-
-                return (
-                    matched / queryTokens.length >= 0.8
-                );
+            // Allow one missing meaningful word for
+            // variations such as official/remix/version titles.
+            if (
+                queryTokens.length >= 3 &&
+                matched / queryTokens.length >= 0.66
+            ) {
+                return true;
             }
 
             return false;
