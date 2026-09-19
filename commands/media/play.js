@@ -31,12 +31,14 @@ module.exports = {
         }
 
         const baseName = `play-${Date.now()}`;
-        const downloadedFile = path.join(mediaDir, `${baseName}.mp3`);
-        const output = path.join(mediaDir, `${baseName}.ogg`);
-
-        // ==========================================
-        // DOWNLOAD FILE WITH REDIRECT SUPPORT
-        // ==========================================
+        const downloadedFile = path.join(
+            mediaDir,
+            `${baseName}.mp3`
+        );
+        const output = path.join(
+            mediaDir,
+            `${baseName}.ogg`
+        );
 
         function downloadFile(url, filePath, redirects = 0) {
             return new Promise((resolve, reject) => {
@@ -50,15 +52,14 @@ module.exports = {
                     : http;
 
                 const request = client.get(url, response => {
-                    // Follow redirects
                     if (
-                        [301, 302, 303, 307, 308].includes(
-                            response.statusCode
-                        )
+                        [301, 302, 303, 307, 308]
+                            .includes(response.statusCode)
                     ) {
                         response.resume();
 
-                        const location = response.headers.location;
+                        const location =
+                            response.headers.location;
 
                         if (!location) {
                             reject(
@@ -80,9 +81,11 @@ module.exports = {
                         return;
                     }
 
-                    // 200 = normal response
-                    // 206 = partial content, valid for media/CDN downloads
-                    if (![200, 206].includes(response.statusCode)) {
+                    if (
+                        ![200, 206].includes(
+                            response.statusCode
+                        )
+                    ) {
                         response.resume();
 
                         reject(
@@ -94,7 +97,8 @@ module.exports = {
                         return;
                     }
 
-                    const stream = fs.createWriteStream(filePath);
+                    const stream =
+                        fs.createWriteStream(filePath);
 
                     response.pipe(stream);
 
@@ -110,7 +114,9 @@ module.exports = {
 
                 request.setTimeout(120000, () => {
                     request.destroy(
-                        new Error("Download timed out")
+                        new Error(
+                            "Download timed out"
+                        )
                     );
                 });
 
@@ -119,19 +125,14 @@ module.exports = {
         }
 
         try {
-            // ==========================================
-            // SEARCH MESSAGE
-            // ==========================================
-
             await sock.sendMessage(jid, {
                 text: t(jid, "play_searching")
             });
 
-            // ==========================================
-            // SEARCH YOUTUBE
-            // ==========================================
-
-            console.log("🔎 Searching YouTube:", query);
+            console.log(
+                "🔎 Searching YouTube:",
+                query
+            );
 
             const search = await yts(query);
 
@@ -152,56 +153,89 @@ module.exports = {
                 );
             }
 
-            const video = results.find(
+            console.log(
+                `🔍 Found ${results.length} YouTube results.`
+            );
+
+            let selectedVideo = null;
+            let audioUrl = null;
+
+            const candidates = results.filter(
                 item =>
                     item &&
                     item.type === "video" &&
                     item.url
-            ) || results[0];
+            );
 
-            if (!video || !video.url) {
+            for (
+                let i = 0;
+                i < candidates.length;
+                i++
+            ) {
+                const video = candidates[i];
+
+                console.log(
+                    `🎵 Trying result ${i + 1}/${candidates.length}:`,
+                    video.title || video.url
+                );
+
+                try {
+                    const result =
+                        await youtube(video.url);
+
+                    if (
+                        !result ||
+                        !result.status
+                    ) {
+                        console.log(
+                            "⚠️ Downloader returned failure."
+                        );
+                        continue;
+                    }
+
+                    if (!result.mp3) {
+                        console.log(
+                            "⚠️ No MP3 URL returned. Trying next result..."
+                        );
+                        continue;
+                    }
+
+                    selectedVideo = video;
+                    audioUrl = result.mp3;
+
+                    console.log(
+                        "✅ Audio URL found."
+                    );
+
+                    break;
+                } catch (error) {
+                    console.log(
+                        "⚠️ This result failed:",
+                        error.message
+                    );
+                }
+            }
+
+            if (!selectedVideo || !audioUrl) {
                 throw new Error(
-                    "Could not find a playable YouTube video."
+                    "No downloadable audio was found among the YouTube results."
                 );
             }
 
             console.log(
                 "🎵 Selected:",
-                video.title || video.url
+                selectedVideo.title ||
+                    selectedVideo.url
             );
 
             console.log(
                 "🔗 YouTube URL:",
-                video.url
+                selectedVideo.url
             );
-
-            // ==========================================
-            // GET AUDIO DOWNLOAD URL
-            // ==========================================
-
-            const result = await youtube(video.url);
-
-            if (!result || !result.status) {
-                throw new Error(
-                    "YouTube audio downloader failed."
-                );
-            }
-
-            const audioUrl = result.mp3;
-
-            if (!audioUrl) {
-                throw new Error(
-                    "YouTube downloader did not return an MP3 URL."
-                );
-            }
 
             console.log(
                 "⬇️ Downloading audio..."
             );
-
-            // ==========================================
-            // DOWNLOAD MP3
-            // ==========================================
 
             await downloadFile(
                 audioUrl,
@@ -224,67 +258,56 @@ module.exports = {
                 "bytes"
             );
 
-            // ==========================================
-            // CONVERT TO WHATSAPP OGG/OPUS
-            // ==========================================
+            await new Promise(
+                (resolve, reject) => {
+                    execFile(
+                        "ffmpeg",
+                        [
+                            "-y",
+                            "-i",
+                            downloadedFile,
+                            "-vn",
+                            "-c:a",
+                            "libopus",
+                            "-b:a",
+                            "128k",
+                            "-ac",
+                            "1",
+                            "-ar",
+                            "48000",
+                            output
+                        ],
+                        {
+                            maxBuffer:
+                                20 *
+                                1024 *
+                                1024
+                        },
+                        (
+                            error,
+                            stdout,
+                            stderr
+                        ) => {
+                            if (error) {
+                                console.error(
+                                    "❌ FFMPEG ERROR:",
+                                    stderr ||
+                                        error.message
+                                );
 
-            await new Promise((resolve, reject) => {
-                execFile(
-                    "ffmpeg",
-                    [
-                        "-y",
+                                reject(error);
+                                return;
+                            }
 
-                        "-i",
-                        downloadedFile,
-
-                        // Audio only
-                        "-vn",
-
-                        // WhatsApp voice-note friendly Opus
-                        "-c:a",
-                        "libopus",
-
-                        "-b:a",
-                        "128k",
-
-                        // Mono
-                        "-ac",
-                        "1",
-
-                        // Standard Opus sample rate
-                        "-ar",
-                        "48000",
-
-                        output
-                    ],
-                    {
-                        maxBuffer:
-                            20 * 1024 * 1024
-                    },
-                    (
-                        error,
-                        stdout,
-                        stderr
-                    ) => {
-                        if (error) {
-                            console.error(
-                                "❌ FFMPEG ERROR:",
-                                stderr ||
-                                    error.message
+                            console.log(
+                                "🔄 FFmpeg conversion completed."
                             );
 
-                            reject(error);
-                            return;
+                            resolve();
                         }
-
-                        console.log(
-                            "🔄 FFmpeg conversion completed."
-                        );
-
-                        resolve();
-                    }
-                );
-            });
+                    );
+                }
+            );
 
             if (
                 !fs.existsSync(output) ||
@@ -295,17 +318,16 @@ module.exports = {
                 );
             }
 
-            // ==========================================
-            // SEND STATUS
-            // ==========================================
+            console.log(
+                "🎧 Final audio:",
+                output,
+                fs.statSync(output).size,
+                "bytes"
+            );
 
             await sock.sendMessage(jid, {
                 text: t(jid, "play_sending")
             });
-
-            // ==========================================
-            // SEND AS REAL WHATSAPP VOICE NOTE
-            // ==========================================
 
             await sock.sendMessage(jid, {
                 audio: {
@@ -316,10 +338,6 @@ module.exports = {
                 ptt: true
             });
 
-            // ==========================================
-            // SUCCESS MESSAGE
-            // ==========================================
-
             await sock.sendMessage(jid, {
                 text: t(jid, "play_success")
             });
@@ -327,7 +345,6 @@ module.exports = {
             console.log(
                 "✅ PLAY completed successfully."
             );
-
         } catch (err) {
             console.error(
                 "❌ PLAY ERROR:",
@@ -337,12 +354,7 @@ module.exports = {
             await sock.sendMessage(jid, {
                 text: t(jid, "play_failed")
             });
-
         } finally {
-            // ==========================================
-            // CLEANUP
-            // ==========================================
-
             for (const file of [
                 downloadedFile,
                 output
