@@ -53,8 +53,9 @@ module.exports = {
 
                 const request = client.get(url, response => {
                     if (
-                        [301, 302, 303, 307, 308]
-                            .includes(response.statusCode)
+                        [301, 302, 303, 307, 308].includes(
+                            response.statusCode
+                        )
                     ) {
                         response.resume();
 
@@ -103,11 +104,18 @@ module.exports = {
                     response.pipe(stream);
 
                     stream.on("finish", () => {
-                        stream.close(resolve);
+                        stream.close(() => {
+                            resolve();
+                        });
                     });
 
                     stream.on("error", err => {
                         stream.close();
+                        reject(err);
+                    });
+
+                    response.on("error", err => {
+                        stream.destroy();
                         reject(err);
                     });
                 });
@@ -122,6 +130,19 @@ module.exports = {
 
                 request.on("error", reject);
             });
+        }
+
+        function removeFile(filePath) {
+            try {
+                if (fs.existsSync(filePath)) {
+                    fs.unlinkSync(filePath);
+                }
+            } catch (error) {
+                console.error(
+                    "❌ File cleanup error:",
+                    error.message
+                );
+            }
         }
 
         try {
@@ -153,19 +174,32 @@ module.exports = {
                 );
             }
 
+            const candidates = results
+                .filter(
+                    item =>
+                        item &&
+                        item.type === "video" &&
+                        item.url
+                )
+                .slice(0, 10);
+
+            if (!candidates.length) {
+                throw new Error(
+                    "No playable YouTube videos found."
+                );
+            }
+
             console.log(
                 `🔍 Found ${results.length} YouTube results.`
             );
 
+            console.log(
+                `🎯 Will try up to ${candidates.length} video results.`
+            );
+
             let selectedVideo = null;
             let audioUrl = null;
-
-            const candidates = results.filter(
-                item =>
-                    item &&
-                    item.type === "video" &&
-                    item.url
-            );
+            let downloaded = false;
 
             for (
                 let i = 0;
@@ -175,55 +209,123 @@ module.exports = {
                 const video = candidates[i];
 
                 console.log(
-                    `🎵 Trying result ${i + 1}/${candidates.length}:`,
+                    `\n🎵 Trying result ${i + 1}/${candidates.length}:`,
                     video.title || video.url
                 );
 
+                let result;
+
                 try {
-                    const result =
-                        await youtube(video.url);
+                    result = await youtube(video.url);
+                } catch (error) {
+                    console.log(
+                        "⚠️ Downloader error:",
+                        error.message
+                    );
+
+                    continue;
+                }
+
+                if (!result || !result.status) {
+                    console.log(
+                        "⚠️ Downloader returned failure. Skipping..."
+                    );
+
+                    continue;
+                }
+
+                if (
+                    typeof result.mp3 !== "string" ||
+                    !result.mp3.trim()
+                ) {
+                    console.log(
+                        "⚠️ No MP3 URL returned. Skipping..."
+                    );
+
+                    continue;
+                }
+
+                console.log(
+                    "🔗 MP3 URL received."
+                );
+
+                removeFile(downloadedFile);
+
+                try {
+                    console.log(
+                        "⬇️ Downloading audio..."
+                    );
+
+                    await downloadFile(
+                        result.mp3,
+                        downloadedFile
+                    );
 
                     if (
-                        !result ||
-                        !result.status
+                        !fs.existsSync(
+                            downloadedFile
+                        )
                     ) {
                         console.log(
-                            "⚠️ Downloader returned failure."
+                            "⚠️ Download file was not created. Trying next result..."
                         );
+
                         continue;
                     }
 
-                    if (!result.mp3) {
+                    const size =
+                        fs.statSync(
+                            downloadedFile
+                        ).size;
+
+                    if (size === 0) {
                         console.log(
-                            "⚠️ No MP3 URL returned. Trying next result..."
+                            "⚠️ Downloaded file is empty. Trying next result..."
                         );
+
+                        removeFile(
+                            downloadedFile
+                        );
+
                         continue;
                     }
+
+                    console.log(
+                        "🎧 Downloaded:",
+                        downloadedFile,
+                        size,
+                        "bytes"
+                    );
 
                     selectedVideo = video;
                     audioUrl = result.mp3;
-
-                    console.log(
-                        "✅ Audio URL found."
-                    );
+                    downloaded = true;
 
                     break;
                 } catch (error) {
                     console.log(
-                        "⚠️ This result failed:",
+                        "⚠️ Audio download failed:",
                         error.message
+                    );
+
+                    removeFile(
+                        downloadedFile
                     );
                 }
             }
 
-            if (!selectedVideo || !audioUrl) {
+            if (
+                !downloaded ||
+                !selectedVideo ||
+                !audioUrl
+            ) {
                 throw new Error(
-                    "No downloadable audio was found among the YouTube results."
+                    "No downloadable audio was found among the available YouTube results."
                 );
             }
 
             console.log(
-                "🎵 Selected:",
+                "\n✅ Selected:",
                 selectedVideo.title ||
                     selectedVideo.url
             );
@@ -234,28 +336,7 @@ module.exports = {
             );
 
             console.log(
-                "⬇️ Downloading audio..."
-            );
-
-            await downloadFile(
-                audioUrl,
-                downloadedFile
-            );
-
-            if (
-                !fs.existsSync(downloadedFile) ||
-                fs.statSync(downloadedFile).size === 0
-            ) {
-                throw new Error(
-                    "Downloaded audio file is empty."
-                );
-            }
-
-            console.log(
-                "🎧 Downloaded:",
-                downloadedFile,
-                fs.statSync(downloadedFile).size,
-                "bytes"
+                "🔄 Converting audio to Opus..."
             );
 
             await new Promise(
@@ -355,26 +436,12 @@ module.exports = {
                 text: t(jid, "play_failed")
             });
         } finally {
-            for (const file of [
-                downloadedFile,
-                output
-            ]) {
-                try {
-                    if (fs.existsSync(file)) {
-                        fs.unlinkSync(file);
+            removeFile(downloadedFile);
+            removeFile(output);
 
-                        console.log(
-                            "🧹 Deleted:",
-                            file
-                        );
-                    }
-                } catch (err) {
-                    console.error(
-                        "❌ Cleanup error:",
-                        err.message
-                    );
-                }
-            }
+            console.log(
+                "🧹 PLAY temporary files cleaned."
+            );
         }
     }
 };
