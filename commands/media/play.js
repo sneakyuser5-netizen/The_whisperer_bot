@@ -1,14 +1,11 @@
-const { t } = require("../../lib/lang");
 const fs = require("fs");
 const path = require("path");
-const https = require("https");
-const http = require("http");
 const { execFile } = require("child_process");
-const { yts, youtube } = require("btch-downloader");
+const { t } = require("../../lib/lang");
 
 module.exports = {
     name: "play",
-    description: "Search and download authorized audio",
+    description: "Search and download audio from SoundCloud",
     category: "media",
     permission: "public",
     usage: ".play <song name>",
@@ -35,6 +32,7 @@ module.exports = {
             mediaDir,
             `${baseName}.mp3`
         );
+
         const output = path.join(
             mediaDir,
             `${baseName}.ogg`
@@ -84,8 +82,7 @@ module.exports = {
                 return true;
             }
 
-            // Allow a strong partial match for longer searches,
-            // but never accept an artist-only unrelated song.
+            // Strong partial match for longer searches.
             if (queryTokens.length >= 2) {
                 const matched = queryTokens.filter(
                     token => titleTokens.has(token)
@@ -98,98 +95,6 @@ module.exports = {
             }
 
             return false;
-        }
-
-        function downloadFile(url, filePath, redirects = 0) {
-            return new Promise((resolve, reject) => {
-                if (redirects > 10) {
-                    reject(new Error("Too many redirects"));
-                    return;
-                }
-
-                const client = url.startsWith("https://")
-                    ? https
-                    : http;
-
-                const request = client.get(url, response => {
-                    if (
-                        [301, 302, 303, 307, 308].includes(
-                            response.statusCode
-                        )
-                    ) {
-                        response.resume();
-
-                        const location =
-                            response.headers.location;
-
-                        if (!location) {
-                            reject(
-                                new Error(
-                                    `Redirect without location: HTTP ${response.statusCode}`
-                                )
-                            );
-                            return;
-                        }
-
-                        downloadFile(
-                            location,
-                            filePath,
-                            redirects + 1
-                        )
-                            .then(resolve)
-                            .catch(reject);
-
-                        return;
-                    }
-
-                    if (
-                        ![200, 206].includes(
-                            response.statusCode
-                        )
-                    ) {
-                        response.resume();
-
-                        reject(
-                            new Error(
-                                `HTTP ${response.statusCode}`
-                            )
-                        );
-
-                        return;
-                    }
-
-                    const stream =
-                        fs.createWriteStream(filePath);
-
-                    response.pipe(stream);
-
-                    stream.on("finish", () => {
-                        stream.close(() => {
-                            resolve();
-                        });
-                    });
-
-                    stream.on("error", err => {
-                        stream.destroy();
-                        reject(err);
-                    });
-
-                    response.on("error", err => {
-                        stream.destroy();
-                        reject(err);
-                    });
-                });
-
-                request.setTimeout(120000, () => {
-                    request.destroy(
-                        new Error(
-                            "Download timed out"
-                        )
-                    );
-                });
-
-                request.on("error", reject);
-            });
         }
 
         function cleanupFile(filePath) {
@@ -210,137 +115,205 @@ module.exports = {
             }
         }
 
+        function runYtDlp(searchQuery, outputTemplate) {
+            return new Promise((resolve, reject) => {
+                const args = [
+                    "--no-playlist",
+                    "--no-warnings",
+                    "--extract-audio",
+                    "--audio-format",
+                    "mp3",
+                    "--output",
+                    outputTemplate,
+                    searchQuery
+                ];
+
+                console.log(
+                    "▶️ Running yt-dlp:",
+                    "yt-dlp",
+                    ...args
+                );
+
+                execFile(
+                    "yt-dlp",
+                    args,
+                    {
+                        maxBuffer:
+                            20 *
+                            1024 *
+                            1024
+                    },
+                    (
+                        error,
+                        stdout,
+                        stderr
+                    ) => {
+                        if (stdout) {
+                            console.log(
+                                stdout
+                            );
+                        }
+
+                        if (stderr) {
+                            console.log(
+                                stderr
+                            );
+                        }
+
+                        if (error) {
+                            reject(error);
+                            return;
+                        }
+
+                        resolve();
+                    }
+                );
+            });
+        }
+
+        function searchSoundCloud(query) {
+            return new Promise((resolve, reject) => {
+                const args = [
+                    "--flat-playlist",
+                    "--playlist-end",
+                    "10",
+                    "--print",
+                    "%(id)s|%(title)s|%(webpage_url)s",
+                    `scsearch10:${query}`
+                ];
+
+                execFile(
+                    "yt-dlp",
+                    args,
+                    {
+                        maxBuffer:
+                            10 *
+                            1024 *
+                            1024
+                    },
+                    (
+                        error,
+                        stdout,
+                        stderr
+                    ) => {
+                        if (error) {
+                            console.error(
+                                "❌ SoundCloud search error:",
+                                stderr ||
+                                    error.message
+                            );
+
+                            reject(error);
+                            return;
+                        }
+
+                        const lines = stdout
+                            .split(/\r?\n/)
+                            .map(line => line.trim())
+                            .filter(Boolean);
+
+                        const results = [];
+
+                        for (const line of lines) {
+                            const parts =
+                                line.split("|");
+
+                            if (
+                                parts.length < 3
+                            ) {
+                                continue;
+                            }
+
+                            const [
+                                id,
+                                title,
+                                url
+                            ] = parts;
+
+                            results.push({
+                                id,
+                                title,
+                                url
+                            });
+                        }
+
+                        resolve(results);
+                    }
+                );
+            });
+        }
+
         try {
             await sock.sendMessage(jid, {
                 text: t(jid, "play_searching")
             });
 
             console.log(
-                "🔎 Searching YouTube:",
+                "🔎 Searching SoundCloud:",
                 query
             );
 
-            const search = await yts(query);
-
-            if (!search || !search.status) {
-                throw new Error(
-                    "YouTube search failed."
-                );
-            }
-
             const results =
-                search.result?.videos ||
-                search.result?.all ||
-                [];
+                await searchSoundCloud(query);
+
+            console.log(
+                `🎯 SoundCloud returned ${results.length} result(s).`
+            );
 
             if (!results.length) {
                 throw new Error(
-                    "No YouTube results found."
+                    "No SoundCloud results found."
                 );
             }
 
-            /*
-             * IMPORTANT:
-             * Only use videos whose titles match the
-             * requested song.
-             *
-             * This prevents:
-             *
-             * ".play Pana"
-             *
-             * from silently becoming another Tekno song.
-             */
-            const matchingVideos = results.filter(
-                item =>
+            const matchingResults =
+                results.filter(item =>
                     item &&
-                    item.type === "video" &&
                     item.url &&
                     matchesRequestedSong(
                         item.title || "",
                         query
                     )
-            );
+                );
 
             console.log(
-                `🎯 Found ${matchingVideos.length} matching result(s) for:`,
+                `🎵 Found ${matchingResults.length} matching SoundCloud result(s) for:`,
                 query
             );
 
-            if (!matchingVideos.length) {
+            if (!matchingResults.length) {
                 throw new Error(
-                    "No YouTube result matched the requested song."
+                    "No SoundCloud result matched the requested song."
                 );
             }
 
-            let selectedVideo = null;
-            let selectedMp3 = null;
+            let selectedResult = null;
 
-            /*
-             * Try matching uploads one by one.
-             *
-             * We NEVER try an unrelated artist song.
-             */
             for (
                 let i = 0;
-                i < matchingVideos.length;
+                i < matchingResults.length;
                 i++
             ) {
-                const video = matchingVideos[i];
+                const result =
+                    matchingResults[i];
 
                 console.log(
-                    `🎵 Trying matching result ${i + 1}/${matchingVideos.length}:`,
-                    video.title
+                    `🎵 Trying matching SoundCloud result ${i + 1}/${matchingResults.length}:`,
+                    result.title
                 );
 
                 console.log(
-                    "🔗 YouTube URL:",
-                    video.url
+                    "🔗 SoundCloud URL:",
+                    result.url
                 );
 
-                let result;
-
-                try {
-                    result = await youtube(video.url);
-                } catch (error) {
-                    console.error(
-                        "⚠️ Downloader error:",
-                        error.message
-                    );
-
-                    continue;
-                }
-
-                if (
-                    !result ||
-                    !result.status
-                ) {
-                    console.log(
-                        "⚠️ Downloader did not return a valid result."
-                    );
-
-                    continue;
-                }
-
-                if (
-                    typeof result.mp3 !== "string" ||
-                    !result.mp3.trim()
-                ) {
-                    console.log(
-                        "⚠️ No MP3 URL for this matching result."
-                    );
-
-                    continue;
-                }
-
-                console.log(
-                    "🔗 MP3 URL received."
+                cleanupFile(
+                    downloadedFile
                 );
 
                 try {
-                    cleanupFile(downloadedFile);
-
-                    await downloadFile(
-                        result.mp3,
+                    await runYtDlp(
+                        result.url,
                         downloadedFile
                     );
 
@@ -350,7 +323,7 @@ module.exports = {
                         )
                     ) {
                         console.log(
-                            "⚠️ Download file was not created."
+                            "⚠️ yt-dlp did not create the MP3 file."
                         );
 
                         continue;
@@ -363,7 +336,7 @@ module.exports = {
 
                     if (size === 0) {
                         console.log(
-                            "⚠️ Downloaded file is empty."
+                            "⚠️ Downloaded MP3 is empty."
                         );
 
                         cleanupFile(
@@ -379,13 +352,13 @@ module.exports = {
                         "bytes"
                     );
 
-                    selectedVideo = video;
-                    selectedMp3 = result.mp3;
+                    selectedResult =
+                        result;
 
                     break;
                 } catch (error) {
                     console.error(
-                        "⚠️ Download failed for this matching result:",
+                        "⚠️ SoundCloud download failed:",
                         error.message
                     );
 
@@ -395,23 +368,20 @@ module.exports = {
                 }
             }
 
-            if (
-                !selectedVideo ||
-                !selectedMp3
-            ) {
+            if (!selectedResult) {
                 throw new Error(
                     "No downloadable version of the requested song was found."
                 );
             }
 
             console.log(
-                "✅ Selected matching downloadable song:",
-                selectedVideo.title
+                "✅ Selected SoundCloud song:",
+                selectedResult.title
             );
 
             console.log(
                 "🔗 Selected URL:",
-                selectedVideo.url
+                selectedResult.url
             );
 
             console.log(
@@ -478,7 +448,9 @@ module.exports = {
             }
 
             const outputSize =
-                fs.statSync(output).size;
+                fs.statSync(
+                    output
+                ).size;
 
             if (outputSize === 0) {
                 throw new Error(
@@ -519,12 +491,24 @@ module.exports = {
                 error
             );
 
-            await sock.sendMessage(jid, {
-                text: t(jid, "play_failed")
-            });
+            try {
+                await sock.sendMessage(jid, {
+                    text: t(jid, "play_failed")
+                });
+            } catch (sendError) {
+                console.error(
+                    "❌ Failed to send error message:",
+                    sendError.message
+                );
+            }
         } finally {
-            cleanupFile(downloadedFile);
-            cleanupFile(output);
+            cleanupFile(
+                downloadedFile
+            );
+
+            cleanupFile(
+                output
+            );
 
             console.log(
                 "🧹 PLAY temporary files cleaned."
