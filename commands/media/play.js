@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const { execFile } = require("child_process");
+const ytDlp = require("youtube-dl-exec");
 const { t } = require("../../lib/lang");
 
 module.exports = {
@@ -28,6 +29,7 @@ module.exports = {
         }
 
         const baseName = `play-${Date.now()}`;
+
         const downloadedFile = path.join(
             mediaDir,
             `${baseName}.mp3`
@@ -61,7 +63,6 @@ module.exports = {
                 return false;
             }
 
-            // Exact phrase match.
             if (normalizedTitle.includes(normalizedQuery)) {
                 return true;
             }
@@ -73,7 +74,6 @@ module.exports = {
                 return false;
             }
 
-            // Every requested word must appear in the title.
             const allTokensPresent = queryTokens.every(
                 token => titleTokens.has(token)
             );
@@ -82,16 +82,14 @@ module.exports = {
                 return true;
             }
 
-            // Strong partial match for longer searches.
             if (queryTokens.length >= 2) {
                 const matched = queryTokens.filter(
                     token => titleTokens.has(token)
                 ).length;
 
-                const ratio =
-                    matched / queryTokens.length;
-
-                return ratio >= 0.8;
+                return (
+                    matched / queryTokens.length >= 0.8
+                );
             }
 
             return false;
@@ -115,132 +113,62 @@ module.exports = {
             }
         }
 
-        function runYtDlp(searchQuery, outputTemplate) {
-            return new Promise((resolve, reject) => {
-                const args = [
-                    "--no-playlist",
-                    "--no-warnings",
-                    "--extract-audio",
-                    "--audio-format",
-                    "mp3",
-                    "--output",
-                    outputTemplate,
-                    searchQuery
-                ];
+        async function searchSoundCloud(searchQuery) {
+            console.log(
+                "🔎 yt-dlp SoundCloud search:",
+                searchQuery
+            );
 
-                console.log(
-                    "▶️ Running yt-dlp:",
-                    "yt-dlp",
-                    ...args
-                );
+            const result = await ytDlp(
+                `scsearch10:${searchQuery}`,
+                {
+                    flatPlaylist: true,
+                    dumpSingleJson: true,
+                    noWarnings: true,
+                    skipDownload: true
+                }
+            );
 
-                execFile(
-                    "yt-dlp",
-                    args,
-                    {
-                        maxBuffer:
-                            20 *
-                            1024 *
-                            1024
-                    },
-                    (
-                        error,
-                        stdout,
-                        stderr
-                    ) => {
-                        if (stdout) {
-                            console.log(
-                                stdout
-                            );
-                        }
+            if (!result) {
+                return [];
+            }
 
-                        if (stderr) {
-                            console.log(
-                                stderr
-                            );
-                        }
+            const entries =
+                Array.isArray(result.entries)
+                    ? result.entries
+                    : [];
 
-                        if (error) {
-                            reject(error);
-                            return;
-                        }
-
-                        resolve();
-                    }
-                );
-            });
+            return entries
+                .filter(Boolean)
+                .map(item => ({
+                    id: item.id,
+                    title: item.title || "",
+                    url:
+                        item.webpage_url ||
+                        item.url ||
+                        ""
+                }));
         }
 
-        function searchSoundCloud(query) {
-            return new Promise((resolve, reject) => {
-                const args = [
-                    "--flat-playlist",
-                    "--playlist-end",
-                    "10",
-                    "--print",
-                    "%(id)s|%(title)s|%(webpage_url)s",
-                    `scsearch10:${query}`
-                ];
+        async function downloadSoundCloud(
+            url,
+            filePath
+        ) {
+            console.log(
+                "⬇️ Downloading with bundled yt-dlp:",
+                url
+            );
 
-                execFile(
-                    "yt-dlp",
-                    args,
-                    {
-                        maxBuffer:
-                            10 *
-                            1024 *
-                            1024
-                    },
-                    (
-                        error,
-                        stdout,
-                        stderr
-                    ) => {
-                        if (error) {
-                            console.error(
-                                "❌ SoundCloud search error:",
-                                stderr ||
-                                    error.message
-                            );
-
-                            reject(error);
-                            return;
-                        }
-
-                        const lines = stdout
-                            .split(/\r?\n/)
-                            .map(line => line.trim())
-                            .filter(Boolean);
-
-                        const results = [];
-
-                        for (const line of lines) {
-                            const parts =
-                                line.split("|");
-
-                            if (
-                                parts.length < 3
-                            ) {
-                                continue;
-                            }
-
-                            const [
-                                id,
-                                title,
-                                url
-                            ] = parts;
-
-                            results.push({
-                                id,
-                                title,
-                                url
-                            });
-                        }
-
-                        resolve(results);
-                    }
-                );
-            });
+            await ytDlp(
+                url,
+                {
+                    noPlaylist: true,
+                    extractAudio: true,
+                    audioFormat: "mp3",
+                    output: filePath,
+                    noWarnings: true
+                }
+            );
         }
 
         try {
@@ -268,16 +196,15 @@ module.exports = {
 
             const matchingResults =
                 results.filter(item =>
-                    item &&
                     item.url &&
                     matchesRequestedSong(
-                        item.title || "",
+                        item.title,
                         query
                     )
                 );
 
             console.log(
-                `🎵 Found ${matchingResults.length} matching SoundCloud result(s) for:`,
+                `🎵 Found ${matchingResults.length} matching result(s) for:`,
                 query
             );
 
@@ -298,7 +225,7 @@ module.exports = {
                     matchingResults[i];
 
                 console.log(
-                    `🎵 Trying matching SoundCloud result ${i + 1}/${matchingResults.length}:`,
+                    `🎵 Trying result ${i + 1}/${matchingResults.length}:`,
                     result.title
                 );
 
@@ -312,7 +239,7 @@ module.exports = {
                 );
 
                 try {
-                    await runYtDlp(
+                    await downloadSoundCloud(
                         result.url,
                         downloadedFile
                     );
@@ -323,7 +250,7 @@ module.exports = {
                         )
                     ) {
                         console.log(
-                            "⚠️ yt-dlp did not create the MP3 file."
+                            "⚠️ yt-dlp did not create the MP3."
                         );
 
                         continue;
@@ -375,7 +302,7 @@ module.exports = {
             }
 
             console.log(
-                "✅ Selected SoundCloud song:",
+                "✅ Selected song:",
                 selectedResult.title
             );
 
