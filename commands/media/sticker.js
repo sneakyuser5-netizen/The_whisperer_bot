@@ -1,7 +1,7 @@
 const { t } = require("../../lib/lang");
 const fs = require("fs");
 const path = require("path");
-const { execFile } = require("child_process");
+const { spawn } = require("child_process");
 
 module.exports = {
     name: "sticker",
@@ -35,9 +35,14 @@ module.exports = {
             });
         }
 
-        const mediaDir = path.join(
+        const rootDir = path.resolve(
             __dirname,
-            "../../media"
+            "../.."
+        );
+
+        const mediaDir = path.join(
+            rootDir,
+            "media"
         );
 
         if (!fs.existsSync(mediaDir)) {
@@ -47,7 +52,10 @@ module.exports = {
         }
 
         const baseName = `telegram-sticker-${Date.now()}`;
-        const packDir = path.join(mediaDir, baseName);
+        const packDir = path.join(
+            mediaDir,
+            baseName
+        );
 
         fs.mkdirSync(packDir, {
             recursive: true
@@ -62,76 +70,127 @@ module.exports = {
                 text: t(jid, "sticker_downloading")
             });
 
+            console.log(
+                `🎨 TELEGRAM STICKER: starting download for ${link}`
+            );
+
+            console.log(
+                `🎨 TELEGRAM STICKER: output directory = ${packDir}`
+            );
+
+            // ==========================================
+            // FIND PYTHON
+            // ==========================================
+
+            const venvPython = path.join(
+                rootDir,
+                ".venv",
+                "bin",
+                "python"
+            );
+
+            const pythonCommand = fs.existsSync(venvPython)
+                ? venvPython
+                : "python3";
+
+            console.log(
+                `🐍 TELEGRAM STICKER: Python = ${pythonCommand}`
+            );
+
+            const pythonScript = path.join(
+                rootDir,
+                "lib",
+                "telegram_stickers.py"
+            );
+
+            console.log(
+                `🐍 TELEGRAM STICKER: script = ${pythonScript}`
+            );
+
             // ==========================================
             // DOWNLOAD TELEGRAM STICKERS WITH TELETHON
+            // LIVE OUTPUT
             // ==========================================
 
             await new Promise((resolve, reject) => {
-                execFile(
-                    fs.existsSync(
-                        path.join(
-                            path.resolve(__dirname, "../.."),
-                            ".venv",
-                            "bin",
-                            "python"
-                        )
-                    )
-                        ? path.join(
-                            path.resolve(__dirname, "../.."),
-                            ".venv",
-                            "bin",
-                            "python"
-                        )
-                        : "python3",
+                console.log(
+                    "🐍 TELEGRAM STICKER: launching Python process..."
+                );
+
+                const child = spawn(
+                    pythonCommand,
                     [
-                        path.join(
-                            path.resolve(__dirname, "../.."),
-                            "lib",
-                            "telegram_stickers.py"
-                        ),
+                        "-u",
+                        pythonScript,
                         link,
                         packDir
                     ],
                     {
-                        maxBuffer: 20 * 1024 * 1024
-                    },
-                    (error, stdout, stderr) => {
-                        if (stdout) {
-                            console.log(
-                                "TELEGRAM STICKER:",
-                                stdout
-                            );
+                        cwd: rootDir,
+                        env: {
+                            ...process.env,
+                            PYTHONUNBUFFERED: "1"
                         }
-
-                        if (stderr) {
-                            console.error(
-                                "TELEGRAM STICKER STDERR:",
-                                stderr
-                            );
-                        }
-
-                        if (error) {
-                            console.error(
-                                "TELEGRAM STICKER ERROR:",
-                                error.message
-                            );
-
-                            reject(error);
-                            return;
-                        }
-
-                        resolve();
                     }
                 );
+
+                let stderrBuffer = "";
+                let stdoutBuffer = "";
+
+                child.stdout.on("data", data => {
+                    const text = data.toString();
+
+                    stdoutBuffer += text;
+
+                    console.log(
+                        "🐍 TELEGRAM PYTHON:",
+                        text.trimEnd()
+                    );
+                });
+
+                child.stderr.on("data", data => {
+                    const text = data.toString();
+
+                    stderrBuffer += text;
+
+                    console.error(
+                        "🐍 TELEGRAM PYTHON STDERR:",
+                        text.trimEnd()
+                    );
+                });
+
+                child.on("error", error => {
+                    console.error(
+                        "🐍 TELEGRAM PYTHON SPAWN ERROR:",
+                        error
+                    );
+
+                    reject(error);
+                });
+
+                child.on("close", code => {
+                    console.log(
+                        `🐍 TELEGRAM PYTHON: process exited with code ${code}`
+                    );
+
+                    if (code !== 0) {
+                        const error = new Error(
+                            `Telegram sticker downloader exited with code ${code}`
+                        );
+
+                        error.stdout = stdoutBuffer;
+                        error.stderr = stderrBuffer;
+
+                        reject(error);
+                        return;
+                    }
+
+                    resolve();
+                });
             });
 
             // ==========================================
-            // PROCESS TELEGRAM STICKERS
-            //
-            // WEBP    = send directly
-            // WEBM    = convert to animated WEBP
-            // TGS     = convert with Lottie converter
-            // UNKNOWN = skip safely
+            // VERIFY DOWNLOAD DIRECTORY
             // ==========================================
 
             if (!fs.existsSync(packDir)) {
@@ -140,10 +199,9 @@ module.exports = {
                 );
             }
 
-            const rootDir = path.resolve(
-                __dirname,
-                "../.."
-            );
+            // ==========================================
+            // PROCESS TELEGRAM STICKERS
+            // ==========================================
 
             const converter = path.join(
                 rootDir,
@@ -181,6 +239,10 @@ module.exports = {
                 );
             }
 
+            // ==========================================
+            // PROCESS EACH STICKER
+            // ==========================================
+
             for (const file of files) {
                 const inputFile = path.join(
                     packDir,
@@ -188,7 +250,7 @@ module.exports = {
                 );
 
                 // ==========================================
-                // WEBP = ALREADY READY
+                // WEBP
                 // ==========================================
 
                 if (/\.webp$/i.test(file)) {
@@ -200,7 +262,7 @@ module.exports = {
                 }
 
                 // ==========================================
-                // WEBM = CONVERT TO ANIMATED WEBP
+                // WEBM
                 // ==========================================
 
                 if (/\.webm$/i.test(file)) {
@@ -217,7 +279,7 @@ module.exports = {
                     );
 
                     await new Promise((resolve, reject) => {
-                        execFile(
+                        const ffmpeg = spawn(
                             "ffmpeg",
                             [
                                 "-y",
@@ -232,49 +294,48 @@ module.exports = {
                                 "-q:v",
                                 "75",
                                 outputFile
-                            ],
-                            {
-                                maxBuffer: 20 * 1024 * 1024
-                            },
-                            (error, stdout, stderr) => {
-                                if (stdout) {
-                                    console.log(
-                                        "FFMPEG:",
-                                        stdout
-                                    );
-                                }
-
-                                if (stderr) {
-                                    console.error(
-                                        "FFMPEG STDERR:",
-                                        stderr
-                                    );
-                                }
-
-                                if (error) {
-                                    console.error(
-                                        `FFMPEG ERROR ${file}:`,
-                                        error.message
-                                    );
-
-                                    reject(error);
-                                    return;
-                                }
-
-                                console.log(
-                                    `🎬 WebM converted successfully: ${file}`
-                                );
-
-                                resolve();
-                            }
+                            ]
                         );
+
+                        ffmpeg.stdout.on("data", data => {
+                            console.log(
+                                "FFMPEG:",
+                                data.toString().trimEnd()
+                            );
+                        });
+
+                        ffmpeg.stderr.on("data", data => {
+                            console.error(
+                                "FFMPEG STDERR:",
+                                data.toString().trimEnd()
+                            );
+                        });
+
+                        ffmpeg.on("error", reject);
+
+                        ffmpeg.on("close", code => {
+                            if (code !== 0) {
+                                reject(
+                                    new Error(
+                                        `FFmpeg exited with code ${code} for ${file}`
+                                    )
+                                );
+                                return;
+                            }
+
+                            console.log(
+                                `🎬 WebM converted successfully: ${file}`
+                            );
+
+                            resolve();
+                        });
                     });
 
                     continue;
                 }
 
                 // ==========================================
-                // UNKNOWN = SKIP SAFELY
+                // UNKNOWN
                 // ==========================================
 
                 if (/\.unknown$/i.test(file)) {
@@ -286,7 +347,7 @@ module.exports = {
                 }
 
                 // ==========================================
-                // TGS = USE LOTTIE CONVERTER
+                // TGS
                 // ==========================================
 
                 if (/\.tgs$/i.test(file)) {
@@ -309,7 +370,11 @@ module.exports = {
                     );
 
                     await new Promise((resolve, reject) => {
-                        execFile(
+                        console.log(
+                            `🎨 LOTTIE: starting converter for ${file}`
+                        );
+
+                        const lottie = spawn(
                             converter,
                             [
                                 "--output",
@@ -317,36 +382,49 @@ module.exports = {
                                 inputFile
                             ],
                             {
-                                maxBuffer: 20 * 1024 * 1024
-                            },
-                            (error, stdout, stderr) => {
-                                if (stdout) {
-                                    console.log(
-                                        "LOTTIE CONVERTER:",
-                                        stdout
-                                    );
-                                }
-
-                                if (stderr) {
-                                    console.error(
-                                        "LOTTIE CONVERTER STDERR:",
-                                        stderr
-                                    );
-                                }
-
-                                if (error) {
-                                    console.error(
-                                        `LOTTIE CONVERTER ERROR ${file}:`,
-                                        error.message
-                                    );
-
-                                    reject(error);
-                                    return;
-                                }
-
-                                resolve();
+                                cwd: rootDir
                             }
                         );
+
+                        lottie.stdout.on("data", data => {
+                            console.log(
+                                "LOTTIE:",
+                                data.toString().trimEnd()
+                            );
+                        });
+
+                        lottie.stderr.on("data", data => {
+                            console.error(
+                                "LOTTIE STDERR:",
+                                data.toString().trimEnd()
+                            );
+                        });
+
+                        lottie.on("error", error => {
+                            console.error(
+                                `LOTTIE SPAWN ERROR ${file}:`,
+                                error
+                            );
+
+                            reject(error);
+                        });
+
+                        lottie.on("close", code => {
+                            if (code !== 0) {
+                                reject(
+                                    new Error(
+                                        `Lottie converter exited with code ${code} for ${file}`
+                                    )
+                                );
+                                return;
+                            }
+
+                            console.log(
+                                `🎨 Lottie converted successfully: ${file}`
+                            );
+
+                            resolve();
+                        });
                     });
                 }
             }
@@ -385,7 +463,7 @@ module.exports = {
             }
 
             // ==========================================
-            // SEND STICKERS TO WHATSAPP
+            // SEND STICKERS
             // ==========================================
 
             let sent = 0;
@@ -409,7 +487,10 @@ module.exports = {
 
                     sent++;
 
-                    // Prevent flooding WhatsApp
+                    console.log(
+                        `🎨 WhatsApp sticker sent: ${file}`
+                    );
+
                     await new Promise(resolve =>
                         setTimeout(resolve, 200)
                     );
@@ -430,6 +511,10 @@ module.exports = {
                     "No stickers could be sent."
                 );
             }
+
+            console.log(
+                `🎨 Telegram sticker command completed: ${sent} stickers sent.`
+            );
 
             // ==========================================
             // SUCCESS
