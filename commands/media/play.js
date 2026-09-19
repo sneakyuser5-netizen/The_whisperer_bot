@@ -110,7 +110,7 @@ module.exports = {
                     });
 
                     stream.on("error", err => {
-                        stream.close();
+                        stream.destroy();
                         reject(err);
                     });
 
@@ -132,14 +132,18 @@ module.exports = {
             });
         }
 
-        function removeFile(filePath) {
+        function cleanupFile(filePath) {
             try {
                 if (fs.existsSync(filePath)) {
                     fs.unlinkSync(filePath);
+                    console.log(
+                        "🧹 Deleted:",
+                        filePath
+                    );
                 }
             } catch (error) {
                 console.error(
-                    "❌ File cleanup error:",
+                    "❌ Cleanup error:",
                     error.message
                 );
             }
@@ -174,165 +178,95 @@ module.exports = {
                 );
             }
 
-            const candidates = results
-                .filter(
-                    item =>
-                        item &&
-                        item.type === "video" &&
-                        item.url
-                )
-                .slice(0, 10);
-
-            if (!candidates.length) {
-                throw new Error(
-                    "No playable YouTube videos found."
-                );
-            }
-
-            console.log(
-                `🔍 Found ${results.length} YouTube results.`
+            const video = results.find(
+                item =>
+                    item &&
+                    item.type === "video" &&
+                    item.url
             );
 
-            console.log(
-                `🎯 Will try up to ${candidates.length} video results.`
-            );
-
-            let selectedVideo = null;
-            let audioUrl = null;
-            let downloaded = false;
-
-            for (
-                let i = 0;
-                i < candidates.length;
-                i++
-            ) {
-                const video = candidates[i];
-
-                console.log(
-                    `\n🎵 Trying result ${i + 1}/${candidates.length}:`,
-                    video.title || video.url
-                );
-
-                let result;
-
-                try {
-                    result = await youtube(video.url);
-                } catch (error) {
-                    console.log(
-                        "⚠️ Downloader error:",
-                        error.message
-                    );
-
-                    continue;
-                }
-
-                if (!result || !result.status) {
-                    console.log(
-                        "⚠️ Downloader returned failure. Skipping..."
-                    );
-
-                    continue;
-                }
-
-                if (
-                    typeof result.mp3 !== "string" ||
-                    !result.mp3.trim()
-                ) {
-                    console.log(
-                        "⚠️ No MP3 URL returned. Skipping..."
-                    );
-
-                    continue;
-                }
-
-                console.log(
-                    "🔗 MP3 URL received."
-                );
-
-                removeFile(downloadedFile);
-
-                try {
-                    console.log(
-                        "⬇️ Downloading audio..."
-                    );
-
-                    await downloadFile(
-                        result.mp3,
-                        downloadedFile
-                    );
-
-                    if (
-                        !fs.existsSync(
-                            downloadedFile
-                        )
-                    ) {
-                        console.log(
-                            "⚠️ Download file was not created. Trying next result..."
-                        );
-
-                        continue;
-                    }
-
-                    const size =
-                        fs.statSync(
-                            downloadedFile
-                        ).size;
-
-                    if (size === 0) {
-                        console.log(
-                            "⚠️ Downloaded file is empty. Trying next result..."
-                        );
-
-                        removeFile(
-                            downloadedFile
-                        );
-
-                        continue;
-                    }
-
-                    console.log(
-                        "🎧 Downloaded:",
-                        downloadedFile,
-                        size,
-                        "bytes"
-                    );
-
-                    selectedVideo = video;
-                    audioUrl = result.mp3;
-                    downloaded = true;
-
-                    break;
-                } catch (error) {
-                    console.log(
-                        "⚠️ Audio download failed:",
-                        error.message
-                    );
-
-                    removeFile(
-                        downloadedFile
-                    );
-                }
-            }
-
-            if (
-                !downloaded ||
-                !selectedVideo ||
-                !audioUrl
-            ) {
+            if (!video || !video.url) {
                 throw new Error(
-                    "No downloadable audio was found among the available YouTube results."
+                    "Could not find a playable YouTube video."
                 );
             }
 
             console.log(
-                "\n✅ Selected:",
-                selectedVideo.title ||
-                    selectedVideo.url
+                "🎵 Selected exact search result:",
+                video.title || video.url
             );
 
             console.log(
                 "🔗 YouTube URL:",
-                selectedVideo.url
+                video.url
+            );
+
+            console.log(
+                "🎯 Requesting audio for this exact video..."
+            );
+
+            let result;
+
+            try {
+                result = await youtube(video.url);
+            } catch (error) {
+                throw new Error(
+                    `YouTube audio downloader failed: ${error.message}`
+                );
+            }
+
+            if (!result || !result.status) {
+                throw new Error(
+                    "YouTube audio downloader failed for the selected video."
+                );
+            }
+
+            if (
+                typeof result.mp3 !== "string" ||
+                !result.mp3.trim()
+            ) {
+                throw new Error(
+                    "The selected YouTube video has no downloadable MP3 URL."
+                );
+            }
+
+            console.log(
+                "🔗 MP3 URL received for selected video."
+            );
+
+            console.log(
+                "⬇️ Downloading audio..."
+            );
+
+            await downloadFile(
+                result.mp3,
+                downloadedFile
+            );
+
+            if (
+                !fs.existsSync(downloadedFile)
+            ) {
+                throw new Error(
+                    "Downloaded audio file was not created."
+                );
+            }
+
+            const downloadedSize =
+                fs.statSync(
+                    downloadedFile
+                ).size;
+
+            if (downloadedSize === 0) {
+                throw new Error(
+                    "Downloaded audio file is empty."
+                );
+            }
+
+            console.log(
+                "🎧 Downloaded:",
+                downloadedFile,
+                downloadedSize,
+                "bytes"
             );
 
             console.log(
@@ -391,18 +325,26 @@ module.exports = {
             );
 
             if (
-                !fs.existsSync(output) ||
-                fs.statSync(output).size === 0
+                !fs.existsSync(output)
             ) {
                 throw new Error(
                     "Final OGG/Opus file was not created."
                 );
             }
 
+            const outputSize =
+                fs.statSync(output).size;
+
+            if (outputSize === 0) {
+                throw new Error(
+                    "Final OGG/Opus file is empty."
+                );
+            }
+
             console.log(
                 "🎧 Final audio:",
                 output,
-                fs.statSync(output).size,
+                outputSize,
                 "bytes"
             );
 
@@ -426,18 +368,18 @@ module.exports = {
             console.log(
                 "✅ PLAY completed successfully."
             );
-        } catch (err) {
+        } catch (error) {
             console.error(
                 "❌ PLAY ERROR:",
-                err
+                error
             );
 
             await sock.sendMessage(jid, {
                 text: t(jid, "play_failed")
             });
         } finally {
-            removeFile(downloadedFile);
-            removeFile(output);
+            cleanupFile(downloadedFile);
+            cleanupFile(output);
 
             console.log(
                 "🧹 PLAY temporary files cleaned."
