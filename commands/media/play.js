@@ -114,40 +114,118 @@ module.exports = {
         }
 
         async function searchSoundCloud(searchQuery) {
-            console.log(
-                "🔎 yt-dlp SoundCloud search:",
-                searchQuery
-            );
+            const normalized = searchQuery
+                .replace(/\s+/g, " ")
+                .trim();
 
-            const result = await ytDlp(
-                `scsearch10:${searchQuery}`,
-                {
-                    flatPlaylist: true,
-                    dumpSingleJson: true,
-                    noWarnings: true,
-                    skipDownload: true
-                }
-            );
+            const words = normalized.split(" ").filter(Boolean);
 
-            if (!result) {
-                return [];
+            const searchQueries = [];
+
+            // Original full query
+            searchQueries.push(normalized);
+
+            // Remove common feature words and retry
+            const withoutFeatures = normalized
+                .replace(/\b(feat|ft|featuring)\b/gi, " ")
+                .replace(/\s+/g, " ")
+                .trim();
+
+            if (
+                withoutFeatures &&
+                withoutFeatures !== normalized
+            ) {
+                searchQueries.push(withoutFeatures);
             }
 
-            const entries =
-                Array.isArray(result.entries)
-                    ? result.entries
-                    : [];
+            // Try artist/title portions separately
+            if (words.length >= 3) {
+                searchQueries.push(
+                    words.slice(0, 2).join(" ")
+                );
 
-            return entries
-                .filter(Boolean)
-                .map(item => ({
-                    id: item.id,
-                    title: item.title || "",
-                    url:
-                        item.webpage_url ||
-                        item.url ||
-                        ""
-                }));
+                searchQueries.push(
+                    words.slice(-2).join(" ")
+                );
+            }
+
+            // Remove duplicate searches
+            const uniqueQueries = [
+                ...new Set(
+                    searchQueries.filter(Boolean)
+                )
+            ];
+
+            console.log(
+                "🔎 SoundCloud search variations:",
+                uniqueQueries
+            );
+
+            const allResults = [];
+            const seenUrls = new Set();
+
+            for (const searchTerm of uniqueQueries) {
+                try {
+                    console.log(
+                        "🔎 Searching SoundCloud:",
+                        searchTerm
+                    );
+
+                    const result = await ytDlp(
+                        `scsearch10:${searchTerm}`,
+                        {
+                            flatPlaylist: true,
+                            dumpSingleJson: true,
+                            noWarnings: true,
+                            skipDownload: true
+                        }
+                    );
+
+                    const entries =
+                        result &&
+                        Array.isArray(result.entries)
+                            ? result.entries
+                            : [];
+
+                    console.log(
+                        `🎯 "${searchTerm}" returned ${entries.length} result(s).`
+                    );
+
+                    for (const item of entries) {
+                        if (!item) {
+                            continue;
+                        }
+
+                        const url =
+                            item.webpage_url ||
+                            item.url ||
+                            "";
+
+                        if (!url || seenUrls.has(url)) {
+                            continue;
+                        }
+
+                        seenUrls.add(url);
+
+                        allResults.push({
+                            id: item.id,
+                            title: item.title || "",
+                            url
+                        });
+                    }
+                } catch (error) {
+                    console.error(
+                        `⚠️ SoundCloud search failed for "${searchTerm}":`,
+                        error.message
+                    );
+                }
+            }
+
+            console.log(
+                `🎯 Combined SoundCloud results: ${allResults.length}`
+            );
+
+            return allResults;
         }
 
         async function downloadSoundCloud(
