@@ -40,6 +40,66 @@ module.exports = {
             `${baseName}.ogg`
         );
 
+        function normalizeText(text = "") {
+            return text
+                .normalize("NFD")
+                .replace(/[\u0300-\u036f]/g, "")
+                .toLowerCase()
+                .replace(/[^a-z0-9]+/g, " ")
+                .trim();
+        }
+
+        function getTokens(text = "") {
+            return normalizeText(text)
+                .split(/\s+/)
+                .filter(Boolean);
+        }
+
+        function matchesRequestedSong(title, requested) {
+            const normalizedTitle = normalizeText(title);
+            const normalizedQuery = normalizeText(requested);
+
+            if (!normalizedTitle || !normalizedQuery) {
+                return false;
+            }
+
+            // Exact phrase match.
+            if (normalizedTitle.includes(normalizedQuery)) {
+                return true;
+            }
+
+            const queryTokens = getTokens(requested);
+            const titleTokens = new Set(getTokens(title));
+
+            if (!queryTokens.length) {
+                return false;
+            }
+
+            // Every requested word must appear in the title.
+            const allTokensPresent = queryTokens.every(
+                token => titleTokens.has(token)
+            );
+
+            if (allTokensPresent) {
+                return true;
+            }
+
+            // Allow a strong partial match for longer searches,
+            // but never accept an artist-only unrelated song.
+            if (queryTokens.length >= 2) {
+                const matched = queryTokens.filter(
+                    token => titleTokens.has(token)
+                ).length;
+
+                const ratio =
+                    matched / queryTokens.length;
+
+                return ratio >= 0.8;
+            }
+
+            return false;
+        }
+
         function downloadFile(url, filePath, redirects = 0) {
             return new Promise((resolve, reject) => {
                 if (redirects > 10) {
@@ -136,6 +196,7 @@ module.exports = {
             try {
                 if (fs.existsSync(filePath)) {
                     fs.unlinkSync(filePath);
+
                     console.log(
                         "🧹 Deleted:",
                         filePath
@@ -178,95 +239,179 @@ module.exports = {
                 );
             }
 
-            const video = results.find(
+            /*
+             * IMPORTANT:
+             * Only use videos whose titles match the
+             * requested song.
+             *
+             * This prevents:
+             *
+             * ".play Pana"
+             *
+             * from silently becoming another Tekno song.
+             */
+            const matchingVideos = results.filter(
                 item =>
                     item &&
                     item.type === "video" &&
-                    item.url
+                    item.url &&
+                    matchesRequestedSong(
+                        item.title || "",
+                        query
+                    )
             );
 
-            if (!video || !video.url) {
+            console.log(
+                `🎯 Found ${matchingVideos.length} matching result(s) for:`,
+                query
+            );
+
+            if (!matchingVideos.length) {
                 throw new Error(
-                    "Could not find a playable YouTube video."
+                    "No YouTube result matched the requested song."
                 );
             }
 
-            console.log(
-                "🎵 Selected exact search result:",
-                video.title || video.url
-            );
+            let selectedVideo = null;
+            let selectedMp3 = null;
 
-            console.log(
-                "🔗 YouTube URL:",
-                video.url
-            );
+            /*
+             * Try matching uploads one by one.
+             *
+             * We NEVER try an unrelated artist song.
+             */
+            for (
+                let i = 0;
+                i < matchingVideos.length;
+                i++
+            ) {
+                const video = matchingVideos[i];
 
-            console.log(
-                "🎯 Requesting audio for this exact video..."
-            );
-
-            let result;
-
-            try {
-                result = await youtube(video.url);
-            } catch (error) {
-                throw new Error(
-                    `YouTube audio downloader failed: ${error.message}`
+                console.log(
+                    `🎵 Trying matching result ${i + 1}/${matchingVideos.length}:`,
+                    video.title
                 );
-            }
 
-            if (!result || !result.status) {
-                throw new Error(
-                    "YouTube audio downloader failed for the selected video."
+                console.log(
+                    "🔗 YouTube URL:",
+                    video.url
                 );
+
+                let result;
+
+                try {
+                    result = await youtube(video.url);
+                } catch (error) {
+                    console.error(
+                        "⚠️ Downloader error:",
+                        error.message
+                    );
+
+                    continue;
+                }
+
+                if (
+                    !result ||
+                    !result.status
+                ) {
+                    console.log(
+                        "⚠️ Downloader did not return a valid result."
+                    );
+
+                    continue;
+                }
+
+                if (
+                    typeof result.mp3 !== "string" ||
+                    !result.mp3.trim()
+                ) {
+                    console.log(
+                        "⚠️ No MP3 URL for this matching result."
+                    );
+
+                    continue;
+                }
+
+                console.log(
+                    "🔗 MP3 URL received."
+                );
+
+                try {
+                    cleanupFile(downloadedFile);
+
+                    await downloadFile(
+                        result.mp3,
+                        downloadedFile
+                    );
+
+                    if (
+                        !fs.existsSync(
+                            downloadedFile
+                        )
+                    ) {
+                        console.log(
+                            "⚠️ Download file was not created."
+                        );
+
+                        continue;
+                    }
+
+                    const size =
+                        fs.statSync(
+                            downloadedFile
+                        ).size;
+
+                    if (size === 0) {
+                        console.log(
+                            "⚠️ Downloaded file is empty."
+                        );
+
+                        cleanupFile(
+                            downloadedFile
+                        );
+
+                        continue;
+                    }
+
+                    console.log(
+                        "🎧 Downloaded:",
+                        size,
+                        "bytes"
+                    );
+
+                    selectedVideo = video;
+                    selectedMp3 = result.mp3;
+
+                    break;
+                } catch (error) {
+                    console.error(
+                        "⚠️ Download failed for this matching result:",
+                        error.message
+                    );
+
+                    cleanupFile(
+                        downloadedFile
+                    );
+                }
             }
 
             if (
-                typeof result.mp3 !== "string" ||
-                !result.mp3.trim()
+                !selectedVideo ||
+                !selectedMp3
             ) {
                 throw new Error(
-                    "The selected YouTube video has no downloadable MP3 URL."
+                    "No downloadable version of the requested song was found."
                 );
             }
 
             console.log(
-                "🔗 MP3 URL received for selected video."
+                "✅ Selected matching downloadable song:",
+                selectedVideo.title
             );
 
             console.log(
-                "⬇️ Downloading audio..."
-            );
-
-            await downloadFile(
-                result.mp3,
-                downloadedFile
-            );
-
-            if (
-                !fs.existsSync(downloadedFile)
-            ) {
-                throw new Error(
-                    "Downloaded audio file was not created."
-                );
-            }
-
-            const downloadedSize =
-                fs.statSync(
-                    downloadedFile
-                ).size;
-
-            if (downloadedSize === 0) {
-                throw new Error(
-                    "Downloaded audio file is empty."
-                );
-            }
-
-            console.log(
-                "🎧 Downloaded:",
-                downloadedFile,
-                downloadedSize,
-                "bytes"
+                "🔗 Selected URL:",
+                selectedVideo.url
             );
 
             console.log(
