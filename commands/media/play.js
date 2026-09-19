@@ -67,8 +67,36 @@ module.exports = {
                 return false;
             }
 
-            if (normalizedTitle.includes(normalizedQuery)) {
-                return true;
+            const mixTerms = [
+                "mix",
+                "mega mix",
+                "megamiх",
+                "compilation",
+                "playlist",
+                "nonstop",
+                "non stop",
+                "dj mix",
+                "volume",
+                "vol",
+                "continuous",
+                "mixtape",
+                "medley",
+                "live set"
+            ];
+
+            const titleLower = normalizedTitle;
+
+            if (
+                mixTerms.some(term =>
+                    titleLower.includes(term)
+                )
+            ) {
+                console.log(
+                    "🚫 Rejecting likely mix/compilation:",
+                    title
+                );
+
+                return false;
             }
 
             const queryTokens = normalizedQuery
@@ -87,13 +115,14 @@ module.exports = {
                 token => titleTokens.has(token)
             ).length;
 
-            // All meaningful words matched.
+            // Exact meaningful-word match.
             if (matched === queryTokens.length) {
                 return true;
             }
 
-            // Allow one missing meaningful word for
-            // variations such as official/remix/version titles.
+            // Allow one missing word for titles such as:
+            // "Giveaway (feat. Zlatan)"
+            // when the query contains an artist name.
             if (
                 queryTokens.length >= 3 &&
                 matched / queryTokens.length >= 0.66
@@ -102,6 +131,30 @@ module.exports = {
             }
 
             return false;
+        }
+
+        function isReasonableSongLength(result) {
+            const duration = Number(result.duration) || 0;
+
+            // If SoundCloud did not provide duration,
+            // don't reject the result on duration alone.
+            if (!duration) {
+                return true;
+            }
+
+            // Normal songs are usually well below this.
+            // This prevents long mixes/compilations from
+            // being selected as a requested individual song.
+            if (duration > 15 * 60) {
+                console.log(
+                    `🚫 Rejecting long result (${Math.round(duration)}s):`,
+                    result.title
+                );
+
+                return false;
+            }
+
+            return true;
         }
 
         function cleanupFile(filePath) {
@@ -219,7 +272,8 @@ module.exports = {
                         allResults.push({
                             id: item.id,
                             title: item.title || "",
-                            url
+                            url,
+                            duration: Number(item.duration) || 0
                         });
                     }
                 } catch (error) {
@@ -282,13 +336,34 @@ module.exports = {
             }
 
             const matchingResults =
-                results.filter(item =>
-                    item.url &&
-                    matchesRequestedSong(
-                        item.title,
-                        query
+                results
+                    .filter(item =>
+                        item.url &&
+                        matchesRequestedSong(
+                            item.title,
+                            query
+                        ) &&
+                        isReasonableSongLength(item)
                     )
-                );
+                    .sort((a, b) => {
+                        const aDuration =
+                            Number(a.duration) || 0;
+
+                        const bDuration =
+                            Number(b.duration) || 0;
+
+                        // Prefer results with a known,
+                        // normal song length.
+                        if (!aDuration && bDuration) {
+                            return 1;
+                        }
+
+                        if (aDuration && !bDuration) {
+                            return -1;
+                        }
+
+                        return aDuration - bDuration;
+                    });
 
             console.log(
                 `🎵 Found ${matchingResults.length} matching result(s) for:`,
