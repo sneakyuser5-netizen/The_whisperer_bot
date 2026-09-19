@@ -1,95 +1,364 @@
-import os
 import sys
+import os
+import re
 import asyncio
-import shutil
-import subprocess
-from pathlib import Path
+import fcntl
 
 from telethon import TelegramClient
+from telethon.sessions import StringSession
+from telethon.tl.functions.messages import GetStickerSetRequest
+from telethon.tl.types import InputStickerSetShortName
 
 
-API_ID = int(os.getenv("TELEGRAM_API_ID", "0"))
-API_HASH = os.getenv("TELEGRAM_API_HASH", "")
+# ============================================================
+# PROJECT ROOT
+# ============================================================
 
-SESSION_PATH = "/home/container/telegram_session"
+PROJECT_ROOT = os.path.dirname(
+    os.path.dirname(
+        os.path.abspath(__file__)
+    )
+)
 
-client = TelegramClient(
-    SESSION_PATH,
-    API_ID,
-    API_HASH
+if PROJECT_ROOT not in sys.path:
+    sys.path.insert(0, PROJECT_ROOT)
+
+
+# ============================================================
+# TELEGRAM CREDENTIALS
+# ============================================================
+
+from telegram_config import API_ID, API_HASH
+
+
+# ============================================================
+# TELEGRAM SESSION
+# ============================================================
+
+SESSION_NAME = os.path.join(
+    PROJECT_ROOT,
+    "telegram_session"
 )
 
 
-async def download_stickers(pack_url, output_dir):
+# ============================================================
+# TELEGRAM SESSION PROCESS LOCK
+# ============================================================
 
-    await client.start()
+LOCK_FILE = os.path.join(
+    PROJECT_ROOT,
+    "telegram_stickers.lock"
+)
 
-    print("TELEGRAM: session started")
 
-    if not os.path.exists(output_dir):
-        os.makedirs(output_dir)
+# ============================================================
+# EXTRACT STICKER PACK SHORT NAME
+# ============================================================
+
+def extract_short_name(url):
+    """
+    Extract the sticker-pack short name from:
+
+    https://t.me/addstickers/DEDSECH
+    """
+
+    url = url.strip()
+
+    match = re.search(
+        r"^(?:https?://)?t\.me/addstickers/([A-Za-z0-9_]+)(?:\?.*)?$",
+        url
+    )
+
+    if not match:
+        raise ValueError(
+            "Invalid Telegram sticker pack link."
+        )
+
+    return match.group(1)
+
+
+# ============================================================
+# DOWNLOAD TELEGRAM STICKER PACK
+# ============================================================
+
+async def download_stickers(
+    url,
+    output_dir
+):
+    """
+    Download every sticker from a Telegram sticker pack.
+
+    Returns:
+        list of downloaded sticker file paths
+    """
+
+    short_name = extract_short_name(url)
+
+    os.makedirs(
+        output_dir,
+        exist_ok=True
+    )
+
+    telegram_session = os.getenv(
+        "TELEGRAM_SESSION",
+        ""
+    ).strip()
+
+    # Use TELEGRAM_SESSION when supplied.
+    # Otherwise use the local telegram_session.session file.
+    if telegram_session:
+        print(
+            "TELEGRAM: using TELEGRAM_SESSION environment session.",
+            flush=True
+        )
+
+        client = TelegramClient(
+            StringSession(telegram_session),
+            API_ID,
+            API_HASH
+        )
+
+    else:
+        print(
+            "TELEGRAM: using telegram_session.session file.",
+            flush=True
+        )
+
+        client = TelegramClient(
+            SESSION_NAME,
+            API_ID,
+            API_HASH
+        )
+
+    print(
+        f"TELEGRAM: API ID loaded = {bool(API_ID)}",
+        flush=True
+    )
+
+    print(
+        f"TELEGRAM: API HASH loaded = {bool(API_HASH)}",
+        flush=True
+    )
+
+    print(
+        f"TELEGRAM: session env exists = {bool(telegram_session)}",
+        flush=True
+    )
+
+    print(
+        f"TELEGRAM: session file exists = {os.path.exists(SESSION_NAME + '.session')}",
+        flush=True
+    )
+
+    print(
+        "TELEGRAM: starting client...",
+        flush=True
+    )
 
     try:
-        username = (
-            pack_url
-            .split("/")
-            [-1]
+        await client.start()
+
+        print(
+            "TELEGRAM: client started.",
+            flush=True
         )
 
-        result = await client.get_messages(
-            "stickers",
-            ids=None
+        print(
+            f"TELEGRAM: requesting sticker pack {short_name}...",
+            flush=True
         )
 
-        print("Telegram sticker pack:", username)
+        sticker_set = await asyncio.wait_for(
+            client(
+                GetStickerSetRequest(
+                    stickerset=InputStickerSetShortName(
+                        short_name=short_name
+                    ),
+                    hash=0
+                )
+            ),
+            timeout=60
+        )
 
-        # download logic stays here
+        documents = sticker_set.documents
+
+        print(
+            f"TELEGRAM: sticker pack received ({len(documents)} stickers).",
+            flush=True
+        )
+
+        if not documents:
+            raise ValueError(
+                "Sticker pack is empty."
+            )
+
+        downloaded = []
+
+        for index, document in enumerate(
+            documents,
+            start=1
+        ):
+            # Telegram's MIME type is not always reliable.
+            # Download first, then detect the actual file format.
+
+            filename = os.path.join(
+                output_dir,
+                f"sticker_{index}.tmp"
+            )
+
+            try:
+                print(
+                    f"TELEGRAM: downloading sticker {index}/{len(documents)}...",
+                    flush=True
+                )
+
+                downloaded_file = await client.download_media(
+                    document,
+                    file=filename
+                )
+
+                if (
+                    downloaded_file
+                    and os.path.exists(downloaded_file)
+                ):
+                    with open(
+                        downloaded_file,
+                        "rb"
+                    ) as handle:
+                        header = handle.read(16)
+
+                    if (
+                        header[:4] == b"RIFF"
+                        and header[8:12] == b"WEBP"
+                    ):
+                        extension = ".webp"
+
+                    elif header[:4] == b"\x1a\x45\xdf\xa3":
+                        extension = ".webm"
+
+                    elif header[:2] == b"\x1f\x8b":
+                        extension = ".tgs"
+
+                    else:
+                        extension = ".unknown"
+
+                    final_file = os.path.join(
+                        output_dir,
+                        f"sticker_{index}{extension}"
+                    )
+
+                    os.replace(
+                        downloaded_file,
+                        final_file
+                    )
+
+                    downloaded.append(
+                        final_file
+                    )
+
+                    print(
+                        f"TELEGRAM: detected sticker {index} as {extension}",
+                        flush=True
+                    )
+
+            except Exception as error:
+                print(
+                    f"WARNING: Sticker {index} failed: {error}",
+                    file=sys.stderr,
+                    flush=True
+                )
+
+        if not downloaded:
+            raise ValueError(
+                "No stickers could be downloaded."
+            )
+
+        print(
+            f"TELEGRAM: completed. Downloaded {len(downloaded)} stickers.",
+            flush=True
+        )
+
+        return downloaded
 
     finally:
         await client.disconnect()
-        print("TELEGRAM: session lock released")
 
 
-def convert_sticker(input_file, output_file):
+# ============================================================
+# COMMAND-LINE MODE
+# ============================================================
 
-    converter = (
-        "/home/container/.lottie-converter/bin/"
-        "lottie_to_webp.sh"
-    )
+if __name__ == "__main__":
 
-    subprocess.run(
-        [
-            converter,
-            "--output",
-            output_file,
-            input_file
-        ],
-        check=True
-    )
-
-
-async def main():
-
-    if len(sys.argv) < 2:
+    if len(sys.argv) != 3:
         print(
-            "Usage: telegram_stickers.py "
-            "<telegram sticker url> <output>"
+            "Usage: python lib/telegram_stickers.py "
+            "<sticker_pack_url> <output_dir>"
         )
-        return
+
+        sys.exit(1)
 
     url = sys.argv[1]
 
-    output = (
-        sys.argv[2]
-        if len(sys.argv) > 2
-        else "/home/container/media/stickers"
-    )
+    output_dir = sys.argv[2]
 
-    await download_stickers(
-        url,
-        output
-    )
+    lock_handle = None
 
+    try:
 
-if __name__ == "__main__":
-    asyncio.run(main())
+        # ----------------------------------------------------
+        # Prevent multiple Telethon processes from sharing
+        # the same SQLite session database.
+        # ----------------------------------------------------
+
+        lock_handle = open(
+            LOCK_FILE,
+            "w"
+        )
+
+        try:
+
+            fcntl.flock(
+                lock_handle,
+                fcntl.LOCK_EX
+            )
+
+            print(
+                "TELEGRAM: session lock acquired.",
+                flush=True
+            )
+
+            files = asyncio.run(
+                download_stickers(
+                    url,
+                    output_dir
+                )
+            )
+
+            for file_path in files:
+                print(
+                    file_path
+                )
+
+        finally:
+
+            fcntl.flock(
+                lock_handle,
+                fcntl.LOCK_UN
+            )
+
+            lock_handle.close()
+
+            print(
+                "TELEGRAM: session lock released.",
+                flush=True
+            )
+
+    except Exception as error:
+
+        print(
+            f"ERROR: {error}",
+            file=sys.stderr
+        )
+
+        sys.exit(1)
