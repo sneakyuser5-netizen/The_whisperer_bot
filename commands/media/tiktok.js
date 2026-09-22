@@ -4,9 +4,10 @@ const path = require("path");
 const https = require("https");
 const http = require("http");
 const { download } = require("@silent-tech-offc/ttdl");
+const session = require("../../lib/session");
 
 function extractTikTokUrl(msg, args = []) {
-    const text = args.join(" ").trim();
+    const text = args[0]?.trim() || "";
 
     const urlFromArgs = text.match(
         /https?:\/\/(?:www\.)?(?:tiktok\.com|vm\.tiktok\.com|vt\.tiktok\.com)\/\S+/i
@@ -131,11 +132,30 @@ module.exports = {
     execute: async (sock, msg, args = []) => {
         const jid = msg.key.remoteJid;
 
+        const quality =
+            args[1] === "no_watermark" ||
+            args[1] === "normal"
+                ? args[1]
+                : null;
+
         const url = extractTikTokUrl(msg, args);
 
         if (!url) {
             return sock.sendMessage(jid, {
                 text: t(jid, "tiktok_missing")
+            });
+        }
+
+        if (!quality) {
+            session.set(jid, {
+                type: "media_quality",
+                command: "tiktok",
+                url,
+                expires: Date.now() + 60000
+            });
+
+            return sock.sendMessage(jid, {
+                text: t(jid, "tiktok_quality")
             });
         }
 
@@ -151,6 +171,7 @@ module.exports = {
         }
 
         const baseName = `tiktok-${Date.now()}`;
+
         const videoFile = path.join(
             mediaDir,
             `${baseName}.mp4`
@@ -161,17 +182,32 @@ module.exports = {
                 text: t(jid, "tiktok_downloading")
             });
 
-            console.log("🔎 TikTok URL:", url);
+            console.log(
+                "🔎 TikTok URL:",
+                url
+            );
+
+            console.log(
+                "🎚️ TikTok selection:",
+                quality
+            );
 
             const result = await download(url);
 
+            if (!result) {
+                throw new Error(
+                    "TikTok downloader returned no result."
+                );
+            }
+
             const videoUrl =
-                result.videoNoWatermark ||
-                result.video;
+                quality === "no_watermark"
+                    ? result.videoNoWatermark
+                    : result.video;
 
             if (!videoUrl) {
                 throw new Error(
-                    "TikTok downloader returned no video URL."
+                    `TikTok ${quality} video URL was not returned.`
                 );
             }
 

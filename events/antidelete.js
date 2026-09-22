@@ -1,20 +1,18 @@
 const messageCache = require("../lib/messageCache");
 const settings = require("../lib/settings");
+const { t } = require("../lib/lang");
+const identity = require("../lib/identity");
 
 module.exports = {
-
     name: "antidelete",
-
     trigger: "messages.upsert",
 
     execute: async (sock, msg) => {
-
         if (!msg.message) return;
 
         const protocol = msg.message.protocolMessage;
 
         if (!protocol) return;
-        
 
         // Only handle deleted messages
         if (protocol.type !== 0) return;
@@ -29,52 +27,53 @@ module.exports = {
 
         const jid = original.key.remoteJid;
 
-        // Only groups for now
-        if (!jid.endsWith("@g.us")) return;
-
         const groupSettings = settings.get(jid);
 
         if (!groupSettings?.antidelete) return;
 
-        const sender = original.key.participant || original.key.remoteJid;
+        const sender =
+            original.key.participant ||
+            original.key.remoteJid;
+
+        const displaySender = sender.replace(/@lid$/i, "");
 
         const text =
             original.message?.conversation ||
             original.message?.extendedTextMessage?.text ||
             "[Media message]";
 
-        const identity = require("../lib/identity");
+        const ownerNumber = identity.getBotOwner();
 
-const ownerNumber = identity.getBotOwner();
+        if (!ownerNumber) return;
 
-if (!ownerNumber) return;
+        const owner = ownerNumber + "@s.whatsapp.net";
 
-const owner = ownerNumber + "@s.whatsapp.net";
+        let groupName = null;
 
-if (!owner) return;
+        if (jid.endsWith("@g.us")) {
+            try {
+                const metadata = await sock.groupMetadata(jid);
+                groupName = metadata.subject;
+            } catch {}
+        }
 
-let groupName = "Unknown Group";
-
-try {
-    const metadata = await sock.groupMetadata(jid);
-    groupName = metadata.subject;
-} catch {}
+        const notification = [
+            t(owner, "antidelete_recovered"),
+            "",
+            `${t(owner, "antidelete_user")}`,
+            `@${displaySender}`,
+            "",
+            groupName
+                ? `${t(owner, "antidelete_group")}\n${groupName}`
+                : `${t(owner, "antidelete_chat")}\n${jid.replace(/@lid$/i, "")}`,
+            "",
+            `${t(owner, "antidelete_message")}`,
+            text
+        ].join("\n");
 
         await sock.sendMessage(owner, {
-            text:
-`🗑️ Deleted Message Recovered
-
-👤 User:
-@${sender}
-
-👥 Group:
-${groupName}
-
-💬 Message:
-${text}`,
+            text: notification,
             mentions: [sender]
         });
-
     }
-
 };

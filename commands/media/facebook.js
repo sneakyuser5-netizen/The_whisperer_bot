@@ -4,9 +4,10 @@ const path = require("path");
 const https = require("https");
 const http = require("http");
 const { fbdown } = require("btch-downloader");
+const session = require("../../lib/session");
 
 function extractFacebookUrl(msg, args = []) {
-    const text = args.join(" ").trim();
+    const text = args[0]?.trim() || "";
 
     const urlFromArgs = text.match(
         /https?:\/\/(?:www\.|m\.)?(?:facebook\.com|fb\.watch)\/\S+/i
@@ -131,11 +132,33 @@ module.exports = {
     execute: async (sock, msg, args = []) => {
         const jid = msg.key.remoteJid;
 
+        const quality =
+            args[1] === "hd" || args[1] === "normal"
+                ? args[1]
+                : null;
+
         const url = extractFacebookUrl(msg, args);
 
         if (!url) {
             return sock.sendMessage(jid, {
                 text: t(jid, "facebook_missing")
+            });
+        }
+
+        /*
+         * First request:
+         * Ask the user to choose the video quality.
+         */
+        if (!quality) {
+            session.set(jid, {
+                type: "media_quality",
+                command: "facebook",
+                url,
+                expires: Date.now() + 60000
+            });
+
+            return sock.sendMessage(jid, {
+                text: t(jid, "facebook_quality")
             });
         }
 
@@ -167,6 +190,11 @@ module.exports = {
                 url
             );
 
+            console.log(
+                "🎚️ Facebook quality:",
+                quality
+            );
+
             const result = await fbdown(url);
 
             if (!result || result.status === false) {
@@ -176,12 +204,13 @@ module.exports = {
             }
 
             const videoUrl =
-                result.HD ||
-                result.Normal_video;
+                quality === "hd"
+                    ? result.HD
+                    : result.Normal_video;
 
             if (!videoUrl) {
                 throw new Error(
-                    "Facebook downloader returned no video URL."
+                    `Facebook ${quality} video URL was not returned.`
                 );
             }
 

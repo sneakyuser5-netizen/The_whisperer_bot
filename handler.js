@@ -196,6 +196,70 @@ ${t(jid, "owner.afk_return_footer")}`
     if (!body.startsWith(prefix)) {
         const current = session.get(jid);
 
+        // ==========================================
+        // MEDIA QUALITY SELECTION
+        // ==========================================
+
+        if (current?.type === "media_quality") {
+            const answer = body.trim();
+
+            if (Date.now() > current.expires) {
+                session.delete(jid);
+
+                const expiredKey =
+                    current.command === "facebook"
+                        ? "facebook_quality_expired"
+                        : "tiktok_quality_expired";
+
+                return sock.sendMessage(jid, {
+                    text: t(jid, expiredKey)
+                });
+            }
+
+            let quality;
+
+            if (answer === "1") {
+                quality =
+                    current.command === "tiktok"
+                        ? "no_watermark"
+                        : "hd";
+            } else if (answer === "2") {
+                quality = "normal";
+            } else {
+                const invalidKey =
+                    current.command === "facebook"
+                        ? "facebook_quality_invalid"
+                        : "tiktok_quality_invalid";
+
+                return sock.sendMessage(jid, {
+                    text: t(jid, invalidKey)
+                });
+            }
+
+            const command = commands.get(current.command);
+
+            if (!command) {
+                session.delete(jid);
+
+                return sock.sendMessage(jid, {
+                    text: t(
+                        jid,
+                        current.command === "facebook"
+                            ? "facebook_failed"
+                            : "tiktok_failed"
+                    )
+                });
+            }
+
+            session.delete(jid);
+
+            return command.execute(
+                sock,
+                msg,
+                [current.url, quality]
+            );
+        }
+
         if (current?.type === "kickall") {
             const answer = body.trim().toLowerCase();
 

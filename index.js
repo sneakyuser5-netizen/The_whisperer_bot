@@ -389,6 +389,13 @@ await handleMessage(
     );
 
 });
+sock.ev.on("messages.update", async (updates) => {
+    await runEvents(
+        "messages.update",
+        sock,
+        updates
+    );
+});
         sock.ev.on("presence.update", ({ id, presences }) => {
 
     const presence = require("./lib/presence");
