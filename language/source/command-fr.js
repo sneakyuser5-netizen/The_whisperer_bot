@@ -1,5 +1,6 @@
 
 module.exports = {
+    "apk": "Rechercher et télécharger des versions APK",
 "img": "Générer une image à partir d’un texte",
 "robot": "Lire un texte cité avec une voix robotique",
 "hacker": "Générer une image de style hacker à partir d’un texte",
