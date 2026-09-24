@@ -141,7 +141,6 @@ module.exports = {
     usage: ".apk <app name> | .apk <number>",
 
     execute: async (sock, msg, args) => {
-        if (msg.key?.fromMe) return;
 
         const jid = msg.key?.remoteJid;
 
