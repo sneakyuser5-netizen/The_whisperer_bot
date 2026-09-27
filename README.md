@@ -1,222 +1,813 @@
-# 🤖 WhisperBot
+✦ WhisperBot
 
-[![Node.js](https://img.shields.io/badge/Node.js-20+-green)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/license-MIT-blue)](LICENSE)
-[![Status](https://img.shields.io/badge/status-active-brightgreen)]()
+A modular WhatsApp bot built with Node.js and Baileys, designed around a dynamic command system, event handling, multilingual support, moderation tools, utilities, media features, and extensibility.
 
-A fast, modular and production-ready WhatsApp bot built with Node.js and Baileys. WhisperBot focuses on group moderation, utilities, multilingual support and extensibility through plugins and a simple command system.
+WhisperBot is built to be easy to expand: commands, events, plugins, language files, and reusable helpers are separated into their own systems instead of being packed into one large file.
 
 ---
 
-## Highlights
+✦ What is WhisperBot?
 
-- Multi-device WhatsApp support via @whiskeysockets/baileys
-- Modular command + plugin architecture (auto-loads commands & events)
-- Multilingual (English / French) with buildable dictionaries
-- Owner / Sudo / Admin permission levels and command cooldowns
-- Lightweight JSON-based storage (no external DB required)
-- Built-in features: AFK, activity tracking, status saver, auto-read, auto-typing/recording, anti-call, pairing code flow
+WhisperBot is a feature-rich WhatsApp bot that uses the WhatsApp multi-device protocol through Baileys.
 
----
+Its architecture is centered around:
 
-## 📢 WhatsApp Channel
+- Dynamic command loading
+- Event-driven message handling
+- Permission management
+- Group moderation
+- Interactive command sessions
+- JSON-based persistent storage
+- English/French localization
+- Plugin support
+- Media and utility features
+- Optional AI and third-party integrations
 
-Follow the official **WhisperBot WhatsApp Channel** to stay up to date with:
-
-- 🚀 New features and commands
-- 🛠️ Updates and improvements
-- 🐛 Bug fixes and important notices
-- 📚 Tips and usage examples
-- 🔔 Important project announcements
-
-👉 **[Join the official WhisperBot WhatsApp Channel](https://whatsapp.com/channel/0029VbCmque7Noa0J2BLR82e)**
-
-## Features
-
-- Multi-device connection and pairing-code login
-- Command handler with categories (Admin, Group, Fun, Info, Owner, Tools, etc.)
-- Permissions: Creator, Owner, Sudo, Admin, Public/private modes
-- Auto typing / auto recording presence simulation
-- Auto read (blue ticks) and read-by-user toggles
-- Status saver (forward posted statuses to owner)
-- AFK detection and replies
-- Message caching for session flows and utilities
-- Activity tracking, leaderboards and “seen” utilities
-- Anti-link, anti-spam, mute, warns and moderation utilities
-- Plugin system to extend behavior without changing core
-- Language tooling: build translations with npm run translate / build
+The project is actively developed and its architecture continues to evolve.
 
 ---
 
-## Quickstart
+⚡ Features
 
-1. Clone the repo
-   git clone https://github.com/sneakyuser5-netizen/The_whisperer_bot.git
+💬 Messaging & Presence
+
+- Auto typing
+- Auto recording
+- Automatic read/blue-tick controls
+- Per-user read controls
+- Message caching
+- AFK detection and responses
+- Bot-account mention detection
+- Interactive message sessions
+
+🛡️ Group Management
+
+- Group moderation commands
+- Admin permission checks
+- Anti-link utilities
+- Anti-spam features
+- Mute controls
+- Warning systems
+- Group participant events
+- Group activity tracking
+
+👑 Permission System
+
+WhisperBot supports multiple permission levels:
+
+Creator
+   ↓
+Owner
+   ↓
+Sudo
+   ↓
+Admin
+   ↓
+Public
+
+Commands can define the permission level required to execute them.
+
+The bot also supports public/private operating modes and per-command cooldowns.
+
+📊 Activity & Utilities
+
+- Activity tracking
+- User activity information
+- Leaderboards
+- Seen utilities
+- Status saver
+- AFK system
+- Runtime/session utilities
+- Message caching
+
+🎨 Localization
+
+WhisperBot currently supports:
+
+- 🇬🇧 English
+- 🇫🇷 French
+
+Language files are maintained through the project's language build system.
+
+After changing language data:
+
+npm run translate
+
+or:
+
+npm run build
+
+🧩 Plugins & Events
+
+The bot has separate systems for:
+
+- Commands
+- Events
+- Plugins
+- Reusable library modules
+
+This makes it possible to add functionality without continually modifying the main entry point.
+
+---
+
+🚀 Installation
+
+Requirements
+
+Before installing WhisperBot, make sure you have:
+
+- Node.js 20+
+- npm
+- A WhatsApp account for pairing
+- Internet access
+- Git (recommended)
+
+Some optional features may require additional API keys or system dependencies.
+
+---
+
+1. Clone the repository
+
+git clone https://github.com/sneakyuser5-netizen/The_whisperer_bot.git
+cd The_whisperer_bot
 
 2. Install dependencies
-   npm install
 
-3. Configure environment variables (optional)
-   - Copy or edit `.env` to add API keys used by optional features (News, TMDB, GROQ, etc.):
-     - NEWS_API_KEY
-     - TMDB_API_KEY
-     - GROQ_API_KEY
+npm install
 
-4. Configure the bot
-   - Edit `database/setup.json` (used during initial pairing):
-     {
-       "phone": "237612345678"
-     }
-     Replace with your phone in international format (bot uses this to print a pairing code).
+The project's "postinstall" script also prepares the additional dependencies used by some media/Lottie functionality.
 
-   - For core settings open `config.js` or use the settings library (global/group settings are stored in `database/settings.json`).
+3. Check dependencies
 
-5. Start the bot
-   npm start
+npm run check
 
-6. Pair the bot
-   - When the bot notices no registered credentials, it prints a pairing code to the console.
-   - Follow the instructions in the console and in `database/setup.json` to complete pairing.
+This runs the project's dependency-checking script.
 
-Notes:
-- The bot uses multi-file auth state (session directory). Keep `./session` safe.
-- The code prints pairing information rather than a QR by default (see index.js).
+4. Start WhisperBot
+
+npm start
+
+The main entry point is:
+
+index.js
 
 ---
 
-## Scripts
+🔐 Pairing & First-Time Setup
 
-- npm start — run the bot (node index.js)
-- npm run translate — regenerate language files (tools/build-language.js)
-- npm run build — alias for build-language
+WhisperBot uses WhatsApp's multi-device authentication and pairing-code flow.
 
----
+During the first setup, the bot needs the phone number that will be paired with WhatsApp.
 
-## Configuration
+The setup information is stored in:
 
-- Main settings: config.js
-  - BOT_NAME (from settings)
-  - PREFIX (default `.`)
-  - CREATOR (owner phone id)
-  - TIMEZONE
+database/setup.json
 
-- Runtime settings are stored in JSON files under `database/`:
-  - settings.json (global & per-group)
-  - owner.json
-  - sudo.json
-  - mutes.json
-  - activity.json
-  - read.json
-  - etc.
+Use international number format.
 
-- Environment variables go in `.env` for optional third-party integrations.
+Example:
 
----
+{
+  "phone": "2376XXXXXXXX"
+}
 
-## Commands & Permissions
+Important
 
-- Commands are located in `commands/` and are loaded automatically at startup.
-- Each command exposes metadata:
-  - name, aliases, description, category, permission, usage, minArgs, cooldown, execute()
-- Permission levels:
-  - public, admin (group admin), sudo, owner, creator
-- The bot supports a global mode (public/private). In private mode only owner/sudo may use commands.
+Do not replace the example above with somebody else's number.
 
-Command parsing supports:
-- .command arg1 arg2
-- .command=inlineArg otherArgs
+Use the WhatsApp number that you intend to pair with the bot.
 
-Cooldowns are enforced per-user per-command.
+After configuring the number:
+
+npm start
+
+Follow the pairing instructions printed by the bot.
+
+Once authentication has been completed, the WhatsApp authentication state is stored locally in the session directory.
 
 ---
 
-## Events & Plugins
+📁 Authentication Data
 
-- Event handlers are in `events/` and loaded by `eventHandler.js`.
-- Plugins can be placed in `plugins/` and will be auto-loaded by the plugin manager.
-- Typical events: group-participants.update, messages.upsert, presence.update, call, connection.update.
+WhisperBot uses multi-file authentication state.
 
----
+The authentication/session data is sensitive.
 
-## Language & Localization
+session/
 
-- Supported: English & French
-- Source dictionary & translations in `language/`
-- After editing translations run:
-  npm run translate
-- Use the translation helper in code: t(jid, "translation.key") or t("translation.key")
+Never publish or share your session files.
+
+Anyone who obtains valid WhatsApp authentication credentials may potentially gain access to the connected WhatsApp account.
+
+Keep the session directory private and make sure it is excluded from Git.
 
 ---
 
-## Project Structure (high level)
+⚙️ Configuration
 
-- index.js — entry point, Baileys socket, connection & pairing flow
-- handler.js — command loader / executor, sessions, cooldowns
-- eventHandler.js — loads and dispatches events
-- commands/ — command modules
-- events/ — event modules
-- plugins/ — optional extensions
-- lib/ — reusable helper modules (identity, settings, afk, activity, owner, sudo, presence, messageCache, etc.)
-- database/ — JSON storage files
-- tools/ — utilities (language builder, etc.)
-- assets/ — images (welcome, icons)
+Main configuration is handled through:
 
----
+config.js
 
-## Security & Privacy
+Current core settings include:
 
-- Keep the `session/` directory private (contains WhatsApp auth files).
-- Do not commit `.env` with secrets to public repos.
-- Owner and sudo lists control privileged operations — use them carefully.
+BOT_NAME
+PREFIX
+CREATOR
+TIMEZONE
 
----
+The default command prefix is:
 
-## Troubleshooting
+.
 
-- No pairing code printed?
-  - Make sure `database/setup.json` contains a valid phone string and restart the bot.
-- Bot reconnects or logs out:
-  - index.js reconnects automatically; if you see a DisconnectReason.loggedOut, re-pair.
-- QR not printing:
-  - The bot uses pairing codes; the terminal QR may be disabled (printQRInTerminal: false).
+So a command can look like:
 
----
+.menu
 
-## Development
+or:
 
-- Add commands by creating a new file in `commands/<category>/`.
-- Add events by placing modules in `events/`.
-- Update language strings in `language/dictionary.js` and run `npm run translate`.
-- Use the existing helper modules in `lib/` to integrate with settings, owner/sudo checks and persistence.
+.help
 
----
+Runtime and persistent settings are stored in JSON files under:
 
-## Dependencies (selected)
-- @whiskeysockets/baileys — WhatsApp protocol client
-- @vitalets/google-translate-api — for translation automation
-- openai — optional AI integrations
-- axios, dotenv, pino, qrcode
+database/
 
-See package.json for complete list and versions.
+Examples include settings for:
+
+- Global configuration
+- Group configuration
+- Owner information
+- Sudo users
+- Mutes
+- Activity
+- Read settings
+- Other runtime state
+
+Do not treat runtime database files as source code.
+
+They may change while the bot is running.
 
 ---
 
-## Contributing
+🔑 Environment Variables
 
-Contributions are welcome. Please:
-1. Open an issue describing the change or feature.
-2. Fork and create a branch for your change.
-3. Run tests (if any) and ensure formatting is consistent.
-4. Submit a pull request with a clear description.
+Optional integrations can use environment variables.
+
+Keep private API keys inside:
+
+.env
+
+For example:
+
+NEWS_API_KEY=your_key_here
+TMDB_API_KEY=your_key_here
+GROQ_API_KEY=your_key_here
+
+Never commit real API keys to a public repository.
+
+Use ".env.example" as a template where applicable.
 
 ---
 
-## License
+🧠 Command System
 
-MIT License — see LICENSE file.
+Commands live under:
+
+commands/
+
+Commands are loaded dynamically at startup.
+
+You generally do not need to manually import every command into "index.js".
+
+A command can define metadata such as:
+
+name
+aliases
+description
+category
+permission
+usage
+minArgs
+cooldown
+execute()
+
+A simplified command structure looks like:
+
+commands/
+├── admin/
+├── fun/
+├── general/
+├── group/
+├── info/
+├── owner/
+└── tools/
+
+Additional categories may exist as the project evolves.
 
 ---
 
-## Author
+⌨️ Command Usage
 
-THE-WHISPERER — https://github.com/sneakyuser5-netizen
+The normal command format is:
+
+.command argument1 argument2
+
+Commands can also support inline argument syntax:
+
+.command=argument
+
+Aliases can provide alternative names for the same command.
+
+Cooldowns can be applied per user and per command.
+
+---
+
+👑 Permissions
+
+WhisperBot separates privileged operations into different levels.
+
+Public
+
+Available to normal users when the relevant command allows public access.
+
+Admin
+
+Requires appropriate group-admin privileges.
+
+Sudo
+
+Trusted users granted additional bot privileges.
+
+Owner
+
+Users recognized by the bot as owners.
+
+Creator
+
+The highest-level creator permission.
+
+The exact permission required depends on each command.
+
+---
+
+🔒 Public & Private Mode
+
+WhisperBot supports different operating modes.
+
+In public mode, commands configured for public use can be accessed normally.
+
+In private mode, command access is restricted to privileged users according to the permission system.
+
+This allows the bot owner to limit who can interact with administrative functionality.
+
+---
+
+🧩 Interactive Sessions
+
+Some operations require more than one message.
+
+WhisperBot supports temporary interactive sessions that allow a command to:
+
+User sends command
+        ↓
+Bot requests additional input
+        ↓
+Session stores the pending operation
+        ↓
+User responds
+        ↓
+Bot continues the operation
+
+This system is useful for confirmation prompts, multi-step operations, and other conversational commands.
+
+---
+
+📡 Event System
+
+Event modules are stored under:
+
+events/
+
+The event handler loads and dispatches event modules separately from commands.
+
+Depending on the current implementation, events can handle things such as:
+
+- Incoming messages
+- Message updates
+- Group participant changes
+- Presence updates
+- Calls
+- Connection changes
+- Other WhatsApp events
+
+This separation keeps event-specific logic outside the main command system.
+
+---
+
+🔌 Plugin System
+
+Plugins live under:
+
+plugins/
+
+The plugin architecture allows additional functionality to be introduced without unnecessarily modifying the core bot.
+
+A plugin can interact with existing helper systems and bot events depending on the plugin interface being used.
+
+This is intended to keep WhisperBot extensible as the project grows.
+
+---
+
+🌍 Language System
+
+WhisperBot supports:
+
+English
+French
+
+Language resources are located in:
+
+language/
+
+The project includes a language build tool:
+
+tools/build-language.js
+
+To regenerate the language files:
+
+npm run translate
+
+The same build operation can also be run with:
+
+npm run build
+
+When adding or changing translation keys, keep placeholders, key names, and command-related strings consistent with the existing language system.
+
+---
+
+🏗️ Project Architecture
+
+The project is divided into several major systems.
+
+The_whisperer_bot/
+│
+├── assets/
+│   └── Static assets and bot resources
+│
+├── commands/
+│   └── Command modules
+│
+├── core/
+│   └── Core bot functionality
+│
+├── database/
+│   └── JSON-based runtime storage
+│
+├── events/
+│   └── WhatsApp event modules
+│
+├── language/
+│   └── Localization resources
+│
+├── lib/
+│   └── Reusable helper systems
+│
+├── media/
+│   └── Media-related resources
+│
+├── plugins/
+│   └── Optional extensions
+│
+├── scripts/
+│   └── Setup and maintenance scripts
+│
+├── tools/
+│   └── Development/build utilities
+│
+├── config.js
+│   └── Core configuration
+│
+├── eventHandler.js
+│   └── Event loading/dispatch system
+│
+├── handler.js
+│   └── Command loading/execution and message processing
+│
+├── index.js
+│   └── Main entry point and WhatsApp connection
+│
+├── package.json
+│   └── Dependencies and npm scripts
+│
+└── start.sh
+    └── Startup helper
+
+---
+
+🔄 Message Processing
+
+At a high level, an incoming message passes through several layers before a command is executed.
+
+WhatsApp message
+       │
+       ▼
+Message/event handling
+       │
+       ├── Read handling
+       ├── Message caching
+       ├── Identity handling
+       ├── AFK handling
+       ├── Activity tracking
+       ├── Mention handling
+       │
+       ▼
+Command detection
+       │
+       ▼
+Command parsing
+       │
+       ▼
+Cooldown / mode checks
+       │
+       ▼
+Permission validation
+       │
+       ▼
+Argument validation
+       │
+       ▼
+Command execution
+
+This layered design allows individual systems to evolve without placing every feature directly inside the command itself.
+
+---
+
+🛠️ Development
+
+Add a command
+
+Create a JavaScript file inside an appropriate category:
+
+commands/<category>/<command>.js
+
+The command should expose the metadata expected by the command loader and an execution function.
+
+Because commands are dynamically loaded, avoid duplicating command registration in unrelated files.
+
+---
+
+Add an event
+
+Create the event module under:
+
+events/
+
+Use the existing event conventions when connecting the module to WhatsApp events.
+
+---
+
+Add or modify translations
+
+Update the appropriate language resources and rebuild them:
+
+npm run translate
+
+Then check the generated changes before committing.
+
+---
+
+Check the project
+
+Run:
+
+npm run check
+
+You can also check individual JavaScript files with Node:
+
+node --check path/to/file.js
+
+For example:
+
+node --check index.js
+
+---
+
+📜 Available npm Scripts
+
+The current "package.json" defines:
+
+Command| Purpose
+"npm start"| Start WhisperBot
+"npm run setup"| Run the setup script
+"npm run check"| Check project dependencies
+"npm run translate"| Build/regenerate language files
+"npm run build"| Run the language build process
+
+The project also uses a "postinstall" script for additional dependency/setup tasks.
+
+---
+
+📦 Main Dependencies
+
+WhisperBot currently uses a number of packages for different parts of its functionality, including:
+
+- Baileys — WhatsApp multi-device communication
+- Axios — HTTP requests
+- dotenv — environment configuration
+- OpenAI — optional AI functionality
+- Google Translate API — translation functionality
+- Sharp / Jimp — image processing
+- Edge TTS — text-to-speech
+- youtube-dl-exec — media downloading
+- QRCode — QR-related utilities
+- Pino — logging
+- BTCH Downloader / TTDL — media/download functionality
+
+See "package.json" for the authoritative dependency list and versions.
+
+---
+
+🔐 Security
+
+If you are running your own instance, treat the following as private:
+
+session/
+.env
+private API keys
+WhatsApp authentication credentials
+private runtime data
+
+Never commit:
+
+.env
+session credentials
+real API keys
+private authentication files
+
+Before pushing changes to a public repository, inspect your Git diff:
+
+git diff
+
+and:
+
+git status
+
+If a secret has already been committed, simply deleting it from the latest file is not always enough because Git history may still contain it.
+
+---
+
+🗃️ Runtime Database
+
+WhisperBot uses lightweight JSON storage instead of requiring an external database server.
+
+This makes the project easy to run on environments such as:
+
+- Linux
+- Termux
+- VPS environments
+- Local development machines
+
+Runtime JSON files may change while the bot is running.
+
+For that reason, avoid blindly committing every modified file under "database/".
+
+Only commit database changes when they are intentionally part of the project.
+
+---
+
+🧪 Troubleshooting
+
+The bot does not start
+
+Try:
+
+npm install
+npm run check
+npm start
+
+If a JavaScript syntax problem is suspected:
+
+node --check index.js
+
+Then check the relevant module reported by Node.
+
+---
+
+No pairing code appears
+
+Check that the initial setup information is present and valid:
+
+database/setup.json
+
+Then restart:
+
+npm start
+
+Make sure the phone number uses international format.
+
+---
+
+The bot logs out
+
+If WhatsApp authentication has been invalidated or logged out, the existing session may need to be removed and the bot paired again.
+
+Do not delete the session directory casually while troubleshooting unless you understand that doing so can require a new authentication process.
+
+---
+
+Translation changes are not appearing
+
+Run:
+
+npm run translate
+
+Then verify the generated language files and restart the bot if necessary.
+
+---
+
+📢 WhisperBot Updates
+
+Follow the official WhisperBot WhatsApp Channel for:
+
+- 🚀 New features
+- 🛠️ Improvements
+- 🐛 Bug fixes
+- 📚 Usage information
+- 🔔 Project announcements
+
+Official WhatsApp Channel:
+
+https://whatsapp.com/channel/0029VbCmque7Noa0J2BLR82e
+
+---
+
+🤝 Contributing
+
+Contributions, suggestions, and bug reports are welcome.
+
+Before making a contribution:
+
+1. Fork the repository.
+2. Create a separate branch for your changes.
+3. Keep changes focused.
+4. Test the affected functionality.
+5. Check JavaScript syntax.
+6. Avoid committing runtime credentials or private data.
+7. Update documentation when behavior changes.
+8. Submit a clear pull request.
+
+For larger changes, opening an issue first can help establish the intended direction.
+
+---
+
+🧹 Development Philosophy
+
+WhisperBot is designed around a few simple principles:
+
+Keep features modular
+
+Commands should remain commands.
+
+Events should remain events.
+
+Reusable functionality should live in "lib/".
+
+Avoid unnecessary duplication
+
+Before creating a new helper or system, check whether an existing module already provides the required functionality.
+
+Protect runtime data
+
+Source code can be public.
+
+Authentication credentials and private configuration should not be.
+
+Keep documentation synchronized
+
+When the architecture changes, update the README and related documentation instead of allowing old instructions to remain indefinitely.
+
+---
+
+📄 License
+
+This project is released under the MIT License.
+
+See the repository license file for the complete license text.
+
+---
+
+👤 Author
+
+THE-WHISPERER
+
+GitHub:
+
+https://github.com/sneakyuser5-netizen
+
+---
+
+✦ WhisperBot
+
+«Modular. Extensible. Built for WhatsApp.»
+
+---
