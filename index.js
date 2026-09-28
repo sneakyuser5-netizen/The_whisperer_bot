@@ -247,7 +247,9 @@ Made with ❤️ by
 
     const msg = messages[0];
     if (!msg.message) return; // add this first
-    if (msg.key?.fromMe) return;
+    // Allow bot-owner commands to reach handler.js.
+        // handler.js ignores outgoing messages that are not commands.
+        if (msg.key?.fromMe && !msg.message?.conversation?.trim().startsWith(".")) return;
 
     // ===== GLOBAL AUTO READ START =====
     try {
