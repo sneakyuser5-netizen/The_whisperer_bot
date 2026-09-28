@@ -5,7 +5,7 @@ module.exports = {
     name: "shorturl",
     description: "Shorten a URL",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
 
     execute: async (sock, msg, args) => {
 

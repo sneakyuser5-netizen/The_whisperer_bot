@@ -23,7 +23,7 @@ module.exports = {
     name: "ip",
     description: "Lookup IP address information",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
 
     execute: async (sock, msg, args) => {
 

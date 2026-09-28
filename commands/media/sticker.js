@@ -7,7 +7,7 @@ module.exports = {
     name: "sticker",
     description: "Download stickers from a Telegram sticker pack",
     category: "media",
-    permission: "public",
+    permission: "sudo",
     usage: ".sticker <Telegram sticker pack link>",
     minArgs: 1,
 

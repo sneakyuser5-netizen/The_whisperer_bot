@@ -8,7 +8,7 @@ module.exports = {
     name: "play",
     description: "Search and download audio from SoundCloud",
     category: "media",
-    permission: "public",
+    permission: "sudo",
     usage: ".play <song name>",
     minArgs: 1,
 

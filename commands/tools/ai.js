@@ -9,7 +9,7 @@ module.exports = {
 
     category: "tools",
 
-    permission: "public",
+    permission: "sudo",
 
     usage: ".ai on\n.ai off\n.ai status",
 

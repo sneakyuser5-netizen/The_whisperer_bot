@@ -61,7 +61,7 @@ module.exports = {
 
     category: "tools",
 
-    permission: "public",
+    permission: "sudo",
 
     usage: ".rd",
 

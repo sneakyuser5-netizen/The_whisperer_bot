@@ -1,6 +1,5 @@
 const os = require("os");
 const sudo = require("../../lib/sudo");
-const settings = require("../../lib/settings");
 const identity = require("../../lib/identity");
 const { t } = require("../../lib/lang");
 
@@ -12,7 +11,7 @@ module.exports = {
 
     category: "info",
 
-    permission: "public",
+    permission: "sudo",
 
     execute: async (sock, msg) => {
 
@@ -26,8 +25,7 @@ module.exports = {
 
         const owner = identity.getBotOwner();
         const sudos = sudo.all(owner).length;
-        const mode = settings.get("global").mode || "private";
-
+    
         
 const botName =
     settings.get("global").bot_name ||
@@ -46,9 +44,6 @@ ${owner}
 
 🛡️ ${t("info.bot_sudos")}
 ${sudos}
-
-🌍 ${t("info.bot_mode")}
-${mode}
 
 ⚙️ ${t("info.bot_platform")}
 ${os.platform()}

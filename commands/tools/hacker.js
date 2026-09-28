@@ -39,7 +39,7 @@ module.exports = {
     name: "hacker",
     description: "Generate a hacker-style image from text",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".hacker <text>",
 
     execute: async (sock, msg, args = []) => {

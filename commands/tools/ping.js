@@ -10,7 +10,7 @@ module.exports = {
 
     description: "Check bot response speed",
 
-    permission: "public",
+    permission: "sudo",
 
     cooldown: 5,
 

@@ -8,7 +8,7 @@ module.exports = {
 
     category: "info",
 
-    permission: "all",
+    permission: "sudo",
 
     execute: async (sock, msg) => {
 

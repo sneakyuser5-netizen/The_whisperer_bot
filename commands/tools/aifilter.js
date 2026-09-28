@@ -6,7 +6,7 @@ module.exports = {
     name: "aifilter",
     description: "Enable or disable AI message filtering",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".aifilter on\n.aifilter off\n.aifilter status",
 
     execute: async (sock, msg, args = []) => {

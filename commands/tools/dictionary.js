@@ -6,7 +6,7 @@ module.exports = {
     name: "dictionary",
     description: "Look up word definitions",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".dictionary <word>",
 
     execute: async (sock, msg, args) => {

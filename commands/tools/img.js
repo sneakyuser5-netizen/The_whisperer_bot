@@ -6,7 +6,7 @@ module.exports = {
     aliases: ["image"],
     description: "Generate an image from a text prompt",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".img <prompt>",
 
     execute: async (sock, msg, args = []) => {

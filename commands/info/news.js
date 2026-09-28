@@ -6,7 +6,7 @@ module.exports = {
     name: "news",
     description: "Show latest headlines",
     category: "info",
-    permission: "public",
+    permission: "sudo",
     usage: ".news [country]",
 
     execute: async (sock, msg, args) => {

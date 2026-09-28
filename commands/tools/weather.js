@@ -5,7 +5,7 @@ module.exports = {
     name: "weather",
     description: "Show current weather",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".weather <city>",
     minArgs: 1,
 

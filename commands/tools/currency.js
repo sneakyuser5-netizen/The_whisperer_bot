@@ -5,7 +5,7 @@ module.exports = {
     name: "currency",
     description: "Convert currencies",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".currency <amount> <from> <to>",
 
     execute: async (sock, msg, args) => {

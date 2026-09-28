@@ -136,7 +136,7 @@ module.exports = {
     name: "apk",
     aliases: ["app"],
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     description: "Search and download Android app versions",
     usage: ".apk <app name> | .apk <number>",
 

@@ -145,7 +145,6 @@ async function handleMessage(sock, msg) {
         return;
     }
 
-    const mode = settings.get("global").mode || "private";
     let body = text.trim();
 
     if (body.startsWith(prefix + " ")) {
@@ -373,8 +372,15 @@ ${t(jid, "owner.afk_return_footer")}`
 
     const permission = command.permission || "public";
 
-    if (mode === "private" &&!isOwner &&!isSudo) {
-        return sock.sendMessage(sender, { text: t("private_mode") });
+    // ==========================================
+    // COMMAND ACCESS CONTROL
+    // .menu = public
+    // Everything else = owner/sudo only
+    // ==========================================
+    if (cmd !== "menu" && !isOwner && !isSudo) {
+        return sock.sendMessage(sender, {
+            text: t("owner_only")
+        });
     }
     if (permission === "creator" &&!identity.isCreator(msg)) {
         return sock.sendMessage(sender, { text: t("creator_only") });

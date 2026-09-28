@@ -6,7 +6,7 @@ module.exports = {
     name: "movie",
     description: "Search for movie information",
     category: "info",
-    permission: "public",
+    permission: "sudo",
     usage: ".movie <title>",
 
     execute: async (sock, msg, args) => {

@@ -4,7 +4,7 @@ module.exports = {
     name: "github",
     description: "Show the GitHub repository",
     category: "info",
-    permission: "public",
+    permission: "sudo",
 
     execute: async (sock, msg) => {
 

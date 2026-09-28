@@ -5,7 +5,7 @@ module.exports = {
     name: "qr",
     description: "Generate QR codes",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".qr <text>",
 
     execute: async (sock, msg, args) => {

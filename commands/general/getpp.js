@@ -8,7 +8,7 @@ module.exports = {
 
     category: "general",
 
-    permission: "public",
+    permission: "sudo",
 
     usage: ".getpp [@user]",
 

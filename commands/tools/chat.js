@@ -161,7 +161,7 @@ module.exports = {
 
     category: "tools",
 
-    permission: "public",
+    permission: "sudo",
 
     usage: ".chat <message>\n.chat reset\n.chat status\n.chat remember <fact>\n.chat memories\n.chat forget <fact>\n.chat memory clear",
 

@@ -7,7 +7,7 @@ module.exports = {
     aliases: ["ar"],
     description: "Automatically react to messages",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".autoreact on\n.autoreact off\n.autoreact status",
 
     execute: async (sock, msg, args) => {

@@ -19,7 +19,7 @@ module.exports = {
 
     category: "media",
 
-    permission: "public",
+    permission: "sudo",
 
     usage: ".stk",
 

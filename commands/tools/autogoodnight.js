@@ -6,7 +6,7 @@ module.exports = {
     name: "autogoodnight",
     description: "Enable or disable automatic good-night replies",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".autogoodnight on\n.autogoodnight off\n.autogoodnight status",
 
     execute: async (sock, msg, args = []) => {

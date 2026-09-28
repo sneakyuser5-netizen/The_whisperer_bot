@@ -499,7 +499,6 @@ module.exports = {
   "info.alive_title": "🤖 *𝙒𝙃𝙄𝙎𝙋𝙀𝙍 𝘽𝙊𝙏 𝙀𝙎𝙏 𝙀𝙉 𝙇𝙄𝙂𝙉𝙀*",
 
   "info.bot_creator": "Créateur",
-  "info.bot_mode": "Mode",
   "info.bot_node": "Node",
   "info.bot_owner": "Propriétaire du bot",
   "info.bot_platform": "Plateforme",
@@ -587,8 +586,6 @@ module.exports = {
   "owner.prefix_no_space": "❌ *𝙇𝙚 𝙥𝙧é𝙛𝙞𝙭𝙚 𝙣𝙚 𝙥𝙚𝙪𝙩 𝙥𝙖𝙨 𝙘𝙤𝙣𝙩𝙚𝙣𝙞𝙧 𝙙’𝙚𝙨𝙥𝙖𝙘𝙚𝙨.*",
   "owner.prefix_too_long": "❌ *𝙋𝙧é𝙛𝙞𝙭𝙚 𝙩𝙧𝙤𝙥 𝙡𝙤𝙣𝙜.* Maximum : 3 caractères.",
 
-  "owner.private_enabled": "🔒 *𝙈𝙊𝘿𝙀 𝙋𝙍𝙄𝙑É 𝘼𝘾𝙏𝙄𝙑É*\n\nSeuls le propriétaire et les membres sudo peuvent utiliser le bot.",
-  "owner.public_enabled": "🌍 *𝙈𝙊𝘿𝙀 𝙋𝙐𝘽𝙇𝙄𝘾 𝘼𝘾𝙏𝙄𝙑É*\n\nTout le monde peut utiliser les commandes publiques. (Le propriétaire et les sudo conservent leurs privilèges.)",
 
   "owner.read_disabled": "✅ *𝙇𝙚𝙘𝙩𝙪𝙧𝙚 𝙖𝙪𝙩𝙤𝙢𝙖𝙩𝙞𝙦𝙪𝙚 𝙙é𝙨𝙖𝙘𝙩𝙞𝙫é𝙚.*",
   "owner.read_enabled": "✅ *𝙇𝙚𝙘𝙩𝙪𝙧𝙚 𝙖𝙪𝙩𝙤𝙢𝙖𝙩𝙞𝙦𝙪𝙚 𝙖𝙘𝙩𝙞𝙫é𝙚.*",
@@ -617,7 +614,6 @@ module.exports = {
   "prefix_no_space": "❌ *𝙇𝙚 𝙥𝙧é𝙛𝙞𝙭𝙚 𝙣𝙚 𝙥𝙚𝙪𝙩 𝙥𝙖𝙨 𝙘𝙤𝙣𝙩𝙚𝙣𝙞𝙧 𝙙’𝙚𝙨𝙥𝙖𝙘𝙚𝙨.*",
   "prefix_too_long": "❌ *𝙋𝙧é𝙛𝙞𝙭𝙚 𝙩𝙧𝙤𝙥 𝙡𝙤𝙣𝙜.* Max : 3 caractères.",
 
-  "private_mode": "🔒 *𝙒𝙝𝙞𝙨𝙥𝙚𝙧𝘽𝙤𝙩 𝙚𝙨𝙩 𝙚𝙣 𝙢𝙤𝙙𝙚 𝙥𝙧𝙞𝙫é.*\n\nSeuls le propriétaire et les sudo de confiance peuvent l’utiliser.\nDemandez au propriétaire d’exécuter *.𝙥𝙪𝙗𝙡𝙞𝙘* pour l’ouvrir.",
   "secret": "Commande de test réservée au propriétaire",
   "sudo_only": "🚫 *𝙋𝙚𝙧𝙢𝙞𝙨𝙨𝙞𝙤𝙣 𝙧𝙚𝙛𝙪𝙨é𝙚.*\n\nSeuls les membres sudo peuvent utiliser cette commande.",
 

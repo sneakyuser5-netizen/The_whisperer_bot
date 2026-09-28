@@ -125,7 +125,7 @@ module.exports = {
     name: "tiktok",
     description: "Download a TikTok video",
     category: "media",
-    permission: "public",
+    permission: "sudo",
     usage: ".tiktok <TikTok URL> or reply to a TikTok URL",
     minArgs: 0,
 

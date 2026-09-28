@@ -10,7 +10,7 @@ module.exports = {
 
     category: "general",
 
-    permission: "public",
+    permission: "sudo",
 
     execute: async (sock, msg) => {
 

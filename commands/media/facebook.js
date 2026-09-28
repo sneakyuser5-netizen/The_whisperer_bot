@@ -125,7 +125,7 @@ module.exports = {
     name: "facebook",
     description: "Download a Facebook video",
     category: "media",
-    permission: "public",
+    permission: "sudo",
     usage: ".facebook <Facebook URL> or reply to a Facebook URL",
     minArgs: 0,
 

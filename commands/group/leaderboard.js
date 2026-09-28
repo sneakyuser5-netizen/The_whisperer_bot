@@ -10,7 +10,7 @@ module.exports = {
 
     category: "group",
 
-    permission: "any",
+    permission: "sudo",
 
     execute: async (sock, msg) => {
 

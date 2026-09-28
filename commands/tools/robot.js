@@ -102,7 +102,7 @@ module.exports = {
     name: "robot",
     description: "Read a replied text using a robotic voice",
     category: "tools",
-    permission: "public",
+    permission: "sudo",
     usage: ".robot",
 
     execute: async (sock, msg) => {
