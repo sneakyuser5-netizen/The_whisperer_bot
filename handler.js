@@ -377,11 +377,16 @@ ${t(jid, "owner.afk_return_footer")}`
     // .menu = public
     // Everything else = owner/sudo only
     // ==========================================
-    if (cmd !== "menu" && !isOwner && !isSudo) {
-        return sock.sendMessage(sender, {
-            text: t("owner_only")
-        });
-    }
+
+// ==========================================
+// COMMAND ACCESS CONTROL
+// .menu = public
+// Everything else = owner/sudo only
+// Unauthorized users are silently ignored.
+// ==========================================
+if (cmd !== "menu" && !isOwner && !isSudo) {
+    return;
+}
     if (permission === "creator" &&!identity.isCreator(msg)) {
         return sock.sendMessage(sender, { text: t("creator_only") });
     }
