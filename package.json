@@ -14,7 +14,7 @@
   "dependencies": {
     "@silent-tech-offc/ttdl": "^1.0.0",
     "@vitalets/google-translate-api": "^9.2.1",
-    "@whiskeysockets/baileys": "7.0.0-rc14",
+    "@whiskeysockets/baileys": "^7.0.0-rc14",
     "axios": "^1.19.0",
     "btch-downloader": "^6.4.0",
     "dotenv": "^17.4.2",

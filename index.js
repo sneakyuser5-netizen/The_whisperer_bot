@@ -247,6 +247,7 @@ Made with ❤️ by
 
     const msg = messages[0];
     if (!msg.message) return; // add this first
+    if (msg.key?.fromMe) return;
 
     // ===== GLOBAL AUTO READ START =====
     try {

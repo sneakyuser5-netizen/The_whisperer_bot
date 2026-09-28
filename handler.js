@@ -41,10 +41,11 @@ function loadCommands(dir = "./commands") {
 }
 
 async function handleMessage(sock, msg) {
+    if (msg.key?.fromMe) return;
+
     const text =
         msg.message?.conversation ||
         msg.message?.extendedTextMessage?.text;
-
     const jid = msg.key.remoteJid;
     // ==========================================
     // BOT ACCOUNT TAG DETECTION
