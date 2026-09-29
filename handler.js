@@ -41,8 +41,6 @@ function loadCommands(dir = "./commands") {
 }
 
 async function handleMessage(sock, msg) {
-    if (msg.key?.fromMe) return;
-
     const text =
         msg.message?.conversation ||
         msg.message?.extendedTextMessage?.text;
@@ -134,6 +132,15 @@ async function handleMessage(sock, msg) {
 
     const groupSettings = settings.get(jid);
     let prefix = groupSettings.prefix || ".";
+// ==========================================
+// OWNER SELF-MESSAGE HANDLING
+// Allow the bot owner to send commands from
+// the same WhatsApp account the bot uses.
+// Ignore other outgoing bot messages.
+// ==========================================
+if (msg.key?.fromMe && !text?.trim().startsWith(prefix)) {
+    return;
+}
 
     const identity = require("./lib/identity");
     const senderId = identity.getSender(msg);
