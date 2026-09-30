@@ -296,7 +296,7 @@ try {
 
 const senderId = identity.getSender(msg);
 
-if (senderId === botId) {
+if (senderId === botId && !msg.key?.fromMe) {
     return;
 }
   
