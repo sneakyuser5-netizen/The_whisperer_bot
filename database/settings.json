@@ -1,18 +1,1 @@
-{
-  "global": {
-    "autoreact": false,
-    "autotyping": false,
-    "autorecording": false,
-    "autoread": false,
-    "anticall": false,
-    "language": "fr",
-    "mode": "public"
-  },
-  "277447035633799@lid": {
-    "antidelete": true
-  },
-  "260851131019469@lid": {
-    "antidelete": true,
-    "antiedit": true
-  }
-}
+{}
