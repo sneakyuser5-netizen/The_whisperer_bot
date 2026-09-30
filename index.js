@@ -249,7 +249,14 @@ Made with ❤️ by
     if (!msg.message) return; // add this first
     // Allow bot-owner commands to reach handler.js.
         // handler.js ignores outgoing messages that are not commands.
-        if (msg.key?.fromMe && !msg.message?.conversation?.trim().startsWith(".")) return;
+        const commandText =
+        msg.message?.conversation ||
+        msg.message?.extendedTextMessage?.text ||
+        msg.message?.imageMessage?.caption ||
+        msg.message?.videoMessage?.caption ||
+        "";
+
+    if (msg.key?.fromMe && !commandText.trim().startsWith(".")) return;
 
     // ===== GLOBAL AUTO READ START =====
     try {

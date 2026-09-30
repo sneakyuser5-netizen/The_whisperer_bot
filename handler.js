@@ -391,6 +391,21 @@ ${t(jid, "owner.afk_return_footer")}`
 // Everything else = owner/sudo only
 // Unauthorized users are silently ignored.
 // ==========================================
+/*console.log(
+    "PERMISSION-TRACE:",
+    JSON.stringify({
+        fromMe: msg.key?.fromMe,
+        remoteJid: msg.key?.remoteJid,
+        participant: msg.key?.participant,
+        senderId,
+        botOwner: identity.getBotOwner(),
+        creator: identity.getCreator(),
+        isOwner,
+        isSudo,
+        cmd
+    })
+);*/
+
 if (cmd !== "menu" && !isOwner && !isSudo) {
     return;
 }
