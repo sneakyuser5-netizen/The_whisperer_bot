@@ -1,9 +1,7 @@
 const OpenAI = require("openai");
 const settings = require("../lib/settings");
 const { keys } = require("../lib/api");
-const identity = require("../lib/identity");
 const { t } = require("../lib/lang");
-const { isGroupAdmin } = require("../lib/group-admin");
 
 const client = keys.groq? new OpenAI({ apiKey: keys.groq, baseURL: "https://api.groq.com/openai/v1" }) : null;
 const MODEL = "openai/gpt-oss-120b";
@@ -19,7 +17,7 @@ function fallbackCategory(v){
     if(/(kill you|i will kill|murder|i go kill|i go beat|hurt you)/i.test(v)) return "threat";
     if(/(nudes|porn|xxx|pussy|dick pic|sex chat)/i.test(v)) return "sexual";
     if(/(send money|free money|crypto double)/i.test(v)) return "scam";
-    if(/(fuck|shit|bitch|asshole|bastard|idiot|stupid|fool|mugu|mumu|ode|olosho|fou|imbecile|con|pute|salope|nique|yab|rubbish|useless|shut up|getout|get out)/i.test(v)) return "harassment";
+    if(/(fuck|shit|bitch|asshole|bastard|idiot|stupid|fool|mugu|mumu|ode|olosho|fou|imbecile|con|pute|salope|nique|yab|rubbish|useless|shut up|getout|get out|big fool)/i.test(v)) return "harassment";
     return "safe";
 }
 async function classify(text){
@@ -52,9 +50,11 @@ module.exports={
         const category=await classify(text);
         if(category==="safe") return;
 
-        const rawSender = msg.key.participant || msg.participant || identity.getSender(msg);
-        const senderJid = identity.normalize(rawSender);
-        const tag = `@${senderJid.split("@")[0]}`;
+        // IMPORTANT: Keep LID as-is, don't normalize
+        const rawJid = msg.key.participant || msg.participant || msg.key.participantAlt;
+        if(!rawJid) return;
+        const senderJid = rawJid; // keep @lid or @s.whatsapp.net
+        const tag = `@${senderJid.split("@")[0]}`; // mention placeholder, WhatsApp will resolve name
 
         if(!warns[jid]) warns[jid]={};
         if(!warns[jid][senderJid]) warns[jid][senderJid]=0;
@@ -77,10 +77,10 @@ module.exports={
                     mentions:[senderJid]
                 });
                 try{
-                    await sock.groupParticipantsUpdate(jid,[senderJid],"remove");
-                    console.log(`[AIFILTER] KICKED ${senderJid}`);
+                    const res = await sock.groupParticipantsUpdate(jid,[senderJid],"remove");
+                    console.log(`[AIFILTER] KICK RES:`,JSON.stringify(res), `JID: ${senderJid}`);
                 }catch(kickErr){
-                    console.log(`[AIFILTER] KICK FAILED:`,kickErr.message);
+                    console.log(`[AIFILTER] KICK FAILED ${senderJid}:`,kickErr.message);
                     await sock.sendMessage(jid,{
                         text:`${tag} ${t(jid,"tools.aifilter_not_admin")}`,
                         mentions:[senderJid]
