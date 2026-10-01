@@ -1,4 +1,5 @@
 module.exports = {
+    "tools.aifilter_not_admin": "⚠️ Should be kicked but I'm not admin. Make me admin!",
   "tools.aifilter_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:*\n.aifilter on\n.aifilter off\n.aifilter status",
   "tools.aifilter_enabled": "🛡️ *𝘼𝙄 𝙁𝙞𝙡𝙩𝙚𝙧 𝙚𝙣𝙖𝙗𝙡𝙚𝙙 - 𝙒𝙄𝙇𝘿 𝙈𝙤𝙙𝙚 𝙊𝙉.*",
   "tools.aifilter_disabled": "🛡️ *𝘼𝙄 𝙁𝙞𝙡𝙩𝙚𝙧 𝙙𝙞𝙨𝙖𝙗𝙡𝙚𝙙.*",
