@@ -468,7 +468,7 @@ database/setup.json
 
 Example:
 {
-  "phone": "2376XXXXXXXX"
+  "phone": "447XXXXXXXXX or 2376XXXXXXXX"
 }
 
 Then save the file and restart the bot.
@@ -492,7 +492,7 @@ Use your real WhatsApp number in international format.
 
 Example:
 {
-  "phone": "2376XXXXXXXX"
+  "phone": "447XXXXXXXXX or 2376XXXXXXXX"
 }
 
 Then restart the bot.
@@ -501,7 +501,8 @@ Then restart the bot.
 }
 
 // Validate Cameroon WhatsApp number
-if (!/^2376\d{8}$/.test(phone)) {
+// Validate international WhatsApp number (allow any country)
+if (!/^\d{7,15}$/.test(phone)) {
     console.log(`
 ❌ INVALID PHONE NUMBER
 
@@ -511,13 +512,13 @@ Current format:
 ${phone}
 
 Required format:
-2376XXXXXXXX
+447XXXXXXXXX or 2376XXXXXXXX
 
 Example:
-2376XXXXXXXX
+447XXXXXXXXX or 2376XXXXXXXX
 
 Do not use:
-+237
++237 or +447 
 spaces
 dashes
 or parentheses.
