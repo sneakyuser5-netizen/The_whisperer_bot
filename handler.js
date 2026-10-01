@@ -146,6 +146,7 @@ if (msg.key?.fromMe && !text?.trim().startsWith(prefix)) {
     const senderId = identity.getSender(msg);
     const isOwner = identity.isOwner(msg);
     const isSudo = identity.isSudo(msg);
+
     const mute = require("./lib/mute");
 
     if (jid.endsWith("@g.us") && mute.isMuted(jid, senderId) &&!identity.isCreator(msg) &&!identity.isBotOwner(msg) &&!isSudo) {

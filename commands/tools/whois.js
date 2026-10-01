@@ -7,50 +7,79 @@ module.exports = {
     execute: async (sock, msg) => {
         const jid = msg.key.remoteJid;
 
-        let text =
+        // Private chat - keep simple
+        if (!jid.endsWith("@g.us")) {
+            const text = 
 `${t("tools.whois_title")}
 
 ${t("tools.whois_jid")}
 ${jid}
 
 ${t("tools.whois_type")}
-${jid.endsWith("@g.us") ? t("tools.whois_group") : t("tools.whois_private")}
+${t("tools.whois_private")}
 
 ${t("tools.whois_fromme")}
 ${msg.key.fromMe ? t("yes") : t("no")}`;
 
-        if (jid.endsWith("@g.us")) {
+            return await sock.sendMessage(jid, { text });
+        }
+
+        try {
+            const meta = await sock.groupMetadata(jid);
+
+            const creation = meta.creation ? new Date(meta.creation * 1000).toLocaleString() : t("tools.whois_hidden");
+            const desc = meta.desc?.desc || meta.desc || t("tools.whois_no_desc");
+            
+            // OWNER FIX: owner field is often empty, superadmin is the real owner
+            let ownerJid = meta.owner;
+            if (!ownerJid) {
+                const superAdmin = meta.participants.find(p => p.admin === 'superadmin');
+                if (superAdmin) ownerJid = superAdmin.id;
+            }
+
+            const ownerMention = ownerJid ? `@${ownerJid.split('@')[0]}` : t("tools.whois_hidden");
+
+            const admins = meta.participants.filter(p => p.admin === 'admin' || p.admin === 'superadmin');
+            const adminsMentions = admins.map(p => p.id);
+
+            // For @The whisperer style -> @number in text + mentions array
+            const adminsText = admins.length 
+                ? admins.map(p => `@${p.id.split('@')[0]}`).join(', ') 
+                : t("tools.whois_no_admins");
+
+            let inviteLink = t("tools.whois_no_invite");
             try {
-                const meta = await sock.groupMetadata(jid);
+                const code = await sock.groupInviteCode(jid);
+                inviteLink = `https://chat.whatsapp.com/${code}`;
+            } catch {}
 
-                // More details
-                const creation = meta.creation ? new Date(meta.creation * 1000).toLocaleString() : t("tools.whois_hidden");
-                const owner = meta.owner ? meta.owner : t("tools.whois_hidden");
-                const desc = meta.desc?.desc || meta.desc || t("tools.whois_no_desc");
-                
-                const admins = meta.participants.filter(p => p.admin !== null);
-                const adminsList = admins.map(p => `${p.id.split('@')[0]} (${p.admin})`).join(', ') || t("tools.whois_no_admins");
+            let picUrl = null;
+            try {
+                picUrl = await sock.profilePictureUrl(jid, 'image');
+            } catch {}
 
-                let inviteLink = t("tools.whois_no_invite");
-                try {
-                    const code = await sock.groupInviteCode(jid);
-                    inviteLink = `https://chat.whatsapp.com/${code}`;
-                } catch {}
+            // Build caption - NO profile photo URL anymore
+            // Restrict = only admins can edit group info / Announce = only admins can send messages
+            const caption =
+`${t("tools.whois_title")}
 
-                let picUrl = t("tools.whois_no_pic");
-                try {
-                    picUrl = await sock.profilePictureUrl(jid, 'image');
-                } catch {}
+${t("tools.whois_jid")}
+${jid}
 
-                text +=
-`\n\n${t("tools.whois_group_name")}
+${t("tools.whois_type")}
+${t("tools.whois_group")}
+
+${t("tools.whois_fromme")}
+${msg.key.fromMe ? t("yes") : t("no")}
+
+${t("tools.whois_group_name")}
 ${meta.subject}
 
 ${t("tools.whois_created")}
 ${creation}
 
 ${t("tools.whois_owner")}
-${owner}
+${ownerMention}
 
 ${t("tools.whois_desc")}
 ${desc}
@@ -62,7 +91,7 @@ ${t("tools.whois_admins_count")}
 ${admins.length}
 
 ${t("tools.whois_admins")}
-${adminsList}
+${adminsText}
 
 ${t("tools.whois_restrict")}
 ${meta.restrict ? t("yes") : t("no")}
@@ -71,16 +100,25 @@ ${t("tools.whois_announce")}
 ${meta.announce ? t("yes") : t("no")}
 
 ${t("tools.whois_invite")}
-${inviteLink}
+${inviteLink}`;
 
-${t("tools.whois_pic")}
-${picUrl}`;
+            const allMentions = [...new Set([ownerJid, ...adminsMentions].filter(Boolean))];
 
-            } catch (e) {
-                text += `\n\n${t("tools.whois_error")} ${e.message}`;
+            if (picUrl) {
+                await sock.sendMessage(jid, {
+                    image: { url: picUrl },
+                    caption: caption,
+                    mentions: allMentions
+                });
+            } else {
+                await sock.sendMessage(jid, {
+                    text: caption,
+                    mentions: allMentions
+                });
             }
-        }
 
-        await sock.sendMessage(jid, { text });
+        } catch (e) {
+            await sock.sendMessage(jid, { text: `${t("tools.whois_error")} ${e.message}` });
+        }
     }
 };
