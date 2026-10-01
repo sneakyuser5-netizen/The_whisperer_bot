@@ -12,6 +12,7 @@
     "postinstall": "node scripts/install-python-deps.js && node scripts/install-lottie-converter.js"
   },
   "dependencies": {
+    "@huggingface/inference": "^4.13.30",
     "@silent-tech-offc/ttdl": "^1.0.0",
     "@vitalets/google-translate-api": "^9.2.1",
     "@whiskeysockets/baileys": "^7.0.0-rc14",
