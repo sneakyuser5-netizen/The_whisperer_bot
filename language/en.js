@@ -122,14 +122,14 @@ module.exports = {
   "antibot_status_enabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙞𝙨 𝙚𝙣𝙖𝙗𝙡𝙚𝙙.*",
   "antibot_status_disabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙞𝙨 𝙙𝙞𝙨𝙖𝙗𝙡𝙚𝙙.*",
   "antibot_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:*\n.antibot on\n.antibot off\n.antibot status",
-
   "facebook_missing": "📌 *𝙎𝙚𝙣𝙙 𝙤𝙧 𝙧𝙚𝙥𝙡𝙮 𝙩𝙤 𝙖 𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙫𝙞𝙙𝙚𝙤 𝙡𝙞𝙣𝙠.*",
-  "facebook_quality": "🎬 *𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙑𝙞𝙙𝙚𝙤*\\n\\nChoose video quality:\\n\\n1️⃣ *HD*\\n2️⃣ *Normal*\\n\\nReply with *1* or *2*.\\n\\n⏳ Selection expires in 60 seconds.",
-  "facebook_quality_invalid": "❌ Please reply with *1* for HD or *2* for Normal.",
-  "facebook_quality_expired": "⌛ Your Facebook quality selection has expired. Please send the Facebook link again.",
+  "facebook_quality": "🎬 *𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙑𝙞𝙙𝙚𝙤*\n\n𝘾𝙝𝙤𝙤𝙨𝙚 𝙫𝙞𝙙𝙚𝙤 𝙦𝙪𝙖𝙡𝙞𝙩𝙮:\n\n1️⃣ *HD*\n2️⃣ *𝙉𝙤𝙧𝙢𝙖𝙡*\n\n𝙍𝙚𝙥𝙡𝙮 𝙬𝙞𝙩𝙝 *1* 𝙤𝙧 *2*.\n\n⏳ 𝙎𝙚𝙡𝙚𝙘𝙩𝙞𝙤𝙣 𝙚𝙭𝙥𝙞𝙧𝙚𝙨 𝙞𝙣 60 𝙨𝙚𝙘𝙤𝙣𝙙𝙨.",
+  "facebook_quality_invalid": "❌ *𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙘𝙝𝙤𝙞𝙘𝙚.* 𝙍𝙚𝙥𝙡𝙮 𝙬𝙞𝙩𝙝 *1* 𝙛𝙤𝙧 𝙃𝘿 𝙤𝙧 *2* 𝙛𝙤𝙧 𝙉𝙤𝙧𝙢𝙖𝙡.",
+  "facebook_quality_expired": "⌛ *𝙔𝙤𝙪𝙧 𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙨𝙚𝙡𝙚𝙘𝙩𝙞𝙤𝙣 𝙚𝙭𝙥𝙞𝙧𝙚𝙙.* 𝙋𝙡𝙚𝙖𝙨𝙚 𝙨𝙚𝙣𝙙 𝙩𝙝𝙚 𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙡𝙞𝙣𝙠 𝙖𝙜𝙖𝙞𝙣.",
   "facebook_downloading": "⏳ *𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜 𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙫𝙞𝙙𝙚𝙤...*",
   "facebook_success": "✅ *𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙫𝙞𝙙𝙚𝙤 𝙙𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙚𝙙.*",
   "facebook_failed": "❌ *𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙙𝙤𝙬𝙣𝙡𝙤𝙖𝙙 𝙛𝙖𝙞𝙡𝙚𝙙.*",
+
   "tiktok_missing": "📌 *𝙎𝙚𝙣𝙙 𝙤𝙧 𝙧𝙚𝙥𝙡𝙮 𝙩𝙤 𝙖 𝙏𝙞𝙠𝙏𝙤𝙠 𝙡𝙞𝙣𝙠.*",
   "tiktok_quality": "🎬 *𝙏𝙞𝙠𝙏𝙤𝙠 𝙑𝙞𝙙𝙚𝙤*\\n\\nChoose video type:\\n\\n1️⃣ *No Watermark*\\n2️⃣ *Normal*\\n\\nReply with *1* or *2*.\\n\\n⏳ Selection expires in 60 seconds.",
   "tiktok_quality_invalid": "❌ Please reply with *1* for No Watermark or *2* for Normal.",

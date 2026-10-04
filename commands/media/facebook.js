@@ -7,116 +7,44 @@ const { fbdown } = require("btch-downloader");
 const session = require("../../lib/session");
 
 function extractFacebookUrl(msg, args = []) {
-    const text = args[0]?.trim() || "";
+    const text = (args[0] || "").trim();
+    const urlFromArgs = text.match(/https?:\/\/(?:www\.|m\.)?(?:facebook\.com|fb\.watch)\/\S+/i);
+    if (urlFromArgs) return urlFromArgs[0].replace(/[)\]}>.,]+$/, "");
 
-    const urlFromArgs = text.match(
-        /https?:\/\/(?:www\.|m\.)?(?:facebook\.com|fb\.watch)\/\S+/i
-    );
+    const context = msg.message?.extendedTextMessage?.contextInfo;
+    const quoted = context?.quotedMessage;
+    if (!quoted) return null;
 
-    if (urlFromArgs) {
-        return urlFromArgs[0].replace(/[)\]}>.,]+$/, "");
-    }
-
-    const context =
-        msg.message?.extendedTextMessage?.contextInfo;
-
-    const quoted =
-        context?.quotedMessage;
-
-    if (!quoted) {
-        return null;
-    }
-
-    const quotedText =
-        quoted.conversation ||
-        quoted.extendedTextMessage?.text ||
-        quoted.imageMessage?.caption ||
-        quoted.videoMessage?.caption ||
-        "";
-
-    const urlFromReply = quotedText.match(
-        /https?:\/\/(?:www\.|m\.)?(?:facebook\.com|fb\.watch)\/\S+/i
-    );
-
-    if (urlFromReply) {
-        return urlFromReply[0].replace(/[)\]}>.,]+$/, "");
-    }
-
+    const quotedText = quoted.conversation || quoted.extendedTextMessage?.text || quoted.imageMessage?.caption || quoted.videoMessage?.caption || "";
+    const urlFromReply = quotedText.match(/https?:\/\/(?:www\.|m\.)?(?:facebook\.com|fb\.watch)\/\S+/i);
+    if (urlFromReply) return urlFromReply[0].replace(/[)\]}>.,]+$/, "");
     return null;
 }
 
 function downloadFile(url, outputPath, redirects = 0) {
     return new Promise((resolve, reject) => {
-        if (redirects > 10) {
-            reject(new Error("Too many redirects."));
-            return;
-        }
-
-        const client = url.startsWith("https://")
-            ? https
-            : http;
-
+        if (redirects > 10) return reject(new Error("Too many redirects."));
+        const client = url.startsWith("https://")? https : http;
         const request = client.get(url, response => {
-            if (
-                response.statusCode >= 300 &&
-                response.statusCode < 400 &&
-                response.headers.location
-            ) {
+            if (response.statusCode >= 300 && response.statusCode < 400 && response.headers.location) {
                 response.resume();
-
-                const nextUrl = new URL(
-                    response.headers.location,
-                    url
-                ).toString();
-
-                downloadFile(
-                    nextUrl,
-                    outputPath,
-                    redirects + 1
-                )
-                    .then(resolve)
-                    .catch(reject);
-
-                return;
+                const nextUrl = new URL(response.headers.location, url).toString();
+                return downloadFile(nextUrl, outputPath, redirects + 1).then(resolve).catch(reject);
             }
-
-            if (response.statusCode !== 200) {
+            if (response.statusCode!== 200) {
                 response.resume();
-
-                reject(
-                    new Error(
-                        `Download failed with HTTP ${response.statusCode}`
-                    )
-                );
-
-                return;
+                return reject(new Error(`Download failed with HTTP ${response.statusCode}`));
             }
-
             const file = fs.createWriteStream(outputPath);
-
             response.pipe(file);
-
-            file.on("finish", () => {
-                file.close(resolve);
-            });
-
+            file.on("finish", () => file.close(resolve));
             file.on("error", err => {
                 file.destroy();
-
-                try {
-                    fs.unlinkSync(outputPath);
-                } catch {}
-
+                try { fs.unlinkSync(outputPath); } catch {}
                 reject(err);
             });
         });
-
-        request.setTimeout(60000, () => {
-            request.destroy(
-                new Error("Facebook download timed out.")
-            );
-        });
-
+        request.setTimeout(60000, () => request.destroy(new Error("Facebook download timed out.")));
         request.on("error", reject);
     });
 }
@@ -128,27 +56,21 @@ module.exports = {
     permission: "sudo",
     usage: ".facebook <Facebook URL> or reply to a Facebook URL",
     minArgs: 0,
-
     execute: async (sock, msg, args = []) => {
         const jid = msg.key.remoteJid;
-
-        const quality =
-            args[1] === "hd" || args[1] === "normal"
-                ? args[1]
-                : null;
-
-        const url = extractFacebookUrl(msg, args);
-
-        if (!url) {
-            return sock.sendMessage(jid, {
-                text: t(jid, "facebook_missing")
-            });
+        let videoFile = null;
+        let qualityInput = (args[1] || args[0] || "").toLowerCase().trim();
+        let quality = null;
+        if (["1", "hd"].includes(qualityInput)) quality = "hd";
+        if (["2", "normal", "sd"].includes(qualityInput)) quality = "normal";
+        let url = extractFacebookUrl(msg, args);
+        const sess = session.get(jid);
+        if (!url && sess?.type === "media_quality" && sess?.command === "facebook") {
+            url = sess.url;
         }
-
-        /*
-         * First request:
-         * Ask the user to choose the video quality.
-         */
+        if (!url) {
+            return sock.sendMessage(jid, { text: t(jid, "facebook_missing") });
+        }
         if (!quality) {
             session.set(jid, {
                 type: "media_quality",
@@ -156,120 +78,37 @@ module.exports = {
                 url,
                 expires: Date.now() + 60000
             });
-
-            return sock.sendMessage(jid, {
-                text: t(jid, "facebook_quality")
-            });
+            return sock.sendMessage(jid, { text: t(jid, "facebook_quality") });
         }
-
-        const mediaDir = path.join(
-            __dirname,
-            "../../media"
-        );
-
-        if (!fs.existsSync(mediaDir)) {
-            fs.mkdirSync(mediaDir, {
-                recursive: true
-            });
-        }
-
-        const baseName = `facebook-${Date.now()}`;
-
-        const videoFile = path.join(
-            mediaDir,
-            `${baseName}.mp4`
-        );
-
+        if (sess?.command === "facebook") session.delete(jid);
+        const mediaDir = path.join(__dirname, "../../media");
+        if (!fs.existsSync(mediaDir)) fs.mkdirSync(mediaDir, { recursive: true });
+        videoFile = path.join(mediaDir, `facebook-${Date.now()}.mp4`);
         try {
-            await sock.sendMessage(jid, {
-                text: t(jid, "facebook_downloading")
-            });
-
-            console.log(
-                "🔎 Facebook URL:",
-                url
-            );
-
-            console.log(
-                "🎚️ Facebook quality:",
-                quality
-            );
-
+            await sock.sendMessage(jid, { text: t(jid, "facebook_downloading") });
+            console.log("🔎 Facebook URL:", url, "Quality:", quality);
             const result = await fbdown(url);
-
-            if (!result || result.status === false) {
-                throw new Error(
-                    "Facebook downloader failed to retrieve the video."
-                );
+            if (!result || result.status === false) throw new Error("Facebook downloader failed.");
+            const videoUrl = quality === "hd"? result.HD : result.Normal_video;
+            if (!videoUrl) throw new Error(`Facebook ${quality} URL not returned.`);
+            await downloadFile(videoUrl, videoFile);
+            if (!fs.existsSync(videoFile) || fs.statSync(videoFile).size === 0) {
+                throw new Error("Empty file.");
             }
-
-            const videoUrl =
-                quality === "hd"
-                    ? result.HD
-                    : result.Normal_video;
-
-            if (!videoUrl) {
-                throw new Error(
-                    `Facebook ${quality} video URL was not returned.`
-                );
-            }
-
-            console.log(
-                "🎬 Facebook video URL received."
-            );
-
-            await downloadFile(
-                videoUrl,
-                videoFile
-            );
-
-            if (
-                !fs.existsSync(videoFile) ||
-                fs.statSync(videoFile).size === 0
-            ) {
-                throw new Error(
-                    "Facebook video download produced an empty file."
-                );
-            }
-
-            console.log(
-                "📦 Facebook video saved:",
-                videoFile,
-                `${fs.statSync(videoFile).size} bytes`
-            );
-
             await sock.sendMessage(jid, {
-                video: {
-                    url: videoFile
-                },
+                video: { url: videoFile },
                 caption: t(jid, "facebook_success")
             });
-
         } catch (err) {
-            console.error(
-                "❌ FACEBOOK ERROR:",
-                err
-            );
-
-            await sock.sendMessage(jid, {
-                text: t(jid, "facebook_failed")
-            });
-
+            console.error("❌ FACEBOOK ERROR:", err);
+            await sock.sendMessage(jid, { text: t(jid, "facebook_failed") });
         } finally {
             try {
-                if (fs.existsSync(videoFile)) {
+                if (videoFile && fs.existsSync(videoFile)) {
                     fs.unlinkSync(videoFile);
-
-                    console.log(
-                        "🧹 Deleted:",
-                        videoFile
-                    );
                 }
-            } catch (err) {
-                console.error(
-                    "❌ Facebook cleanup error:",
-                    err.message
-                );
+            } catch (e) {
+                console.error("Cleanup error:", e.message);
             }
         }
     }
