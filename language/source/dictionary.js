@@ -80,7 +80,6 @@ module.exports = {
   "revoke": "Generate a new group invite link",
   "roast": "Funny roast a user",
   "robot": "Read a replied text using a robotic voice",
-  "rules": "Show group rules",
   "seen": "Show when a user was last active",
   "send": "No description.",
   "setbio": "Change the WhatsApp bio",

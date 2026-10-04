@@ -32,7 +32,7 @@ ${t(jid, "admin.settings_antilink")} : ${group.antilink ? t(jid, "admin.on") : t
 
 ${t(jid, "admin.settings_welcome")} : ${group.welcome ? t(jid, "admin.on") : t(jid, "admin.off")}
 
-${t(jid, "admin.settings_antigm")} : ${group.antigm ? t(jid, "admin.on") : t(jid, "admin.off")}
+${t(jid, "admin.settings_antispam")} : ${group.antispam ? t(jid, "admin.on") : t(jid, "admin.off")}
 
 ${t(jid, "admin.settings_goodbye")} : ${group.goodbye ? t(jid, "admin.on") : t(jid, "admin.off")}`
 

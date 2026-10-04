@@ -308,6 +308,7 @@ module.exports = {
 
   "admin.settings_antigm": "⚙️ *𝘼𝙣𝙩𝙞-𝙂𝙧𝙤𝙪𝙥 𝙈𝙖𝙣𝙖𝙜𝙚𝙢𝙚𝙣𝙩 𝙨𝙚𝙩𝙩𝙞𝙣𝙜*",
   "admin.settings_antilink": "⚙️ *𝘼𝙣𝙩𝙞-𝙇𝙞𝙣𝙠 𝙨𝙚𝙩𝙩𝙞𝙣𝙜*",
+  "admin.settings_antispam": "🚫 *𝘼𝙣𝙩𝙞𝙨𝙥𝙖𝙢*",
   "admin.settings_goodbye": "⚙️ *𝙂𝙤𝙤𝙙𝙗𝙮𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚𝙨 𝙨𝙚𝙩𝙩𝙞𝙣𝙜*",
   "admin.settings_title": "⚙️ *𝙎𝙚𝙩𝙩𝙞𝙣𝙜𝙨*",
   "admin.settings_welcome": "⚙️ *𝙒𝙚𝙡𝙘𝙤𝙢𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚𝙨 𝙨𝙚𝙩𝙩𝙞𝙣𝙜*",
@@ -444,9 +445,6 @@ module.exports = {
   "fun.truth_title": "😈 *𝙏𝙍𝙐𝙏𝙃 𝙏𝙄𝙈𝙀*",
   "general.memory_title": "💾 *𝙈𝙚𝙢𝙤𝙧𝙮 𝙐𝙨𝙖𝙜𝙚*",
   "general.owner": "👑 *𝙊𝙬𝙣𝙚𝙧:* The-whisperer",
-  "general.rules_footer": "*𝙁𝙤𝙡𝙡𝙤𝙬 𝙩𝙝𝙚 𝙧𝙪𝙡𝙚𝙨 𝙖𝙣𝙙 𝙖𝙫𝙤𝙞𝙙 𝙢𝙤𝙙𝙚𝙧𝙖𝙩𝙤𝙧 𝙩𝙧𝙤𝙪𝙗𝙡𝙚.*",
-  "general.rules_none": "📜 *𝙉𝙤 𝙧𝙪𝙡𝙚𝙨 𝙨𝙚𝙩 𝙮𝙚𝙩.*\n\nThe group is running on vibes only.",
-  "general.rules_title": "📜 *𝙂𝙧𝙤𝙪𝙥 𝙍𝙪𝙡𝙚𝙨:*",
   "general.stats_commands": "*𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨*",
   "general.stats_database": "*𝘿𝙖𝙩𝙖𝙗𝙖𝙨𝙚 𝙁𝙞𝙡𝙚𝙨*",
   "general.stats_events": "*𝙀𝙫𝙚𝙣𝙩𝙨*",

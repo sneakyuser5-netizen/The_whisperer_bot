@@ -307,6 +307,7 @@ module.exports = {
 
   "admin.settings_antigm": "⚙️ *𝙋𝙖𝙧𝙖𝙢è𝙩𝙧𝙚 𝙖𝙣𝙩𝙞-𝙜𝙚𝙨𝙩𝙞𝙤𝙣 𝙙𝙚 𝙜𝙧𝙤𝙪𝙥𝙚*",
   "admin.settings_antilink": "⚙️ *𝙋𝙖𝙧𝙖𝙢è𝙩𝙧𝙚 𝙖𝙣𝙩𝙞-𝙡𝙞𝙚𝙣*",
+  "admin.settings_antispam": "🚫 *𝘼𝙣𝙩𝙞𝙨𝙥𝙖𝙢*",
   "admin.settings_goodbye": "⚙️ *𝙋𝙖𝙧𝙖𝙢è𝙩𝙧𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚𝙨 𝙙’𝙖𝙪 𝙧𝙚𝙫𝙤𝙞𝙧*",
   "admin.settings_title": "⚙️ *𝙋𝙖𝙧𝙖𝙢è𝙩𝙧𝙚𝙨*",
   "admin.settings_welcome": "⚙️ *𝙋𝙖𝙧𝙖𝙢è𝙩𝙧𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚𝙨 𝙙𝙚 𝙗𝙞𝙚𝙣𝙫𝙚𝙣𝙪𝙚*",
@@ -445,9 +446,6 @@ module.exports = {
 
   "general.memory_title": "💾 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 𝙙𝙚 𝙡𝙖 𝙢é𝙢𝙤𝙞𝙧𝙚*",
   "general.owner": "👑 *𝙋𝙧𝙤𝙥𝙧𝙞é𝙩𝙖𝙞𝙧𝙚 :* The-whisperer",
-  "general.rules_footer": "*𝙍𝙚𝙨𝙥𝙚𝙘𝙩𝙚𝙯 𝙡𝙚𝙨 𝙧è𝙜𝙡𝙚𝙨 𝙚𝙩 é𝙫𝙞𝙩𝙚𝙯 𝙡𝙚𝙨 𝙥𝙧𝙤𝙗𝙡è𝙢𝙚𝙨 𝙖𝙫𝙚𝙘 𝙡𝙚𝙨 𝙢𝙤𝙙é𝙧𝙖𝙩𝙚𝙪𝙧𝙨.*",
-  "general.rules_none": "📜 *𝘼𝙪𝙘𝙪𝙣𝙚 𝙧è𝙜𝙡𝙚 𝙙é𝙛𝙞𝙣𝙞𝙚 𝙥𝙤𝙪𝙧 𝙡’𝙞𝙣𝙨𝙩𝙖𝙣𝙩.*\n\nLe groupe fonctionne sur les bonnes vibes.",
-  "general.rules_title": "📜 *𝙍è𝙜𝙡𝙚𝙨 𝙙𝙪 𝙜𝙧𝙤𝙪𝙥𝙚 :*",
 
 
   "general.stats_commands": "Commandes",
