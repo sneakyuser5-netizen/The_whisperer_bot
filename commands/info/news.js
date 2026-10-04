@@ -19,15 +19,52 @@ module.exports = {
             });
         }
 
-        const country = (args[0] || "us").toLowerCase();
+        const input = (args[0] || "").toLowerCase();
+
+        const categories = [
+            "business",
+            "entertainment",
+            "general",
+            "health",
+            "science",
+            "sports",
+            "technology"
+        ];
+
+        const params = {
+            apiKey,
+            country: "us",
+            pageSize: 5
+        };
+
+        if (categories.includes(input)) {
+            params.category = input;
+        } else if (input === "cameroon" || input === "cm") {
+            delete params.country;
+            params.q = "Cameroon";
+        } else if (!input) {
+            // Default: US latest headlines
+        } else {
+            params.country = input;
+        }
 
         try {
-            const { data } = await axios.get(api.urls.news, {
-                params: {
+            const url = (input === "cameroon" || input === "cm")
+                ? api.urls.newsSearch
+                : api.urls.news;
+
+            const requestParams = (input === "cameroon" || input === "cm")
+                ? {
                     apiKey,
-                    country,
+                    q: "Cameroon",
+                    language: "en",
+                    sortBy: "publishedAt",
                     pageSize: 5
-                },
+                }
+                : params;
+
+            const { data } = await axios.get(url, {
+                params: requestParams,
                 timeout: 15000
             });
 

@@ -1,4 +1,6 @@
 module.exports = {
+"tools.translate_languages": "🌐 *Available Languages:*\n\n🇬🇧 en — English\n🇫🇷 fr — French\n🇪🇸 es — Spanish\n🇩🇪 de — German\n🇮🇹 it — Italian\n🇵🇹 pt — Portuguese\n🇸🇦 ar — Arabic\n🇷🇺 ru — Russian\n🇮🇳 hi — Hindi\n🇨🇳 zh — Chinese\n🇯🇵 ja — Japanese\n🇰🇷 ko — Korean",
+
     "tools.aifilter_not_admin": "⚠️ Should be kicked but I'm not admin. Make me admin!",
   "tools.aifilter_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:*\n.aifilter on\n.aifilter off\n.aifilter status",
   "tools.aifilter_enabled": "🛡️ *𝘼𝙄 𝙁𝙞𝙡𝙩𝙚𝙧 𝙚𝙣𝙖𝙗𝙡𝙚𝙙 - 𝙒𝙄𝙇𝘿 𝙈𝙤𝙙𝙚 𝙊𝙉.*",
@@ -84,7 +86,7 @@ module.exports = {
   "tools.aifilter_status_off": "AI filter disabled.",
   "tools.aifilter_enabled": "*𝘼𝙄 𝙛𝙞𝙡𝙩𝙚𝙧 𝙚𝙣𝙖𝙗𝙡𝙚𝙙.*",
   "tools.aifilter_disabled": "*𝘼𝙄 𝙛𝙞𝙡𝙩𝙚𝙧 𝙙𝙞𝙨𝙖𝙗𝙡𝙚𝙙.*",
-  "tools.autogoodnight_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* .autogoodnight on | off | status",
+  "tools.autogoodnight_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* .agn on | off | status",
   "tools.autogoodnight_status_on": "Auto good night enabled.",
   "tools.autogoodnight_status_off": "Auto good night disabled.",
   "tools.autogoodnight_enabled": "*𝘼𝙪𝙩𝙤 𝙜𝙤𝙤𝙙 𝙣𝙞𝙜𝙝𝙩 𝙚𝙣𝙖𝙗𝙡𝙚𝙙.*",
@@ -104,19 +106,6 @@ module.exports = {
   "media.stk_usage": "📌 Reply to an image with .stk",
   "media.stk_failed": "❌ *𝙎𝙩𝙞𝙘𝙠𝙚𝙧 𝙘𝙤𝙣𝙫𝙚𝙧𝙨𝙞𝙤𝙣 𝙛𝙖𝙞𝙡𝙚𝙙.*",
 
-  "tools.chat_memory_title": "🧠 *𝙇𝙤𝙣𝙜-𝙩𝙚𝙧𝙢 𝙈𝙚𝙢𝙤𝙧𝙮*",
-  "tools.chat_memory_empty": "🧠 No saved memories.",
-  "tools.chat_memory_cleared": "🧠 Long-term memory cleared.",
-  "tools.chat_memory_saved": "🧠 I'll remember that.",
-  "tools.chat_memory_exists": "🧠 Memory already exists.",
-  "tools.chat_memory_removed": "🧠 *𝙈𝙚𝙢𝙤𝙧𝙮 𝙧𝙚𝙢𝙤𝙫𝙚𝙙.*",
-  "tools.chat_memory_not_found": "🧠 *𝙈𝙚𝙢𝙤𝙧𝙮 𝙣𝙤𝙩 𝙛𝙤𝙪𝙣𝙙.*",
-  "tools.chat_remember_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* .chat remember <information>",
-  "tools.chat_forget_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* .chat forget <information>",
-  "tools.chat_reset": "🧠 Chat memory cleared.",
-  "tools.chat_status_active": "🧠 Chat memory: ON",
-  "tools.chat_status_empty": "🧠 Chat memory: OFF",
-  "tools.chat_too_long": "❌ Message too long. Please shorten it.",
 
   "antibot_enabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙚𝙣𝙖𝙗𝙡𝙚𝙙.*\nBot accounts will be removed on join.",
   "antibot_disabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙙𝙞𝙨𝙖𝙗𝙡𝙚𝙙.*",
@@ -221,14 +210,11 @@ module.exports = {
   "admin.setgoodbye_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:*\n.setgoodbye <message>",
   "admin.setgoodbye_saved": "✅ Goodbye message updated.",
 
-  "tools.chat_rate_limit": "⚠️ AI service is busy. Try again shortly.",
-  "tools.chat_failed": "❌ *𝙁𝙖𝙞𝙡𝙚𝙙 𝙩𝙤 𝙜𝙚𝙩 𝙖 𝙧𝙚𝙨𝙥𝙤𝙣𝙨𝙚 𝙛𝙧𝙤𝙢 𝙩𝙝𝙚 𝘼𝙄.*",
   "owner.clear_current": "Current chat",
   "owner.clear_private": "Private chats",
   "owner.clear_groups": "Group chats",
   "owner.clear_all": "Everything",
   "owner.clear_cancel": "Cancel",
-  "tools.chat_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:*\n.chat <message>",
   "owner.clear_success": "*𝘾𝙝𝙖𝙩 𝙘𝙡𝙚𝙖𝙧𝙚𝙙.*",
   "owner.clear_error": "*𝙐𝙣𝙖𝙗𝙡𝙚 𝙩𝙤 𝙘𝙡𝙚𝙖𝙧 𝙩𝙝𝙞𝙨 𝙘𝙝𝙖𝙩.*",
   "owner.clear_empty": "Nothing to clear.",
@@ -239,8 +225,9 @@ module.exports = {
   "info.movie_no_description": "*𝙉𝙤 𝙙𝙚𝙨𝙘𝙧𝙞𝙥𝙩𝙞𝙤𝙣 𝙖𝙫𝙖𝙞𝙡𝙖𝙗𝙡𝙚.*",
   "info.movie_no_api": "*𝙏𝙈𝘿𝘽_𝘼𝙋𝙄_𝙆𝙀𝙔 𝙞𝙨 𝙣𝙤𝙩 𝙘𝙤𝙣𝙛𝙞𝙜𝙪𝙧𝙚𝙙.*",
 
-  "tools.dictionary_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* .dictionary <word>",
+  "tools.dictionary_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* .dic <word>",
   "tools.dictionary_not_found": "*𝙒𝙤𝙧𝙙 𝙣𝙤𝙩 𝙛𝙤𝙪𝙣𝙙.*",
+  "tools.dictionary_failed": "⚠️ *𝘿𝙞𝙘𝙩𝙞𝙤𝙣𝙖𝙧𝙮 𝙨𝙚𝙧𝙫𝙞𝙘𝙚 𝙞𝙨 𝙪𝙣𝙖𝙫𝙖𝙞𝙡𝙖𝙗𝙡𝙚. 𝙏𝙧𝙮 𝙖𝙜𝙖𝙞𝙣 𝙡𝙖𝙩𝙚𝙧.*",
   "tools.dictionary_none": "None",
 
   "tools.currency_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* .currency <amount> <from> <to>",
@@ -250,7 +237,7 @@ module.exports = {
   "tools.currency_error": "*𝙐𝙣𝙖𝙗𝙡𝙚 𝙩𝙤 𝙧𝙚𝙩𝙧𝙞𝙚𝙫𝙚 𝙚𝙭𝙘𝙝𝙖𝙣𝙜𝙚 𝙧𝙖𝙩𝙚𝙨.*",
 
   "info.news_title": "*𝙇𝙖𝙩𝙚𝙨𝙩 𝙉𝙚𝙬𝙨*",
-  "info.news_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* .news [country]",
+  "info.news_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* .news | .news sports | .news technology | .news Cameroon",
   "info.news_error": "*𝙐𝙣𝙖𝙗𝙡𝙚 𝙩𝙤 𝙧𝙚𝙩𝙧𝙞𝙚𝙫𝙚 𝙩𝙝𝙚 𝙡𝙖𝙩𝙚𝙨𝙩 𝙣𝙚𝙬𝙨.*",
   "info.news_empty": "No news found.",
   "info.news_no_api": "*𝙉𝙀𝙒𝙎_𝘼𝙋𝙄_𝙆𝙀𝙔 𝙞𝙨 𝙣𝙤𝙩 𝙘𝙤𝙣𝙛𝙞𝙜𝙪𝙧𝙚𝙙.*",
@@ -281,12 +268,6 @@ module.exports = {
   "admin.goodbye_enabled": "✅ *𝙂𝙤𝙤𝙙𝙗𝙮𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚𝙨 𝙚𝙣𝙖𝙗𝙡𝙚𝙙.*",
   "admin.goodbye_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:*\n.goodbye on\n.goodbye off",
 
-  "admin.groupinfo_admins": "👑 *𝘼𝙙𝙢𝙞𝙣𝙨*",
-  "admin.groupinfo_description": "📝 *𝘿𝙚𝙨𝙘𝙧𝙞𝙥𝙩𝙞𝙤𝙣*",
-  "admin.groupinfo_members": "👥 *𝙈𝙚𝙢𝙗𝙚𝙧𝙨*",
-  "admin.groupinfo_name": "📛 *𝙉𝙖𝙢𝙚*",
-  "admin.groupinfo_no_description": "⚠️ *𝙉𝙤 𝙙𝙚𝙨𝙘𝙧𝙞𝙥𝙩𝙞𝙤𝙣 𝙨𝙚𝙩.*",
-  "admin.groupinfo_title": "📋 *𝙂𝙧𝙤𝙪𝙥 𝙄𝙣𝙛𝙤𝙧𝙢𝙖𝙩𝙞𝙤𝙣*",
 
   "admin.gstatus_failed": "❌ *𝙁𝙖𝙞𝙡𝙚𝙙 𝙩𝙤 𝙥𝙤𝙨𝙩 𝙨𝙩𝙖𝙩𝙪𝙨.*",
   "admin.gstatus_only_supported": "❌ *𝙊𝙣𝙡𝙮 𝙥𝙝𝙤𝙩𝙤𝙨 𝙖𝙣𝙙 𝙫𝙞𝙙𝙚𝙤𝙨 𝙖𝙧𝙚 𝙨𝙪𝙥𝙥𝙤𝙧𝙩𝙚𝙙.*",
@@ -301,7 +282,6 @@ module.exports = {
   "admin.lock_locked_emoji": "🔒",
   "admin.lock_locked_text": "has been *𝙡𝙤𝙘𝙠𝙚𝙙*.",
   "admin.lock_valid_types": "❌ *𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙩𝙮𝙥𝙚.* Valid types:",
-  "admin.membercount_total": "👥 *𝙏𝙤𝙩𝙖𝙡 𝙢𝙚𝙢𝙗𝙚𝙧𝙨:*",
 
   "admin.mute_invalid_time": "❌ *𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙩𝙞𝙢𝙚 𝙛𝙤𝙧𝙢𝙖𝙩.*\nUse:\n10m = minutes\n1h = hours\n1d = days",
   "admin.mute_mention": "❌ *𝙈𝙚𝙣𝙩𝙞𝙤𝙣 𝙖 𝙪𝙨𝙚𝙧.*\nExample: .mute @user 10m",
@@ -317,13 +297,6 @@ module.exports = {
   "admin.promote_success": "✅ *𝙐𝙨𝙚𝙧 𝙥𝙧𝙤𝙢𝙤𝙩𝙚𝙙 𝙩𝙤 𝙖𝙙𝙢𝙞𝙣.*",
   "admin.promote_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:* Reply to or mention a user to promote them.",
 
-  "admin.purge_deleted": "🧹 *𝘿𝙚𝙡𝙚𝙩𝙚𝙙*",
-  "admin.purge_finished": "*𝘾𝙡𝙚𝙖𝙣𝙪𝙥 𝙛𝙞𝙣𝙞𝙨𝙝𝙚𝙙.*",
-  "admin.purge_messages": "messages.",
-  "admin.purge_no_history": "❌ *𝙉𝙤𝙩 𝙚𝙣𝙤𝙪𝙜𝙝 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙝𝙞𝙨𝙩𝙤𝙧𝙮 𝙩𝙤 𝙥𝙪𝙧𝙜𝙚.*",
-  "admin.purge_not_found": "❌ *𝙈𝙚𝙨𝙨𝙖𝙜𝙚 𝙣𝙤𝙩 𝙛𝙤𝙪𝙣𝙙 𝙞𝙣 𝙢𝙚𝙢𝙤𝙧𝙮.*",
-  "admin.purge_reply": "❌ *𝙍𝙚𝙥𝙡𝙮 𝙩𝙤 𝙖 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙛𝙞𝙧𝙨𝙩.*\n\nExample:\nReply → .purge 10",
-  "admin.purge_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:*\n.purge 10\n\n*𝙈𝙖𝙭𝙞𝙢𝙪𝙢:* 100 messages.",
 
   "admin.resetwarn_result": "✅ *𝙒𝙖𝙧𝙣𝙞𝙣𝙜𝙨 𝙧𝙚𝙨𝙚𝙩.*\n\n*𝙐𝙨𝙚𝙧:* {user}\n*𝙒𝙖𝙧𝙣𝙞𝙣𝙜𝙨:* 0/5",
   "admin.resetwarn_success": "✅ *𝙒𝙖𝙧𝙣𝙞𝙣𝙜𝙨 𝙧𝙚𝙨𝙚𝙩.*",
@@ -333,7 +306,6 @@ module.exports = {
   "admin.revoke_new_link_base": "🔗 *𝙉𝙚𝙬 𝙞𝙣𝙫𝙞𝙩𝙚 𝙡𝙞𝙣𝙠:*",
   "admin.revoke_reset": "✅ *𝙂𝙧𝙤𝙪𝙥 𝙞𝙣𝙫𝙞𝙩𝙚 𝙡𝙞𝙣𝙠 𝙧𝙚𝙨𝙚𝙩.*",
 
-  "admin.setrules_updated": "✅ *𝙂𝙧𝙤𝙪𝙥 𝙧𝙪𝙡𝙚𝙨 𝙪𝙥𝙙𝙖𝙩𝙚𝙙.*\n*𝙋𝙡𝙚𝙖𝙨𝙚 𝙧𝙚𝙨𝙥𝙚𝙘𝙩 𝙩𝙝𝙚 𝙧𝙪𝙡𝙚𝙨 𝙤𝙧 𝙡𝙚𝙖𝙫𝙚 𝙩𝙝𝙚 𝙜𝙧𝙤𝙪𝙥.*",
   "admin.settings_antigm": "⚙️ *𝘼𝙣𝙩𝙞-𝙂𝙧𝙤𝙪𝙥 𝙈𝙖𝙣𝙖𝙜𝙚𝙢𝙚𝙣𝙩 𝙨𝙚𝙩𝙩𝙞𝙣𝙜*",
   "admin.settings_antilink": "⚙️ *𝘼𝙣𝙩𝙞-𝙇𝙞𝙣𝙠 𝙨𝙚𝙩𝙩𝙞𝙣𝙜*",
   "admin.settings_goodbye": "⚙️ *𝙂𝙤𝙤𝙙𝙗𝙮𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚𝙨 𝙨𝙚𝙩𝙩𝙞𝙣𝙜*",
@@ -387,7 +359,6 @@ module.exports = {
 
   "choose_one": "❌ *𝘾𝙝𝙤𝙤𝙨𝙚 𝙤𝙣𝙚 𝙤𝙥𝙩𝙞𝙤𝙣:*",
   "creator_only": "👑 *𝙊𝙬𝙣𝙚𝙧 𝙤𝙣𝙡𝙮*\n\nOnly *𝙏𝙃𝙀-𝙒𝙃𝙄𝙎𝙋𝙀𝙍𝙀𝙍* can use this command.",
-  "delrules_success": "🗑️ *𝙂𝙧𝙤𝙪𝙥 𝙧𝙪𝙡𝙚𝙨 𝙧𝙚𝙢𝙤𝙫𝙚𝙙.*\n\nThe rulebook is clear.",
   "demote_failed": "❌ *𝙁𝙖𝙞𝙡𝙚𝙙 𝙩𝙤 𝙙𝙚𝙢𝙤𝙩𝙚 𝙪𝙨𝙚𝙧.*",
   "demote_success": "✅ *𝙐𝙨𝙚𝙧 𝙙𝙚𝙢𝙤𝙩𝙚𝙙 𝙛𝙧𝙤𝙢 𝙖𝙙𝙢𝙞𝙣.*",
   "demote_target_required": "❌ *𝙍𝙚𝙥𝙡𝙮 𝙩𝙤 𝙤𝙧 𝙢𝙚𝙣𝙩𝙞𝙤𝙣 𝙖𝙣 𝙖𝙙𝙢𝙞𝙣 𝙩𝙤 𝙙𝙚𝙢𝙤𝙩𝙚.*\n\nExample:\n.demote @user",
@@ -640,7 +611,6 @@ module.exports = {
   "secret": "Owner-only test command",
   "sudo_only": "🚫 *𝙋𝙚𝙧𝙢𝙞𝙨𝙨𝙞𝙤𝙣 𝙙𝙚𝙣𝙞𝙚𝙙.*\n\nOnly sudo members can use this. Ask the owner.",
 
-  "tools.echo_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:*\n.echo Hello",
   "tools.ip_failed": "❌ *𝙁𝙖𝙞𝙡𝙚𝙙 𝙩𝙤 𝙧𝙚𝙩𝙧𝙞𝙚𝙫𝙚 𝙄𝙋 𝙞𝙣𝙛𝙤𝙧𝙢𝙖𝙩𝙞𝙤𝙣.*",
   "tools.ip_invalid": "❌ *𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙄𝙋 𝙖𝙙𝙙𝙧𝙚𝙨𝙨.*",
   "tools.ip_result": "🌍 *𝙄𝙋 𝙄𝙣𝙛𝙤𝙧𝙢𝙖𝙩𝙞𝙤𝙣*",
@@ -648,7 +618,7 @@ module.exports = {
   "tools.translate_failed": "❌ *𝙏𝙧𝙖𝙣𝙨𝙡𝙖𝙩𝙞𝙤𝙣 𝙛𝙖𝙞𝙡𝙚𝙙.*",
   "tools.translate_rate_limit": "⚠️ Translation service is busy. Try again later.",
   "tools.translate_result": "🌐 *𝙏𝙧𝙖𝙣𝙨𝙡𝙖𝙩𝙞𝙤𝙣 𝙍𝙚𝙨𝙪𝙡𝙩*\n\n🌐 From: {from}\n🎯 To: {to}\n\n📝 Original:\n{original}\n\n✅ Translation:\n{translation}",
-  "tools.translate_usage": "📌 *𝙐𝙨𝙖𝙜𝙚: .𝙩𝙧𝙖𝙣𝙨𝙡𝙖𝙩𝙚 <𝙩𝙚𝙭𝙩>*",
+  "tools.translate_usage": "📌 *𝙐𝙨𝙖𝙜𝙚: .𝙩𝙧𝙖𝙣𝙨 𝙗𝙮 𝙧𝙚𝙥𝙡𝙮𝙞𝙣𝙜 𝙩𝙤 𝙖 𝙩𝙚𝙭𝙩 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙤𝙧 .𝙩𝙧𝙖𝙣𝙨 𝙡𝙖𝙣𝙜𝙪𝙖𝙜𝙚 (𝙯𝙝, 𝙚𝙣, 𝙛𝙧) <𝙩𝙚𝙭𝙩>*",
   "tools.vv_failed": "❌ *𝙁𝙖𝙞𝙡𝙚𝙙 𝙩𝙤 𝙧𝙚𝙩𝙧𝙞𝙚𝙫𝙚 𝙫𝙞𝙚𝙬-𝙤𝙣𝙘𝙚 𝙢𝙚𝙙𝙞𝙖.*",
   "tools.vv_reply": "❌ *𝙍𝙚𝙥𝙡𝙮 𝙩𝙤 𝙖 𝙫𝙞𝙚𝙬-𝙤𝙣𝙘𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚.*",
   "tools.vv_unsupported": "❌ *𝙐𝙣𝙨𝙪𝙥𝙥𝙤𝙧𝙩𝙚𝙙 𝙫𝙞𝙚𝙬-𝙤𝙣𝙘𝙚 𝙩𝙮𝙥𝙚.*",

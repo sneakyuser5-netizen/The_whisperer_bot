@@ -3,11 +3,11 @@ const settings = require("../../lib/settings");
 const { isGroupAdmin } = require("../../lib/group-admin");
 
 module.exports = {
-    name: "autogoodnight",
+    name: "agn",
     description: "Enable or disable automatic good-night replies",
     category: "tools",
     permission: "sudo",
-    usage: ".autogoodnight on\n.autogoodnight off\n.autogoodnight status",
+    usage: ".agn on\n.agn off\n.agn status",
 
     execute: async (sock, msg, args = []) => {
         const jid = msg?.key?.remoteJid;
@@ -42,7 +42,7 @@ module.exports = {
         }
 
         if (option === "status") {
-            const enabled = !!settings.get(jid).autogoodnight;
+            const enabled = !!settings.get(jid).agn;
 
             return sock.sendMessage(jid, {
                 text: t(

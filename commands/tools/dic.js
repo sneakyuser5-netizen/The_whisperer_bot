@@ -3,11 +3,11 @@ const { t } = require("../../lib/lang");
 const api = require("../../lib/api");
 
 module.exports = {
-    name: "dictionary",
+    name: "dic",
     description: "Look up word definitions",
     category: "tools",
     permission: "sudo",
-    usage: ".dictionary <word>",
+    usage: ".dic <word>",
 
     execute: async (sock, msg, args) => {
 
@@ -65,13 +65,19 @@ ${synonyms}`
                 }
             );
 
-        } catch {
+        } catch (err) {
+        console.error("Dictionary error:", err.response?.status || err.message);
 
-            await sock.sendMessage(jid, {
+        if (err.response?.status === 404) {
+            return await sock.sendMessage(jid, {
                 text: t(jid, "tools.dictionary_not_found")
             });
-
         }
+
+        await sock.sendMessage(jid, {
+            text: t(jid, "tools.dictionary_failed")
+        });
+    }
 
     }
 

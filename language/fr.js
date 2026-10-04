@@ -1,4 +1,5 @@
 module.exports = {
+"tools.translate_languages": "🌐 *Langues disponibles :*\n\n🇬🇧 en — Anglais\n🇫🇷 fr — Français\n🇪🇸 es — Espagnol\n🇩🇪 de — Allemand\n🇮🇹 it — Italien\n🇵🇹 pt — Portugais\n🇸🇦 ar — Arabe\n🇷🇺 ru — Russe\n🇮🇳 hi — Hindi\n🇨🇳 zh — Chinois\n🇯🇵 ja — Japonais\n🇰🇷 ko — Coréen",
   "tools.aifilter_not_admin": "⚠️ Devrait être exclu mais je ne suis pas admin. Rends-moi admin!",
 	  "tools.aifilter_usage": "📌 *「 𝗨𝘁𝗶𝗹𝗶𝘀𝗮𝘁𝗶𝗼𝗻 」*\n.aifilter on\n.aifilter off\n.aifilter status",
   "tools.aifilter_enabled": "🛡️ *「 𝗙𝗶𝗹𝘁𝗿𝗲 𝗔𝗜 𝗮𝗰𝘁𝗶𝘃𝗲́ - 𝗠𝗼𝗱𝗲 𝗦𝗮𝘂𝘃𝗮𝗴𝗲 𝗢𝗡 」*",
@@ -83,7 +84,7 @@ module.exports = {
   "tools.aifilter_status_off": "Filtre IA désactivé.",
   "tools.aifilter_enabled": "Filtre IA activé.",
   "tools.aifilter_disabled": "Filtre IA désactivé.",
-  "tools.autogoodnight_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :* .autogoodnight on | off | status",
+  "tools.autogoodnight_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :* .agn on | off | status",
   "tools.autogoodnight_status_on": "Réponse automatique de bonne nuit activée.",
   "tools.autogoodnight_status_off": "Réponse automatique de bonne nuit désactivée.",
   "tools.autogoodnight_enabled": "Réponse automatique de bonne nuit activée.",
@@ -102,19 +103,6 @@ module.exports = {
   "tools.tts_failed": "❌ Impossible de convertir le texte en audio.",
   "media.stk_usage": "📌 Répondez à une image avec .stk pour la convertir en sticker.",
   "media.stk_failed": "❌ Impossible de convertir l’image en sticker.",
-  "tools.chat_memory_title": "🧠 *𝙈é𝙢𝙤𝙞𝙧𝙚 à 𝙡𝙤𝙣𝙜 𝙩𝙚𝙧𝙢𝙚*",
-  "tools.chat_memory_empty": "🧠 Aucune mémoire enregistrée pour cette conversation.",
-  "tools.chat_memory_cleared": "🧠 Mémoire à long terme effacée.",
-  "tools.chat_memory_saved": "🧠 Je m’en souviendrai.",
-  "tools.chat_memory_exists": "🧠 Cette information est déjà enregistrée.",
-  "tools.chat_memory_removed": "🧠 Mémoire supprimée.",
-  "tools.chat_memory_not_found": "🧠 Mémoire introuvable.",
-  "tools.chat_remember_usage": "📌 Utilisation : .chat remember <information>",
-  "tools.chat_forget_usage": "📌 Utilisation : .chat forget <information>",
-  "tools.chat_reset": "🧠 Mémoire de discussion effacée.",
-  "tools.chat_status_active": "🧠 Mémoire active pour cette conversation.",
-  "tools.chat_status_empty": "🧠 Aucune mémoire active pour cette conversation.",
-  "tools.chat_too_long": "❌ Message trop long. Raccourcissez-le et réessayez.",
 
   "antibot_enabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙖𝙘𝙩𝙞𝙫é.*\nLes comptes bots seront supprimés à leur arrivée.",
   "antibot_disabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙙é𝙨𝙖𝙘𝙩𝙞𝙫é.*",
@@ -219,10 +207,6 @@ module.exports = {
   "admin.setgoodbye_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :*\n.setgoodbye <message>",
   "admin.setgoodbye_saved": "✅ Message d’au revoir mis à jour.",
 
-  "tools.chat_usage": "📌 Utilisation :\n.chat <message>",
-  "tools.chat_failed": "❌ Impossible d’obtenir une réponse de l’IA.",
-  "tools.chat_rate_limit": "⚠️ Service IA occupé. Réessayez dans un instant.",
-  "tools.chat_failed": "❌ Impossible d’obtenir une réponse de l’IA.",
 
   "owner.clear_title": "🗑️ GESTIONNAIRE DE NETTOYAGE",
   "owner.clear_choose": "Choisissez ce que vous voulez supprimer :",
@@ -240,8 +224,9 @@ module.exports = {
   "info.movie_error": "Impossible de récupérer les infos du film.",
   "info.movie_no_description": "Aucune description disponible.",
   "info.movie_no_api": "TMDB_𝘼𝙋𝙄_KEY n’est pas configurée.",
-  "tools.dictionary_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :* .dictionary <mot>",
+  "tools.dictionary_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :* .dic <mot>",
   "tools.dictionary_not_found": "Mot introuvable.",
+  "tools.dictionary_failed": "⚠️ *𝙇𝙚 𝙨𝙚𝙧𝙫𝙞𝙘𝙚 𝙙𝙚 𝙙𝙞𝙘𝙩𝙞𝙤𝙣𝙣𝙖𝙞𝙧𝙚 𝙚𝙨𝙩 𝙞𝙣𝙙𝙞𝙨𝙥𝙤𝙣𝙞𝙗𝙡𝙚. 𝙑𝙚𝙪𝙞𝙡𝙡𝙚𝙯 𝙧𝙚𝙨𝙨𝙖𝙮𝙚𝙧 𝙥𝙡𝙪𝙨 𝙩𝙖𝙧𝙙.*",
   "tools.dictionary_none": "Aucun",
   "admin_check_confirmed": "✅ *𝙑é𝙧𝙞𝙛𝙞𝙘𝙖𝙩𝙞𝙤𝙣 𝙖𝙙𝙢𝙞𝙣 𝙚𝙛𝙛𝙚𝙘𝙩𝙪é𝙚*",
 
@@ -251,7 +236,7 @@ module.exports = {
   "tools.currency_result": "Conversion de devise",
   "tools.currency_error": "Impossible de récupérer les taux de change.",
   "info.news_title": "Dernières actualités",
-  "info.news_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :* .news [pays]",
+  "info.news_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :* .news | .news sports | .news technology | .news Cameroon",
   "info.news_error": "Impossible de récupérer les actualités.",
   "info.news_empty": "Aucune actualité trouvée.",
   "info.news_no_api": "NEWS_𝘼𝙋𝙄_KEY n’est pas configurée.",
@@ -282,12 +267,6 @@ module.exports = {
   "admin.goodbye_enabled": "✅ *𝙈𝙚𝙨𝙨𝙖𝙜𝙚𝙨 𝙙’𝙖𝙪 𝙧𝙚𝙫𝙤𝙞𝙧 𝙖𝙘𝙩𝙞𝙫é𝙨.*",
   "admin.goodbye_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :*\n.goodbye on\n.goodbye off",
 
-  "admin.groupinfo_admins": "👑 *𝘼𝙙𝙢𝙞𝙣𝙨*",
-  "admin.groupinfo_description": "📝 *𝘿𝙚𝙨𝙘𝙧𝙞𝙥𝙩𝙞𝙤𝙣*",
-  "admin.groupinfo_members": "👥 *𝙈𝙚𝙢𝙗𝙧𝙚𝙨*",
-  "admin.groupinfo_name": "📛 *𝙉𝙤𝙢*",
-  "admin.groupinfo_no_description": "⚠️ *𝘼𝙪𝙘𝙪𝙣𝙚 𝙙𝙚𝙨𝙘𝙧𝙞𝙥𝙩𝙞𝙤𝙣 𝙙é𝙛𝙞𝙣𝙞𝙚.*",
-  "admin.groupinfo_title": "📋 *𝙄𝙣𝙛𝙤𝙧𝙢𝙖𝙩𝙞𝙤𝙣𝙨 𝙨𝙪𝙧 𝙡𝙚 𝙜𝙧𝙤𝙪𝙥𝙚*",
 
   "admin.gstatus_failed": "❌ *É𝙘𝙝𝙚𝙘 𝙙𝙚 𝙡𝙖 𝙥𝙪𝙗𝙡𝙞𝙘𝙖𝙩𝙞𝙤𝙣 𝙙𝙪 𝙨𝙩𝙖𝙩𝙪𝙩.*",
   "admin.gstatus_only_supported": "❌ *𝙎𝙚𝙪𝙡𝙚𝙨 𝙡𝙚𝙨 𝙥𝙝𝙤𝙩𝙤𝙨 𝙚𝙩 𝙫𝙞𝙙é𝙤𝙨 𝙨𝙤𝙣𝙩 𝙥𝙧𝙞𝙨𝙚𝙨 𝙚𝙣 𝙘𝙝𝙖𝙧𝙜𝙚.*",
@@ -302,7 +281,6 @@ module.exports = {
   "admin.lock_locked_emoji": "🔒",
   "admin.lock_locked_text": "a été *𝙫𝙚𝙧𝙧𝙤𝙪𝙞𝙡𝙡é*.",
   "admin.lock_valid_types": "❌ *𝙏𝙮𝙥𝙚 𝙞𝙣𝙫𝙖𝙡𝙞𝙙𝙚.* Types valides :",
-  "admin.membercount_total": "👥 *𝙈𝙚𝙢𝙗𝙧𝙚𝙨 𝙖𝙪 𝙩𝙤𝙩𝙖𝙡 :*",
 
   "admin.mute_invalid_time": "❌ *𝙁𝙤𝙧𝙢𝙖𝙩 𝙙𝙚 𝙩𝙚𝙢𝙥𝙨 𝙞𝙣𝙫𝙖𝙡𝙞𝙙𝙚.*\nUtilisez :\n10m = minutes\n1h = heures\n1d = jours",
   "admin.mute_mention": "❌ *𝙈𝙚𝙣𝙩𝙞𝙤𝙣𝙣𝙚𝙯 𝙪𝙣 𝙪𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙚𝙪𝙧.*\nExemple : .mute @user",
@@ -318,13 +296,6 @@ module.exports = {
   "admin.promote_success": "✅ *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙚𝙪𝙧 𝙥𝙧𝙤𝙢𝙪 𝙖𝙙𝙢𝙞𝙣𝙞𝙨𝙩𝙧𝙖𝙩𝙚𝙪𝙧.*",
   "admin.promote_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :* Répondez ou mentionnez un utilisateur pour le promouvoir.",
 
-  "admin.purge_deleted": "🧹 *𝙎𝙪𝙥𝙥𝙧𝙞𝙢é*",
-  "admin.purge_finished": "*𝙉𝙚𝙩𝙩𝙤𝙮𝙖𝙜𝙚 𝙩𝙚𝙧𝙢𝙞𝙣é.*",
-  "admin.purge_messages": "messages.",
-  "admin.purge_no_history": "❌ *𝙋𝙖𝙨 𝙖𝙨𝙨𝙚𝙯 𝙙’𝙝𝙞𝙨𝙩𝙤𝙧𝙞𝙦𝙪𝙚 𝙥𝙤𝙪𝙧 𝙥𝙪𝙧𝙜𝙚𝙧.*",
-  "admin.purge_not_found": "❌ *𝙈𝙚𝙨𝙨𝙖𝙜𝙚 𝙞𝙣𝙩𝙧𝙤𝙪𝙫𝙖𝙗𝙡𝙚 𝙚𝙣 𝙢é𝙢𝙤𝙞𝙧𝙚.*",
-  "admin.purge_reply": "❌ *𝙍é𝙥𝙤𝙣𝙙𝙚𝙯 𝙙’𝙖𝙗𝙤𝙧𝙙 à 𝙪𝙣 𝙢𝙚𝙨𝙨𝙖𝙜𝙚.*\n\nExemple :\nRépondez → .purge 10",
-  "admin.purge_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :*\n.purge 10\n\n*𝙈𝙖𝙭𝙞𝙢𝙪𝙢 :* 100 messages.",
 
   "admin.resetwarn_result": "✅ *𝘼𝙫𝙚𝙧𝙩𝙞𝙨𝙨𝙚𝙢𝙚𝙣𝙩𝙨 𝙧é𝙞𝙣𝙞𝙩𝙞𝙖𝙡𝙞𝙨é𝙨.*\n\n*𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙚𝙪𝙧 :* {user}\n*𝘼𝙫𝙚𝙧𝙩𝙞𝙨𝙨𝙚𝙢𝙚𝙣𝙩𝙨 :* 0/5",
   "admin.resetwarn_success": "✅ *𝘼𝙫𝙚𝙧𝙩𝙞𝙨𝙨𝙚𝙢𝙚𝙣𝙩𝙨 𝙧é𝙞𝙣𝙞𝙩𝙞𝙖𝙡𝙞𝙨é𝙨.*",
@@ -334,7 +305,6 @@ module.exports = {
   "admin.revoke_new_link_base": "🔗 *𝙉𝙤𝙪𝙫𝙚𝙖𝙪 𝙡𝙞𝙚𝙣 𝙙’𝙞𝙣𝙫𝙞𝙩𝙖𝙩𝙞𝙤𝙣 :*",
   "admin.revoke_reset": "✅ *𝙇𝙞𝙚𝙣 𝙙’𝙞𝙣𝙫𝙞𝙩𝙖𝙩𝙞𝙤𝙣 𝙧é𝙞𝙣𝙞𝙩𝙞𝙖𝙡𝙞𝙨é.*",
 
-  "admin.setrules_updated": "✅ *𝙍è𝙜𝙡𝙚𝙨 𝙙𝙪 𝙜𝙧𝙤𝙪𝙥𝙚 𝙢𝙞𝙨𝙚𝙨 à 𝙟𝙤𝙪𝙧.*\n*𝙍𝙚𝙨𝙥𝙚𝙘𝙩𝙚𝙯-𝙡𝙚𝙨 𝙤𝙪 𝙚𝙣𝙫𝙞𝙨𝙖𝙜𝙚𝙯 𝙙𝙚 𝙥𝙖𝙧𝙩𝙞𝙧.*",
   "admin.settings_antigm": "⚙️ *𝙋𝙖𝙧𝙖𝙢è𝙩𝙧𝙚 𝙖𝙣𝙩𝙞-𝙜𝙚𝙨𝙩𝙞𝙤𝙣 𝙙𝙚 𝙜𝙧𝙤𝙪𝙥𝙚*",
   "admin.settings_antilink": "⚙️ *𝙋𝙖𝙧𝙖𝙢è𝙩𝙧𝙚 𝙖𝙣𝙩𝙞-𝙡𝙞𝙚𝙣*",
   "admin.settings_goodbye": "⚙️ *𝙋𝙖𝙧𝙖𝙢è𝙩𝙧𝙚 𝙢𝙚𝙨𝙨𝙖𝙜𝙚𝙨 𝙙’𝙖𝙪 𝙧𝙚𝙫𝙤𝙞𝙧*",
@@ -388,7 +358,6 @@ module.exports = {
 
   "choose_one": "❌ *𝙑𝙚𝙪𝙞𝙡𝙡𝙚𝙯 𝙘𝙝𝙤𝙞𝙨𝙞𝙧 𝙪𝙣𝙚 𝙤𝙥𝙩𝙞𝙤𝙣 :*",
   "creator_only": "👑 *𝙍é𝙨𝙚𝙧𝙫é 𝙖𝙪 𝙘𝙧é𝙖𝙩𝙚𝙪𝙧*\n\nSeul *𝙏𝙃𝙀-𝙒𝙃𝙄𝙎𝙋𝙀𝙍𝙀𝙍* peut utiliser cette commande.",
-  "delrules_success": "🗑️ *𝙍è𝙜𝙡𝙚𝙨 𝙙𝙪 𝙜𝙧𝙤𝙪𝙥𝙚 𝙨𝙪𝙥𝙥𝙧𝙞𝙢é𝙚𝙨.*\n\nLe livre des lois a été brûlé... temporairement.",
 
   "demote_failed": "❌ *É𝙘𝙝𝙚𝙘 𝙙𝙚 𝙡𝙖 𝙧é𝙩𝙧𝙤𝙜𝙧𝙖𝙙𝙖𝙩𝙞𝙤𝙣.*",
   "demote_success": "✅ *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙚𝙪𝙧 𝙧𝙚𝙩𝙞𝙧é 𝙙𝙚𝙨 𝙖𝙙𝙢𝙞𝙣𝙨.*",
@@ -659,7 +628,6 @@ module.exports = {
   "secret": "Commande de test réservée au propriétaire",
   "sudo_only": "🚫 *𝙋𝙚𝙧𝙢𝙞𝙨𝙨𝙞𝙤𝙣 𝙧𝙚𝙛𝙪𝙨é𝙚.*\n\nSeuls les membres sudo peuvent utiliser cette commande.",
 
-  "tools.echo_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :*\n.echo Bonjour",
   "tools.ip_failed": "❌ Impossible de récupérer les informations IP.",
   "tools.ip_invalid": "❌ Adresse IP invalide.",
   "tools.ip_result": "🌍 *𝙄𝙣𝙛𝙤𝙧𝙢𝙖𝙩𝙞𝙤𝙣𝙨 𝙨𝙪𝙧 𝙡’𝙖𝙙𝙧𝙚𝙨𝙨𝙚 𝙄𝙋*",
@@ -668,7 +636,7 @@ module.exports = {
   "tools.translate_failed": "❌ *É𝙘𝙝𝙚𝙘 𝙙𝙚 𝙡𝙖 𝙩𝙧𝙖𝙙𝙪𝙘𝙩𝙞𝙤𝙣.*",
   "tools.translate_rate_limit": "⚠️ Service de traduction occupé. Réessayez plus tard.",
   "tools.translate_result": "🌐 *𝙍é𝙨𝙪𝙡𝙩𝙖𝙩 𝙙𝙚 𝙡𝙖 𝙩𝙧𝙖𝙙𝙪𝙘𝙩𝙞𝙤𝙣*\n\n🌐 De : {from}\n🎯 Vers : {to}\n\n📝 Original :\n{original}\n\n✅ Traduction :\n{translation}",
-  "tools.translate_usage": "📌 *𝘼𝙛𝙛𝙞𝙘𝙝𝙚 𝙡’𝙪𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 𝙙𝙚 𝙘𝙚𝙩𝙩𝙚 𝙘𝙤𝙢𝙢𝙖𝙣𝙙𝙚.*",
+  "tools.translate_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 : .𝙩𝙧𝙖𝙣𝙨 𝙚𝙣 𝙧𝙚́𝙥𝙤𝙣𝙙𝙖𝙣𝙩 𝙖̀ 𝙪𝙣 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 𝙩𝙚𝙭𝙩𝙚 𝙤𝙪 .𝙩𝙧𝙖𝙣𝙨 𝙡𝙖𝙣𝙜𝙪𝙚 (𝙯𝙝, 𝙚𝙣, 𝙛𝙧) <𝙩𝙚𝙭𝙩𝙚>*",
 
   "tools.vv_failed": "❌ *É𝙘𝙝𝙚𝙘 𝙙𝙚 𝙡𝙖 𝙧é𝙘𝙪𝙥é𝙧𝙖𝙩𝙞𝙤𝙣 𝙙𝙪 𝙢é𝙙𝙞𝙖 « 𝙫𝙤𝙞𝙧 𝙪𝙣𝙚 𝙛𝙤𝙞𝙨 ».*",
   "tools.vv_reply": "❌ *𝙍é𝙥𝙤𝙣𝙙𝙚𝙯 à 𝙪𝙣 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 « 𝙫𝙤𝙞𝙧 𝙪𝙣𝙚 𝙛𝙤𝙞𝙨 ».*",

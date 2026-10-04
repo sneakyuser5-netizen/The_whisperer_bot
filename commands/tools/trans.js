@@ -16,7 +16,7 @@ const languages = {
 };
 module.exports = {
 
-    name: "translate",
+    name: "trans",
 
     description: "Translate text to another language",
 
@@ -32,6 +32,12 @@ if (
     /^[a-z]{2}$/i.test(args[0])
 ) {
     target = args.shift().toLowerCase();
+
+    if (!languages[target]) {
+        return sock.sendMessage(jid, {
+            text: t(jid, "tools.translate_languages")
+        });
+    }
 }
 
 let text = args.join(" ");
