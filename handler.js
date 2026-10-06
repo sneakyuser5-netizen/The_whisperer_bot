@@ -138,8 +138,23 @@ async function handleMessage(sock, msg) {
 // the same WhatsApp account the bot uses.
 // Ignore other outgoing bot messages.
 // ==========================================
-if (msg.key?.fromMe && !text?.trim().startsWith(prefix)) {
-    return;
+if (
+    msg.key?.fromMe &&
+    !text?.trim().startsWith(prefix)
+) {
+    const activeSession = session.get(jid);
+
+    // Allow the owner's interactive reply (1/2) from the
+    // same WhatsApp account, but ignore messages generated
+    // by the bot itself.
+    if (
+        !(
+            activeSession?.type === "media_quality" &&
+            msg.key?.remoteJidAlt
+        )
+    ) {
+        return;
+    }
 }
 
     const identity = require("./lib/identity");
