@@ -256,7 +256,11 @@ Made with ❤️ by
         msg.message?.videoMessage?.caption ||
         "";
 
-    if (msg.key?.fromMe && !commandText.trim().startsWith(".")) return;
+    // Let handler.js decide whether outgoing/self messages
+    // should be accepted. This is required for interactive
+    // sessions such as Facebook/TikTok quality selection.
+    // Do NOT discard "2", "yes", etc. here.
+
 
     // ===== GLOBAL AUTO READ START =====
     try {
