@@ -121,7 +121,7 @@ module.exports = {
   "facebook_failed": "❌ *𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙙𝙤𝙬𝙣𝙡𝙤𝙖𝙙 𝙛𝙖𝙞𝙡𝙚𝙙.*",
 
   "tiktok_missing": "📌 *𝙎𝙚𝙣𝙙 𝙤𝙧 𝙧𝙚𝙥𝙡𝙮 𝙩𝙤 𝙖 𝙏𝙞𝙠𝙏𝙤𝙠 𝙡𝙞𝙣𝙠.*",
-  "tiktok_quality": "🎬 *𝙏𝙞𝙠𝙏𝙤𝙠 𝙑𝙞𝙙𝙚𝙤*\\n\\nChoose video type:\\n\\n1️⃣ *No Watermark*\\n2️⃣ *Normal*\\n\\nReply with *1* or *2*.\\n\\n⏳ Selection expires in 60 seconds.",
+  "tiktok_quality": "🎬 *𝙏𝙞𝙠𝙏𝙤𝙠 𝙑𝙞𝙙𝙚𝙤*\n\n*𝘾𝙝𝙤𝙤𝙨𝙚 𝙫𝙞𝙙𝙚𝙤 𝙩𝙮𝙥𝙚:*\n\n1️⃣ *𝙉𝙤 𝙒𝙖𝙩𝙚𝙧𝙢𝙖𝙧𝙠*\n2️⃣ *𝙉𝙤𝙧𝙢𝙖𝙡*\n\n𝙍𝙚𝙥𝙡𝙮 𝙬𝙞𝙩𝙝 *1* 𝙤𝙧 *2*.\n\n⏳ *𝙎𝙚𝙡𝙚𝙘𝙩𝙞𝙤𝙣 𝙚𝙭𝙥𝙞𝙧𝙚𝙨 𝙞𝙣 60 𝙨𝙚𝙘𝙤𝙣𝙙𝙨.*",
   "tiktok_quality_invalid": "❌ Please reply with *1* for No Watermark or *2* for Normal.",
   "tiktok_quality_expired": "⌛ Your TikTok quality selection has expired. Please send the TikTok link again.",
   "tiktok_downloading": "⏳ *𝘿𝙤𝙬𝙣𝙡𝙤𝙖𝙙𝙞𝙣𝙜 𝙏𝙞𝙠𝙏𝙤𝙠 𝙫𝙞𝙙𝙚𝙤...*",

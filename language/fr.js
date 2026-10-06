@@ -59,7 +59,7 @@ module.exports = {
     "tools.apk_version": "Version",
     "tools.apk_file_title": "📦 Téléchargement APK",
     "tools.apk_android": "Android",
-    "tools.apk_usage": "Utilisation : .apk <nom de l’application>\\n.apk <numéro>",
+    "tools.apk_usage": "Utilisation : .apk <nom de l’application>\n.apk <numéro>",
     "tools.apk_versions_failed": "❌ Impossible de trouver les versions de cette application.",
     "tools.apk_invalid_selection": "❌ Numéro de version invalide.",
     "tools.apk_downloading": "📦 Téléchargement de la version {version}...",
@@ -118,7 +118,7 @@ module.exports = {
   "facebook_failed": "❌ *𝙀́𝙘𝙝𝙚𝙘 𝙙𝙪 𝙩𝙚́𝙡𝙚́𝙘𝙝𝙖𝙧𝙜𝙚𝙢𝙚𝙣𝙩 𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠.*",
 
   "tiktok_missing": "📌 Envoyez un lien TikTok ou répondez à un message contenant un lien TikTok.",
-  "tiktok_quality": "🎬 *𝙑𝙞𝙙é𝙤 𝙏𝙞𝙠𝙏𝙤𝙠*\\n\\nChoisissez le type de vidéo :\\n\\n1️⃣ *Sans filigrane*\\n2️⃣ *Normale*\\n\\nRépondez avec *1* ou *2*.\\n\\n⏳ La sélection expire dans 60 secondes.",
+  "tiktok_quality": "🎬 *𝙑𝙞𝙙é𝙤 𝙏𝙞𝙠𝙏𝙤𝙠*\n\n*𝘾𝙝𝙤𝙞𝙨𝙞𝙨𝙨𝙚𝙯 𝙡𝙚 𝙩𝙮𝙥𝙚 𝙙𝙚 𝙫𝙞𝙙é𝙤 :*\n\n1️⃣ *𝙎𝙖𝙣𝙨 𝙛𝙞𝙡𝙞𝙜𝙧𝙖𝙣𝙚*\n2️⃣ *𝙉𝙤𝙧𝙢𝙖𝙡𝙚*\n\n𝙍é𝙥𝙤𝙣𝙙𝙚𝙯 𝙖𝙫𝙚𝙘 *1* 𝙤𝙪 *2*.\n\n⏳ *𝙇𝙖 𝙨é𝙡𝙚𝙘𝙩𝙞𝙤𝙣 𝙚𝙭𝙥𝙞𝙧𝙚 𝙙𝙖𝙣𝙨 60 𝙨𝙚𝙘𝙤𝙣𝙙𝙚𝙨.*",
   "tiktok_quality_invalid": "❌ Répondez avec *1* pour Sans filigrane ou *2* pour Normale.",
   "tiktok_quality_expired": "⌛ Votre sélection de qualité TikTok a expiré. Veuillez renvoyer le lien TikTok.",
   "tiktok_downloading": "⏳ *𝙏é𝙡é𝙘𝙝𝙖𝙧𝙜𝙚𝙢𝙚𝙣𝙩 𝙙𝙚 𝙡𝙖 𝙫𝙞𝙙é𝙤 𝙏𝙞𝙠𝙏𝙤𝙠...*",
