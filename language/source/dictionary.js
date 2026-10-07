@@ -7,7 +7,6 @@ module.exports = {
   "ai": "Enable or disable automatic AI chat",
   "aifilter": "Enable or disable AI message filtering",
   "alive": "Check if bot is alive",
-  "antibot": "Enable or disable anti-bot protection",
   "anticall": "Enable or disable auto call rejection",
   "antidelete": "Enable or disable anti-delete",
   "antiedit": "Enable or disable anti-edit",

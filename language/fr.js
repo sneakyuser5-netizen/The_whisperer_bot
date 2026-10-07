@@ -104,11 +104,6 @@ module.exports = {
   "media.stk_usage": "📌 Répondez à une image avec .stk pour la convertir en sticker.",
   "media.stk_failed": "❌ Impossible de convertir l’image en sticker.",
 
-  "antibot_enabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙖𝙘𝙩𝙞𝙫é.*\nLes comptes bots seront supprimés à leur arrivée.",
-  "antibot_disabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙙é𝙨𝙖𝙘𝙩𝙞𝙫é.*",
-  "antibot_status_enabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙚𝙨𝙩 𝙖𝙘𝙩𝙞𝙫é.*",
-  "antibot_status_disabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙚𝙨𝙩 𝙙é𝙨𝙖𝙘𝙩𝙞𝙫é.*",
-  "antibot_usage": "📌 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 :*\n.antibot on\n.antibot off\n.antibot status",
   "facebook_missing": "📌 *𝙀𝙣𝙫𝙤𝙮𝙚𝙯 𝙤𝙪 𝙧𝙚́𝙥𝙤𝙣𝙙𝙚𝙯 𝙖̀ 𝙪𝙣 𝙡𝙞𝙚𝙣 𝙫𝙞𝙙𝙚́𝙤 𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠.*",
   "facebook_quality": "🎬 *𝙑𝙞𝙙𝙚́𝙤 𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠*\n\n𝘾𝙝𝙤𝙞𝙨𝙞𝙨𝙚𝙯 𝙡𝙖 𝙦𝙪𝙖𝙡𝙞𝙩𝙚́ 𝙫𝙞𝙙𝙚́𝙤 :\n\n1️⃣ *HD*\n2️⃣ *𝙉𝙤𝙧𝙢𝙖𝙡𝙚*\n\n𝙍𝙚́𝙥𝙤𝙣𝙙𝙚𝙯 𝙖𝙫𝙚𝙘 *1* 𝙤𝙪 *2*.\n\n⏳ 𝙇𝙖 𝙨𝙚́𝙡𝙚𝙘𝙩𝙞𝙤𝙣 𝙚𝙭𝙥𝙞𝙧𝙚 𝙙𝙖𝙣𝙨 60 𝙨𝙚𝙘𝙤𝙣𝙙𝙚𝙨.",
   "facebook_quality_invalid": "❌ *𝘾𝙝𝙤𝙞𝙭 𝙞𝙣𝙫𝙖𝙡𝙞𝙙𝙚.* 𝙍𝙚́𝙥𝙤𝙣𝙙𝙚𝙯 𝙖𝙫𝙚𝙘 *1* 𝙥𝙤𝙪𝙧 𝙃𝘿 𝙤𝙪 *2* 𝙥𝙤𝙪𝙧 𝙉𝙤𝙧𝙢𝙖𝙡𝙚.",

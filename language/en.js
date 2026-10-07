@@ -107,11 +107,6 @@ module.exports = {
   "media.stk_failed": "❌ *𝙎𝙩𝙞𝙘𝙠𝙚𝙧 𝙘𝙤𝙣𝙫𝙚𝙧𝙨𝙞𝙤𝙣 𝙛𝙖𝙞𝙡𝙚𝙙.*",
 
 
-  "antibot_enabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙚𝙣𝙖𝙗𝙡𝙚𝙙.*\nBot accounts will be removed on join.",
-  "antibot_disabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙙𝙞𝙨𝙖𝙗𝙡𝙚𝙙.*",
-  "antibot_status_enabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙞𝙨 𝙚𝙣𝙖𝙗𝙡𝙚𝙙.*",
-  "antibot_status_disabled": "🤖 *𝘼𝙣𝙩𝙞𝘽𝙤𝙩 𝙞𝙨 𝙙𝙞𝙨𝙖𝙗𝙡𝙚𝙙.*",
-  "antibot_usage": "📌 *𝙐𝙨𝙖𝙜𝙚:*\n.antibot on\n.antibot off\n.antibot status",
   "facebook_missing": "📌 *𝙎𝙚𝙣𝙙 𝙤𝙧 𝙧𝙚𝙥𝙡𝙮 𝙩𝙤 𝙖 𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙫𝙞𝙙𝙚𝙤 𝙡𝙞𝙣𝙠.*",
   "facebook_quality": "🎬 *𝙁𝙖𝙘𝙚𝙗𝙤𝙤𝙠 𝙑𝙞𝙙𝙚𝙤*\n\n𝘾𝙝𝙤𝙤𝙨𝙚 𝙫𝙞𝙙𝙚𝙤 𝙦𝙪𝙖𝙡𝙞𝙩𝙮:\n\n1️⃣ *HD*\n2️⃣ *𝙉𝙤𝙧𝙢𝙖𝙡*\n\n𝙍𝙚𝙥𝙡𝙮 𝙬𝙞𝙩𝙝 *1* 𝙤𝙧 *2*.\n\n⏳ 𝙎𝙚𝙡𝙚𝙘𝙩𝙞𝙤𝙣 𝙚𝙭𝙥𝙞𝙧𝙚𝙨 𝙞𝙣 60 𝙨𝙚𝙘𝙤𝙣𝙙𝙨.",
   "facebook_quality_invalid": "❌ *𝙄𝙣𝙫𝙖𝙡𝙞𝙙 𝙘𝙝𝙤𝙞𝙘𝙚.* 𝙍𝙚𝙥𝙡𝙮 𝙬𝙞𝙩𝙝 *1* 𝙛𝙤𝙧 𝙃𝘿 𝙤𝙧 *2* 𝙛𝙤𝙧 𝙉𝙤𝙧𝙢𝙖𝙡.",
