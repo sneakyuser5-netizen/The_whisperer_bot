@@ -87,7 +87,7 @@ module.exports = {
 
             await sock.sendMessage(jid, { delete: msg.key });
             await sock.sendMessage(jid, {
-                text: `🚫 ${locked} is locked.\n\n😂 The admin put this message type in jail.`
+                text: t(jid, "message_type_locked").replace("{type}", locked)
             });
 
         } catch (err) {

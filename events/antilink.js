@@ -63,50 +63,6 @@ module.exports = {
                 return;
             }
 
-            /*
-             * Sticker lock
-             */
-            if (
-                groupSettings.lock_sticker &&
-                msg.message?.stickerMessage
-            ) {
-
-                const sender =
-                    msg.key.participant ||
-                    msg.key.participantAlt;
-
-                if (!sender) return;
-
-                const member =
-                    metadata.participants.find(p => {
-
-                        const ids = [
-                            p.id,
-                            p.jid,
-                            p.participant,
-                            p.participantAlt,
-                            p.phoneNumber
-                        ]
-                            .filter(Boolean)
-                            .map(String);
-
-                        return ids.includes(String(sender));
-                    });
-
-                if (!member?.admin) {
-
-                    await sock.sendMessage(jid, {
-                        delete: msg.key
-                    });
-
-                    await sock.sendMessage(jid, {
-                        text:
-                            "🚫 Stickers are currently locked."
-                    });
-                }
-
-                return;
-            }
 
             /*
              * Extract message text.

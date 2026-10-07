@@ -1,4 +1,43 @@
 module.exports = {
+"admin.settings_header": "PARAMÈTRES",
+
+"admin.settings_security": "SÉCURITÉ",
+"admin.settings_adminonly_label": "Admin uniquement",
+"admin.settings_antilink_label": "Anti-Lien",
+"admin.settings_imagelock_label": "Verrouillage des images",
+"admin.settings_aifilter_label": "Filtre IA",
+
+"admin.settings_ai_section": "IA",
+"admin.settings_ai_label": "IA",
+
+"admin.settings_automation": "AUTOMATISATION",
+"admin.settings_autoreact_label": "Auto-Réaction",
+"admin.settings_autogoodnight_label": "Auto-Bonne Nuit",
+
+"admin.settings_group_section": "GROUPE",
+"admin.settings_welcome_label": "Bienvenue",
+"admin.settings_goodbye_label": "Au revoir",
+"admin.settings_slowmode_label": "Mode lent",
+
+"admin.settings_bot_section": "BOT",
+"admin.settings_prefix_label": "Préfixe",
+"admin.settings_botname_label": "Nom du bot",
+
+"admin.settings_summary": "RÉSUMÉ",
+"admin.settings_enabled": "Activés",
+"admin.settings_disabled": "Désactivés",
+
+"admin.settings_on": "ACTIVÉ",
+"admin.settings_off": "DÉSACTIVÉ",
+"admin.adminonly_usage": "📌 *𝘼𝘿𝙈𝙄𝙉-𝙊𝙉𝙇𝙔 𝙈𝙊𝘿𝙀*\n\n🔒 `.adminonly on` — Activer le mode réservé aux admins\n🔓 `.adminonly off` — Désactiver le mode réservé aux admins\n📊 `.adminonly status` — Vérifier le statut actuel",
+
+"admin.adminonly_enabled": "🔒 *「 𝙈𝙊𝘿𝙀 𝘼𝘿𝙈𝙄𝙉 𝙐𝙉𝙄𝙌𝙐𝙀 𝘼𝘾𝙏𝙄𝙑É 」*\n\n👑 Seuls les administrateurs du groupe peuvent envoyer des messages maintenant.\n\n🗑️ Les messages des membres non administrateurs seront automatiquement supprimés.",
+
+"admin.adminonly_disabled": "🔓 *「 𝙈𝙊𝘿𝙀 𝘼𝘿𝙈𝙄𝙉 𝙐𝙉𝙄𝙌𝙐𝙀 𝘿É𝙎𝘼𝘾𝙏𝙄𝙑É 」*\n\n👥 Tous les membres du groupe peuvent à nouveau envoyer des messages.",
+
+"admin.adminonly_status_on": "🔒 *𝘼𝘿𝙈𝙄𝙉-𝙊𝙉𝙇𝙔 :* ON ✅\n\n👑 Seuls les administrateurs peuvent envoyer des messages.",
+
+"admin.adminonly_status_off": "🔓 *𝘼𝘿𝙈𝙄𝙉-𝙊𝙉𝙇𝙔 :* OFF ❌\n\n👥 Tous les membres peuvent envoyer des messages.",
 "tools.translate_languages": "🌐 *Langues disponibles :*\n\n🇬🇧 en — Anglais\n🇫🇷 fr — Français\n🇪🇸 es — Espagnol\n🇩🇪 de — Allemand\n🇮🇹 it — Italien\n🇵🇹 pt — Portugais\n🇸🇦 ar — Arabe\n🇷🇺 ru — Russe\n🇮🇳 hi — Hindi\n🇨🇳 zh — Chinois\n🇯🇵 ja — Japonais\n🇰🇷 ko — Coréen",
   "tools.aifilter_not_admin": "⚠️ Devrait être exclu mais je ne suis pas admin. Rends-moi admin!",
 	  "tools.aifilter_usage": "📌 *「 𝗨𝘁𝗶𝗹𝗶𝘀𝗮𝘁𝗶𝗼𝗻 」*\n.aifilter on\n.aifilter off\n.aifilter status",
@@ -696,5 +735,9 @@ module.exports = {
   "antiedit_group": "👥 *𝙂𝙧𝙤𝙪𝙥𝙚 :*",
   "antiedit_chat": "💬 *𝘾𝙝𝙖𝙩 :*",
   "antiedit_original": "📝 *𝙈𝙚𝙨𝙨𝙖𝙜𝙚 𝙤𝙧𝙞𝙜𝙞𝙣𝙖𝙡 :*",
-  "antiedit_new": "✏️ *𝙉𝙤𝙪𝙫𝙚𝙖𝙪 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 :*"
+  "antiedit_new": "✏️ *𝙉𝙤𝙪𝙫𝙚𝙖𝙪 𝙢𝙚𝙨𝙨𝙖𝙜𝙚 :*",
+
+    "message_type_locked": "🚫 Les {type} sont verrouillés.\n\n😂 L’administrateur a mis ce type de message en prison.",
+
+    "message_type_image": "images",
 }

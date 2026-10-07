@@ -1,4 +1,43 @@
 module.exports = {
+"admin.settings_header": "SETTINGS",
+
+"admin.settings_security": "SECURITY",
+"admin.settings_adminonly_label": "Admin Only",
+"admin.settings_antilink_label": "Anti-Link",
+"admin.settings_imagelock_label": "Image Lock",
+"admin.settings_aifilter_label": "AI Filter",
+
+"admin.settings_ai_section": "AI",
+"admin.settings_ai_label": "AI",
+
+"admin.settings_automation": "AUTOMATION",
+"admin.settings_autoreact_label": "Auto-React",
+"admin.settings_autogoodnight_label": "Auto-Goodnight",
+
+"admin.settings_group_section": "GROUP",
+"admin.settings_welcome_label": "Welcome",
+"admin.settings_goodbye_label": "Goodbye",
+"admin.settings_slowmode_label": "Slowmode",
+
+"admin.settings_bot_section": "BOT",
+"admin.settings_prefix_label": "Prefix",
+"admin.settings_botname_label": "Bot Name",
+
+"admin.settings_summary": "SUMMARY",
+"admin.settings_enabled": "Enabled",
+"admin.settings_disabled": "Disabled",
+
+"admin.settings_on": "ON",
+"admin.settings_off": "OFF",
+"admin.adminonly_usage": "📌 *𝘼𝘿𝙈𝙄𝙉-𝙊𝙉𝙇𝙔 𝙈𝙊𝘿𝙀*\n\n🔒 `.adminonly on` — Enable admin-only mode\n🔓 `.adminonly off` — Disable admin-only mode\n📊 `.adminonly status` — Check current status",
+
+"admin.adminonly_enabled": "🔒 *「 𝘼𝘿𝙈𝙄𝙉-𝙊𝙉𝙇𝙔 𝙈𝙊𝘿𝙀 𝙀𝙉𝘼𝘽𝙇𝙀𝘿 」*\n\n👑 Only group administrators can send messages now.\n\n🗑️ Messages from non-admin members will be automatically deleted.",
+
+"admin.adminonly_disabled": "🔓 *「 𝘼𝘿𝙈𝙄𝙉-𝙊𝙉𝙇𝙔 𝙈𝙊𝘿𝙀 𝘿𝙄𝙎𝘼𝘽𝙇𝙀𝘿 」*\n\n👥 All group members can send messages again.",
+
+"admin.adminonly_status_on": "🔒 *𝘼𝘿𝙈𝙄𝙉-𝙊𝙉𝙇𝙔:* ON ✅\n\n👑 Only administrators can send messages.",
+
+"admin.adminonly_status_off": "🔓 *𝘼𝘿𝙈𝙄𝙉-𝙊𝙉𝙇𝙔:* OFF ❌\n\n👥 All members can send messages.",
 "tools.translate_languages": "🌐 *Available Languages:*\n\n🇬🇧 en — English\n🇫🇷 fr — French\n🇪🇸 es — Spanish\n🇩🇪 de — German\n🇮🇹 it — Italian\n🇵🇹 pt — Portuguese\n🇸🇦 ar — Arabic\n🇷🇺 ru — Russian\n🇮🇳 hi — Hindi\n🇨🇳 zh — Chinese\n🇯🇵 ja — Japanese\n🇰🇷 ko — Korean",
 
     "tools.aifilter_not_admin": "⚠️ Should be kicked but I'm not admin. Make me admin!",
@@ -676,5 +715,9 @@ module.exports = {
   "antiedit_group": "👥 *𝙂𝙧𝙤𝙪𝙥:*",
   "antiedit_chat": "💬 *𝘾𝙝𝙖𝙩:*",
   "antiedit_original": "📝 *𝙊𝙧𝙞𝙜𝙞𝙣𝙖𝙡:*",
-  "antiedit_new": "✏️ *𝙉𝙚𝙬 𝙈𝙚𝙨𝙨𝙖𝙜𝙚:*"
+  "antiedit_new": "✏️ *𝙉𝙚𝙬 𝙈𝙚𝙨𝙨𝙖𝙜𝙚:*",
+
+    "message_type_locked": "🚫 {type} is locked.\n\n😂 The admin put this message type in jail.",
+
+    "message_type_image": "image",
 }

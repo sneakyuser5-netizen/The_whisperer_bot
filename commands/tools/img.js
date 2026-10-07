@@ -22,7 +22,7 @@ module.exports = {
         // Respect group image lock
         if (jid.endsWith("@g.us") && settings.get(jid).lock_image === true) {
             return sock.sendMessage(jid, {
-                text: `${t(jid, "admin.lock_locked_emoji")} image ${t(jid, "admin.lock_locked_text")}`
+                text: t(jid, "message_type_locked").replace("{type}", t(jid, "message_type_image"))
             });
         }
 

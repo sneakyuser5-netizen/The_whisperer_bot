@@ -1,5 +1,6 @@
 
 module.exports = {
+"adminonly": "Autoriser uniquement les administrateurs à envoyer des messages",
     "apk": "Rechercher et télécharger des versions APK",
 "img": "Générer une image à partir d’un texte",
 "robot": "Lire un texte cité avec une voix robotique",

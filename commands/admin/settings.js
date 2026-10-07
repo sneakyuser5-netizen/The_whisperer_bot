@@ -15,29 +15,86 @@ module.exports = {
 
         const jid = msg.key.remoteJid;
 
-        if (!jid.endsWith("@g.us")) {
+        if (!jid?.endsWith("@g.us")) {
             return sock.sendMessage(jid, {
                 text: t(jid, "admin.only_groups")
             });
         }
 
         const group = settings.get(jid);
+        const global = settings.get("global");
 
-        await sock.sendMessage(jid, {
+        const on = t(jid, "admin.settings_on");
+        const off = t(jid, "admin.settings_off");
 
-            text:
-`${t(jid, "admin.settings_title")}
+        const status = value => value ? on : off;
 
-${t(jid, "admin.settings_antilink")} : ${group.antilink ? t(jid, "admin.on") : t(jid, "admin.off")}
+const antiLinkDisplay = group.antilink
+    ? `ON (${(group.antilink_action || "delete").toUpperCase()})`
+    : off;
+        const slowmode =
+            Number(group.slowmode) > 0
+                ? `${group.slowmode}s`
+                : off;
 
-${t(jid, "admin.settings_welcome")} : ${group.welcome ? t(jid, "admin.on") : t(jid, "admin.off")}
+        const prefix = group.prefix || ".";
 
-${t(jid, "admin.settings_antispam")} : ${group.antispam ? t(jid, "admin.on") : t(jid, "admin.off")}
+        const features = [
+            group.adminonly,
+            group.lock_image,
+            group.antilink,
+            group.aifilter,
+            group.ai,
+            group.autoreact,
+            group.autogoodnight,
+            group.welcome,
+            group.goodbye,
+            Number(group.slowmode) > 0
+        ];
 
-${t(jid, "admin.settings_goodbye")} : ${group.goodbye ? t(jid, "admin.on") : t(jid, "admin.off")}`
+        const enabledCount = features.filter(Boolean).length;
+        const disabledCount = features.length - enabledCount;
 
-        });
+        const botName = global.bot_name || "WhisperBot";
 
+        const text = `
+╭━━━〔 ⚙️ ${t(jid, "admin.settings_header")} 〕━━━╮
+
+🛡️ *${t(jid, "admin.settings_security")}*
+
+🔒 ${t(jid, "admin.settings_adminonly_label")} : ${status(group.adminonly)}
+🔗 ${t(jid, "admin.settings_antilink_label")} : ${antiLinkDisplay}
+🖼️ ${t(jid, "admin.settings_imagelock_label")} : ${status(group.lock_image)}
+🤖 ${t(jid, "admin.settings_aifilter_label")} : ${status(group.aifilter)}
+
+🤖 *${t(jid, "admin.settings_ai_section")}*
+
+🧠 ${t(jid, "admin.settings_ai_label")} : ${status(group.ai)}
+
+⚡ *${t(jid, "admin.settings_automation")}*
+
+❤️ ${t(jid, "admin.settings_autoreact_label")} : ${status(group.autoreact)}
+🌙 ${t(jid, "admin.settings_autogoodnight_label")} : ${status(group.autogoodnight)}
+
+👥 *${t(jid, "admin.settings_group_section")}*
+
+👋 ${t(jid, "admin.settings_welcome_label")} : ${status(group.welcome)}
+👋 ${t(jid, "admin.settings_goodbye_label")} : ${status(group.goodbye)}
+🐌 ${t(jid, "admin.settings_slowmode_label")} : ${slowmode}
+
+⚙️ *${t(jid, "admin.settings_bot_section")}*
+
+🔣 ${t(jid, "admin.settings_prefix_label")} : ${prefix}
+🤖 ${t(jid, "admin.settings_botname_label")} : ${botName}
+
+📊 *${t(jid, "admin.settings_summary")}*
+
+✅ ${t(jid, "admin.settings_enabled")} : ${enabledCount}
+❌ ${t(jid, "admin.settings_disabled")} : ${disabledCount}
+
+╰━━━━━━━━━━━━━━━━━━━━━━╯
+`.trim();
+
+        return sock.sendMessage(jid, { text });
     }
-
 };
