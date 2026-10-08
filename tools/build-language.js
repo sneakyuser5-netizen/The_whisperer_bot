@@ -182,7 +182,7 @@ for (const [command, description] of foundCommands) {
 
 
 console.log("\n══════════════════════════════");
-console.log(" WhisperBot Language Builder ");
+console.log(" NEXORA Language Builder ");
 console.log("══════════════════════════════");
 
 console.log(`Files scanned        : ${scanned}`);

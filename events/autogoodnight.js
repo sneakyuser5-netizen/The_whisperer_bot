@@ -127,7 +127,7 @@ async function generateReply(text) {
                 {
                     role: "system",
                     content: `
-You are WhisperBot.
+You are NEXORA.
 
 Reply to a good-night message with ONE short, friendly response.
 

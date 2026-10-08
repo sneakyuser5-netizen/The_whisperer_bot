@@ -1,20 +1,16 @@
 const os = require("os");
 const sudo = require("../../lib/sudo");
 const identity = require("../../lib/identity");
+const settings = require("../../lib/settings");
 const { t } = require("../../lib/lang");
 
 module.exports = {
-
     name: "bot",
-
     description: "Show bot information",
-
     category: "info",
-
     permission: "sudo",
 
     execute: async (sock, msg) => {
-
         const jid = msg.key.remoteJid;
 
         const uptime = Math.floor(process.uptime());
@@ -25,41 +21,42 @@ module.exports = {
 
         const owner = identity.getBotOwner();
         const sudos = sudo.all(owner).length;
-    
-        
-const botName =
-    settings.get("global").bot_name ||
-    "Whisperer_Bot";
 
-const text =
-`🤖 *${botName}*
+        const botName =
+            settings.get("global").bot_name ||
+            "NEXORA";
 
-━━━━━━━━━━━━━━
+        const text = `
+╭━━━〔 🤖 ${botName} 〕━━━╮
 
-👑 ${t("info.bot_creator")}
+👑 ${t(jid, "info.bot_creator")}
 THE-WHISPERER
 
-🤖 ${t("info.bot_owner")}
+🤖 ${t(jid, "info.bot_owner")}
 ${owner}
 
-🛡️ ${t("info.bot_sudos")}
+🛡️ ${t(jid, "info.bot_sudos")}
 ${sudos}
 
-⚙️ ${t("info.bot_platform")}
+━━━━━━━━━━━━━━━━━━━━
+
+⚙️ ${t(jid, "info.bot_platform")}
 ${os.platform()}
 
-📦 ${t("info.bot_node")}
+📦 ${t(jid, "info.bot_node")}
 ${process.version}
 
-⏱️ ${t("info.bot_uptime")}
+⏱️ ${t(jid, "info.bot_uptime")}
 ${h}h ${m}m ${s}s
 
-━━━━━━━━━━━━━━`;
+━━━━━━━━━━━━━━━━━━━━
 
-        await sock.sendMessage(jid, {
-            text
-        });
+✨ ${t(jid, "info.bot_status")}
+${t(jid, "info.bot_online")}
 
+╰━━━━━━━━━━━━━━━━━━━━━━╯
+`.trim();
+
+        await sock.sendMessage(jid, { text });
     }
-
 };

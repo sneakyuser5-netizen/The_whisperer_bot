@@ -12,7 +12,7 @@ const BOT_VERSION = "1.0.0";
 
 const botName =
     settings.get("global").bot_name ||
-    "Whisperer_Bot";
+    "NEXORA";
 
 const originalLog = console.log;
 
@@ -146,13 +146,13 @@ if (!info.welcomed) {
 
                 caption:
 `━━━━━━━━━━━━━━━
-🤖 *WhisperBot*
+🤖 *NEXORA*
 
 Welcome *${sock.user.name || "Owner"}*! 🎉
 
 Your WhatsApp has been linked successfully.
 
-👑 You are now the owner of this WhisperBot instance.
+👑 You are now the owner of this NEXORA instance.
 
 🚀 Start by typing:
 
@@ -461,7 +461,7 @@ const phone = setup.getPhone()?.trim();
 if (!phone) {
     console.log(`
 ╔══════════════════════════════════════╗
-║ 🤖 WHISPERBOT SETUP                 ║
+║ 🤖 NEXORA SETUP                 ║
 ╚══════════════════════════════════════╝
 
 ❌ NO PHONE NUMBER FOUND

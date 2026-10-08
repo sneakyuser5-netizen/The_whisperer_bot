@@ -55,7 +55,7 @@ const antiLinkDisplay = group.antilink
         const enabledCount = features.filter(Boolean).length;
         const disabledCount = features.length - enabledCount;
 
-        const botName = global.bot_name || "WhisperBot";
+        const botName = global.bot_name || "NEXORA";
 
         const text = `
 ╭━━━〔 ⚙️ ${t(jid, "admin.settings_header")} 〕━━━╮

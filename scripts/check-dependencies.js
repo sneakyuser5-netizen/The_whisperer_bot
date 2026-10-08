@@ -52,7 +52,7 @@ function check(item) {
 
 console.log("");
 console.log("========================================");
-console.log(" The-whisperer Bot Dependency Check");
+console.log(" NEXORA Bot Dependency Check");
 console.log("========================================");
 console.log("");
 

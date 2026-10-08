@@ -1,4 +1,13 @@
 module.exports = {
+    "info.bot_header": "𝑾𝑯𝑰𝑺𝑷𝑬𝑹𝑬𝑹 𝑩𝑶𝑻",
+    "info.bot_creator": "𝑪𝑹𝑬𝑨𝑻𝑶𝑹",
+    "info.bot_owner": "𝑶𝑾𝑵𝑬𝑹",
+    "info.bot_sudos": "𝑺𝑼𝑫𝑶 𝑼𝑺𝑬𝑹𝑺",
+    "info.bot_platform": "𝑷𝑳𝑨𝑻𝑭𝑶𝑹𝑴",
+    "info.bot_node": "𝑵𝑶𝑫𝑬.𝑱𝑺",
+    "info.bot_uptime": "𝑼𝑷𝑻𝑰𝑴𝑬",
+    "info.bot_status": "𝑺𝑻𝑨𝑻𝑼𝑺",
+    "info.bot_online": "𝑶𝑵𝑳𝑰𝑵𝑬 & 𝑹𝑼𝑵𝑵𝑰𝑵𝑮",
 "admin.settings_header": "SETTINGS",
 
 "admin.settings_security": "SECURITY",
@@ -288,7 +297,7 @@ module.exports = {
   "admin_check_confirmed": "✅ *𝘼𝙙𝙢𝙞𝙣 𝙘𝙝𝙚𝙘𝙠 𝙘𝙤𝙢𝙥𝙡𝙚𝙩𝙚*",
   "github_title": "📂 *𝙒𝙝𝙞𝙨𝙥𝙚𝙧𝘽𝙤𝙩 𝙂𝙞𝙩𝙃𝙪𝙗*",
   "github_repository": "Repository:",
-  "github_star": "Enjoy WhisperBot? Give the repository a ⭐.",
+  "github_star": "Enjoy NEXORA? Give the repository a ⭐.",
 
   "admin_count_message": "📊 *𝙏𝙤𝙩𝙖𝙡 𝙖𝙙𝙢𝙞𝙣𝙞𝙨𝙩𝙧𝙖𝙩𝙤𝙧𝙨:* _{count}_",
   "admin_only": "🚔 *𝘼𝙙𝙢𝙞𝙣𝙨 𝙤𝙣𝙡𝙮*\n\nOnly group administrators may use this command.",
@@ -366,7 +375,7 @@ module.exports = {
   "admin.warn_auto_muted": "has been *𝙖𝙪𝙩𝙤𝙢𝙖𝙩𝙞𝙘𝙖𝙡𝙡𝙮 𝙢𝙪𝙩𝙚𝙙 𝙛𝙤𝙧 𝟑𝟎 𝙢𝙞𝙣𝙪𝙩𝙚𝙨.*\n\nTime to cool off.",
   "admin.warn_final": "🚨 *𝙁𝙞𝙣𝙖𝙡 𝙬𝙖𝙧𝙣𝙞𝙣𝙜 𝙛𝙤𝙧*",
   "admin.warn_issued": "⚠️ *𝙒𝙖𝙧𝙣𝙞𝙣𝙜 𝙞𝙨𝙨𝙪𝙚𝙙*",
-  "admin.warn_kick": "has reached the maximum warnings.\n\nWhisperBot removed them from the group.",
+  "admin.warn_kick": "has reached the maximum warnings.\n\nNEXORA removed them from the group.",
   "admin.warn_last_chance": "🚨 *𝙊𝙣𝙚 𝙢𝙤𝙧𝙚 𝙬𝙖𝙧𝙣𝙞𝙣𝙜 𝙖𝙣𝙙 𝙒𝙝𝙞𝙨𝙥𝙚𝙧𝘽𝙤𝙩 𝙬𝙞𝙡𝙡 𝙧𝙚𝙢𝙤𝙫𝙚 𝙮𝙤𝙪.*",
   "admin.warn_usage": "❌ *𝙍𝙚𝙥𝙡𝙮 𝙩𝙤 𝙤𝙧 𝙢𝙚𝙣𝙩𝙞𝙤𝙣 𝙖 𝙪𝙨𝙚𝙧 𝙩𝙤 𝙬𝙖𝙧𝙣.*\n\nExample:\n.warn @user",
   "admin.warnings_count": "*𝙒𝙖𝙧𝙣𝙞𝙣𝙜𝙨:*",
@@ -535,15 +544,7 @@ module.exports = {
   "info.alive_running": "✅ *𝙍𝙪𝙣𝙣𝙞𝙣𝙜 𝙨𝙢𝙤𝙤𝙩𝙝𝙡𝙮*",
   "info.alive_status": "Status:",
   "info.alive_title": "🤖 *𝙒𝙃𝙄𝙎𝙋𝙀𝙍 𝘽𝙊𝙏 𝙄𝙎 𝘼𝙇𝙄𝙑𝙀*",
-
-  "info.bot_creator": "Creator",
-  "info.bot_node": "Node",
-  "info.bot_owner": "Bot Owner",
-  "info.bot_platform": "Platform",
-  "info.bot_sudos": "Sudo Members",
   "info.bot_title": "🤖 *𝙒𝙝𝙞𝙨𝙥𝙚𝙧𝘽𝙤𝙩*",
-  "info.bot_uptime": "Uptime",
-
   "info.ping_footer": "Still online and ready.",
   "info.ping_memory": "Memory:",
   "info.ping_online": "✅ *𝙊𝙣𝙡𝙞𝙣𝙚*",

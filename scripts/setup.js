@@ -265,7 +265,7 @@ function installSystemPackage(packageName) {
 
 console.log("");
 console.log("========================================");
-console.log(" The-whisperer Bot Automatic Setup");
+console.log(" NEXORA Bot Automatic Setup");
 console.log(" Media + Telegram Support");
 console.log("========================================");
 console.log("");

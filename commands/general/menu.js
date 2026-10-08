@@ -4,7 +4,7 @@ const fs = require("fs");
 module.exports = {
     name: "menu",
     category: "general",
-    description: "✦ The-whisperer_bot • Command Center ✦",
+    description: "✦ NEXORA • Command Center ✦",
     permission: "public",
 
     execute: async (sock, msg, args = []) => {
@@ -21,7 +21,7 @@ module.exports = {
         const config = settings.get("global");
         const { version } = require("../../package.json");
 
-        const botName = config.bot_name || "The-whisperer_bot";
+        const botName = config.bot_name || "NEXORA";
         const prefix = ".";
         const userName = msg.pushName || "User";
 

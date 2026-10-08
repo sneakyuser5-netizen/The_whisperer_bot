@@ -1,4 +1,13 @@
 module.exports = {
+    "info.bot_header": "𝑾𝑯𝑰𝑺𝑷𝑬𝑹𝑬𝑹 𝑩𝑶𝑻",
+    "info.bot_creator": "𝑪𝑹É𝑨𝑻𝑬𝑼𝑹",
+    "info.bot_owner": "𝑷𝑹𝑶𝑷𝑹𝑰É𝑻𝑨𝑰𝑹𝑬",
+    "info.bot_sudos": "𝑼𝑻𝑰𝑳𝑰𝑺𝑨𝑻𝑬𝑼𝑹𝑺 𝑺𝑼𝑫𝑶",
+    "info.bot_platform": "𝑷𝑳𝑨𝑻𝑬𝑭𝑶𝑹𝑴𝑬",
+    "info.bot_node": "𝑵𝑶𝑫𝑬.𝑱𝑺",
+    "info.bot_uptime": "𝑻𝑬𝑴𝑷𝑺 𝑫𝑬 𝑭𝑶𝑵𝑪𝑻𝑰𝑶𝑵𝑵𝑬𝑴𝑬𝑵𝑻",
+    "info.bot_status": "𝑺𝑻𝑨𝑻𝑼𝑻",
+    "info.bot_online": "𝑬𝑵 𝑳𝑰𝑮𝑵𝑬 & 𝑨𝑪𝑻𝑰𝑭",
 "admin.settings_header": "PARAMÈTRES",
 
 "admin.settings_security": "SÉCURITÉ",
@@ -278,7 +287,7 @@ module.exports = {
   "admin_count_message": "📊 *𝙉𝙤𝙢𝙗𝙧𝙚 𝙩𝙤𝙩𝙖𝙡 𝙙’𝙖𝙙𝙢𝙞𝙣𝙞𝙨𝙩𝙧𝙖𝙩𝙚𝙪𝙧𝙨 :* _{count}_",
   "github_title": "📂 *𝙂𝙞𝙩𝙃𝙪𝙗 𝙙𝙚 𝙒𝙝𝙞𝙨𝙥𝙚𝙧𝘽𝙤𝙩*",
   "github_repository": "Dépôt :",
-  "github_star": "Si vous aimez WhisperBot, laissez une ⭐ au dépôt.",
+  "github_star": "Si vous aimez NEXORA, laissez une ⭐ au dépôt.",
 
   "tools.shorturl_usage": "📌 Utilisation :\n.shorturl https://example.com",
   "tools.shorturl_invalid": "❌ Fournissez une URL valide.",
@@ -365,7 +374,7 @@ module.exports = {
   "admin.warn_auto_muted": "a été *𝙖𝙪𝙩𝙤𝙢𝙖𝙩𝙞𝙦𝙪𝙚𝙢𝙚𝙣𝙩 𝙧é𝙙𝙪𝙞𝙩 𝙖𝙪 𝙨𝙞𝙡𝙚𝙣𝙘𝙚 𝙥𝙚𝙣𝙙𝙖𝙣𝙩 𝟯𝟬 𝙢𝙞𝙣𝙪𝙩𝙚𝙨.*\n\nIl est temps de se calmer.",
   "admin.warn_final": "🚨 *𝘿𝙚𝙧𝙣𝙞𝙚𝙧 𝙖𝙫𝙚𝙧𝙩𝙞𝙨𝙨𝙚𝙢𝙚𝙣𝙩 𝙥𝙤𝙪𝙧*",
   "admin.warn_issued": "⚠️ *𝘼𝙫𝙚𝙧𝙩𝙞𝙨𝙨𝙚𝙢𝙚𝙣𝙩 𝙙𝙤𝙣𝙣é*",
-  "admin.warn_kick": "a atteint le nombre maximal d’avertissements.\n\nWhisperBot l’a retiré du groupe.",
+  "admin.warn_kick": "a atteint le nombre maximal d’avertissements.\n\nNEXORA l’a retiré du groupe.",
   "admin.warn_last_chance": "🚨 *𝙀𝙣𝙘𝙤𝙧𝙚 𝙪𝙣 𝙖𝙫𝙚𝙧𝙩𝙞𝙨𝙨𝙚𝙢𝙚𝙣𝙩 𝙚𝙩 𝙒𝙝𝙞𝙨𝙥𝙚𝙧𝘽𝙤𝙩 𝙫𝙤𝙪𝙨 𝙧𝙚𝙩𝙞𝙧𝙚𝙧𝙖 𝙙𝙪 𝙜𝙧𝙤𝙪𝙥𝙚.*",
   "admin.warn_usage": "❌ *𝙍é𝙥𝙤𝙣𝙙𝙚𝙯 𝙤𝙪 𝙢𝙚𝙣𝙩𝙞𝙤𝙣𝙣𝙚𝙯 𝙪𝙣 𝙪𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙚𝙪𝙧 𝙥𝙤𝙪𝙧 𝙡𝙚 𝙨𝙖𝙣𝙘𝙩𝙞𝙤𝙣𝙣𝙚𝙧.*\n\nExemple :\n.warn @user",
   "admin.warnings_count": "*𝘼𝙫𝙚𝙧𝙩𝙞𝙨𝙨𝙚𝙢𝙚𝙣𝙩𝙨 :*",
@@ -540,15 +549,7 @@ module.exports = {
   "info.alive_running": "✅ *𝙁𝙤𝙣𝙘𝙩𝙞𝙤𝙣𝙣𝙚 𝙘𝙤𝙧𝙧𝙚𝙘𝙩𝙚𝙢𝙚𝙣𝙩*",
   "info.alive_status": "Statut :",
   "info.alive_title": "🤖 *𝙒𝙃𝙄𝙎𝙋𝙀𝙍 𝘽𝙊𝙏 𝙀𝙎𝙏 𝙀𝙉 𝙇𝙄𝙂𝙉𝙀*",
-
-  "info.bot_creator": "Créateur",
-  "info.bot_node": "Node",
-  "info.bot_owner": "Propriétaire du bot",
-  "info.bot_platform": "Plateforme",
-  "info.bot_sudos": "Membres Sudo",
   "info.bot_title": "🤖 *𝙒𝙝𝙞𝙨𝙥𝙚𝙧𝙚𝙧𝘽𝙤𝙩*",
-  "info.bot_uptime": "Temps d’activité",
-
   "info.ping_footer": "Toujours en ligne et prêt.",
   "info.ping_memory": "Mémoire :",
   "info.ping_online": "✅ *𝙀𝙣 𝙡𝙞𝙜𝙣𝙚*",

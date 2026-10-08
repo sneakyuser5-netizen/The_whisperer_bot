@@ -1,14 +1,14 @@
-✦ WhisperBot
+✦ NEXORA
 
 A modular WhatsApp bot built with Node.js and Baileys, designed around a dynamic command system, event handling, multilingual support, moderation tools, utilities, media features, and extensibility.
 
-WhisperBot is built to be easy to expand: commands, events, plugins, language files, and reusable helpers are separated into their own systems instead of being packed into one large file.
+NEXORA is built to be easy to expand: commands, events, plugins, language files, and reusable helpers are separated into their own systems instead of being packed into one large file.
 
 ---
 
-✦ What is WhisperBot?
+✦ What is NEXORA?
 
-WhisperBot is a feature-rich WhatsApp bot that uses the WhatsApp multi-device protocol through Baileys.
+NEXORA is a feature-rich WhatsApp bot that uses the WhatsApp multi-device protocol through Baileys.
 
 Its architecture is centered around:
 
@@ -53,7 +53,7 @@ The project is actively developed and its architecture continues to evolve.
 
 👑 Permission System
 
-WhisperBot supports multiple permission levels:
+NEXORA supports multiple permission levels:
 
 Creator
    ↓
@@ -82,7 +82,7 @@ The bot also supports public/private operating modes and per-command cooldowns.
 
 🎨 Localization
 
-WhisperBot currently supports:
+NEXORA currently supports:
 
 - 🇬🇧 English
 - 🇫🇷 French
@@ -118,7 +118,7 @@ This makes it possible to add functionality without continually modifying the ma
 
 Requirements
 
-Before installing WhisperBot, make sure you have:
+Before installing NEXORA, make sure you have:
 
 - Node.js 20+
 - npm
@@ -133,8 +133,8 @@ Some optional features may require additional API keys or system dependencies.
 1. Clone the repository
 
 ```bash
-git clone https://github.com/sneakyuser5-netizen/The_whisperer_bot.git
-cd The_whisperer_bot
+git clone https://github.com/sneakyuser5-netizen/NEXORA.git
+cd NEXORA
 ```
 
 2. Install dependencies
@@ -153,7 +153,7 @@ npm run check
 
 This runs the project's dependency-checking script.
 
-4. Start WhisperBot
+4. Start NEXORA
 
 ```bash
 npm start
@@ -169,7 +169,7 @@ index.js
 
 🔐 Pairing & First-Time Setup
 
-WhisperBot uses WhatsApp's multi-device authentication and pairing-code flow.
+NEXORA uses WhatsApp's multi-device authentication and pairing-code flow.
 
 During the first setup, the bot needs the phone number that will be paired with WhatsApp.
 
@@ -209,7 +209,7 @@ Once authentication has been completed, the WhatsApp authentication state is sto
 
 📁 Authentication Data
 
-WhisperBot uses multi-file authentication state.
+NEXORA uses multi-file authentication state.
 
 The authentication/session data is sensitive.
 
@@ -368,7 +368,7 @@ Cooldowns can be applied per user and per command.
 
 👑 Permissions
 
-WhisperBot separates privileged operations into different levels.
+NEXORA separates privileged operations into different levels.
 
 **Public**
 
@@ -396,7 +396,7 @@ The exact permission required depends on each command.
 
 🔒 Public & Private Mode
 
-WhisperBot supports different operating modes.
+NEXORA supports different operating modes.
 
 In public mode, commands configured for public use can be accessed normally.
 
@@ -410,7 +410,7 @@ This allows the bot owner to limit who can interact with administrative function
 
 Some operations require more than one message.
 
-WhisperBot supports temporary interactive sessions that allow a command to:
+NEXORA supports temporary interactive sessions that allow a command to:
 
 ```
 User sends command
@@ -464,13 +464,13 @@ The plugin architecture allows additional functionality to be introduced without
 
 A plugin can interact with existing helper systems and bot events depending on the plugin interface being used.
 
-This is intended to keep WhisperBot extensible as the project grows.
+This is intended to keep NEXORA extensible as the project grows.
 
 ---
 
 🌍 Language System
 
-WhisperBot supports:
+NEXORA supports:
 
 - English
 - French
@@ -508,7 +508,7 @@ When adding or changing translation keys, keep placeholders, key names, and comm
 The project is divided into several major systems.
 
 ```
-The_whisperer_bot/
+NEXORA/
 │
 ├── assets/
 │   └── Static assets and bot resources
@@ -672,7 +672,7 @@ The current "package.json" defines:
 
 | Command | Purpose |
 |---------|---------|
-| `npm start` | Start WhisperBot |
+| `npm start` | Start NEXORA |
 | `npm run setup` | Run the setup script |
 | `npm run check` | Check project dependencies |
 | `npm run translate` | Build/regenerate language files |
@@ -684,7 +684,7 @@ The project also uses a "postinstall" script for additional dependency/setup tas
 
 📦 Main Dependencies
 
-WhisperBot currently uses a number of packages for different parts of its functionality, including:
+NEXORA currently uses a number of packages for different parts of its functionality, including:
 
 - **Baileys** — WhatsApp multi-device communication
 - **Axios** — HTTP requests
@@ -737,7 +737,7 @@ If a secret has already been committed, simply deleting it from the latest file 
 
 🗃️ Runtime Database
 
-WhisperBot uses lightweight JSON storage instead of requiring an external database server.
+NEXORA uses lightweight JSON storage instead of requiring an external database server.
 
 This makes the project easy to run on environments such as:
 
@@ -814,9 +814,9 @@ Then verify the generated language files and restart the bot if necessary.
 
 ---
 
-📢 WhisperBot Updates
+📢 NEXORA Updates
 
-Follow the official WhisperBot WhatsApp Channel for:
+Follow the official NEXORA WhatsApp Channel for:
 
 - 🚀 New features
 - 🛠️ Improvements
@@ -851,7 +851,7 @@ For larger changes, opening an issue first can help establish the intended direc
 
 🧹 Development Philosophy
 
-WhisperBot is designed around a few simple principles:
+NEXORA is designed around a few simple principles:
 
 **Keep features modular**
 
@@ -893,6 +893,6 @@ GitHub: https://github.com/sneakyuser5-netizen
 
 ---
 
-✦ WhisperBot
+✦ NEXORA
 
 «Modular. Extensible. Built for WhatsApp.»
