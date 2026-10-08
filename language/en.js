@@ -487,7 +487,7 @@ module.exports = {
   "fun.truth_footer": "✋ *𝘼𝙣𝙨𝙬𝙚𝙧 𝙝𝙤𝙣𝙚𝙨𝙩𝙡𝙮... 𝙤𝙧 𝙩𝙝𝙚 𝙗𝙤𝙩 𝙬𝙞𝙡𝙡 𝙠𝙣𝙤𝙬!*",
   "fun.truth_title": "😈 *𝙏𝙍𝙐𝙏𝙃 𝙏𝙄𝙈𝙀*",
   "general.memory_title": "💾 *𝙈𝙚𝙢𝙤𝙧𝙮 𝙐𝙨𝙖𝙜𝙚*",
-  "general.owner": "👑 *𝙊𝙬𝙣𝙚𝙧:* The-whisperer",
+  "general.owner": "👑 *𝙊𝙬𝙣𝙚𝙧:* 𝚃𝚑𝚎 𝚠𝚑𝚒𝚜",
   "general.stats_commands": "*𝘾𝙤𝙢𝙢𝙖𝙣𝙙𝙨*",
   "general.stats_database": "*𝘿𝙖𝙩𝙖𝙗𝙖𝙨𝙚 𝙁𝙞𝙡𝙚𝙨*",
   "general.stats_events": "*𝙀𝙫𝙚𝙣𝙩𝙨*",

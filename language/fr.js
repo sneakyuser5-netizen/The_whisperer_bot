@@ -488,7 +488,7 @@ module.exports = {
   "fun.truth_title": "😈 *𝙃𝙀𝙐𝙍𝙀 𝘿𝙀 𝙇𝘼 𝙑É𝙍𝙄𝙏É*",
 
   "general.memory_title": "💾 *𝙐𝙩𝙞𝙡𝙞𝙨𝙖𝙩𝙞𝙤𝙣 𝙙𝙚 𝙡𝙖 𝙢é𝙢𝙤𝙞𝙧𝙚*",
-  "general.owner": "👑 *𝙋𝙧𝙤𝙥𝙧𝙞é𝙩𝙖𝙞𝙧𝙚 :* The-whisperer",
+  "general.owner": "👑 *𝙋𝙧𝙤𝙥𝙧𝙞é𝙩𝙖𝙞𝙧𝙚 :* 𝚃𝚑𝚎 𝚠𝚑𝚒𝚜",
 
 
   "general.stats_commands": "Commandes",

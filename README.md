@@ -887,7 +887,7 @@ See the repository license file for the complete license text.
 
 👤 Author
 
-THE-WHISPERER
+𝚃𝚑𝚎 𝚠𝚑𝚒𝚜
 
 GitHub: https://github.com/sneakyuser5-netizen
 

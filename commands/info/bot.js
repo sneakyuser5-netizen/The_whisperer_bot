@@ -30,7 +30,7 @@ module.exports = {
 ╭━━━〔 🤖 ${botName} 〕━━━╮
 
 👑 ${t(jid, "info.bot_creator")}
-THE-WHISPERER
+𝚃𝚑𝚎 𝚠𝚑𝚒𝚜
 
 🤖 ${t(jid, "info.bot_owner")}
 ${owner}

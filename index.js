@@ -170,7 +170,7 @@ Enjoy your new assistant!
 ━━━━━━━━━━━━━━━
 
 Made with ❤️ by
-*THE-WHISPERER-237*`
+*𝚃𝚑𝚎 𝚠𝚑𝚒𝚜*`
             }
         );
 

@@ -19,7 +19,7 @@ module.exports = {
 `${t("info.alive_title")}
 
 👑 ${t("info.alive_owner")}
-THE-WHISPERER
+𝚃𝚑𝚎 𝚠𝚑𝚒𝚜
 
 ⚡ ${t("info.alive_status")}
 ${t("info.alive_running")}
