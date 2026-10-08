@@ -1,5 +1,6 @@
 
 module.exports = {
+"env": "🔐 Gérer les clés API du bot en toute sécurité.",
 "adminonly": "Autoriser uniquement les administrateurs à envoyer des messages",
     "apk": "Rechercher et télécharger des versions APK",
 "img": "Générer une image à partir d’un texte",
