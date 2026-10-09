@@ -142,7 +142,7 @@ if (!info.welcomed) {
         await sock.sendMessage(
             owner + "@s.whatsapp.net",
             {
-                image: fs.readFileSync("./assets/welcome.png"),
+                image: fs.readFileSync("./assets/menu.png"),
 
                 caption:
 `━━━━━━━━━━━━━━━
@@ -160,10 +160,18 @@ Your WhatsApp has been linked successfully.
 
 Useful commands:
 
-• .private
-• .public
+• .menu
 • .setsudo
 • .ping
+
+🔑 *API Configuration*
+
+Want to use API-powered commands?
+
+Type *.env* and follow the instructions
+to configure your API keys.
+
+Use *.env status* to check your API setup.
 
 Enjoy your new assistant!
 
