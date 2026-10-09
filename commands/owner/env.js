@@ -94,8 +94,8 @@ Examples:
 module.exports = {
     name: "env",
     description: "Manage API keys securely",
-    category: "admin",
-    permission: "sudo",
+    category: "owner",
+    permission: "owner",
     usage: ".env set/status/remove/guide",
     minArgs: 1,
 
