@@ -285,7 +285,7 @@ module.exports = {
 
             await sock.sendMessage(jid, {
                 image: { url: imageUrl },
-                caption: t(jid, "tools.img_result")
+                caption: t(jid, "img_result")
                     .replace("{prompt}", prompt)
             });
 
